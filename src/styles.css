@@ -6,16 +6,13 @@
   --paper-muted: rgba(243, 228, 201, 0.58);
   --gold: #d2aa6d;
   --gold-soft: rgba(210, 170, 109, 0.16);
-  --gold-strong: rgba(210, 170, 109, 0.78);
   --copper: #9c5d3d;
   --leather-1: #2d1d14;
   --leather-2: #21150f;
   --leather-3: #120c08;
-  --card: rgba(28, 22, 17, 0.88);
   --line: rgba(243, 228, 201, 0.16);
   --line-strong: rgba(243, 228, 201, 0.28);
   --shadow: 0 34px 90px rgba(0, 0, 0, 0.62);
-  --radius-xl: 30px;
   --radius-lg: 24px;
   --radius-md: 18px;
   --nav-height: 82px;
@@ -25,16 +22,17 @@
   box-sizing: border-box;
 }
 
-html {
+html,
+body {
+  width: 100%;
   min-height: 100%;
+  overflow-x: hidden;
   background: var(--bg-dark);
 }
 
 body {
   margin: 0;
-  min-height: 100vh;
   color: var(--paper);
-  background: var(--bg-dark);
   font-family:
     Georgia,
     "Times New Roman",
@@ -70,6 +68,7 @@ svg {
 
 .site {
   position: relative;
+  width: 100%;
   min-height: 100vh;
   display: grid;
   grid-template-columns: minmax(280px, 470px) minmax(360px, 430px);
@@ -77,7 +76,7 @@ svg {
   align-items: center;
   gap: 58px;
   padding: 42px 24px;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .site::before {
@@ -208,14 +207,17 @@ svg {
 .screen-page {
   position: relative;
   z-index: 2;
+  width: 100%;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 46px 18px calc(var(--nav-height) + 26px);
   scrollbar-width: none;
 }
 
 .screen-page::-webkit-scrollbar,
-.entry-form::-webkit-scrollbar {
+.entry-form::-webkit-scrollbar,
+.polaroid-row::-webkit-scrollbar {
   display: none;
 }
 
@@ -232,6 +234,7 @@ svg {
 }
 
 .brand-block {
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -240,6 +243,7 @@ svg {
 .brand-mark {
   width: 42px;
   height: 42px;
+  flex: 0 0 auto;
   display: grid;
   place-items: center;
   border: 1px solid var(--gold);
@@ -257,21 +261,26 @@ svg {
 .brand-block h1 {
   margin: 0;
   color: var(--paper);
-  font-size: 1.72rem;
+  font-size: clamp(1.45rem, 7vw, 1.72rem);
   line-height: 1;
   letter-spacing: -0.045em;
+  white-space: nowrap;
 }
 
 .brand-block p {
   margin: 4px 0 0;
   color: var(--gold);
   font-size: 0.84rem;
+  max-width: 210px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .round-button {
-  position: relative;
   width: 44px;
   height: 44px;
+  flex: 0 0 auto;
   display: grid;
   place-items: center;
   border: 1px solid var(--line);
@@ -301,8 +310,8 @@ svg {
 .welcome-block h2 {
   margin: 10px 0 0;
   color: var(--paper);
-  font-size: 1.75rem;
-  line-height: 1.05;
+  font-size: clamp(1.45rem, 7vw, 1.75rem);
+  line-height: 1.08;
   letter-spacing: -0.045em;
   font-weight: 500;
 }
@@ -311,6 +320,7 @@ svg {
   margin: 8px 0 0;
   color: var(--paper-soft);
   line-height: 1.55;
+  font-size: clamp(0.94rem, 4vw, 1rem);
 }
 
 .daily-highlight,
@@ -333,9 +343,6 @@ svg {
   padding: 16px;
   border-color: rgba(210, 170, 109, 0.28);
   border-radius: 28px;
-  box-shadow:
-    0 22px 52px rgba(0, 0, 0, 0.38),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.035);
 }
 
 .daily-polaroid,
@@ -348,13 +355,14 @@ svg {
 .daily-polaroid {
   padding: 10px 10px 15px;
   border-radius: 10px;
-  transform: rotate(-1.2deg);
+  transform: rotate(-1deg);
 }
 
 .daily-polaroid img {
   width: 100%;
-  aspect-ratio: 1 / 0.72;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
+  object-position: center;
   border-radius: 5px;
   filter: sepia(0.08) saturate(0.92);
 }
@@ -411,6 +419,7 @@ svg {
   display: flex;
   gap: 10px;
   margin-top: 14px;
+  flex-wrap: wrap;
 }
 
 .section-head {
@@ -457,7 +466,7 @@ svg {
 
 .roadbook-image {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 
@@ -467,6 +476,7 @@ svg {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .roadbook-image::after {
@@ -533,8 +543,8 @@ svg {
 .spot-card h3 {
   margin: 7px 0 0;
   color: var(--paper);
-  font-size: 1.58rem;
-  line-height: 1.03;
+  font-size: 1.45rem;
+  line-height: 1.05;
   letter-spacing: -0.04em;
   font-weight: 500;
 }
@@ -611,10 +621,6 @@ svg {
   scrollbar-width: none;
 }
 
-.polaroid-row::-webkit-scrollbar {
-  display: none;
-}
-
 .polaroid {
   width: 188px;
   flex: 0 0 auto;
@@ -632,6 +638,7 @@ svg {
   width: 100%;
   aspect-ratio: 1 / 0.78;
   object-fit: cover;
+  object-position: center;
   border-radius: 4px;
   filter: sepia(0.08) saturate(0.92);
 }
@@ -711,6 +718,7 @@ svg {
   height: 100%;
   min-height: 142px;
   object-fit: cover;
+  object-position: center;
 }
 
 .spot-card h3 {
@@ -1187,18 +1195,34 @@ svg {
   }
 }
 
-@media (max-width: 470px) {
+@media (max-width: 700px) {
+  :root {
+    --nav-height: 86px;
+  }
+
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
   .site {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
     padding: 0;
+    overflow-x: hidden;
   }
 
   .phone-shell {
     width: 100%;
+    max-width: none;
     height: 100vh;
     min-height: 100vh;
     padding: 0;
     border-radius: 0;
     box-shadow: none;
+    background: transparent;
   }
 
   .phone-notch {
@@ -1206,39 +1230,104 @@ svg {
   }
 
   .app-screen {
+    width: 100%;
+    height: 100vh;
     border-radius: 0;
   }
 
   .screen-page {
-    padding: 30px 14px calc(var(--nav-height) + 18px);
+    width: 100%;
+    padding: 24px 14px calc(var(--nav-height) + env(safe-area-inset-bottom) + 18px);
   }
 
-  .bottom-nav {
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
+  .app-header {
+    margin-bottom: 22px;
   }
 
-  .stats-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 13px;
+    font-size: 1.25rem;
   }
 
   .brand-block h1 {
     font-size: 1.55rem;
   }
 
+  .brand-block p {
+    max-width: 170px;
+    font-size: 0.78rem;
+  }
+
+  .round-button {
+    width: 42px;
+    height: 42px;
+  }
+
+  .welcome-block h2 {
+    font-size: 1.55rem;
+  }
+
+  .daily-highlight {
+    padding: 14px;
+    border-radius: 22px;
+  }
+
+  .daily-polaroid {
+    transform: none;
+  }
+
+  .daily-polaroid img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .roadbook-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .weekly-car img,
+  .garage-card img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .spot-card {
+    grid-template-columns: 100px 1fr;
+  }
+
+  .spot-card img {
+    min-height: 132px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .profile-actions {
     grid-template-columns: 1fr;
   }
-}
 
-@media (max-width: 360px) {
   .bottom-nav {
+    left: 10px;
+    right: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    height: 70px;
     grid-template-columns: 1fr 1fr 74px 1fr 1fr;
   }
 
   .create-button {
     width: 74px;
+    height: 62px;
+  }
+}
+
+@media (max-width: 360px) {
+  .bottom-nav {
+    grid-template-columns: 1fr 1fr 68px 1fr 1fr;
+  }
+
+  .create-button {
+    width: 68px;
   }
 
   .nav-item span {
@@ -1246,6 +1335,12 @@ svg {
   }
 
   .spot-card {
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 92px 1fr;
+  }
+
+  .section-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
   }
 }
