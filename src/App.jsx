@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 
 const STORAGE_KEY = "blechroute-beta-009";
+const basePath = import.meta.env.BASE_URL;
 
 const carImages = {
-  bmwE39: "/bmw_sedan_bei_sonnenuntergang.png",
-  golf2: "/volkswagen_golf_bei_sonnenuntergang.png",
-  audi80: "/audi_bei_sonnenuntergang_auf_landstrasse.png",
-  bmwLake: "/bmw_am_see_im_goldenen_licht.png"
+  bmwE39: `${basePath}bmw_sedan_bei_sonnenuntergang.png`,
+  golf2: `${basePath}volkswagen_golf_bei_sonnenuntergang.png`,
+  audi80: `${basePath}audi_bei_sonnenuntergang_auf_landstrasse.png`,
+  bmwLake: `${basePath}bmw_am_see_im_goldenen_licht.png`
 };
 
 const defaultUser = {
@@ -345,200 +346,6 @@ function IconEdit() {
       <path d="M4 20h4l11-11a2.8 2.8 0 0 0-4-4L4 16v4Z" />
       <path d="m13.5 6.5 4 4" />
     </svg>
-  );
-}
-
-function AuthScreen({ onGuest, onLogin, onRegister }) {
-  const [mode, setMode] = useState("welcome");
-  const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: "",
-    repeatPassword: "",
-    accept: false
-  });
-  const [error, setError] = useState("");
-
-  function updateField(field, value) {
-    setForm((current) => ({
-      ...current,
-      [field]: value
-    }));
-    setError("");
-  }
-
-  function handleLoginSubmit(event) {
-    event.preventDefault();
-
-    if (!form.email || !form.password) {
-      setError("Bitte E-Mail-Adresse und Passwort ausfüllen.");
-      return;
-    }
-
-    onLogin({
-      email: form.email,
-      username: form.email.split("@")[0]
-    });
-  }
-
-  function handleRegisterSubmit(event) {
-    event.preventDefault();
-
-    if (!form.username || !form.email || !form.password || !form.repeatPassword) {
-      setError("Bitte alle Pflichtfelder ausfüllen.");
-      return;
-    }
-
-    if (form.password !== form.repeatPassword) {
-      setError("Die Passwörter stimmen noch nicht überein.");
-      return;
-    }
-
-    if (!form.accept) {
-      setError("Bitte AGB und Datenschutz für diese Demo akzeptieren.");
-      return;
-    }
-
-    onRegister({
-      username: form.username,
-      email: form.email
-    });
-  }
-
-  return (
-    <main className="auth-screen">
-      <section className="auth-card">
-        <div className="auth-logo">B</div>
-
-        {mode === "welcome" && (
-          <>
-            <p className="section-label">Blechroute Beta</p>
-            <h1>Momente, die bleiben.</h1>
-            <p>
-              Dein digitales Roadbook für Touren, Fahrzeuge, Spots und kleine
-              Geschichten auf Rädern.
-            </p>
-
-            <div className="auth-actions">
-              <button type="button" onClick={() => setMode("login")}>
-                Einloggen
-              </button>
-              <button type="button" onClick={() => setMode("register")}>
-                Konto erstellen
-              </button>
-              <button className="ghost-button" type="button" onClick={onGuest}>
-                Erstmal ansehen
-              </button>
-            </div>
-          </>
-        )}
-
-        {mode === "login" && (
-          <form className="auth-form" onSubmit={handleLoginSubmit}>
-            <button className="back-button" type="button" onClick={() => setMode("welcome")}>
-              Zurück
-            </button>
-
-            <p className="section-label">Einloggen</p>
-            <h1>Willkommen zurück.</h1>
-
-            <label>
-              E-Mail-Adresse *
-              <input
-                type="email"
-                value={form.email}
-                onChange={(event) => updateField("email", event.target.value)}
-                placeholder="deinname@mail.de"
-              />
-            </label>
-
-            <label>
-              Passwort *
-              <input
-                type="password"
-                value={form.password}
-                onChange={(event) => updateField("password", event.target.value)}
-                placeholder="Passwort"
-              />
-            </label>
-
-            {error && <p className="form-error">{error}</p>}
-
-            <button type="submit">Einloggen</button>
-            <button className="ghost-button" type="button" onClick={() => setMode("register")}>
-              Noch kein Konto?
-            </button>
-
-            <small>* Pflichtfeld · Demo ohne echte Server-Anmeldung</small>
-          </form>
-        )}
-
-        {mode === "register" && (
-          <form className="auth-form" onSubmit={handleRegisterSubmit}>
-            <button className="back-button" type="button" onClick={() => setMode("welcome")}>
-              Zurück
-            </button>
-
-            <p className="section-label">Registrierung</p>
-            <h1>Konto erstellen.</h1>
-
-            <label>
-              Benutzername *
-              <input
-                type="text"
-                value={form.username}
-                onChange={(event) => updateField("username", event.target.value)}
-                placeholder="christophdietrich19"
-              />
-            </label>
-
-            <label>
-              E-Mail-Adresse *
-              <input
-                type="email"
-                value={form.email}
-                onChange={(event) => updateField("email", event.target.value)}
-                placeholder="deinname@mail.de"
-              />
-            </label>
-
-            <label>
-              Passwort *
-              <input
-                type="password"
-                value={form.password}
-                onChange={(event) => updateField("password", event.target.value)}
-                placeholder="Passwort"
-              />
-            </label>
-
-            <label>
-              Passwort wiederholen *
-              <input
-                type="password"
-                value={form.repeatPassword}
-                onChange={(event) => updateField("repeatPassword", event.target.value)}
-                placeholder="Passwort wiederholen"
-              />
-            </label>
-
-            <label className="check-row">
-              <input
-                type="checkbox"
-                checked={form.accept}
-                onChange={(event) => updateField("accept", event.target.checked)}
-              />
-              <span>AGB und Datenschutz akzeptieren *</span>
-            </label>
-
-            {error && <p className="form-error">{error}</p>}
-
-            <button type="submit">Konto erstellen</button>
-            <small>* Pflichtfeld · Demo ohne echte Server-Anmeldung</small>
-          </form>
-        )}
-      </section>
-    </main>
   );
 }
 
@@ -1532,53 +1339,9 @@ export default function App() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
   }, [appState]);
 
-  function handleGuest() {
-    setAppState((current) => ({
-      ...current,
-      loggedIn: false,
-      guestMode: true
-    }));
-  }
-
-  function handleLogin(data) {
-    setAppState((current) => ({
-      ...current,
-      loggedIn: true,
-      guestMode: false,
-      user: {
-        ...current.user,
-        email: data.email,
-        handle: `@${data.username}`,
-        name: data.username || current.user.name
-      }
-    }));
-  }
-
-  function handleRegister(data) {
-    setAppState((current) => ({
-      ...current,
-      loggedIn: true,
-      guestMode: false,
-      user: {
-        ...current.user,
-        name: data.username,
-        handle: `@${data.username}`,
-        email: data.email
-      }
-    }));
-  }
-
   function handleResetDemo() {
     localStorage.removeItem(STORAGE_KEY);
     setAppState(createDefaultState());
-  }
-
-  if (!appState.loggedIn && !appState.guestMode) {
-    return (
-      <div className="site auth-site">
-        <AuthScreen onGuest={handleGuest} onLogin={handleLogin} onRegister={handleRegister} />
-      </div>
-    );
   }
 
   return (
