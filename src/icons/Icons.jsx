@@ -108,3 +108,16 @@ export function IconEdit() {
     </svg>
   );
 }
+
+export function IconMenuSliders() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 7h16" />
+      <path d="M4 12h16" />
+      <path d="M4 17h16" />
+      <circle cx="8" cy="7" r="1.7" />
+      <circle cx="15" cy="12" r="1.7" />
+      <circle cx="10.5" cy="17" r="1.7" />
+    </svg>
+  );
+}

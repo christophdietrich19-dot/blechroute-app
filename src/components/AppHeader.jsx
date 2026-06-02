@@ -1,4 +1,4 @@
-import { IconCompass, IconBell } from "../icons/Icons";
+import { IconCompass, IconMenuSliders } from "../icons/Icons";
 
 export default function AppHeader({ compact = false, userProfile }) {
   return (
@@ -11,11 +11,11 @@ export default function AppHeader({ compact = false, userProfile }) {
 
         <div className="brand-center">
           <h1>Blechroute</h1>
-          <p>{userProfile?.handle || "Momente, die bleiben."}</p>
+          <p>{userProfile?.handle || "Roadbook"}</p>
         </div>
 
         <button className="top-icon-button" type="button" aria-label="Menü öffnen">
-          <IconBell />
+          <IconMenuSliders />
           <span>Menu</span>
         </button>
       </div>
