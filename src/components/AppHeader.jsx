@@ -3,29 +3,25 @@ import { IconCompass, IconMenuSliders } from "../icons/Icons";
 export default function AppHeader({ compact = false, userProfile }) {
   return (
     <header className={compact ? "app-header compact" : "app-header"}>
-      <div className="brand-topline">
-        <button className="top-icon-button" type="button" aria-label="Karte öffnen">
+      <div className="brand-center">
+        <h1>Blechroute</h1>
+        <p>{userProfile?.handle || "Roadbook"}</p>
+      </div>
+
+      <div className="road-control-row">
+        <button className="road-control-button" type="button" aria-label="Karte öffnen">
           <IconCompass />
           <span>Map</span>
         </button>
 
-        <div className="brand-center">
-          <h1>Blechroute</h1>
-          <p>{userProfile?.handle || "Roadbook"}</p>
-        </div>
+        <button className="road-control-button main-control active" type="button">
+          <span>Feed</span>
+        </button>
 
-        <button className="top-icon-button" type="button" aria-label="Menü öffnen">
+        <button className="road-control-button" type="button" aria-label="Menü öffnen">
           <IconMenuSliders />
           <span>Menu</span>
         </button>
-      </div>
-
-      <div className="road-tab-row">
-        <div className="road-tab-side" />
-        <button className="road-tab active" type="button">
-          Feed
-        </button>
-        <div className="road-tab-side" />
       </div>
     </header>
   );
