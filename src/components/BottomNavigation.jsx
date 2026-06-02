@@ -1,5 +1,5 @@
 import {
-  IconCompass,
+  IconCamera,
   IconGarage,
   IconHome,
   IconPlus,
@@ -19,12 +19,12 @@ export default function BottomNavigation({ activePage, onChangePage, onOpenCreat
       </button>
 
       <button
-        className={activePage === "discover" ? "nav-item active" : "nav-item"}
+        className={activePage === "garage" ? "nav-item active" : "nav-item"}
         type="button"
-        onClick={() => onChangePage("discover")}
+        onClick={() => onChangePage("garage")}
       >
-        <IconCompass />
-        <span>Entdecken</span>
+        <IconGarage />
+        <span>Garage</span>
       </button>
 
       <button className="create-button" type="button" onClick={onOpenCreate}>
@@ -32,12 +32,12 @@ export default function BottomNavigation({ activePage, onChangePage, onOpenCreat
       </button>
 
       <button
-        className={activePage === "garage" ? "nav-item active" : "nav-item"}
+        className={activePage === "discover" ? "nav-item active" : "nav-item"}
         type="button"
-        onClick={() => onChangePage("garage")}
+        onClick={() => onChangePage("discover")}
       >
-        <IconGarage />
-        <span>Garage</span>
+        <IconCamera />
+        <span>Momente</span>
       </button>
 
       <button
