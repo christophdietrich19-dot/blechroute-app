@@ -1,5 +1,3 @@
-import { IconCompass, IconMenuSliders } from "../icons/Icons";
-
 export default function AppHeader({ compact = false, userProfile }) {
   return (
     <header className={compact ? "app-header compact" : "app-header"}>
@@ -10,7 +8,6 @@ export default function AppHeader({ compact = false, userProfile }) {
 
       <div className="road-control-row">
         <button className="road-control-button" type="button" aria-label="Karte öffnen">
-          <IconCompass />
           <span>Map</span>
         </button>
 
@@ -19,7 +16,6 @@ export default function AppHeader({ compact = false, userProfile }) {
         </button>
 
         <button className="road-control-button" type="button" aria-label="Menü öffnen">
-          <IconMenuSliders />
           <span>Menu</span>
         </button>
       </div>
