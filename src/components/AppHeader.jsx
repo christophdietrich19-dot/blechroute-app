@@ -1,4 +1,9 @@
-export default function AppHeader({ compact = false, userProfile }) {
+export default function AppHeader({
+  compact = false,
+  userProfile,
+  onOpenMap,
+  onOpenMenu
+}) {
   return (
     <header className={compact ? "app-header compact" : "app-header"}>
       <div className="brand-center">
@@ -7,7 +12,12 @@ export default function AppHeader({ compact = false, userProfile }) {
       </div>
 
       <div className="road-control-row">
-        <button className="road-control-button" type="button" aria-label="Karte öffnen">
+        <button
+          className="road-control-button"
+          type="button"
+          aria-label="Karte öffnen"
+          onClick={onOpenMap}
+        >
           <span>Map</span>
         </button>
 
@@ -15,7 +25,12 @@ export default function AppHeader({ compact = false, userProfile }) {
           <span>Feed</span>
         </button>
 
-        <button className="road-control-button" type="button" aria-label="Menü öffnen">
+        <button
+          className="road-control-button"
+          type="button"
+          aria-label="Menü öffnen"
+          onClick={onOpenMenu}
+        >
           <span>Menu</span>
         </button>
       </div>

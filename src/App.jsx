@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import AppMenu from "./components/AppMenu";
 import BottomNavigation from "./components/BottomNavigation";
 import CreateMenu from "./components/CreateMenu";
 import EntryForm from "./components/EntryForm";
@@ -23,6 +24,7 @@ import {
 function AppShell({ appState, setAppState, onResetDemo }) {
   const [activePage, setActivePage] = useState("feed");
   const [createOpen, setCreateOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [formType, setFormType] = useState(null);
   const [editProfile, setEditProfile] = useState(false);
   const [toast, setToast] = useState("");
@@ -40,10 +42,39 @@ function AppShell({ appState, setAppState, onResetDemo }) {
     setFormType(type);
   }
 
+  function updateEntry(entryId, updater) {
+    setAppState((current) => ({
+      ...current,
+      entries: current.entries.map((entry) => {
+        if (entry.id !== entryId) {
+          return entry;
+        }
+
+        return typeof updater === "function" ? updater(entry) : updater;
+      })
+    }));
+  }
+
+  function handleOpenMap() {
+    setActivePage("discover");
+  }
+
+  function handleOpenMenu() {
+    setMenuOpen(true);
+  }
+
   function handleSave(type, form) {
     const today = getTodayLabel();
 
     setAppState((current) => {
+      const author = {
+        name: current.user.name,
+        handle: current.user.handle,
+        region: current.user.region,
+        avatar: current.user.avatar,
+        bio: current.user.bio
+      };
+
       if (type === "vehicle") {
         const newVehicle = {
           id: makeId(),
@@ -90,7 +121,9 @@ function AppShell({ appState, setAppState, onResetDemo }) {
           saved: 0,
           image: form.image,
           text: form.description || "Ein neuer Ort im Roadbook.",
-          visibility: form.visibility
+          visibility: form.visibility,
+          author,
+          comments: []
         };
 
         return {
@@ -123,7 +156,9 @@ function AppShell({ appState, setAppState, onResetDemo }) {
           saved: 0,
           image: form.image,
           text: form.description,
-          visibility: form.visibility
+          visibility: form.visibility,
+          author,
+          comments: []
         };
 
         return {
@@ -147,7 +182,9 @@ function AppShell({ appState, setAppState, onResetDemo }) {
         saved: 0,
         image: form.image,
         text: form.description,
-        visibility: form.visibility
+        visibility: form.visibility,
+        author,
+        comments: []
       };
 
       return {
@@ -170,22 +207,48 @@ function AppShell({ appState, setAppState, onResetDemo }) {
     showToast("Profil lokal gespeichert.");
   }
 
+  function handleResetDemoFromMenu() {
+    onResetDemo();
+    showToast("Demo wurde zurückgesetzt.");
+  }
+
   return (
     <div className="phone-shell">
       <div className="phone-notch" />
 
       <main className="app-screen">
-        {activePage === "feed" && <FeedPage appState={appState} />}
+        {activePage === "feed" && (
+          <FeedPage
+            appState={appState}
+            onUpdateEntry={updateEntry}
+            onOpenMap={handleOpenMap}
+            onOpenMenu={handleOpenMenu}
+          />
+        )}
 
-        {activePage === "discover" && <DiscoverPage appState={appState} />}
+        {activePage === "discover" && (
+          <DiscoverPage
+            appState={appState}
+            onOpenMap={handleOpenMap}
+            onOpenMenu={handleOpenMenu}
+          />
+        )}
 
-        {activePage === "garage" && <GaragePage appState={appState} />}
+        {activePage === "garage" && (
+          <GaragePage
+            appState={appState}
+            onOpenMap={handleOpenMap}
+            onOpenMenu={handleOpenMenu}
+          />
+        )}
 
         {activePage === "profile" && (
           <ProfilePage
             appState={appState}
             onEditProfile={() => setEditProfile(true)}
             onResetDemo={onResetDemo}
+            onOpenMap={handleOpenMap}
+            onOpenMenu={handleOpenMenu}
           />
         )}
 
@@ -201,6 +264,18 @@ function AppShell({ appState, setAppState, onResetDemo }) {
           <CreateMenu
             onClose={() => setCreateOpen(false)}
             onChoose={handleChoose}
+          />
+        )}
+
+        {menuOpen && (
+          <AppMenu
+            user={appState.user}
+            onClose={() => setMenuOpen(false)}
+            onGoToFeed={() => setActivePage("feed")}
+            onGoToDiscover={() => setActivePage("discover")}
+            onGoToGarage={() => setActivePage("garage")}
+            onGoToProfile={() => setActivePage("profile")}
+            onResetDemo={handleResetDemoFromMenu}
           />
         )}
 

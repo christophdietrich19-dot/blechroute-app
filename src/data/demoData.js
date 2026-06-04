@@ -1,6 +1,6 @@
 const basePath = import.meta.env.BASE_URL;
 
-export const STORAGE_KEY = "blechroute-beta-010";
+export const STORAGE_KEY = "blechroute-beta-011";
 
 export const carImages = {
   bmwE39: `${basePath}bmw_sedan_bei_sonnenuntergang.png`,
@@ -8,6 +8,33 @@ export const carImages = {
   audi80: `${basePath}audi_bei_sonnenuntergang_auf_landstrasse.png`,
   bmwLake: `${basePath}bmw_am_see_im_goldenen_licht.png`
 };
+
+export const communityUsers = [
+  {
+    id: "user-christoph",
+    name: "Christoph",
+    handle: "@christophdietrich19",
+    region: "Lausitz",
+    avatar: carImages.bmwLake,
+    bio: "Alte Autos, ruhige Straßen und Erinnerungen, die bleiben."
+  },
+  {
+    id: "user-julia",
+    name: "Julia M.",
+    handle: "@julia.roadbook",
+    region: "Oberlausitz",
+    avatar: carImages.golf2,
+    bio: "Klassiker, Landstraßen und kleine Fundstücke am Straßenrand."
+  },
+  {
+    id: "user-max",
+    name: "Max R.",
+    handle: "@max.oldmetal",
+    region: "Bautzen",
+    avatar: carImages.audi80,
+    bio: "Lieber Patina als perfekt. Hauptsache, die Geschichte stimmt."
+  }
+];
 
 export const defaultUser = {
   name: "Christoph",
@@ -40,7 +67,7 @@ export const defaultVehicles = [
     status: "Kantig und echt",
     image: carImages.golf2,
     story:
-      "Ein Auto, das nicht perfekt sein muss. Hauptsache es erzählt etwas.",
+      "Ein Auto, das nicht perfekt sein muss. Hauptsache er erzählt etwas.",
     visibility: "Öffentlich"
   },
   {
@@ -72,7 +99,20 @@ export const defaultRoadbookEntries = [
     image: carImages.bmwLake,
     text:
       "Goldenes Licht über dem Wasser, leere Straßen und dieses leise Gefühl, dass genau solche Fahrten bleiben.",
-    visibility: "Öffentlich"
+    visibility: "Öffentlich",
+    author: communityUsers[0],
+    comments: [
+      {
+        id: 1,
+        author: "Julia M.",
+        text: "Das sieht nach genau der richtigen Abendrunde aus."
+      },
+      {
+        id: 2,
+        author: "Max R.",
+        text: "Der E39 passt einfach brutal gut in dieses Licht."
+      }
+    ]
   },
   {
     id: 2,
@@ -89,7 +129,15 @@ export const defaultRoadbookEntries = [
     image: carImages.golf2,
     text:
       "Eigentlich nur kurz anhalten. Dann war da dieses Licht auf dem alten Lack.",
-    visibility: "Öffentlich"
+    visibility: "Öffentlich",
+    author: communityUsers[1],
+    comments: [
+      {
+        id: 1,
+        author: "Christoph",
+        text: "Genau solche Momente machen alte Autos aus."
+      }
+    ]
   },
   {
     id: 3,
@@ -106,7 +154,20 @@ export const defaultRoadbookEntries = [
     image: carImages.audi80,
     text:
       "Schmal, ruhig, leicht feucht. Kein Stress. Nur Wald, Straße und ein Auto, das sich richtig anfühlt.",
-    visibility: "Öffentlich"
+    visibility: "Öffentlich",
+    author: communityUsers[2],
+    comments: [
+      {
+        id: 1,
+        author: "Julia M.",
+        text: "Richtig schöner Spot. Muss ich mir merken."
+      },
+      {
+        id: 2,
+        author: "Christoph",
+        text: "Audi 80 auf Waldstraße ist einfach stimmig."
+      }
+    ]
   }
 ];
 
@@ -206,6 +267,7 @@ export function createDefaultState() {
     loggedIn: false,
     guestMode: true,
     user: defaultUser,
+    communityUsers,
     vehicles: defaultVehicles,
     entries: defaultRoadbookEntries,
     spots: defaultSpots,

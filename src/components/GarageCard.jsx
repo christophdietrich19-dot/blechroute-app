@@ -6,11 +6,17 @@ export default function GarageCard({ vehicle }) {
       <div>
         <p className="section-label">{vehicle.status}</p>
         <h2>{vehicle.name}</h2>
+
         <p>
           {vehicle.year} · {vehicle.type} · {vehicle.engine}
         </p>
+
         <small>{vehicle.story}</small>
-        <span className="visibility-pill">{vehicle.visibility}</span>
+
+        <div className="roadbook-meta">
+          <span>{vehicle.visibility}</span>
+          <span>Garage</span>
+        </div>
       </div>
     </article>
   );

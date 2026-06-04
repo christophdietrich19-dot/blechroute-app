@@ -1,10 +1,15 @@
 import AppHeader from "../components/AppHeader";
 import GarageCard from "../components/GarageCard";
 
-export default function GaragePage({ appState }) {
+export default function GaragePage({ appState, onOpenMap, onOpenMenu }) {
   return (
     <section className="screen-page">
-      <AppHeader compact userProfile={appState.user} />
+      <AppHeader
+        compact
+        userProfile={appState.user}
+        onOpenMap={onOpenMap}
+        onOpenMenu={onOpenMenu}
+      />
 
       <div className="section-head">
         <h2>Garage</h2>

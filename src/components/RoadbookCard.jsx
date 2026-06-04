@@ -1,13 +1,153 @@
 import { useState } from "react";
-import { IconBookmark, IconHeart } from "../icons/Icons";
+import { IconBookmark, IconHeart, IconMapPin } from "../icons/Icons";
 
-export default function RoadbookCard({ entry, featured = false }) {
-  const [liked, setLiked] = useState(false);
-  const [saved, setSaved] = useState(false);
+export default function RoadbookCard({
+  entry,
+  featured = false,
+  currentUser,
+  onUpdateEntry
+}) {
+  const [likedByMe, setLikedByMe] = useState(false);
+  const [savedByMe, setSavedByMe] = useState(false);
+  const [following, setFollowing] = useState(false);
+  const [commentsOpen, setCommentsOpen] = useState(false);
+  const [commentText, setCommentText] = useState("");
+
+  const likes = Number(entry.likes || 0);
+  const saved = Number(entry.saved || 0);
+  const comments = entry.comments || [];
+
+  const author = entry.author || {
+    name: currentUser?.name || "Christoph",
+    handle: currentUser?.handle || "@christophdietrich19",
+    avatar: currentUser?.avatar || entry.image
+  };
+
+  function safeUpdate(updater) {
+    if (onUpdateEntry) {
+      onUpdateEntry(entry.id, updater);
+    }
+  }
+
+  function handleLike() {
+    const nextLiked = !likedByMe;
+
+    setLikedByMe(nextLiked);
+
+    safeUpdate((currentEntry) => ({
+      ...currentEntry,
+      likes: Math.max(0, Number(currentEntry.likes || 0) + (nextLiked ? 1 : -1))
+    }));
+  }
+
+  function handleSave() {
+    const nextSaved = !savedByMe;
+
+    setSavedByMe(nextSaved);
+
+    safeUpdate((currentEntry) => ({
+      ...currentEntry,
+      saved: Math.max(0, Number(currentEntry.saved || 0) + (nextSaved ? 1 : -1))
+    }));
+  }
+
+  function handleAddComment(event) {
+    event.preventDefault();
+
+    const cleanText = commentText.trim();
+
+    if (!cleanText) {
+      return;
+    }
+
+    const newComment = {
+      id: Date.now(),
+      author: currentUser?.name || "Christoph",
+      text: cleanText
+    };
+
+    safeUpdate((currentEntry) => ({
+      ...currentEntry,
+      comments: [...(currentEntry.comments || []), newComment]
+    }));
+
+    setCommentText("");
+    setCommentsOpen(true);
+  }
 
   return (
     <article className={featured ? "roadbook-card featured" : "roadbook-card"}>
-      <div className="roadbook-image">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "11px",
+          padding: "14px 16px 0"
+        }}
+      >
+        <img
+          src={author.avatar}
+          alt={author.name}
+          style={{
+            width: "42px",
+            height: "42px",
+            objectFit: "cover",
+            borderRadius: "14px",
+            border: "1px solid rgba(216, 174, 103, 0.32)"
+          }}
+        />
+
+        <div style={{ minWidth: 0, flex: 1 }}>
+          <strong
+            style={{
+              display: "block",
+              color: "var(--paper)",
+              fontSize: "0.95rem",
+              lineHeight: 1.1
+            }}
+          >
+            {author.name}
+          </strong>
+
+          <span
+            style={{
+              display: "block",
+              marginTop: "3px",
+              color: "var(--paper-muted)",
+              fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+              fontSize: "0.72rem",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap"
+            }}
+          >
+            {author.handle} · {entry.date}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setFollowing((current) => !current)}
+          style={{
+            border: "1px solid rgba(216, 174, 103, 0.24)",
+            borderRadius: "999px",
+            color: following ? "var(--paper-ink)" : "var(--gold-light)",
+            background: following
+              ? "linear-gradient(145deg, var(--gold-light), var(--gold))"
+              : "rgba(54, 22, 8, 0.72)",
+            padding: "8px 10px",
+            fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+            fontSize: "0.68rem",
+            fontWeight: 900,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase"
+          }}
+        >
+          {following ? "Folgt" : "Folgen"}
+        </button>
+      </div>
+
+      <div className="roadbook-image" style={{ marginTop: "14px" }}>
         <img src={entry.image} alt={entry.title} />
         <span className="paper-label">{entry.type}</span>
         <span className="date-stamp">{entry.date}</span>
@@ -25,25 +165,130 @@ export default function RoadbookCard({ entry, featured = false }) {
           <span>{entry.visibility}</span>
         </div>
 
+        <div className="roadbook-meta">
+          <span>
+            <IconMapPin />
+            {entry.location}
+          </span>
+        </div>
+
         <div className="roadbook-actions">
           <button
-            className={liked ? "soft-action active" : "soft-action"}
+            className={likedByMe ? "soft-action active" : "soft-action"}
             type="button"
-            onClick={() => setLiked((current) => !current)}
+            onClick={handleLike}
           >
             <IconHeart />
-            <span>{liked ? entry.likes + 1 : entry.likes}</span>
+            <span>{likes}</span>
           </button>
 
           <button
-            className={saved ? "soft-action active" : "soft-action"}
+            className={savedByMe ? "soft-action active" : "soft-action"}
             type="button"
-            onClick={() => setSaved((current) => !current)}
+            onClick={handleSave}
           >
             <IconBookmark />
-            <span>{saved ? entry.saved + 1 : entry.saved}</span>
+            <span>{saved}</span>
+          </button>
+
+          <button
+            className={commentsOpen ? "soft-action active" : "soft-action"}
+            type="button"
+            onClick={() => setCommentsOpen((current) => !current)}
+          >
+            <span>{comments.length} Kommentare</span>
           </button>
         </div>
+
+        {commentsOpen && (
+          <div
+            style={{
+              marginTop: "14px",
+              padding: "12px",
+              border: "1px solid rgba(216, 174, 103, 0.16)",
+              borderRadius: "18px",
+              background: "rgba(24, 9, 4, 0.42)"
+            }}
+          >
+            {comments.length > 0 ? (
+              comments.map((comment) => (
+                <p
+                  key={comment.id}
+                  style={{
+                    margin: "0 0 8px",
+                    color: "var(--paper-soft)",
+                    fontSize: "0.86rem",
+                    lineHeight: 1.45
+                  }}
+                >
+                  <strong style={{ color: "var(--gold-light)" }}>
+                    {comment.author}
+                  </strong>{" "}
+                  {comment.text}
+                </p>
+              ))
+            ) : (
+              <p
+                style={{
+                  margin: "0 0 10px",
+                  color: "var(--paper-muted)",
+                  fontSize: "0.86rem",
+                  lineHeight: 1.45
+                }}
+              >
+                Noch keine Kommentare. Sag etwas zu diesem Moment.
+              </p>
+            )}
+
+            <form
+              onSubmit={handleAddComment}
+              style={{
+                display: "grid",
+                gap: "9px",
+                marginTop: "12px"
+              }}
+            >
+              <textarea
+                value={commentText}
+                placeholder="Kommentar schreiben..."
+                onChange={(event) => setCommentText(event.target.value)}
+                style={{
+                  width: "100%",
+                  minHeight: "74px",
+                  resize: "vertical",
+                  border: "1px solid rgba(216, 174, 103, 0.2)",
+                  borderRadius: "14px",
+                  padding: "10px",
+                  color: "var(--paper)",
+                  background: "rgba(255, 255, 255, 0.055)",
+                  outline: "none",
+                  fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+                  fontSize: "0.84rem"
+                }}
+              />
+
+              <button
+                type="submit"
+                style={{
+                  justifySelf: "start",
+                  border: "1px solid rgba(216, 174, 103, 0.34)",
+                  borderRadius: "999px",
+                  color: "var(--paper-ink)",
+                  background:
+                    "linear-gradient(145deg, var(--gold-light), var(--gold))",
+                  padding: "9px 12px",
+                  fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+                  fontSize: "0.74rem",
+                  fontWeight: 900,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase"
+                }}
+              >
+                Senden
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     </article>
   );

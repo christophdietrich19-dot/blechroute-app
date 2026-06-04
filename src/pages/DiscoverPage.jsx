@@ -1,10 +1,15 @@
 import AppHeader from "../components/AppHeader";
 import { IconMapPin } from "../icons/Icons";
 
-export default function DiscoverPage({ appState }) {
+export default function DiscoverPage({ appState, onOpenMap, onOpenMenu }) {
   return (
     <section className="screen-page">
-      <AppHeader compact userProfile={appState.user} />
+      <AppHeader
+        compact
+        userProfile={appState.user}
+        onOpenMap={onOpenMap}
+        onOpenMenu={onOpenMenu}
+      />
 
       <div className="search-book">
         <IconMapPin />
@@ -12,7 +17,7 @@ export default function DiscoverPage({ appState }) {
       </div>
 
       <div className="section-head">
-        <h2>Entdecken</h2>
+        <h2>Map & Orte</h2>
         <span>Orte mit Geschichte</span>
       </div>
 

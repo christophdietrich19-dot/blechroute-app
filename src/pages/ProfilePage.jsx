@@ -3,7 +3,13 @@ import AppHeader from "../components/AppHeader";
 import { IconEdit } from "../icons/Icons";
 import { tasks } from "../data/demoData";
 
-export default function ProfilePage({ appState, onEditProfile, onResetDemo }) {
+export default function ProfilePage({
+  appState,
+  onEditProfile,
+  onResetDemo,
+  onOpenMap,
+  onOpenMenu
+}) {
   const stats = useMemo(
     () => [
       {
@@ -32,13 +38,18 @@ export default function ProfilePage({ appState, onEditProfile, onResetDemo }) {
 
   return (
     <section className="screen-page">
-      <AppHeader compact userProfile={appState.user} />
+      <AppHeader
+        compact
+        userProfile={appState.user}
+        onOpenMap={onOpenMap}
+        onOpenMenu={onOpenMenu}
+      />
 
       <article className="profile-card">
         <img src={appState.user.avatar} alt={appState.user.name} />
 
         <div>
-          <p className="section-label">Roadbook Besitzer</p>
+          <p className="section-label">Roadbook</p>
           <h2>{appState.user.name}</h2>
           <span>{appState.user.handle}</span>
           <p>{appState.user.bio}</p>
@@ -66,8 +77,8 @@ export default function ProfilePage({ appState, onEditProfile, onResetDemo }) {
       </div>
 
       <div className="section-head">
-        <h2>Kleine Ziele</h2>
-        <span>nicht laut, aber schön</span>
+        <h2>Dein Roadbook wächst</h2>
+        <span>kleine Ziele</span>
       </div>
 
       <div className="task-list">
@@ -84,6 +95,15 @@ export default function ProfilePage({ appState, onEditProfile, onResetDemo }) {
           </article>
         ))}
       </div>
+
+      <article className="note-card">
+        <p className="section-label">Beta Hinweis</p>
+        <h2>Alles, was du hier einträgst, bleibt aktuell auf deinem Gerät.</h2>
+        <p>
+          Blechroute speichert diese Demo lokal im Browser. Echte Konten,
+          Kommentare und gemeinsame Roadbooks kommen später mit dem Backend dazu.
+        </p>
+      </article>
     </section>
   );
 }
