@@ -241,28 +241,18 @@ export default function App() {
 
   return (
     <div className="site">
-      <aside className="desktop-copy">
-        <p className="section-label">Blechroute Beta 0.1.0</p>
-        <h1>Die App ist jetzt sauber aufgeteilt.</h1>
-        <p>
-          Die Oberfläche bleibt wie vorher, aber der Code ist jetzt in Daten,
-          Komponenten, Seiten, Icons und Helfer aufgeteilt. Damit ist Blechroute
-          bereit für echte Community-Funktionen.
-        </p>
-
-        <div className="desktop-tags">
-          <span>Struktur</span>
-          <span>Komponenten</span>
-          <span>Pages</span>
-          <span>bereit für Backend</span>
-        </div>
-      </aside>
-
-      <AppShell
-        appState={appState}
-        setAppState={setAppState}
-        onResetDemo={handleResetDemo}
-      />
+      <div
+        style={{
+          gridColumn: "1 / -1",
+          justifySelf: "center"
+        }}
+      >
+        <AppShell
+          appState={appState}
+          setAppState={setAppState}
+          onResetDemo={handleResetDemo}
+        />
+      </div>
     </div>
   );
 }
