@@ -6,9 +6,19 @@ import {
 } from "../icons/Icons";
 
 export default function CreateMenu({ onClose, onChoose }) {
+  function choose(type) {
+    onChoose(type);
+  }
+
   return (
     <div className="create-overlay" role="presentation" onClick={onClose}>
-      <div className="create-sheet" onClick={(event) => event.stopPropagation()}>
+      <div
+        className="create-sheet"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Neuer Eintrag"
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="sheet-handle" />
 
         <p className="section-label">Neuer Eintrag</p>
@@ -19,7 +29,7 @@ export default function CreateMenu({ onClose, onChoose }) {
         </p>
 
         <div className="create-options">
-          <button type="button" onClick={() => onChoose("moment")}>
+          <button type="button" onClick={() => choose("moment")}>
             <span>
               <IconCamera />
             </span>
@@ -30,7 +40,7 @@ export default function CreateMenu({ onClose, onChoose }) {
             </div>
           </button>
 
-          <button type="button" onClick={() => onChoose("tour")}>
+          <button type="button" onClick={() => choose("tour")}>
             <span>
               <IconPlus />
             </span>
@@ -41,7 +51,7 @@ export default function CreateMenu({ onClose, onChoose }) {
             </div>
           </button>
 
-          <button type="button" onClick={() => onChoose("spot")}>
+          <button type="button" onClick={() => choose("spot")}>
             <span>
               <IconMapPin />
             </span>
@@ -52,7 +62,7 @@ export default function CreateMenu({ onClose, onChoose }) {
             </div>
           </button>
 
-          <button type="button" onClick={() => onChoose("vehicle")}>
+          <button type="button" onClick={() => choose("vehicle")}>
             <span>
               <IconGarage />
             </span>

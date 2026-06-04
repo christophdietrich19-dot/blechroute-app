@@ -22,9 +22,20 @@ export default function AppMenu({
   onGoToProfile,
   onResetDemo
 }) {
+  function goToPage(callback) {
+    callback();
+    onClose();
+  }
+
   return (
     <div className="create-overlay" role="presentation" onClick={onClose}>
-      <div className="create-sheet" onClick={(event) => event.stopPropagation()}>
+      <div
+        className="create-sheet"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Blechroute Menü"
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="sheet-handle" />
 
         <p className="section-label">Menü</p>
@@ -35,32 +46,22 @@ export default function AppMenu({
         </p>
 
         <div className="create-options">
-          <button
-            type="button"
-            onClick={() => {
-              onGoToFeed();
-              onClose();
-            }}
-          >
+          <button type="button" onClick={() => goToPage(onGoToFeed)}>
             <span>
               <IconHome />
             </span>
+
             <div>
               <strong>Feed</strong>
               <small>Zurück zu deinen Momenten und Community-Beiträgen</small>
             </div>
           </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              onGoToNotifications();
-              onClose();
-            }}
-          >
+          <button type="button" onClick={() => goToPage(onGoToNotifications)}>
             <span>
               <IconHeart />
             </span>
+
             <div>
               <strong>Aktivität</strong>
               <small>
@@ -71,80 +72,55 @@ export default function AppMenu({
             </div>
           </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              onGoToDiscover();
-              onClose();
-            }}
-          >
+          <button type="button" onClick={() => goToPage(onGoToDiscover)}>
             <span>
               <IconMapPin />
             </span>
+
             <div>
               <strong>Map & Orte</strong>
               <small>Spots, Routen und Fundstücke entdecken</small>
             </div>
           </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              onGoToGarage();
-              onClose();
-            }}
-          >
+          <button type="button" onClick={() => goToPage(onGoToGarage)}>
             <span>
               <IconGarage />
             </span>
+
             <div>
               <strong>Garage</strong>
               <small>Deine Fahrzeuge und Geschichten ansehen</small>
             </div>
           </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              onGoToMoments();
-              onClose();
-            }}
-          >
+          <button type="button" onClick={() => goToPage(onGoToMoments)}>
             <span>
               <IconCamera />
             </span>
+
             <div>
               <strong>Momente</strong>
               <small>Polaroids, Erinnerungen und Roadbook-Beiträge</small>
             </div>
           </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              onGoToSaved();
-              onClose();
-            }}
-          >
+          <button type="button" onClick={() => goToPage(onGoToSaved)}>
             <span>
               <IconBookmark />
             </span>
+
             <div>
               <strong>Gespeichert</strong>
               <small>{savedCount} gemerkte Beiträge im Roadbook</small>
             </div>
           </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              onGoToProfile();
-              onClose();
-            }}
-          >
+          <button type="button" onClick={() => goToPage(onGoToProfile)}>
             <span>
               <IconProfile />
             </span>
+
             <div>
               <strong>Profil</strong>
               <small>{user?.handle || "Dein Roadbook Profil öffnen"}</small>
