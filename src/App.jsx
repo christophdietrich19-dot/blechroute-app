@@ -171,6 +171,7 @@ function AppShell({ appState, setAppState, onResetDemo }) {
 
   function toggleSavedEntry(entryId) {
     const entry = appState.entries.find((item) => item.id === entryId);
+    const isAlreadySaved = (appState.savedEntryIds || []).includes(entryId);
 
     setAppState((current) => {
       const currentSaved = current.savedEntryIds || [];
@@ -185,8 +186,6 @@ function AppShell({ appState, setAppState, onResetDemo }) {
     });
 
     if (entry) {
-      const isAlreadySaved = (appState.savedEntryIds || []).includes(entryId);
-
       addNotification({
         type: "saved",
         title: isAlreadySaved ? "Beitrag entfernt" : "Beitrag gespeichert",
@@ -633,18 +632,11 @@ export default function App() {
 
   return (
     <div className="site">
-      <div
-        style={{
-          gridColumn: "1 / -1",
-          justifySelf: "center"
-        }}
-      >
-        <AppShell
-          appState={appState}
-          setAppState={setAppState}
-          onResetDemo={handleResetDemo}
-        />
-      </div>
+      <AppShell
+        appState={appState}
+        setAppState={setAppState}
+        onResetDemo={handleResetDemo}
+      />
     </div>
   );
 }
