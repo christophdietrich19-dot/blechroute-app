@@ -474,42 +474,53 @@ svg {
     0 -2px 0 rgba(85, 48, 22, 0.12) inset;
 }
 
+/* Messingkopf der Pinnadel */
 .daily-polaroid::before,
 .polaroid::before {
   content: "";
   position: absolute;
-  top: -12px;
+  top: -13px;
   left: 50%;
-  z-index: 6;
-  width: 22px;
-  height: 22px;
+  z-index: 7;
+  width: 23px;
+  height: 23px;
   transform: translateX(-50%);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 32% 30%, rgba(255, 247, 198, 0.98) 0 11%, transparent 12%),
-    radial-gradient(circle at 38% 36%, #f8d48c 0 18%, #d99543 40%, #88501f 72%, #422008 100%);
+    radial-gradient(circle at 33% 28%, rgba(255, 250, 206, 0.98) 0 10%, transparent 11%),
+    radial-gradient(circle at 38% 35%, #f9d98f 0 18%, #d9903e 39%, #8a4f1f 70%, #3d1d08 100%);
   box-shadow:
-    0 2px 0 rgba(255, 255, 255, 0.2) inset,
-    0 -3px 5px rgba(57, 24, 7, 0.5) inset,
-    0 8px 10px rgba(0, 0, 0, 0.32);
+    inset 0 2px 1px rgba(255, 255, 255, 0.28),
+    inset 0 -4px 6px rgba(55, 21, 6, 0.48),
+    0 5px 8px rgba(0, 0, 0, 0.28),
+    0 10px 18px rgba(0, 0, 0, 0.22);
 }
 
+/* sichtbarer Metallstift der Pinnadel */
 .daily-polaroid::after,
 .polaroid::after {
   content: "";
   position: absolute;
-  top: 8px;
-  left: calc(50% + 1px);
+  top: 6px;
+  left: calc(50% - 1px);
   z-index: 5;
   width: 2px;
-  height: 21px;
+  height: 20px;
   transform-origin: top center;
-  transform: rotate(14deg);
+  transform: rotate(13deg);
   border-radius: 999px;
-  background: linear-gradient(180deg, #efefef 0%, #c9c9c9 28%, #8b8b8b 72%, #686868 100%);
+  background:
+    linear-gradient(
+      90deg,
+      #656565 0%,
+      #d8d8d8 36%,
+      #f6f6f6 52%,
+      #9b9b9b 78%,
+      #555555 100%
+    );
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.04),
-    1px 2px 4px rgba(0, 0, 0, 0.24);
+    1px 2px 4px rgba(0, 0, 0, 0.28),
+    -1px 0 1px rgba(255, 255, 255, 0.16);
 }
 
 .daily-polaroid {
@@ -750,6 +761,8 @@ svg {
 .visibility-pill {
   display: inline-flex;
   width: max-content;
+  align-items: center;
+  gap: 6px;
   padding: 7px 9px;
   border: 1px solid rgba(216, 174, 103, 0.2);
   border-radius: 999px;
@@ -763,6 +776,11 @@ svg {
     system-ui,
     sans-serif;
   font-size: 0.74rem;
+}
+
+.roadbook-meta svg {
+  width: 15px;
+  height: 15px;
 }
 
 .visibility-pill {
@@ -1510,6 +1528,21 @@ svg {
 
   .daily-polaroid {
     transform: none;
+  }
+
+  .daily-polaroid::before,
+  .polaroid::before {
+    top: -12px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .daily-polaroid::after,
+  .polaroid::after {
+    top: 6px;
+    height: 19px;
+    left: calc(50% - 1px);
+    transform: rotate(13deg);
   }
 
   .garage-card img {
