@@ -501,13 +501,13 @@ svg {
 .polaroid::after {
   content: "";
   position: absolute;
-  top: 6px;
-  left: calc(50% - 1px);
+  top: 3px;
+  left: 50%;
   z-index: 5;
   width: 2px;
-  height: 20px;
+  height: 16px;
   transform-origin: top center;
-  transform: rotate(13deg);
+  transform: translateX(-50%) rotate(12deg);
   border-radius: 999px;
   background:
     linear-gradient(
@@ -519,8 +519,8 @@ svg {
       #555555 100%
     );
   box-shadow:
-    1px 2px 4px rgba(0, 0, 0, 0.28),
-    -1px 0 1px rgba(255, 255, 255, 0.16);
+    1px 2px 4px rgba(0, 0, 0, 0.24),
+    -1px 0 1px rgba(255, 255, 255, 0.14);
 }
 
 .daily-polaroid {
@@ -1539,10 +1539,10 @@ svg {
 
   .daily-polaroid::after,
   .polaroid::after {
-    top: 6px;
-    height: 19px;
-    left: calc(50% - 1px);
-    transform: rotate(13deg);
+    top: 3px;
+    left: 50%;
+    height: 15px;
+    transform: translateX(-50%) rotate(12deg);
   }
 
   .garage-card img {
