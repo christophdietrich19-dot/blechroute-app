@@ -7,9 +7,16 @@ import { carImages, defaultRoadbookEntries, defaultVehicles } from "../data/demo
 
 export default function FeedPage({
   appState,
+  activePage,
+  currentUser,
+  savedEntryIds,
+  onToggleSavedEntry,
   onUpdateEntry,
+  onDeleteEntry,
+  onOpenFeed,
   onOpenMap,
-  onOpenMenu
+  onOpenMenu,
+  onOpenCommunityProfile
 }) {
   const { user, entries, polaroids, vehicles } = appState;
 
@@ -48,6 +55,8 @@ export default function FeedPage({
     <section className="screen-page">
       <AppHeader
         userProfile={user}
+        activePage={activePage}
+        onOpenFeed={onOpenFeed}
         onOpenMap={onOpenMap}
         onOpenMenu={onOpenMenu}
       />
@@ -86,16 +95,24 @@ export default function FeedPage({
       <RoadbookCard
         entry={featuredEntry}
         featured
-        currentUser={user}
+        currentUser={currentUser}
+        savedEntryIds={savedEntryIds}
+        onToggleSavedEntry={onToggleSavedEntry}
         onUpdateEntry={onUpdateEntry}
+        onDeleteEntry={onDeleteEntry}
+        onOpenCommunityProfile={onOpenCommunityProfile}
       />
 
       {ownEntries.slice(1, 3).map((entry) => (
         <RoadbookCard
           entry={entry}
           key={entry.id}
-          currentUser={user}
+          currentUser={currentUser}
+          savedEntryIds={savedEntryIds}
+          onToggleSavedEntry={onToggleSavedEntry}
           onUpdateEntry={onUpdateEntry}
+          onDeleteEntry={onDeleteEntry}
+          onOpenCommunityProfile={onOpenCommunityProfile}
         />
       ))}
 
@@ -110,8 +127,12 @@ export default function FeedPage({
             <RoadbookCard
               entry={entry}
               key={entry.id}
-              currentUser={user}
+              currentUser={currentUser}
+              savedEntryIds={savedEntryIds}
+              onToggleSavedEntry={onToggleSavedEntry}
               onUpdateEntry={onUpdateEntry}
+              onDeleteEntry={onDeleteEntry}
+              onOpenCommunityProfile={onOpenCommunityProfile}
             />
           ))
         ) : (

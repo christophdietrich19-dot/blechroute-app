@@ -1,6 +1,8 @@
 export default function AppHeader({
   compact = false,
   userProfile,
+  activePage = "feed",
+  onOpenFeed,
   onOpenMap,
   onOpenMenu
 }) {
@@ -13,7 +15,11 @@ export default function AppHeader({
 
       <div className="road-control-row">
         <button
-          className="road-control-button"
+          className={
+            activePage === "discover"
+              ? "road-control-button active"
+              : "road-control-button"
+          }
           type="button"
           aria-label="Karte öffnen"
           onClick={onOpenMap}
@@ -21,7 +27,16 @@ export default function AppHeader({
           <span>Map</span>
         </button>
 
-        <button className="road-control-button main-control active" type="button">
+        <button
+          className={
+            activePage === "feed"
+              ? "road-control-button main-control active"
+              : "road-control-button main-control"
+          }
+          type="button"
+          aria-label="Feed öffnen"
+          onClick={onOpenFeed}
+        >
           <span>Feed</span>
         </button>
 

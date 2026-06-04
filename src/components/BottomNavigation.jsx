@@ -32,9 +32,9 @@ export default function BottomNavigation({ activePage, onChangePage, onOpenCreat
       </button>
 
       <button
-        className={activePage === "discover" ? "nav-item active" : "nav-item"}
+        className={activePage === "moments" ? "nav-item active" : "nav-item"}
         type="button"
-        onClick={() => onChangePage("discover")}
+        onClick={() => onChangePage("moments")}
       >
         <IconCamera />
         <span>Momente</span>

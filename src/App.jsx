@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import AppMenu from "./components/AppMenu";
 import BottomNavigation from "./components/BottomNavigation";
+import CommunityProfileSheet from "./components/CommunityProfileSheet";
 import CreateMenu from "./components/CreateMenu";
 import EntryForm from "./components/EntryForm";
 import ProfileEditor from "./components/ProfileEditor";
@@ -9,7 +10,10 @@ import ProfileEditor from "./components/ProfileEditor";
 import FeedPage from "./pages/FeedPage";
 import DiscoverPage from "./pages/DiscoverPage";
 import GaragePage from "./pages/GaragePage";
+import MomentsPage from "./pages/MomentsPage";
+import NotificationsPage from "./pages/NotificationsPage";
 import ProfilePage from "./pages/ProfilePage";
+import SavedPage from "./pages/SavedPage";
 
 import { createDefaultState } from "./data/demoData";
 
@@ -27,6 +31,7 @@ function AppShell({ appState, setAppState, onResetDemo }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [formType, setFormType] = useState(null);
   const [editProfile, setEditProfile] = useState(false);
+  const [selectedCommunityUser, setSelectedCommunityUser] = useState(null);
   const [toast, setToast] = useState("");
 
   function showToast(message) {
@@ -35,6 +40,161 @@ function AppShell({ appState, setAppState, onResetDemo }) {
     window.setTimeout(() => {
       setToast("");
     }, 2200);
+  }
+
+  function goToFeed() {
+    setActivePage("feed");
+  }
+
+  function goToMap() {
+    setActivePage("discover");
+  }
+
+  function goToGarage() {
+    setActivePage("garage");
+  }
+
+  function goToMoments() {
+    setActivePage("moments");
+  }
+
+  function goToSaved() {
+    setActivePage("saved");
+  }
+
+  function goToNotifications() {
+    setActivePage("notifications");
+  }
+
+  function goToProfile() {
+    setActivePage("profile");
+  }
+
+  function openMenu() {
+    setMenuOpen(true);
+  }
+
+  function addNotification(notification) {
+    setAppState((current) => {
+      const currentNotifications = current.notifications || [];
+
+      return {
+        ...current,
+        notifications: [
+          {
+            id: makeId(),
+            time: "gerade eben",
+            read: false,
+            ...notification
+          },
+          ...currentNotifications
+        ]
+      };
+    });
+  }
+
+  function markNotificationRead(notificationId) {
+    setAppState((current) => ({
+      ...current,
+      notifications: (current.notifications || []).map((notification) => {
+        if (notification.id !== notificationId) {
+          return notification;
+        }
+
+        return {
+          ...notification,
+          read: true
+        };
+      })
+    }));
+  }
+
+  function markAllNotificationsRead() {
+    setAppState((current) => ({
+      ...current,
+      notifications: (current.notifications || []).map((notification) => ({
+        ...notification,
+        read: true
+      }))
+    }));
+
+    showToast("Alle Aktivitäten wurden gelesen.");
+  }
+
+  function clearReadNotifications() {
+    setAppState((current) => ({
+      ...current,
+      notifications: (current.notifications || []).filter(
+        (notification) => !notification.read
+      )
+    }));
+
+    showToast("Gelesene Aktivitäten wurden entfernt.");
+  }
+
+  function handleOpenCommunityProfile(user) {
+    if (!user) {
+      return;
+    }
+
+    if (user.handle === appState.user.handle) {
+      setActivePage("profile");
+      return;
+    }
+
+    setSelectedCommunityUser(user);
+  }
+
+  function toggleFollow(handle) {
+    if (!handle) {
+      return;
+    }
+
+    setAppState((current) => {
+      const currentHandles = current.followingHandles || [];
+      const isFollowing = currentHandles.includes(handle);
+
+      return {
+        ...current,
+        followingHandles: isFollowing
+          ? currentHandles.filter((item) => item !== handle)
+          : [...currentHandles, handle]
+      };
+    });
+
+    addNotification({
+      type: "follow",
+      title: "Folgen aktualisiert",
+      text: `Du hast den Folgen Status von ${handle} geändert.`
+    });
+  }
+
+  function toggleSavedEntry(entryId) {
+    const entry = appState.entries.find((item) => item.id === entryId);
+
+    setAppState((current) => {
+      const currentSaved = current.savedEntryIds || [];
+      const isSaved = currentSaved.includes(entryId);
+
+      return {
+        ...current,
+        savedEntryIds: isSaved
+          ? currentSaved.filter((id) => id !== entryId)
+          : [...currentSaved, entryId]
+      };
+    });
+
+    if (entry) {
+      const isAlreadySaved = (appState.savedEntryIds || []).includes(entryId);
+
+      addNotification({
+        type: "saved",
+        title: isAlreadySaved ? "Beitrag entfernt" : "Beitrag gespeichert",
+        text: isAlreadySaved
+          ? `„${entry.title}“ wurde aus deiner Sammlung entfernt.`
+          : `„${entry.title}“ liegt jetzt in deinen gespeicherten Beiträgen.`
+      });
+    }
   }
 
   function handleChoose(type) {
@@ -55,12 +215,72 @@ function AppShell({ appState, setAppState, onResetDemo }) {
     }));
   }
 
-  function handleOpenMap() {
-    setActivePage("discover");
+  function deleteEntry(entryId) {
+    setAppState((current) => {
+      const entryToDelete = current.entries.find((entry) => entry.id === entryId);
+
+      const nextEntries = current.entries.filter((entry) => entry.id !== entryId);
+
+      const nextPolaroids =
+        entryToDelete?.type === "Moment"
+          ? current.polaroids.filter(
+              (polaroid) =>
+                polaroid.title !== entryToDelete.title ||
+                polaroid.image !== entryToDelete.image
+            )
+          : current.polaroids;
+
+      return {
+        ...current,
+        entries: nextEntries,
+        polaroids: nextPolaroids,
+        savedEntryIds: (current.savedEntryIds || []).filter((id) => id !== entryId)
+      };
+    });
+
+    addNotification({
+      type: "system",
+      title: "Eintrag gelöscht",
+      text: "Der Roadbook Eintrag wurde aus deiner lokalen Beta entfernt."
+    });
+
+    showToast("Eintrag wurde gelöscht.");
   }
 
-  function handleOpenMenu() {
-    setMenuOpen(true);
+  function updateVehicle(vehicleId, updater) {
+    setAppState((current) => ({
+      ...current,
+      vehicles: current.vehicles.map((vehicle) => {
+        if (vehicle.id !== vehicleId) {
+          return vehicle;
+        }
+
+        return typeof updater === "function" ? updater(vehicle) : updater;
+      })
+    }));
+
+    addNotification({
+      type: "garage",
+      title: "Garage aktualisiert",
+      text: "Eine Fahrzeugakte wurde geändert."
+    });
+
+    showToast("Garage aktualisiert.");
+  }
+
+  function deleteVehicle(vehicleId) {
+    setAppState((current) => ({
+      ...current,
+      vehicles: current.vehicles.filter((vehicle) => vehicle.id !== vehicleId)
+    }));
+
+    addNotification({
+      type: "garage",
+      title: "Fahrzeug entfernt",
+      text: "Ein Fahrzeug wurde aus deiner Garage gelöscht."
+    });
+
+    showToast("Fahrzeug wurde entfernt.");
   }
 
   function handleSave(type, form) {
@@ -193,6 +413,17 @@ function AppShell({ appState, setAppState, onResetDemo }) {
       };
     });
 
+    const notificationText =
+      type === "vehicle"
+        ? `„${form.title}“ wurde deiner Garage hinzugefügt.`
+        : `„${form.title}“ wurde deinem Roadbook hinzugefügt.`;
+
+    addNotification({
+      type: type === "vehicle" ? "garage" : "roadbook",
+      title: "Neuer Eintrag gespeichert",
+      text: notificationText
+    });
+
     setFormType(null);
     showToast("Gespeichert für die lokale Beta.");
   }
@@ -203,14 +434,39 @@ function AppShell({ appState, setAppState, onResetDemo }) {
       user: nextUser
     }));
 
+    addNotification({
+      type: "profile",
+      title: "Profil aktualisiert",
+      text: "Deine Profilangaben wurden lokal gespeichert."
+    });
+
     setEditProfile(false);
     showToast("Profil lokal gespeichert.");
   }
 
   function handleResetDemoFromMenu() {
     onResetDemo();
+    setSelectedCommunityUser(null);
     showToast("Demo wurde zurückgesetzt.");
   }
+
+  const selectedUserEntries = selectedCommunityUser
+    ? appState.entries.filter(
+        (entry) => entry.author?.handle === selectedCommunityUser.handle
+      )
+    : [];
+
+  const notifications = appState.notifications || [];
+  const unreadCount = notifications.filter((notification) => !notification.read).length;
+
+  const sharedRoadbookProps = {
+    currentUser: appState.user,
+    savedEntryIds: appState.savedEntryIds || [],
+    onToggleSavedEntry: toggleSavedEntry,
+    onUpdateEntry: updateEntry,
+    onDeleteEntry: deleteEntry,
+    onOpenCommunityProfile: handleOpenCommunityProfile
+  };
 
   return (
     <div className="phone-shell">
@@ -220,35 +476,81 @@ function AppShell({ appState, setAppState, onResetDemo }) {
         {activePage === "feed" && (
           <FeedPage
             appState={appState}
-            onUpdateEntry={updateEntry}
-            onOpenMap={handleOpenMap}
-            onOpenMenu={handleOpenMenu}
+            activePage={activePage}
+            onOpenFeed={goToFeed}
+            onOpenMap={goToMap}
+            onOpenMenu={openMenu}
+            {...sharedRoadbookProps}
           />
         )}
 
         {activePage === "discover" && (
           <DiscoverPage
             appState={appState}
-            onOpenMap={handleOpenMap}
-            onOpenMenu={handleOpenMenu}
+            activePage={activePage}
+            onOpenFeed={goToFeed}
+            onOpenMap={goToMap}
+            onOpenMenu={openMenu}
           />
         )}
 
         {activePage === "garage" && (
           <GaragePage
             appState={appState}
-            onOpenMap={handleOpenMap}
-            onOpenMenu={handleOpenMenu}
+            activePage={activePage}
+            onOpenFeed={goToFeed}
+            onOpenMap={goToMap}
+            onOpenMenu={openMenu}
+            onUpdateVehicle={updateVehicle}
+            onDeleteVehicle={deleteVehicle}
+          />
+        )}
+
+        {activePage === "moments" && (
+          <MomentsPage
+            appState={appState}
+            activePage={activePage}
+            onOpenFeed={goToFeed}
+            onOpenMap={goToMap}
+            onOpenMenu={openMenu}
+            {...sharedRoadbookProps}
+          />
+        )}
+
+        {activePage === "saved" && (
+          <SavedPage
+            appState={appState}
+            activePage={activePage}
+            onOpenFeed={goToFeed}
+            onOpenMap={goToMap}
+            onOpenMenu={openMenu}
+            {...sharedRoadbookProps}
+          />
+        )}
+
+        {activePage === "notifications" && (
+          <NotificationsPage
+            appState={appState}
+            activePage={activePage}
+            unreadCount={unreadCount}
+            onOpenFeed={goToFeed}
+            onOpenMap={goToMap}
+            onOpenMenu={openMenu}
+            onMarkRead={markNotificationRead}
+            onMarkAllRead={markAllNotificationsRead}
+            onClearRead={clearReadNotifications}
           />
         )}
 
         {activePage === "profile" && (
           <ProfilePage
             appState={appState}
+            activePage={activePage}
             onEditProfile={() => setEditProfile(true)}
             onResetDemo={onResetDemo}
-            onOpenMap={handleOpenMap}
-            onOpenMenu={handleOpenMenu}
+            onOpenFeed={goToFeed}
+            onOpenMap={goToMap}
+            onOpenMenu={openMenu}
           />
         )}
 
@@ -270,12 +572,27 @@ function AppShell({ appState, setAppState, onResetDemo }) {
         {menuOpen && (
           <AppMenu
             user={appState.user}
+            savedCount={(appState.savedEntryIds || []).length}
+            unreadCount={unreadCount}
             onClose={() => setMenuOpen(false)}
-            onGoToFeed={() => setActivePage("feed")}
-            onGoToDiscover={() => setActivePage("discover")}
-            onGoToGarage={() => setActivePage("garage")}
-            onGoToProfile={() => setActivePage("profile")}
+            onGoToFeed={goToFeed}
+            onGoToDiscover={goToMap}
+            onGoToGarage={goToGarage}
+            onGoToMoments={goToMoments}
+            onGoToSaved={goToSaved}
+            onGoToNotifications={goToNotifications}
+            onGoToProfile={goToProfile}
             onResetDemo={handleResetDemoFromMenu}
+          />
+        )}
+
+        {selectedCommunityUser && (
+          <CommunityProfileSheet
+            user={selectedCommunityUser}
+            entries={selectedUserEntries}
+            followingHandles={appState.followingHandles || []}
+            onToggleFollow={toggleFollow}
+            onClose={() => setSelectedCommunityUser(null)}
           />
         )}
 

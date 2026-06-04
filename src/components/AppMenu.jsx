@@ -1,11 +1,24 @@
-import { IconGarage, IconHome, IconMapPin, IconProfile } from "../icons/Icons";
+import {
+  IconBookmark,
+  IconCamera,
+  IconGarage,
+  IconHeart,
+  IconHome,
+  IconMapPin,
+  IconProfile
+} from "../icons/Icons";
 
 export default function AppMenu({
   user,
+  savedCount = 0,
+  unreadCount = 0,
   onClose,
   onGoToFeed,
   onGoToDiscover,
   onGoToGarage,
+  onGoToMoments,
+  onGoToSaved,
+  onGoToNotifications,
   onGoToProfile,
   onResetDemo
 }) {
@@ -17,7 +30,7 @@ export default function AppMenu({
         <p className="section-label">Menü</p>
         <h2>Blechroute steuern</h2>
         <p>
-          Schnell zu deinen Bereichen springen, Demo zurücksetzen oder einfach
+          Schnell zu deinen Bereichen springen, Aktivitäten prüfen oder einfach
           weiter im Roadbook stöbern.
         </p>
 
@@ -35,6 +48,26 @@ export default function AppMenu({
             <div>
               <strong>Feed</strong>
               <small>Zurück zu deinen Momenten und Community-Beiträgen</small>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              onGoToNotifications();
+              onClose();
+            }}
+          >
+            <span>
+              <IconHeart />
+            </span>
+            <div>
+              <strong>Aktivität</strong>
+              <small>
+                {unreadCount > 0
+                  ? `${unreadCount} neue Meldungen`
+                  : "Keine neuen Meldungen"}
+              </small>
             </div>
           </button>
 
@@ -67,6 +100,38 @@ export default function AppMenu({
             <div>
               <strong>Garage</strong>
               <small>Deine Fahrzeuge und Geschichten ansehen</small>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              onGoToMoments();
+              onClose();
+            }}
+          >
+            <span>
+              <IconCamera />
+            </span>
+            <div>
+              <strong>Momente</strong>
+              <small>Polaroids, Erinnerungen und Roadbook-Beiträge</small>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              onGoToSaved();
+              onClose();
+            }}
+          >
+            <span>
+              <IconBookmark />
+            </span>
+            <div>
+              <strong>Gespeichert</strong>
+              <small>{savedCount} gemerkte Beiträge im Roadbook</small>
             </div>
           </button>
 

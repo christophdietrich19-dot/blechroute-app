@@ -1,4 +1,9 @@
-import { IconBook, IconCamera, IconGarage, IconMapPin } from "../icons/Icons";
+import {
+  IconCamera,
+  IconGarage,
+  IconMapPin,
+  IconPlus
+} from "../icons/Icons";
 
 export default function CreateMenu({ onClose, onChoose }) {
   return (
@@ -7,20 +12,32 @@ export default function CreateMenu({ onClose, onChoose }) {
         <div className="sheet-handle" />
 
         <p className="section-label">Neuer Eintrag</p>
-        <h2>Was bleibt von dieser Fahrt?</h2>
+        <h2>Was möchtest du festhalten?</h2>
         <p>
-          Füge eine Tour, einen Ort, einen Moment oder ein Fahrzeug zu deinem
-          Roadbook hinzu.
+          Blechroute sammelt nicht einfach Posts. Es geht um Fahrzeuge, Orte,
+          Touren und diese kleinen Momente, die später wieder auftauchen sollen.
         </p>
 
         <div className="create-options">
+          <button type="button" onClick={() => onChoose("moment")}>
+            <span>
+              <IconCamera />
+            </span>
+
+            <div>
+              <strong>Moment festhalten</strong>
+              <small>Ein Foto, ein kurzer Text, ein Polaroid fürs Roadbook</small>
+            </div>
+          </button>
+
           <button type="button" onClick={() => onChoose("tour")}>
             <span>
-              <IconBook />
+              <IconPlus />
             </span>
+
             <div>
-              <strong>Neue Tour</strong>
-              <small>Strecke, Fahrzeug, Bilder und Gefühl festhalten</small>
+              <strong>Tour anlegen</strong>
+              <small>Strecke, Fahrzeug, Dauer und Gefühl der Fahrt speichern</small>
             </div>
           </button>
 
@@ -28,19 +45,10 @@ export default function CreateMenu({ onClose, onChoose }) {
             <span>
               <IconMapPin />
             </span>
-            <div>
-              <strong>Neuer Spot</strong>
-              <small>Lieblingsort, Fotoplatz oder Pause speichern</small>
-            </div>
-          </button>
 
-          <button type="button" onClick={() => onChoose("moment")}>
-            <span>
-              <IconCamera />
-            </span>
             <div>
-              <strong>Neuer Moment</strong>
-              <small>Ein Foto, ein Satz, eine Erinnerung</small>
+              <strong>Spot speichern</strong>
+              <small>Ort, Kategorie und kleine Notiz für später merken</small>
             </div>
           </button>
 
@@ -48,9 +56,10 @@ export default function CreateMenu({ onClose, onChoose }) {
             <span>
               <IconGarage />
             </span>
+
             <div>
-              <strong>Neues Fahrzeug</strong>
-              <small>Auto in deiner Garage anlegen</small>
+              <strong>Fahrzeug hinzufügen</strong>
+              <small>Auto in deine Garage legen und mit Story versehen</small>
             </div>
           </button>
         </div>

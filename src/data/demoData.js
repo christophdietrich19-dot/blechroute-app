@@ -78,7 +78,7 @@ export const defaultVehicles = [
     engine: "2.8 V6",
     status: "Sonntagskind",
     image: carImages.audi80,
-    story: "Ruhige Linie, weicher Klang und dieses alte Audi-Gefühl.",
+    story: "Ruhige Linie, weicher Klang und genau der richtige Vibe.",
     visibility: "Öffentlich"
   }
 ];
@@ -234,6 +234,41 @@ export const defaultPolaroids = [
   }
 ];
 
+export const defaultNotifications = [
+  {
+    id: 1,
+    type: "comment",
+    title: "Julia hat deinen Moment kommentiert",
+    text: "„Genau solche Momente machen alte Autos aus.“",
+    time: "vor 12 Minuten",
+    read: false
+  },
+  {
+    id: 2,
+    type: "follow",
+    title: "Max R. folgt deinem Roadbook",
+    text: "Deine Garage und deine Touren sind jetzt in seinem Blickfeld.",
+    time: "vor 1 Stunde",
+    read: false
+  },
+  {
+    id: 3,
+    type: "saved",
+    title: "Dein Spot wurde gespeichert",
+    text: "Jemand hat sich „Lausitzer Seenland“ für später gemerkt.",
+    time: "gestern",
+    read: true
+  },
+  {
+    id: 4,
+    type: "idea",
+    title: "Wochenidee freigeschaltet",
+    text: "Finde einen Ort, an dem du sonst nur vorbeifährst.",
+    time: "diese Woche",
+    read: true
+  }
+];
+
 export const tasks = [
   {
     id: 1,
@@ -268,6 +303,9 @@ export function createDefaultState() {
     guestMode: true,
     user: defaultUser,
     communityUsers,
+    followingHandles: [],
+    savedEntryIds: [],
+    notifications: defaultNotifications,
     vehicles: defaultVehicles,
     entries: defaultRoadbookEntries,
     spots: defaultSpots,

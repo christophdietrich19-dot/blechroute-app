@@ -5,8 +5,10 @@ import { tasks } from "../data/demoData";
 
 export default function ProfilePage({
   appState,
+  activePage,
   onEditProfile,
   onResetDemo,
+  onOpenFeed,
   onOpenMap,
   onOpenMenu
 }) {
@@ -41,6 +43,8 @@ export default function ProfilePage({
       <AppHeader
         compact
         userProfile={appState.user}
+        activePage={activePage}
+        onOpenFeed={onOpenFeed}
         onOpenMap={onOpenMap}
         onOpenMenu={onOpenMenu}
       />

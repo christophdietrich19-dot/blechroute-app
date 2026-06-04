@@ -1,6 +1,20 @@
-export default function GarageCard({ vehicle }) {
+export default function GarageCard({ vehicle, onOpen }) {
   return (
-    <article className="garage-card">
+    <article
+      className="garage-card"
+      role="button"
+      tabIndex={0}
+      onClick={onOpen}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          onOpen();
+        }
+      }}
+      style={{
+        cursor: "pointer"
+      }}
+    >
       <img src={vehicle.image} alt={vehicle.name} />
 
       <div>
@@ -15,7 +29,7 @@ export default function GarageCard({ vehicle }) {
 
         <div className="roadbook-meta">
           <span>{vehicle.visibility}</span>
-          <span>Garage</span>
+          <span>Fahrzeugakte öffnen</span>
         </div>
       </div>
     </article>
