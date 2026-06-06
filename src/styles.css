@@ -1,12 +1,12 @@
 :root {
   --bg-dark: #050302;
 
-  --leather-black: #080302;
-  --leather-deep: #160702;
-  --leather-dark: #2a0f05;
-  --leather-mid: #54240d;
-  --leather-cognac: #8a431b;
-  --leather-warm: #b66b32;
+  --leather-black: #070201;
+  --leather-deep: #130501;
+  --leather-dark: #260c03;
+  --leather-mid: #51220b;
+  --leather-cognac: #854018;
+  --leather-warm: #b0642e;
 
   --paper: #f6e7cb;
   --paper-warm: #ead2aa;
@@ -126,9 +126,10 @@ svg {
   overflow: hidden;
   border-radius: 38px;
   background:
-    radial-gradient(circle at 22% 6%, rgba(255, 206, 130, 0.14), transparent 24%),
-    radial-gradient(circle at 88% 76%, rgba(255, 170, 76, 0.08), transparent 28%),
-    linear-gradient(160deg, #7f3b18 0%, #4c1d09 32%, #210b04 70%, #080302 100%);
+    radial-gradient(circle at 20% 4%, rgba(255, 210, 132, 0.15), transparent 23%),
+    radial-gradient(circle at 90% 74%, rgba(255, 165, 72, 0.08), transparent 30%),
+    radial-gradient(circle at 18% 86%, rgba(0, 0, 0, 0.35), transparent 35%),
+    linear-gradient(160deg, #713112 0%, #411607 34%, #1c0803 72%, #070201 100%);
 }
 
 .app-screen::before {
@@ -137,27 +138,35 @@ svg {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 14% 18%, rgba(255, 235, 190, 0.09) 0 1px, transparent 2px),
-    radial-gradient(circle at 82% 28%, rgba(0, 0, 0, 0.22) 0 1px, transparent 3px),
-    radial-gradient(circle at 38% 72%, rgba(255, 195, 110, 0.05) 0 1px, transparent 3px),
+    radial-gradient(circle at 12% 14%, rgba(255, 232, 188, 0.09) 0 1px, transparent 2px),
+    radial-gradient(circle at 34% 42%, rgba(0, 0, 0, 0.24) 0 1px, transparent 3px),
+    radial-gradient(circle at 82% 22%, rgba(255, 205, 130, 0.05) 0 1px, transparent 2px),
+    radial-gradient(circle at 62% 76%, rgba(0, 0, 0, 0.22) 0 1px, transparent 3px),
     repeating-radial-gradient(
       ellipse at center,
       rgba(255, 255, 255, 0.018) 0 1px,
-      transparent 1px 8px
+      transparent 1px 7px
     ),
     repeating-linear-gradient(
-      74deg,
+      72deg,
       rgba(255, 255, 255, 0.012) 0 1px,
-      transparent 1px 7px
+      transparent 1px 6px
+    ),
+    repeating-linear-gradient(
+      148deg,
+      rgba(0, 0, 0, 0.06) 0 1px,
+      transparent 1px 9px
     );
   background-size:
-    23px 23px,
+    19px 19px,
     31px 31px,
-    46px 46px,
-    18px 18px,
+    23px 23px,
+    43px 43px,
+    14px 14px,
+    auto,
     auto;
   mix-blend-mode: soft-light;
-  opacity: 0.96;
+  opacity: 1;
 }
 
 .app-screen::after {
@@ -166,8 +175,8 @@ svg {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(to bottom, rgba(255, 205, 130, 0.05), transparent 16%, transparent 72%, rgba(0, 0, 0, 0.42)),
-    radial-gradient(circle at center, transparent 54%, rgba(0, 0, 0, 0.26));
+    linear-gradient(to bottom, rgba(255, 210, 130, 0.055), transparent 16%, transparent 72%, rgba(0, 0, 0, 0.48)),
+    radial-gradient(circle at center, transparent 48%, rgba(0, 0, 0, 0.34));
 }
 
 .screen-page {
@@ -202,12 +211,23 @@ svg {
   background:
     radial-gradient(circle at 50% 0%, rgba(255, 220, 155, 0.18), transparent 36%),
     radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.06), transparent 20%),
-    radial-gradient(circle at 80% 64%, rgba(0, 0, 0, 0.22), transparent 25%),
-    linear-gradient(180deg, #6f3414, #341204 72%, #150602);
+    radial-gradient(circle at 80% 64%, rgba(0, 0, 0, 0.25), transparent 25%),
+    repeating-radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.022) 0 1px,
+      transparent 1px 7px
+    ),
+    repeating-linear-gradient(
+      80deg,
+      rgba(255, 255, 255, 0.015) 0 1px,
+      transparent 1px 7px
+    ),
+    linear-gradient(180deg, #6f3212, #321004 72%, #120401);
   box-shadow:
-    0 16px 34px rgba(0, 0, 0, 0.48),
+    0 16px 34px rgba(0, 0, 0, 0.52),
+    inset 0 1px 0 rgba(255, 232, 180, 0.12),
     inset 0 -1px 0 rgba(255, 218, 154, 0.18),
-    inset 0 -9px 18px rgba(0, 0, 0, 0.18);
+    inset 0 -11px 20px rgba(0, 0, 0, 0.24);
 }
 
 .app-header::before {
@@ -216,14 +236,14 @@ svg {
   inset: 8px 8px auto;
   height: 86px;
   border-radius: 24px 24px 18px 18px;
-  border: 1px solid rgba(244, 212, 142, 0.18);
-  border-bottom-color: rgba(7, 2, 1, 0.5);
+  border: 1px solid rgba(244, 212, 142, 0.2);
+  border-bottom-color: rgba(7, 2, 1, 0.56);
   pointer-events: none;
   background:
-    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.05), transparent 18%),
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.055), transparent 18%),
     repeating-radial-gradient(
       ellipse at center,
-      rgba(255, 255, 255, 0.018) 0 1px,
+      rgba(255, 255, 255, 0.02) 0 1px,
       transparent 1px 7px
     );
   mix-blend-mode: soft-light;
@@ -235,12 +255,16 @@ svg {
   left: 0;
   right: 0;
   bottom: 76px;
-  height: 10px;
+  height: 11px;
   pointer-events: none;
   background:
-    radial-gradient(circle, rgba(246, 196, 116, 0.38) 0 2px, transparent 3px) 0 2px / 14px 7px repeat-x,
-    linear-gradient(to bottom, rgba(5, 2, 1, 0.75), rgba(255, 220, 155, 0.12), rgba(5, 2, 1, 0.78));
-  opacity: 0.65;
+    radial-gradient(circle, rgba(246, 196, 116, 0.42) 0 2px, transparent 3px) 0 2px / 14px 7px repeat-x,
+    linear-gradient(to bottom, rgba(5, 2, 1, 0.82), rgba(255, 220, 155, 0.13), rgba(5, 2, 1, 0.82));
+  opacity: 0.72;
+}
+
+.app-header.compact {
+  margin-bottom: 18px;
 }
 
 .brand-line {
@@ -265,7 +289,7 @@ svg {
   text-shadow:
     0 1px 0 #2a1005,
     0 2px 0 rgba(255, 235, 170, 0.14),
-    0 8px 18px rgba(0, 0, 0, 0.58);
+    0 8px 18px rgba(0, 0, 0, 0.62);
 }
 
 .brand-center p {
@@ -318,17 +342,22 @@ svg {
   min-height: 57px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(244, 212, 142, 0.28);
+  border: 1px solid rgba(244, 212, 142, 0.3);
   border-radius: 17px;
-  color: rgba(244, 212, 142, 0.84);
+  color: rgba(244, 212, 142, 0.86);
   background:
-    radial-gradient(circle at 35% 18%, rgba(255, 220, 154, 0.15), transparent 34%),
-    radial-gradient(circle at 65% 88%, rgba(0, 0, 0, 0.32), transparent 45%),
+    radial-gradient(circle at 35% 18%, rgba(255, 220, 154, 0.16), transparent 34%),
+    radial-gradient(circle at 65% 88%, rgba(0, 0, 0, 0.34), transparent 45%),
+    repeating-radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.018) 0 1px,
+      transparent 1px 7px
+    ),
     linear-gradient(145deg, #703315, #2c1005 74%, #120502);
   box-shadow:
-    0 11px 19px rgba(0, 0, 0, 0.48),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    inset 0 -5px 11px rgba(0, 0, 0, 0.28);
+    0 11px 19px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    inset 0 -5px 11px rgba(0, 0, 0, 0.32);
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 900;
@@ -341,7 +370,7 @@ svg {
   content: "";
   position: absolute;
   inset: 7px;
-  border: 1px dashed rgba(246, 231, 203, 0.18);
+  border: 1px dashed rgba(246, 231, 203, 0.2);
   border-radius: 12px;
   pointer-events: none;
 }
@@ -355,9 +384,9 @@ svg {
   background:
     radial-gradient(circle at 14px 14px, rgba(246, 215, 150, 0.35) 0 1px, transparent 2px),
     radial-gradient(circle at calc(100% - 14px) 14px, rgba(246, 215, 150, 0.26) 0 1px, transparent 2px),
-    radial-gradient(circle at 14px calc(100% - 14px), rgba(0, 0, 0, 0.32) 0 1px, transparent 2px),
-    radial-gradient(circle at calc(100% - 14px) calc(100% - 14px), rgba(0, 0, 0, 0.32) 0 1px, transparent 2px);
-  opacity: 0.85;
+    radial-gradient(circle at 14px calc(100% - 14px), rgba(0, 0, 0, 0.34) 0 1px, transparent 2px),
+    radial-gradient(circle at calc(100% - 14px) calc(100% - 14px), rgba(0, 0, 0, 0.34) 0 1px, transparent 2px);
+  opacity: 0.88;
 }
 
 .road-control-button span,
@@ -385,10 +414,15 @@ svg {
 
 .road-control-button.active {
   color: var(--gold-light);
-  border-color: rgba(244, 212, 142, 0.58);
+  border-color: rgba(244, 212, 142, 0.62);
   background:
-    radial-gradient(circle at 34% 18%, rgba(255, 229, 173, 0.24), transparent 36%),
-    radial-gradient(circle at 62% 84%, rgba(0, 0, 0, 0.24), transparent 44%),
+    radial-gradient(circle at 34% 18%, rgba(255, 229, 173, 0.26), transparent 36%),
+    radial-gradient(circle at 62% 84%, rgba(0, 0, 0, 0.28), transparent 44%),
+    repeating-radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.02) 0 1px,
+      transparent 1px 7px
+    ),
     linear-gradient(145deg, #87431d, #351407 76%, #160602);
 }
 
@@ -455,8 +489,13 @@ svg {
   position: relative;
   color: var(--paper-ink);
   background:
-    radial-gradient(circle at 22% 12%, rgba(255, 255, 255, 0.7), transparent 18%),
-    radial-gradient(circle at 78% 84%, rgba(89, 58, 28, 0.08), transparent 24%),
+    radial-gradient(circle at 22% 12%, rgba(255, 255, 255, 0.72), transparent 18%),
+    radial-gradient(circle at 78% 84%, rgba(89, 58, 28, 0.09), transparent 24%),
+    repeating-radial-gradient(
+      ellipse at center,
+      rgba(90, 59, 29, 0.035) 0 1px,
+      transparent 1px 6px
+    ),
     repeating-linear-gradient(
       7deg,
       rgba(43, 26, 15, 0.035) 0 1px,
@@ -622,6 +661,8 @@ svg {
   display: none;
 }
 
+/* MOMENTS ROW FIX */
+
 .section-head {
   display: flex;
   justify-content: space-between;
@@ -629,8 +670,8 @@ svg {
   align-items: end;
   width: 100%;
   max-width: 100%;
-  margin: 24px 0 14px;
-  overflow-x: hidden;
+  margin: 28px 0 4px;
+  overflow: visible;
 }
 
 .section-head h2 {
@@ -646,6 +687,56 @@ svg {
   color: var(--paper-muted);
   font-size: 0.82rem;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.polaroid-row {
+  display: flex;
+  gap: 18px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 32px 4px 24px;
+  margin-top: -2px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.polaroid {
+  width: 194px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  padding: 11px 11px 16px;
+  border-radius: 8px;
+  transform: rotate(-1.5deg);
+}
+
+.polaroid.tilted {
+  transform: rotate(2deg);
+}
+
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 1 / 0.78;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid rgba(58, 34, 18, 0.2);
+  border-radius: 4px;
+  filter: sepia(0.14) saturate(0.95) contrast(1.02);
+}
+
+.polaroid h3 {
+  margin: 12px 0 0;
+  font-size: 1.08rem;
+  line-height: 1.05;
+  font-weight: 600;
+}
+
+.polaroid p {
+  margin: 6px 0 0;
+  color: rgba(43, 26, 15, 0.78);
+  font-size: 0.9rem;
+  line-height: 1.32;
 }
 
 /* CARDS */
@@ -664,9 +755,14 @@ svg {
   border-radius: var(--radius-lg);
   background:
     radial-gradient(circle at top, rgba(255, 218, 154, 0.08), transparent 36%),
-    linear-gradient(145deg, rgba(70, 31, 13, 0.88), rgba(22, 9, 4, 0.88));
+    repeating-radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.012) 0 1px,
+      transparent 1px 7px
+    ),
+    linear-gradient(145deg, rgba(70, 31, 13, 0.9), rgba(22, 9, 4, 0.9));
   box-shadow:
-    0 18px 44px rgba(0, 0, 0, 0.36),
+    0 18px 44px rgba(0, 0, 0, 0.38),
     inset 0 0 0 1px rgba(255, 255, 255, 0.025);
 }
 
@@ -840,54 +936,6 @@ svg {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 14px;
-}
-
-.polaroid-row {
-  display: flex;
-  gap: 16px;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;
-  padding: 10px 2px 16px;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-
-.polaroid {
-  width: 194px;
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-  padding: 11px 11px 16px;
-  border-radius: 8px;
-  transform: rotate(-1.5deg);
-}
-
-.polaroid.tilted {
-  transform: rotate(2deg);
-}
-
-.polaroid img {
-  width: 100%;
-  aspect-ratio: 1 / 0.78;
-  object-fit: cover;
-  object-position: center;
-  border: 1px solid rgba(58, 34, 18, 0.2);
-  border-radius: 4px;
-  filter: sepia(0.14) saturate(0.95) contrast(1.02);
-}
-
-.polaroid h3 {
-  margin: 12px 0 0;
-  font-size: 1.08rem;
-  line-height: 1.05;
-  font-weight: 600;
-}
-
-.polaroid p {
-  margin: 6px 0 0;
-  color: rgba(43, 26, 15, 0.78);
-  font-size: 0.9rem;
-  line-height: 1.32;
 }
 
 .weekly-car img {
@@ -1108,16 +1156,21 @@ svg {
   align-items: center;
   gap: 4px;
   padding: 8px;
-  border: 1px solid rgba(244, 212, 142, 0.22);
+  border: 1px solid rgba(244, 212, 142, 0.24);
   border-radius: 26px;
   background:
-    radial-gradient(circle at 50% 0%, rgba(255, 226, 170, 0.13), transparent 44%),
-    radial-gradient(circle at 20% 12%, rgba(255, 255, 255, 0.04), transparent 22%),
-    linear-gradient(180deg, rgba(82, 38, 15, 0.98), rgba(24, 8, 3, 0.99));
+    radial-gradient(circle at 50% 0%, rgba(255, 226, 170, 0.14), transparent 44%),
+    radial-gradient(circle at 20% 12%, rgba(255, 255, 255, 0.045), transparent 22%),
+    repeating-radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.016) 0 1px,
+      transparent 1px 7px
+    ),
+    linear-gradient(180deg, rgba(82, 38, 15, 0.99), rgba(24, 8, 3, 0.99));
   box-shadow:
-    0 18px 52px rgba(0, 0, 0, 0.58),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    inset 0 -7px 12px rgba(0, 0, 0, 0.2);
+    0 18px 52px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    inset 0 -7px 12px rgba(0, 0, 0, 0.24);
   backdrop-filter: blur(18px);
 }
 
@@ -1125,7 +1178,7 @@ svg {
   content: "";
   position: absolute;
   inset: 7px;
-  border: 1px dashed rgba(246, 231, 203, 0.15);
+  border: 1px dashed rgba(246, 231, 203, 0.16);
   border-radius: 20px;
   pointer-events: none;
 }
@@ -1156,11 +1209,16 @@ svg {
 .nav-item.active {
   color: var(--gold-light);
   background:
-    radial-gradient(circle at top, rgba(255, 235, 185, 0.18), transparent 50%),
-    linear-gradient(145deg, rgba(96, 45, 18, 0.86), rgba(45, 17, 7, 0.84));
+    radial-gradient(circle at top, rgba(255, 235, 185, 0.2), transparent 50%),
+    repeating-radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.016) 0 1px,
+      transparent 1px 7px
+    ),
+    linear-gradient(145deg, rgba(96, 45, 18, 0.88), rgba(45, 17, 7, 0.86));
   box-shadow:
-    inset 0 0 0 1px rgba(216, 174, 103, 0.2),
-    0 8px 18px rgba(0, 0, 0, 0.22);
+    inset 0 0 0 1px rgba(216, 174, 103, 0.22),
+    0 8px 18px rgba(0, 0, 0, 0.24);
 }
 
 .create-button {
@@ -1171,17 +1229,22 @@ svg {
   display: grid;
   place-items: center;
   padding: 7px;
-  border: 1px solid rgba(244, 212, 142, 0.44);
+  border: 1px solid rgba(244, 212, 142, 0.46);
   border-radius: 999px;
   color: var(--gold-light);
   background:
-    radial-gradient(circle at 36% 22%, rgba(255, 229, 169, 0.2), transparent 30%),
-    radial-gradient(circle at 70% 86%, rgba(0, 0, 0, 0.38), transparent 45%),
+    radial-gradient(circle at 36% 22%, rgba(255, 229, 169, 0.22), transparent 30%),
+    radial-gradient(circle at 70% 86%, rgba(0, 0, 0, 0.4), transparent 45%),
+    repeating-radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.016) 0 1px,
+      transparent 1px 7px
+    ),
     linear-gradient(145deg, #8b461d, #351407 72%, #160602);
   box-shadow:
-    0 17px 34px rgba(0, 0, 0, 0.58),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-    inset 0 -7px 12px rgba(0, 0, 0, 0.22);
+    0 17px 34px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+    inset 0 -7px 12px rgba(0, 0, 0, 0.24);
   transform: translateY(-21px);
 }
 
@@ -1189,7 +1252,7 @@ svg {
   content: "";
   position: absolute;
   inset: 9px;
-  border: 1px dashed rgba(246, 231, 203, 0.22);
+  border: 1px dashed rgba(246, 231, 203, 0.24);
   border-radius: 999px;
 }
 
@@ -1234,6 +1297,11 @@ svg {
   border-radius: 28px;
   background:
     radial-gradient(circle at top, rgba(255, 218, 154, 0.1), transparent 40%),
+    repeating-radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.015) 0 1px,
+      transparent 1px 7px
+    ),
     linear-gradient(180deg, rgba(82, 37, 16, 0.98), rgba(18, 7, 3, 0.98));
   box-shadow: 0 -18px 80px rgba(0, 0, 0, 0.58);
   scrollbar-width: none;
@@ -1535,17 +1603,31 @@ svg {
     transform: rotate(-0.7deg);
   }
 
-  .daily-polaroid::before,
-  .polaroid::before {
+  .daily-polaroid::before {
     top: -16px;
     width: 29px;
     height: 29px;
   }
 
-  .daily-polaroid::after,
-  .polaroid::after {
+  .daily-polaroid::after {
     top: 7px;
     height: 21px;
+  }
+
+  .polaroid-row {
+    padding-top: 34px;
+    padding-bottom: 24px;
+  }
+
+  .polaroid::before {
+    top: -15px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .polaroid::after {
+    top: 7px;
+    height: 20px;
   }
 
   .garage-card img {
