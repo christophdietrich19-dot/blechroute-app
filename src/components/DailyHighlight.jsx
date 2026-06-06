@@ -1,49 +1,36 @@
-import { useState } from "react";
-import { IconBookmark, IconHeart } from "../icons/Icons";
+import { IconMapPin } from "../icons/Icons";
 
 export default function DailyHighlight({ moment }) {
-  const [liked, setLiked] = useState(false);
-  const [saved, setSaved] = useState(false);
-
   return (
     <article className="daily-highlight">
       <div className="daily-polaroid">
+        <div className="polaroid-topline">
+          <div className="mini-author">
+            <img src={moment.image} alt={moment.author} />
+            <div>
+              <strong>Christoph Dietrich</strong>
+              <small>
+                <IconMapPin />
+                {moment.place || "Lausitz"}
+              </small>
+            </div>
+          </div>
+
+          <span className="polaroid-time">heute</span>
+        </div>
+
         <img src={moment.image} alt={moment.headline} />
 
-        <div>
+        <div className="polaroid-caption-row">
           <h3>{moment.headline}</h3>
-          <p>{moment.text}</p>
-          <span>{moment.place}</span>
+          <span>{moment.title}</span>
         </div>
       </div>
 
       <div className="daily-copy">
         <p className="section-label">{moment.title}</p>
-        <h2>Dieser Moment bleibt.</h2>
-        <p>
-          Von {moment.author}. Ausgewählt, weil manchmal ein Bild reicht, um eine
-          ganze Fahrt wieder zu fühlen.
-        </p>
-
-        <div className="daily-actions">
-          <button
-            className={liked ? "soft-action active" : "soft-action"}
-            type="button"
-            onClick={() => setLiked((current) => !current)}
-          >
-            <IconHeart />
-            <span>{liked ? "Behalten" : "Gefällt"}</span>
-          </button>
-
-          <button
-            className={saved ? "soft-action active" : "soft-action"}
-            type="button"
-            onClick={() => setSaved((current) => !current)}
-          >
-            <IconBookmark />
-            <span>{saved ? "Gespeichert" : "Speichern"}</span>
-          </button>
-        </div>
+        <h2>{moment.headline}</h2>
+        <p>{moment.text}</p>
       </div>
     </article>
   );
