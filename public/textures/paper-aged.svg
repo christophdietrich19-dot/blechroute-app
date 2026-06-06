@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360">
+<defs>
+<filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="5" seed="9"/></filter>
+<linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3d4"/><stop offset="0.58" stop-color="#ecd4a8"/><stop offset="1" stop-color="#c49a63"/></linearGradient>
+<pattern id="fib" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M1 8 C12 5,22 12,36 6" fill="none" stroke="#7a5530" stroke-width="0.45" opacity="0.16"/><path d="M4 25 C14 20,20 31,37 24" fill="none" stroke="#fff" stroke-width="0.5" opacity="0.18"/><circle cx="12" cy="17" r="0.7" fill="#6f4926" opacity="0.18"/></pattern>
+</defs>
+<rect width="360" height="360" fill="url(#b)"/><rect width="360" height="360" filter="url(#n)" opacity="0.25"/><rect width="360" height="360" fill="url(#fib)" opacity="0.8"/><rect width="360" height="360" fill="#6b411d" opacity="0.05"/>
+</svg>
