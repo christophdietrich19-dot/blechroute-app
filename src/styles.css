@@ -1,9 +1,6 @@
-/* Blechroute Leather Patch v5
-   Sauberer öffentlicher UI-Stand:
-   - weniger Glanz
-   - mehr Leder-Patch-Charakter
-   - runde Naht-Andeutung ohne eckige PNG-Rahmen
-   - Header, Top Buttons, Bottom Nav und Plus Button neu gewichtet
+/* Blechroute Asset Pack v6 - styles.css
+   Sichtbarer Neuaufbau bleibt nah an deinem aktuellen Layout,
+   aber vorbereitet auf echte Bilder/Assets aus public/textures und public/overlays.
 */
 
 :root {
@@ -156,8 +153,6 @@ svg {
     linear-gradient(to bottom, rgba(255, 210, 130, 0.035), transparent 16%, transparent 72%, rgba(0, 0, 0, 0.48)),
     radial-gradient(circle at center, transparent 48%, rgba(0, 0, 0, 0.34));
 }
-
-/* Scroll area */
 
 .screen-page {
   position: relative;
@@ -616,7 +611,7 @@ svg {
   display: none;
 }
 
-/* Moments */
+/* Cards + common elements */
 
 .section-head {
   display: flex;
@@ -693,8 +688,6 @@ svg {
   font-size: 0.9rem;
   line-height: 1.32;
 }
-
-/* Cards */
 
 .roadbook-card,
 .weekly-car,

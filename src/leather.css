@@ -1,86 +1,90 @@
-/* Blechroute Leather Patch v5 Material Layer
-   Kein Plastikglanz, keine eckigen Nähte auf runden Buttons.
+/* Blechroute Asset Pack v6 Material Layer
+   Nutzt die neuen echten Bilder aus:
+   public/textures und public/overlays
 */
 
 :root {
-  --br-leather-main: url("/blechroute-app/textures/leather-public-main.webp");
-  --br-leather-panel: url("/blechroute-app/textures/leather-public-panel.webp");
-  --br-paper: url("/blechroute-app/textures/paper-public-polaroid.webp");
-  --br-stitch-h: url("/blechroute-app/overlays/stitch-public-horizontal.png");
-  --br-stitch-v: url("/blechroute-app/overlays/stitch-public-vertical.png");
-  --br-edge: url("/blechroute-app/overlays/pressed-edge-public.png");
-  --br-pin: url("/blechroute-app/overlays/brass-pin-public.png");
+  --br-leather-main: url("/blechroute-app/textures/leather-main.webp");
+  --br-leather-panel: url("/blechroute-app/textures/leather-panel.webp");
+  --br-paper: url("/blechroute-app/textures/paper-polaroid.webp");
+
+  --br-button-frame: url("/blechroute-app/overlays/button-stitch-frame.png");
+  --br-stitch-h: url("/blechroute-app/overlays/stitch-horizontal.png");
+  --br-pressed-edge: url("/blechroute-app/overlays/pressed-edge.png");
+  --br-leather-frame: url("/blechroute-app/overlays/leather-frame.png");
+  --br-pin: url("/blechroute-app/overlays/brass-pin.png");
 
   --br-gold: #f1cf89;
   --br-gold-muted: rgba(241, 207, 137, 0.74);
 }
 
+/* echtes Leder-Fundament */
+
 .app-screen {
   background:
-    radial-gradient(circle at 50% -8%, rgba(255, 214, 142, 0.095), transparent 24%),
-    radial-gradient(circle at 8% 18%, rgba(185, 94, 38, 0.115), transparent 30%),
-    radial-gradient(circle at 92% 82%, rgba(0, 0, 0, 0.56), transparent 43%),
-    linear-gradient(160deg, rgba(54, 18, 6, 0.55), rgba(8, 3, 1, 0.98)),
+    radial-gradient(circle at 50% -8%, rgba(255, 214, 142, 0.08), transparent 24%),
+    radial-gradient(circle at 8% 18%, rgba(185, 94, 38, 0.10), transparent 30%),
+    radial-gradient(circle at 92% 82%, rgba(0, 0, 0, 0.58), transparent 43%),
+    linear-gradient(160deg, rgba(54, 18, 6, 0.46), rgba(8, 3, 1, 0.98)),
     var(--br-leather-main);
-  background-size: auto, auto, auto, auto, 720px 720px;
+  background-size: auto, auto, auto, auto, 760px 760px;
   background-position: center top, left top, right bottom, center, center;
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
 }
 
 .app-screen::before {
-  opacity: 0.16;
+  opacity: 0.12;
   mix-blend-mode: soft-light;
 }
 
 .app-screen::after {
   background:
-    linear-gradient(to bottom, rgba(255, 220, 145, 0.020), transparent 13%, transparent 72%, rgba(0, 0, 0, 0.62)),
-    radial-gradient(circle at center, transparent 38%, rgba(0, 0, 0, 0.40));
+    linear-gradient(to bottom, rgba(255, 220, 145, 0.016), transparent 13%, transparent 72%, rgba(0, 0, 0, 0.62)),
+    radial-gradient(circle at center, transparent 38%, rgba(0, 0, 0, 0.38));
 }
 
-/* Header */
+/* Header mit echter Lederstruktur */
 
 .app-header {
   background:
-    radial-gradient(circle at 48% 0%, rgba(255, 220, 150, 0.070), transparent 31%),
+    radial-gradient(circle at 48% 0%, rgba(255, 220, 150, 0.065), transparent 31%),
     radial-gradient(circle at 7% 26%, rgba(255,255,255,0.022), transparent 19%),
-    linear-gradient(180deg, rgba(70, 26, 9, 0.62), rgba(13, 4, 2, 0.96)),
+    linear-gradient(180deg, rgba(70, 26, 9, 0.58), rgba(13, 4, 2, 0.96)),
     var(--br-leather-main);
-  background-size: auto, auto, auto, 720px 720px;
+  background-size: auto, auto, auto, 760px 760px;
   background-position: center top, left top, center, center top;
   background-repeat: no-repeat, no-repeat, no-repeat, repeat;
   box-shadow:
     0 22px 48px rgba(0,0,0,0.66),
-    inset 0 1px 0 rgba(255, 235, 190, 0.055),
+    inset 0 1px 0 rgba(255, 235, 190, 0.050),
     inset 0 -1px 0 rgba(255, 205, 130, 0.08),
     inset 0 -20px 34px rgba(0, 0, 0, 0.38);
 }
 
 .app-header::before {
   background:
-    radial-gradient(circle at 50% 0%, rgba(255, 222, 150, 0.052), transparent 43%),
-    linear-gradient(180deg, rgba(255, 235, 178, 0.018), rgba(0, 0, 0, 0.14)),
+    radial-gradient(circle at 50% 0%, rgba(255, 222, 150, 0.045), transparent 43%),
+    linear-gradient(180deg, rgba(255, 235, 178, 0.014), rgba(0, 0, 0, 0.14)),
     var(--br-leather-main);
-  background-size: auto, auto, 720px 720px;
+  background-size: auto, auto, 760px 760px;
   background-position: center top, center, center top;
   background-repeat: no-repeat, no-repeat, repeat;
   opacity: 0.96;
   border-color: rgba(225, 165, 86, 0.18);
   box-shadow:
     0 15px 30px rgba(0, 0, 0, 0.44),
-    inset 0 0 0 1px rgba(255, 220, 145, 0.035),
-    inset 0 1px 0 rgba(255, 238, 190, 0.040),
+    inset 0 0 0 1px rgba(255, 220, 145, 0.032),
+    inset 0 1px 0 rgba(255, 238, 190, 0.035),
     inset 0 -12px 20px rgba(0, 0, 0, 0.40);
 }
 
-/* Untere Header-Naht als gerade Kante, nicht als Rahmen */
 .app-header::after {
-  height: 18px;
+  height: 20px;
   background:
-    var(--br-stitch-h) center / 1300px 12px repeat-x,
-    var(--br-edge) center / 1300px 18px repeat-x;
-  opacity: 0.30;
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.18));
+    var(--br-stitch-h) center / 1500px 34px repeat-x,
+    var(--br-pressed-edge) center / 1500px 34px repeat-x;
+  opacity: 0.38;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.20));
 }
 
 .brand-center h1 {
@@ -98,57 +102,55 @@
     inset 0 0 0 1px rgba(255,255,255,0.15);
 }
 
-/* Top Buttons als matte Leder-Patches */
+/* Top Buttons: echte Lederfläche plus echter Naht-Rahmen als Bild */
 
 .road-control-button {
   border-radius: 20px;
   border: 1px solid rgba(224, 164, 86, 0.30);
   color: rgba(244, 212, 142, 0.90);
   background:
-    radial-gradient(circle at 45% 8%, rgba(255, 225, 158, 0.075), transparent 34%),
+    radial-gradient(circle at 45% 8%, rgba(255, 225, 158, 0.055), transparent 34%),
     radial-gradient(circle at 70% 95%, rgba(0,0,0,0.40), transparent 46%),
-    linear-gradient(145deg, rgba(93, 39, 16, 0.68), rgba(18, 6, 3, 0.990)),
+    linear-gradient(145deg, rgba(93, 39, 16, 0.58), rgba(18, 6, 3, 0.990)),
     var(--br-leather-panel);
-  background-size: auto, auto, auto, 720px 448px;
+  background-size: auto, auto, auto, 700px 438px;
   background-position: left top, right bottom, center, center;
   background-repeat: no-repeat, no-repeat, no-repeat, repeat;
   box-shadow:
     0 16px 32px rgba(0,0,0,0.68),
-    inset 0 1px 0 rgba(255,245,205,0.040),
+    inset 0 1px 0 rgba(255,245,205,0.036),
     inset 0 -11px 18px rgba(0,0,0,0.46);
 }
 
-/* Runde eingelassene Kante statt eckiger PNG-Naht */
 .road-control-button::before {
   content: "";
   position: absolute;
-  inset: 8px;
+  inset: 2px;
   z-index: 1;
-  border-radius: 14px;
+  border-radius: 19px;
   pointer-events: none;
-  background: none;
-  opacity: 1;
-  filter: none;
-  box-shadow:
-    inset 0 0 0 1px rgba(176, 104, 49, 0.32),
-    inset 0 2px 4px rgba(255, 230, 170, 0.020),
-    inset 0 -6px 10px rgba(0, 0, 0, 0.34),
-    0 1px 0 rgba(255, 220, 145, 0.020);
+  background-image: var(--br-button-frame);
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.52;
+  filter: saturate(0.92) contrast(1.02);
+  box-shadow: none;
 }
 
 .road-control-button::after {
   content: "";
   position: absolute;
-  inset: 4px;
+  inset: 6px;
   z-index: 1;
-  border-radius: 16px;
+  border-radius: 15px;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 47% 0%, rgba(255, 222, 154, 0.045), transparent 52%),
-    linear-gradient(180deg, rgba(255,237,188,0.010), transparent 45%, rgba(0,0,0,0.26));
+    radial-gradient(ellipse at 47% 0%, rgba(255, 222, 154, 0.035), transparent 52%),
+    linear-gradient(180deg, rgba(255,237,188,0.008), transparent 45%, rgba(0,0,0,0.24));
   box-shadow:
-    inset 0 0 0 1px rgba(255,226,160,0.030),
-    inset 0 -8px 13px rgba(0,0,0,0.30);
+    inset 0 0 0 1px rgba(255,226,160,0.026),
+    inset 0 -8px 13px rgba(0,0,0,0.28);
 }
 
 .road-control-button span,
@@ -161,25 +163,29 @@
   border-color: rgba(244, 212, 142, 0.44);
   color: var(--br-gold);
   background:
-    radial-gradient(circle at 45% 8%, rgba(255, 226, 166, 0.090), transparent 34%),
+    radial-gradient(circle at 45% 8%, rgba(255, 226, 166, 0.070), transparent 34%),
     radial-gradient(circle at 70% 95%, rgba(0,0,0,0.38), transparent 46%),
-    linear-gradient(145deg, rgba(108, 47, 20, 0.72), rgba(23, 7, 3, 0.995)),
+    linear-gradient(145deg, rgba(108, 47, 20, 0.62), rgba(23, 7, 3, 0.995)),
     var(--br-leather-panel);
-  background-size: auto, auto, auto, 720px 448px;
+  background-size: auto, auto, auto, 700px 438px;
   box-shadow:
     0 17px 34px rgba(0,0,0,0.70),
     inset 0 1px 0 rgba(255,245,205,0.045),
     inset 0 -12px 19px rgba(0,0,0,0.42);
 }
 
-/* Polaroid */
+.road-control-button.active::before {
+  opacity: 0.62;
+}
+
+/* Polaroid mit echtem Papier und echter Stecknadel */
 
 .daily-polaroid,
 .polaroid {
   background:
-    radial-gradient(circle at 18% 9%, rgba(255,255,255,0.52), transparent 19%),
-    radial-gradient(circle at 80% 86%, rgba(95,59,24,0.095), transparent 26%),
-    linear-gradient(145deg, rgba(255,241,213,0.82), rgba(215,176,112,0.90)),
+    radial-gradient(circle at 18% 9%, rgba(255,255,255,0.48), transparent 19%),
+    radial-gradient(circle at 80% 86%, rgba(95,59,24,0.085), transparent 26%),
+    linear-gradient(145deg, rgba(255,241,213,0.72), rgba(215,176,112,0.84)),
     var(--br-paper);
   background-size: auto, auto, auto, 720px 720px;
   background-position: left top, right bottom, center, center;
@@ -203,38 +209,38 @@
   display: none;
 }
 
-/* Bottom Navigation */
+/* Bottom Navigation: echter Lederstreifen als Linie */
 
 .bottom-nav {
   border: 1px solid rgba(220,160,84,0.28);
   background:
-    radial-gradient(circle at 50% 0%, rgba(255,226,170,0.070), transparent 42%),
-    radial-gradient(circle at 18% 12%, rgba(255,255,255,0.022), transparent 22%),
-    linear-gradient(180deg, rgba(64,28,12,0.92), rgba(13,4,2,0.995)),
+    radial-gradient(circle at 50% 0%, rgba(255,226,170,0.055), transparent 42%),
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,0.018), transparent 22%),
+    linear-gradient(180deg, rgba(64,28,12,0.88), rgba(13,4,2,0.995)),
     var(--br-leather-panel);
-  background-size: auto, auto, auto, 720px 448px;
+  background-size: auto, auto, auto, 700px 438px;
   background-position: center top, left top, center, center bottom;
   background-repeat: no-repeat, no-repeat, no-repeat, repeat;
   box-shadow:
     0 26px 76px rgba(0,0,0,0.80),
-    inset 0 1px 0 rgba(255,242,200,0.045),
+    inset 0 1px 0 rgba(255,242,200,0.040),
     inset 0 -12px 22px rgba(0,0,0,0.48);
 }
 
 .bottom-nav::before {
   content: "";
   position: absolute;
-  left: 13px;
-  right: 13px;
-  top: 11px;
-  bottom: 11px;
+  left: 12px;
+  right: 12px;
+  top: 9px;
+  bottom: 9px;
   z-index: 1;
-  border-radius: 19px;
+  border-radius: 20px;
   pointer-events: none;
   background:
-    var(--br-stitch-h) top center / 1300px 12px repeat-x,
-    var(--br-stitch-h) bottom center / 1300px 12px repeat-x;
-  opacity: 0.22;
+    var(--br-stitch-h) top center / 1500px 24px repeat-x,
+    var(--br-stitch-h) bottom center / 1500px 24px repeat-x;
+  opacity: 0.28;
   filter: drop-shadow(0 1px 0 rgba(0,0,0,0.16));
   box-shadow: none;
 }
@@ -261,11 +267,11 @@
   color: var(--br-gold);
   border-radius: 18px;
   background:
-    radial-gradient(circle at 42% 8%, rgba(255,235,185,0.062), transparent 46%),
+    radial-gradient(circle at 42% 8%, rgba(255,235,185,0.050), transparent 46%),
     radial-gradient(circle at bottom, rgba(0,0,0,0.26), transparent 48%),
-    linear-gradient(145deg, rgba(72,31,13,0.70), rgba(25,8,4,0.88)),
+    linear-gradient(145deg, rgba(72,31,13,0.62), rgba(25,8,4,0.88)),
     var(--br-leather-panel);
-  background-size: auto, auto, auto, 720px 448px;
+  background-size: auto, auto, auto, 700px 438px;
   background-position: top, bottom, center, center;
   box-shadow:
     inset 0 0 0 1px rgba(216,174,103,0.12),
@@ -279,15 +285,15 @@
   color: var(--br-gold);
   border: 1px solid rgba(230,174,92,0.34);
   background:
-    radial-gradient(circle at 35% 20%, rgba(255,235,178,0.080), transparent 27%),
+    radial-gradient(circle at 35% 20%, rgba(255,235,178,0.062), transparent 27%),
     radial-gradient(circle at 70% 86%, rgba(0,0,0,0.38), transparent 43%),
-    linear-gradient(145deg, rgba(82,35,15,0.86), rgba(17,5,2,0.995)),
+    linear-gradient(145deg, rgba(82,35,15,0.78), rgba(17,5,2,0.995)),
     var(--br-leather-panel);
-  background-size: auto, auto, auto, 720px 448px;
+  background-size: auto, auto, auto, 700px 438px;
   background-position: left top, right bottom, center, center;
   box-shadow:
     0 19px 40px rgba(0,0,0,0.74),
-    inset 0 1px 0 rgba(255,248,218,0.045),
+    inset 0 1px 0 rgba(255,248,218,0.040),
     inset 0 -10px 18px rgba(0,0,0,0.46);
 }
 
@@ -302,7 +308,7 @@
   background: none;
   box-shadow:
     inset 0 0 0 1px rgba(190,118,55,0.24),
-    inset 0 3px 5px rgba(255,245,205,0.016),
+    inset 0 3px 5px rgba(255,245,205,0.014),
     inset 0 -7px 12px rgba(0,0,0,0.38);
   opacity: 1;
   filter: none;
@@ -316,10 +322,10 @@
   border-radius: 999px;
   pointer-events: none;
   background:
-    radial-gradient(circle at 38% 16%, rgba(255,230,170,0.045), transparent 31%),
-    linear-gradient(180deg, rgba(255,255,255,0.010), transparent 52%, rgba(0,0,0,0.24));
+    radial-gradient(circle at 38% 16%, rgba(255,230,170,0.040), transparent 31%),
+    linear-gradient(180deg, rgba(255,255,255,0.008), transparent 52%, rgba(0,0,0,0.24));
   box-shadow:
-    inset 0 0 0 1px rgba(255,226,160,0.032),
+    inset 0 0 0 1px rgba(255,226,160,0.030),
     inset 0 -9px 15px rgba(0,0,0,0.42);
 }
 
@@ -343,10 +349,10 @@
 .create-sheet,
 .entry-form {
   background:
-    radial-gradient(circle at top, rgba(255,218,154,0.045), transparent 36%),
-    linear-gradient(145deg, rgba(54,23,10,0.78), rgba(13,4,2,0.95)),
+    radial-gradient(circle at top, rgba(255,218,154,0.040), transparent 36%),
+    linear-gradient(145deg, rgba(54,23,10,0.70), rgba(13,4,2,0.95)),
     var(--br-leather-main);
-  background-size: auto, auto, 720px 720px;
+  background-size: auto, auto, 760px 760px;
   background-position: center top, center, center;
   background-repeat: no-repeat, no-repeat, repeat;
 }
@@ -363,13 +369,13 @@
   .task-card,
   .create-sheet,
   .entry-form {
-    background-size: auto, auto, 720px 720px;
+    background-size: auto, auto, 760px 760px;
   }
 
   .road-control-button,
   .create-button,
   .nav-item.active,
   .bottom-nav {
-    background-size: auto, auto, auto, 720px 448px;
+    background-size: auto, auto, auto, 700px 438px;
   }
 }
