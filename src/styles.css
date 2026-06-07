@@ -1,3 +1,8 @@
+/* Blechroute Public UI Reset v2
+   Vollständiger sichtbarer Neuaufbau.
+   Ziel: weniger Demo, mehr Premium-App.
+*/
+
 :root {
   --bg-dark: #050302;
 
@@ -12,7 +17,7 @@
   --paper-warm: #ead2aa;
   --paper-aged: #d6b982;
   --paper-ink: #2b1a0f;
-  --paper-soft: rgba(246, 231, 203, 0.84);
+  --paper-soft: rgba(246, 231, 203, 0.88);
   --paper-muted: rgba(246, 231, 203, 0.58);
 
   --gold: #d8ae67;
@@ -20,7 +25,7 @@
   --gold-deep: #8f5a22;
 
   --shadow: 0 34px 90px rgba(0, 0, 0, 0.68);
-  --radius-lg: 24px;
+  --radius-lg: 26px;
   --radius-md: 18px;
   --nav-height: 108px;
 }
@@ -80,7 +85,7 @@ svg {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 42px 24px;
+  padding: 38px 20px;
   overflow: hidden;
   background:
     radial-gradient(circle at 50% 0%, rgba(255, 204, 120, 0.12), transparent 26%),
@@ -91,11 +96,11 @@ svg {
 .phone-shell {
   position: relative;
   z-index: 1;
-  width: min(100%, 420px);
-  max-width: 420px;
-  height: min(860px, calc(100vh - 48px));
+  width: min(100%, 430px);
+  max-width: 430px;
+  height: min(880px, calc(100vh - 48px));
   min-height: 740px;
-  padding: 13px;
+  padding: 12px;
   border-radius: 48px;
   overflow: hidden;
   background:
@@ -107,15 +112,7 @@ svg {
 }
 
 .phone-notch {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  z-index: 30;
-  width: 112px;
-  height: 30px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: #020201;
+  display: none;
 }
 
 .app-screen {
@@ -126,10 +123,10 @@ svg {
   overflow: hidden;
   border-radius: 38px;
   background:
-    radial-gradient(circle at 20% 4%, rgba(255, 210, 132, 0.15), transparent 23%),
-    radial-gradient(circle at 90% 74%, rgba(255, 165, 72, 0.08), transparent 30%),
-    radial-gradient(circle at 18% 86%, rgba(0, 0, 0, 0.35), transparent 35%),
-    linear-gradient(160deg, #713112 0%, #411607 34%, #1c0803 72%, #070201 100%);
+    radial-gradient(circle at 50% 0%, rgba(255, 218, 145, 0.1), transparent 23%),
+    radial-gradient(circle at 16% 14%, rgba(175, 88, 36, 0.12), transparent 32%),
+    radial-gradient(circle at 88% 84%, rgba(0, 0, 0, 0.5), transparent 42%),
+    linear-gradient(160deg, #3a1407, #120502 72%, #070201);
 }
 
 .app-screen::before {
@@ -138,35 +135,13 @@ svg {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 12% 14%, rgba(255, 232, 188, 0.09) 0 1px, transparent 2px),
+    radial-gradient(circle at 12% 14%, rgba(255, 232, 188, 0.06) 0 1px, transparent 2px),
     radial-gradient(circle at 34% 42%, rgba(0, 0, 0, 0.24) 0 1px, transparent 3px),
-    radial-gradient(circle at 82% 22%, rgba(255, 205, 130, 0.05) 0 1px, transparent 2px),
-    radial-gradient(circle at 62% 76%, rgba(0, 0, 0, 0.22) 0 1px, transparent 3px),
-    repeating-radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.018) 0 1px,
-      transparent 1px 7px
-    ),
-    repeating-linear-gradient(
-      72deg,
-      rgba(255, 255, 255, 0.012) 0 1px,
-      transparent 1px 6px
-    ),
-    repeating-linear-gradient(
-      148deg,
-      rgba(0, 0, 0, 0.06) 0 1px,
-      transparent 1px 9px
-    );
-  background-size:
-    19px 19px,
-    31px 31px,
-    23px 23px,
-    43px 43px,
-    14px 14px,
-    auto,
-    auto;
+    radial-gradient(circle at 82% 22%, rgba(255, 205, 130, 0.04) 0 1px, transparent 2px),
+    radial-gradient(circle at 62% 76%, rgba(0, 0, 0, 0.22) 0 1px, transparent 3px);
+  background-size: 19px 19px, 31px 31px, 23px 23px, 43px 43px;
   mix-blend-mode: soft-light;
-  opacity: 1;
+  opacity: 0.4;
 }
 
 .app-screen::after {
@@ -175,9 +150,11 @@ svg {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(to bottom, rgba(255, 210, 130, 0.055), transparent 16%, transparent 72%, rgba(0, 0, 0, 0.48)),
+    linear-gradient(to bottom, rgba(255, 210, 130, 0.035), transparent 16%, transparent 72%, rgba(0, 0, 0, 0.48)),
     radial-gradient(circle at center, transparent 48%, rgba(0, 0, 0, 0.34));
 }
+
+/* Scroll area */
 
 .screen-page {
   position: relative;
@@ -187,7 +164,7 @@ svg {
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0 18px calc(var(--nav-height) + 38px);
+  padding: 0 20px calc(var(--nav-height) + 34px);
   scrollbar-width: none;
 }
 
@@ -198,55 +175,43 @@ svg {
   display: none;
 }
 
-/* HEADER */
+/* Header */
 
 .app-header {
   position: relative;
-  width: calc(100% + 36px);
-  max-width: calc(100% + 36px);
-  margin: 0 -18px 24px;
-  padding: 28px 18px 16px;
-  overflow: hidden;
-  border-bottom: 1px solid rgba(7, 2, 1, 0.9);
+  width: calc(100% + 40px);
+  max-width: calc(100% + 40px);
+  margin: 0 -20px 34px;
+  padding: 20px 20px 24px;
+  overflow: visible;
+  border-bottom: 1px solid rgba(7, 2, 1, 0.78);
   background:
-    radial-gradient(circle at 50% 0%, rgba(255, 220, 155, 0.18), transparent 36%),
-    radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.06), transparent 20%),
-    radial-gradient(circle at 80% 64%, rgba(0, 0, 0, 0.25), transparent 25%),
-    repeating-radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.022) 0 1px,
-      transparent 1px 7px
-    ),
-    repeating-linear-gradient(
-      80deg,
-      rgba(255, 255, 255, 0.015) 0 1px,
-      transparent 1px 7px
-    ),
-    linear-gradient(180deg, #6f3212, #321004 72%, #120401);
+    radial-gradient(circle at 50% 0%, rgba(255, 220, 155, 0.13), transparent 36%),
+    radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.035), transparent 20%),
+    linear-gradient(180deg, #5a240c, #1e0903 72%, #0a0301);
   box-shadow:
-    0 16px 34px rgba(0, 0, 0, 0.52),
-    inset 0 1px 0 rgba(255, 232, 180, 0.12),
-    inset 0 -1px 0 rgba(255, 218, 154, 0.18),
-    inset 0 -11px 20px rgba(0, 0, 0, 0.24);
+    0 18px 42px rgba(0, 0, 0, 0.58),
+    inset 0 1px 0 rgba(255, 232, 180, 0.10),
+    inset 0 -1px 0 rgba(255, 218, 154, 0.13),
+    inset 0 -12px 22px rgba(0, 0, 0, 0.30);
 }
 
 .app-header::before {
   content: "";
   position: absolute;
-  inset: 8px 8px auto;
-  height: 86px;
-  border-radius: 24px 24px 18px 18px;
-  border: 1px solid rgba(244, 212, 142, 0.2);
-  border-bottom-color: rgba(7, 2, 1, 0.56);
+  inset: 12px 16px auto;
+  height: 98px;
+  border-radius: 28px 28px 20px 20px;
+  border: 1px solid rgba(244, 212, 142, 0.18);
+  border-bottom-color: rgba(7, 2, 1, 0.52);
   pointer-events: none;
   background:
-    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.055), transparent 18%),
-    repeating-radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.02) 0 1px,
-      transparent 1px 7px
-    );
-  mix-blend-mode: soft-light;
+    radial-gradient(circle at 50% 0%, rgba(255, 226, 160, 0.08), transparent 46%),
+    linear-gradient(180deg, rgba(255, 235, 178, 0.035), rgba(0, 0, 0, 0.13));
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 rgba(255, 245, 205, 0.055),
+    inset 0 -10px 18px rgba(0, 0, 0, 0.28);
 }
 
 .app-header::after {
@@ -254,23 +219,22 @@ svg {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 76px;
+  bottom: 99px;
   height: 11px;
   pointer-events: none;
   background:
-    radial-gradient(circle, rgba(246, 196, 116, 0.42) 0 2px, transparent 3px) 0 2px / 14px 7px repeat-x,
-    linear-gradient(to bottom, rgba(5, 2, 1, 0.82), rgba(255, 220, 155, 0.13), rgba(5, 2, 1, 0.82));
-  opacity: 0.72;
+    linear-gradient(to bottom, rgba(5, 2, 1, 0.82), rgba(255, 220, 155, 0.12), rgba(5, 2, 1, 0.82));
+  opacity: 0.5;
 }
 
 .app-header.compact {
-  margin-bottom: 18px;
+  margin-bottom: 26px;
 }
 
 .brand-line {
   position: relative;
-  z-index: 2;
-  min-height: 86px;
+  z-index: 4;
+  min-height: 96px;
   display: grid;
   place-items: center;
 }
@@ -283,7 +247,7 @@ svg {
 .brand-center h1 {
   margin: 0;
   color: var(--gold-light);
-  font-size: clamp(2.15rem, 9vw, 3rem);
+  font-size: clamp(2.35rem, 9vw, 3.18rem);
   line-height: 1;
   letter-spacing: 0.035em;
   text-shadow:
@@ -296,7 +260,7 @@ svg {
   margin: 8px auto 0;
   max-width: 235px;
   overflow: hidden;
-  color: rgba(246, 231, 203, 0.68);
+  color: rgba(246, 231, 203, 0.70);
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 0.68rem;
   font-weight: 900;
@@ -308,8 +272,8 @@ svg {
 
 .brand-avatar {
   position: absolute;
-  right: 16px;
-  top: 18px;
+  right: 17px;
+  top: 21px;
   width: 54px;
   height: 54px;
   object-fit: cover;
@@ -321,17 +285,19 @@ svg {
     inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
+/* Top controls */
+
 .road-control-row {
   position: relative;
-  z-index: 4;
+  z-index: 6;
   display: grid;
-  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.24fr) minmax(0, 0.88fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.24fr) minmax(0, 0.9fr);
   align-items: center;
-  gap: 8px;
+  gap: 13px;
   width: 100%;
   max-width: 100%;
-  margin-top: 12px;
-  padding-top: 0;
+  margin-top: 17px;
+  padding: 0 3px;
 }
 
 .road-control-button {
@@ -339,27 +305,22 @@ svg {
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  min-height: 57px;
+  min-height: 64px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(244, 212, 142, 0.3);
-  border-radius: 17px;
-  color: rgba(244, 212, 142, 0.86);
+  border: 1px solid rgba(244, 212, 142, 0.34);
+  border-radius: 21px;
+  color: rgba(244, 212, 142, 0.88);
   background:
-    radial-gradient(circle at 35% 18%, rgba(255, 220, 154, 0.16), transparent 34%),
+    radial-gradient(circle at 45% 18%, rgba(255, 220, 154, 0.20), transparent 38%),
     radial-gradient(circle at 65% 88%, rgba(0, 0, 0, 0.34), transparent 45%),
-    repeating-radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.018) 0 1px,
-      transparent 1px 7px
-    ),
-    linear-gradient(145deg, #703315, #2c1005 74%, #120502);
+    linear-gradient(145deg, #6b2f13, #2b0f05 74%, #120502);
   box-shadow:
-    0 11px 19px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    inset 0 -5px 11px rgba(0, 0, 0, 0.32);
+    0 14px 25px rgba(0, 0, 0, 0.58),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -7px 13px rgba(0, 0, 0, 0.34);
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 900;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -369,10 +330,14 @@ svg {
 .road-control-button::before {
   content: "";
   position: absolute;
-  inset: 7px;
-  border: 1px dashed rgba(246, 231, 203, 0.2);
-  border-radius: 12px;
+  inset: 8px;
+  border: 0;
+  border-radius: 14px;
   pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(246, 231, 203, 0.10),
+    inset 0 2px 4px rgba(255, 245, 210, 0.035),
+    inset 0 -5px 9px rgba(0, 0, 0, 0.22);
 }
 
 .road-control-button::after {
@@ -382,11 +347,8 @@ svg {
   border-radius: inherit;
   pointer-events: none;
   background:
-    radial-gradient(circle at 14px 14px, rgba(246, 215, 150, 0.35) 0 1px, transparent 2px),
-    radial-gradient(circle at calc(100% - 14px) 14px, rgba(246, 215, 150, 0.26) 0 1px, transparent 2px),
-    radial-gradient(circle at 14px calc(100% - 14px), rgba(0, 0, 0, 0.34) 0 1px, transparent 2px),
-    radial-gradient(circle at calc(100% - 14px) calc(100% - 14px), rgba(0, 0, 0, 0.34) 0 1px, transparent 2px);
-  opacity: 0.88;
+    linear-gradient(180deg, rgba(255, 240, 190, 0.04), transparent 46%, rgba(0, 0, 0, 0.16));
+  opacity: 0.9;
 }
 
 .road-control-button span,
@@ -416,32 +378,27 @@ svg {
   color: var(--gold-light);
   border-color: rgba(244, 212, 142, 0.62);
   background:
-    radial-gradient(circle at 34% 18%, rgba(255, 229, 173, 0.26), transparent 36%),
+    radial-gradient(circle at 44% 18%, rgba(255, 229, 173, 0.30), transparent 38%),
     radial-gradient(circle at 62% 84%, rgba(0, 0, 0, 0.28), transparent 44%),
-    repeating-radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.02) 0 1px,
-      transparent 1px 7px
-    ),
     linear-gradient(145deg, #87431d, #351407 76%, #160602);
 }
 
 .road-control-button.main-control {
-  min-height: 64px;
-  transform: translateY(-2px);
-  border-radius: 19px;
+  min-height: 70px;
+  transform: translateY(-3px);
+  border-radius: 23px;
   font-size: 0.9rem;
   letter-spacing: 0.17em;
 }
 
-/* TEXT */
+/* Text */
 
 .section-label {
   margin: 0;
   color: var(--gold);
   font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   font-weight: 800;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
 }
@@ -449,28 +406,28 @@ svg {
 .welcome-block {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 22px;
+  margin-bottom: 28px;
   overflow-x: hidden;
 }
 
 .welcome-block h2 {
   margin: 10px 0 0;
   color: var(--paper);
-  font-size: clamp(1.92rem, 8vw, 2.25rem);
-  line-height: 1.05;
+  font-size: clamp(2.08rem, 8vw, 2.45rem);
+  line-height: 1.04;
   letter-spacing: -0.055em;
   font-weight: 500;
-  text-shadow: 0 10px 18px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 12px 20px rgba(0, 0, 0, 0.48);
 }
 
 .welcome-block p:not(.section-label) {
   margin: 8px 0 0;
   color: var(--paper-soft);
   line-height: 1.5;
-  font-size: clamp(1rem, 4.5vw, 1.1rem);
+  font-size: clamp(1.02rem, 4.5vw, 1.12rem);
 }
 
-/* DAILY / POLAROID */
+/* Polaroid */
 
 .daily-highlight {
   display: grid;
@@ -496,11 +453,6 @@ svg {
       rgba(90, 59, 29, 0.035) 0 1px,
       transparent 1px 6px
     ),
-    repeating-linear-gradient(
-      7deg,
-      rgba(43, 26, 15, 0.035) 0 1px,
-      transparent 1px 5px
-    ),
     linear-gradient(145deg, #fff0cf, #ead2aa 72%, #cda66e);
   box-shadow:
     0 24px 42px rgba(0, 0, 0, 0.45),
@@ -511,9 +463,9 @@ svg {
 .daily-polaroid {
   width: 100%;
   max-width: 100%;
-  padding: 14px 14px 21px;
-  border-radius: 15px;
-  transform: rotate(-1.2deg);
+  padding: 15px 15px 22px;
+  border-radius: 16px;
+  transform: none;
 }
 
 .daily-polaroid::before,
@@ -661,7 +613,7 @@ svg {
   display: none;
 }
 
-/* MOMENTS ROW FIX */
+/* Moments */
 
 .section-head {
   display: flex;
@@ -739,7 +691,7 @@ svg {
   line-height: 1.32;
 }
 
-/* CARDS */
+/* Cards */
 
 .roadbook-card,
 .weekly-car,
@@ -755,11 +707,6 @@ svg {
   border-radius: var(--radius-lg);
   background:
     radial-gradient(circle at top, rgba(255, 218, 154, 0.08), transparent 36%),
-    repeating-radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.012) 0 1px,
-      transparent 1px 7px
-    ),
     linear-gradient(145deg, rgba(70, 31, 13, 0.9), rgba(22, 9, 4, 0.9));
   box-shadow:
     0 18px 44px rgba(0, 0, 0, 0.38),
@@ -1142,45 +1089,44 @@ svg {
   background: linear-gradient(90deg, var(--gold), var(--leather-warm));
 }
 
-/* BOTTOM NAV */
+/* Bottom nav */
 
 .bottom-nav {
   position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
   z-index: 80;
-  height: 82px;
+  height: 84px;
   display: grid;
   grid-template-columns: 1fr 1fr 86px 1fr 1fr;
   align-items: center;
   gap: 4px;
-  padding: 8px;
-  border: 1px solid rgba(244, 212, 142, 0.24);
-  border-radius: 26px;
+  padding: 9px;
+  border: 1px solid rgba(244, 212, 142, 0.28);
+  border-radius: 28px;
   background:
     radial-gradient(circle at 50% 0%, rgba(255, 226, 170, 0.14), transparent 44%),
     radial-gradient(circle at 20% 12%, rgba(255, 255, 255, 0.045), transparent 22%),
-    repeating-radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.016) 0 1px,
-      transparent 1px 7px
-    ),
     linear-gradient(180deg, rgba(82, 38, 15, 0.99), rgba(24, 8, 3, 0.99));
   box-shadow:
-    0 18px 52px rgba(0, 0, 0, 0.6),
+    0 20px 58px rgba(0, 0, 0, 0.66),
     inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    inset 0 -7px 12px rgba(0, 0, 0, 0.24);
+    inset 0 -8px 13px rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(18px);
 }
 
 .bottom-nav::before {
   content: "";
   position: absolute;
-  inset: 7px;
-  border: 1px dashed rgba(246, 231, 203, 0.16);
+  inset: 8px;
+  border: 0;
   border-radius: 20px;
   pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(246, 231, 203, 0.10),
+    inset 0 2px 3px rgba(255, 245, 205, 0.025),
+    inset 0 -6px 10px rgba(0, 0, 0, 0.28);
 }
 
 .nav-item {
@@ -1191,7 +1137,7 @@ svg {
   place-items: center;
   gap: 2px;
   border: 0;
-  border-radius: 18px;
+  border-radius: 19px;
   color: rgba(246, 231, 203, 0.58);
   background: transparent;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
@@ -1209,12 +1155,7 @@ svg {
 .nav-item.active {
   color: var(--gold-light);
   background:
-    radial-gradient(circle at top, rgba(255, 235, 185, 0.2), transparent 50%),
-    repeating-radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.016) 0 1px,
-      transparent 1px 7px
-    ),
+    radial-gradient(circle at top, rgba(255, 235, 185, 0.20), transparent 50%),
     linear-gradient(145deg, rgba(96, 45, 18, 0.88), rgba(45, 17, 7, 0.86));
   box-shadow:
     inset 0 0 0 1px rgba(216, 174, 103, 0.22),
@@ -1235,14 +1176,9 @@ svg {
   background:
     radial-gradient(circle at 36% 22%, rgba(255, 229, 169, 0.22), transparent 30%),
     radial-gradient(circle at 70% 86%, rgba(0, 0, 0, 0.4), transparent 45%),
-    repeating-radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.016) 0 1px,
-      transparent 1px 7px
-    ),
     linear-gradient(145deg, #8b461d, #351407 72%, #160602);
   box-shadow:
-    0 17px 34px rgba(0, 0, 0, 0.6),
+    0 18px 36px rgba(0, 0, 0, 0.66),
     inset 0 0 0 1px rgba(255, 255, 255, 0.07),
     inset 0 -7px 12px rgba(0, 0, 0, 0.24);
   transform: translateY(-21px);
@@ -1252,8 +1188,11 @@ svg {
   content: "";
   position: absolute;
   inset: 9px;
-  border: 1px dashed rgba(246, 231, 203, 0.24);
+  border: 0;
   border-radius: 999px;
+  box-shadow:
+    inset 0 0 0 1px rgba(246, 231, 203, 0.12),
+    inset 0 -5px 10px rgba(0, 0, 0, 0.28);
 }
 
 .create-button svg {
@@ -1262,7 +1201,7 @@ svg {
   stroke-width: 2.2;
 }
 
-/* OVERLAYS */
+/* Overlays */
 
 .create-overlay {
   position: fixed;
@@ -1297,11 +1236,6 @@ svg {
   border-radius: 28px;
   background:
     radial-gradient(circle at top, rgba(255, 218, 154, 0.1), transparent 40%),
-    repeating-radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.015) 0 1px,
-      transparent 1px 7px
-    ),
     linear-gradient(180deg, rgba(82, 37, 16, 0.98), rgba(18, 7, 3, 0.98));
   box-shadow: 0 -18px 80px rgba(0, 0, 0, 0.58);
   scrollbar-width: none;
@@ -1475,11 +1409,11 @@ svg {
   text-align: center;
 }
 
-/* MOBILE */
+/* Mobile */
 
 @media (max-width: 700px) {
   :root {
-    --nav-height: 118px;
+    --nav-height: 120px;
   }
 
   html,
@@ -1528,24 +1462,33 @@ svg {
     width: 100%;
     max-width: 100%;
     height: 100dvh;
-    padding: 0 14px calc(136px + env(safe-area-inset-bottom));
+    padding: 0 16px calc(138px + env(safe-area-inset-bottom));
     overflow-y: auto;
     overflow-x: hidden;
   }
 
   .app-header {
-    width: calc(100% + 28px);
-    max-width: calc(100% + 28px);
-    margin: 0 -14px 22px;
-    padding: 22px 14px 15px;
+    width: calc(100% + 32px);
+    max-width: calc(100% + 32px);
+    margin: 0 -16px 28px;
+    padding: 22px 16px 18px;
+  }
+
+  .app-header::before {
+    inset: 10px 14px auto;
+    height: 92px;
+  }
+
+  .app-header::after {
+    bottom: 86px;
   }
 
   .brand-line {
-    min-height: 84px;
+    min-height: 88px;
   }
 
   .brand-center h1 {
-    font-size: 2.15rem;
+    font-size: 2.25rem;
     letter-spacing: 0.03em;
   }
 
@@ -1558,27 +1501,26 @@ svg {
   .brand-avatar {
     width: 44px;
     height: 44px;
-    right: 14px;
-    top: 22px;
+    right: 16px;
+    top: 24px;
   }
 
   .road-control-row {
-    width: 100%;
-    max-width: 100%;
-    grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.18fr) minmax(0, 0.84fr);
-    gap: 7px;
-    margin-top: 10px;
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.18fr) minmax(0, 0.86fr);
+    gap: 10px;
+    margin-top: 12px;
+    padding: 0;
   }
 
   .road-control-button {
-    min-height: 52px;
-    border-radius: 14px;
+    min-height: 56px;
+    border-radius: 17px;
     font-size: 0.62rem;
     letter-spacing: 0.12em;
   }
 
   .road-control-button.main-control {
-    min-height: 58px;
+    min-height: 62px;
     font-size: 0.82rem;
   }
 
@@ -1593,20 +1535,22 @@ svg {
 
   .welcome-block {
     padding-top: 2px;
+    margin-bottom: 28px;
   }
 
   .welcome-block h2 {
-    font-size: 2rem;
+    font-size: 2.1rem;
   }
 
   .daily-polaroid {
-    transform: rotate(-0.7deg);
+    transform: none;
+    padding: 14px 14px 20px;
   }
 
   .daily-polaroid::before {
-    top: -16px;
-    width: 29px;
-    height: 29px;
+    top: -17px;
+    width: 31px;
+    height: 31px;
   }
 
   .daily-polaroid::after {
@@ -1654,20 +1598,20 @@ svg {
 
   .bottom-nav {
     position: fixed;
-    left: 10px;
-    right: 10px;
+    left: 12px;
+    right: 12px;
     bottom: calc(12px + env(safe-area-inset-bottom));
     width: auto;
-    max-width: calc(100vw - 20px);
-    height: 82px;
+    max-width: calc(100vw - 24px);
+    height: 84px;
     grid-template-columns: 1fr 1fr 76px 1fr 1fr;
     z-index: 500;
   }
 
   .create-button {
     width: 76px;
-    height: 68px;
-    transform: translateY(-20px);
+    height: 70px;
+    transform: translateY(-21px);
   }
 
   .create-overlay {
@@ -1720,7 +1664,7 @@ svg {
   }
 
   .brand-center h1 {
-    font-size: 1.82rem;
+    font-size: 1.9rem;
   }
 
   .brand-center p {
@@ -1733,7 +1677,7 @@ svg {
   }
 
   .road-control-row {
-    gap: 6px;
+    gap: 7px;
   }
 
   .road-control-button {
