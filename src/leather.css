@@ -1,11 +1,4 @@
-/* Blechroute Round Stitch Fix v3
-   Ziel:
-   - keine eckigen Nähte mehr auf runden Buttons
-   - FEED Top Button ruhiger und edler
-   - Bottom FEED Button weniger klobig
-   - Plus Button wie ein runder Lederknopf
-   - echte Materialwirkung behalten
-*/
+/* Blechroute Material Matte Fix v4 */
 
 :root {
   --br-leather-main: url("/blechroute-app/textures/leather-public-main.webp");
@@ -15,113 +8,113 @@
   --br-stitch-v: url("/blechroute-app/overlays/stitch-public-vertical.png");
   --br-edge: url("/blechroute-app/overlays/pressed-edge-public.png");
   --br-pin: url("/blechroute-app/overlays/brass-pin-public.png");
-
   --br-gold: #f1cf89;
-  --br-gold-soft: rgba(241, 207, 137, 0.78);
 }
-
-/* Grundmaterial bleibt sauber */
 
 .app-screen {
   background:
-    radial-gradient(circle at 50% 0%, rgba(255, 218, 145, 0.10), transparent 23%),
-    radial-gradient(circle at 16% 14%, rgba(175, 88, 36, 0.12), transparent 32%),
-    radial-gradient(circle at 88% 84%, rgba(0, 0, 0, 0.50), transparent 42%),
-    linear-gradient(160deg, rgba(58, 20, 7, 0.48), rgba(8, 3, 1, 0.97)),
+    radial-gradient(circle at 50% -8%, rgba(255, 214, 142, 0.095), transparent 24%),
+    radial-gradient(circle at 8% 18%, rgba(185, 94, 38, 0.115), transparent 30%),
+    radial-gradient(circle at 92% 82%, rgba(0, 0, 0, 0.56), transparent 43%),
+    linear-gradient(160deg, rgba(54, 18, 6, 0.55), rgba(8, 3, 1, 0.98)),
     var(--br-leather-main);
-  background-size: auto, auto, auto, auto, 900px 900px;
+  background-size: auto, auto, auto, auto, 720px 720px;
   background-position: center top, left top, right bottom, center, center;
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
 }
 
 .app-screen::before {
-  opacity: 0.08;
+  opacity: 0.16;
+  mix-blend-mode: soft-light;
 }
 
 .app-screen::after {
   background:
-    linear-gradient(to bottom, rgba(255, 220, 145, 0.025), transparent 14%, transparent 72%, rgba(0, 0, 0, 0.56)),
-    radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.34));
+    linear-gradient(to bottom, rgba(255, 220, 145, 0.020), transparent 13%, transparent 72%, rgba(0, 0, 0, 0.62)),
+    radial-gradient(circle at center, transparent 38%, rgba(0, 0, 0, 0.40));
 }
-
-/* Header ruhiger, Naht oben weniger dominant */
 
 .app-header {
   background:
-    radial-gradient(circle at 48% 0%, rgba(255, 228, 160, 0.11), transparent 33%),
-    radial-gradient(circle at 8% 28%, rgba(255,255,255,0.035), transparent 22%),
-    linear-gradient(180deg, rgba(80, 31, 11, 0.70), rgba(15, 5, 2, 0.96)),
+    radial-gradient(circle at 48% 0%, rgba(255, 220, 150, 0.070), transparent 31%),
+    radial-gradient(circle at 7% 26%, rgba(255,255,255,0.022), transparent 19%),
+    linear-gradient(180deg, rgba(70, 26, 9, 0.62), rgba(13, 4, 2, 0.96)),
     var(--br-leather-main);
-  background-size: auto, auto, auto, 900px 900px;
+  background-size: auto, auto, auto, 720px 720px;
   background-position: center top, left top, center, center top;
   background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  box-shadow:
+    0 22px 48px rgba(0,0,0,0.66),
+    inset 0 1px 0 rgba(255, 235, 190, 0.055),
+    inset 0 -1px 0 rgba(255, 205, 130, 0.08),
+    inset 0 -20px 34px rgba(0, 0, 0, 0.38);
 }
 
 .app-header::before {
   background:
-    linear-gradient(180deg, rgba(255, 235, 178, 0.026), rgba(0, 0, 0, 0.10)),
+    radial-gradient(circle at 50% 0%, rgba(255, 222, 150, 0.052), transparent 43%),
+    linear-gradient(180deg, rgba(255, 235, 178, 0.018), rgba(0, 0, 0, 0.14)),
     var(--br-leather-main);
-  background-size: auto, 900px 900px;
-  background-position: center, center top;
-  background-repeat: no-repeat, repeat;
-  opacity: 0.9;
-  border-color: rgba(225, 165, 86, 0.22);
+  background-size: auto, auto, 720px 720px;
+  background-position: center top, center, center top;
+  background-repeat: no-repeat, no-repeat, repeat;
+  opacity: 0.96;
+  border-color: rgba(225, 165, 86, 0.18);
   box-shadow:
-    0 15px 30px rgba(0, 0, 0, 0.40),
-    inset 0 0 0 1px rgba(255, 220, 145, 0.045),
-    inset 0 1px 0 rgba(255, 238, 190, 0.055),
-    inset 0 -10px 18px rgba(0, 0, 0, 0.34);
+    0 15px 30px rgba(0, 0, 0, 0.44),
+    inset 0 0 0 1px rgba(255, 220, 145, 0.035),
+    inset 0 1px 0 rgba(255, 238, 190, 0.040),
+    inset 0 -12px 20px rgba(0, 0, 0, 0.40);
 }
 
-/* Nur eine gerade Nahtkante unter dem Header, keine eckigen Rahmen mehr */
-
 .app-header::after {
+  height: 18px;
   background:
-    var(--br-stitch-h) center / 1300px 15px repeat-x,
+    var(--br-stitch-h) center / 1300px 12px repeat-x,
     var(--br-edge) center / 1300px 18px repeat-x;
-  opacity: 0.34;
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.22));
+  opacity: 0.30;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.18));
 }
 
 .brand-center h1 {
   color: var(--br-gold);
+  text-shadow:
+    0 1px 0 rgba(43, 15, 4, 0.96),
+    0 2px 0 rgba(255, 236, 184, 0.08),
+    0 11px 22px rgba(0, 0, 0, 0.78);
 }
 
 .brand-center p {
-  color: rgba(246, 231, 203, 0.68);
+  color: rgba(246, 231, 203, 0.64);
 }
 
 .brand-avatar {
   box-shadow:
-    0 0 0 2px rgba(215, 159, 82, 0.50),
-    0 10px 22px rgba(0,0,0,0.64),
-    inset 0 0 0 1px rgba(255,255,255,0.18);
+    0 0 0 2px rgba(215, 159, 82, 0.46),
+    0 10px 22px rgba(0,0,0,0.66),
+    inset 0 0 0 1px rgba(255,255,255,0.15);
 }
 
-/* TOP BUTTONS
-   Wichtig: Keine horizontal/vertikal gekreuzten Stitch-Bilder mehr auf den runden Buttons.
-   Das war der Grund für die eckigen Nähte.
-*/
+/* Top Buttons: matter, weniger Plastik */
 
 .road-control-button {
   border-radius: 22px;
-  border: 1px solid rgba(224, 164, 86, 0.38);
-  color: rgba(244, 212, 142, 0.92);
+  border: 1px solid rgba(224, 164, 86, 0.34);
+  color: rgba(244, 212, 142, 0.90);
   background:
-    radial-gradient(circle at 46% 17%, rgba(255, 230, 168, 0.23), transparent 39%),
-    radial-gradient(circle at 68% 90%, rgba(0,0,0,0.34), transparent 48%),
-    linear-gradient(145deg, rgba(118, 50, 19, 0.76), rgba(22, 7, 3, 0.98)),
+    radial-gradient(circle at 45% 8%, rgba(255, 225, 158, 0.085), transparent 34%),
+    radial-gradient(circle at 70% 95%, rgba(0,0,0,0.40), transparent 46%),
+    linear-gradient(145deg, rgba(102, 42, 17, 0.66), rgba(20, 7, 3, 0.985)),
     var(--br-leather-panel);
-  background-size: auto, auto, auto, 900px 560px;
+  background-size: auto, auto, auto, 720px 448px;
   background-position: left top, right bottom, center, center;
   background-repeat: no-repeat, no-repeat, no-repeat, repeat;
   box-shadow:
-    0 17px 34px rgba(0,0,0,0.68),
-    inset 0 1px 0 rgba(255,245,205,0.09),
-    inset 0 -10px 18px rgba(0,0,0,0.42);
+    0 16px 32px rgba(0,0,0,0.68),
+    inset 0 1px 0 rgba(255,245,205,0.050),
+    inset 0 -11px 18px rgba(0,0,0,0.44);
 }
 
-/* Runde Pseudo-Naht: keine Bitmap-Stiche an den Ecken, sondern eine weiche eingelassene Kante */
 .road-control-button::before {
   content: "";
   position: absolute;
@@ -133,13 +126,12 @@
   opacity: 1;
   filter: none;
   box-shadow:
-    inset 0 0 0 1px rgba(214, 139, 67, 0.26),
-    inset 0 2px 4px rgba(255, 230, 170, 0.040),
-    inset 0 -5px 9px rgba(0, 0, 0, 0.25),
-    0 1px 0 rgba(255, 220, 145, 0.035);
+    inset 0 0 0 1px rgba(176, 104, 49, 0.34),
+    inset 0 2px 4px rgba(255, 230, 170, 0.026),
+    inset 0 -6px 10px rgba(0, 0, 0, 0.34),
+    0 1px 0 rgba(255, 220, 145, 0.025);
 }
 
-/* feine Lichtfläche oben, statt dunkler Balken */
 .road-control-button::after {
   content: "";
   position: absolute;
@@ -148,11 +140,11 @@
   border-radius: 18px;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 45% 0%, rgba(255, 222, 154, 0.13), transparent 55%),
-    linear-gradient(180deg, rgba(255,237,188,0.030), transparent 42%, rgba(0,0,0,0.22));
+    radial-gradient(ellipse at 47% 0%, rgba(255, 222, 154, 0.060), transparent 52%),
+    linear-gradient(180deg, rgba(255,237,188,0.015), transparent 45%, rgba(0,0,0,0.26));
   box-shadow:
-    inset 0 0 0 1px rgba(255,226,160,0.040),
-    inset 0 -7px 12px rgba(0,0,0,0.24);
+    inset 0 0 0 1px rgba(255,226,160,0.034),
+    inset 0 -8px 13px rgba(0,0,0,0.30);
 }
 
 .road-control-button span,
@@ -162,28 +154,28 @@
 }
 
 .road-control-button.active {
-  border-color: rgba(244, 212, 142, 0.58);
+  border-color: rgba(244, 212, 142, 0.48);
   color: var(--br-gold);
   background:
-    radial-gradient(circle at 46% 17%, rgba(255, 232, 178, 0.28), transparent 39%),
-    radial-gradient(circle at 68% 90%, rgba(0,0,0,0.32), transparent 48%),
-    linear-gradient(145deg, rgba(138, 62, 25, 0.80), rgba(28, 9, 4, 0.99)),
+    radial-gradient(circle at 45% 8%, rgba(255, 226, 166, 0.105), transparent 34%),
+    radial-gradient(circle at 70% 95%, rgba(0,0,0,0.38), transparent 46%),
+    linear-gradient(145deg, rgba(119, 52, 22, 0.70), rgba(25, 8, 4, 0.995)),
     var(--br-leather-panel);
-  background-size: auto, auto, auto, 900px 560px;
+  background-size: auto, auto, auto, 720px 448px;
   box-shadow:
-    0 18px 36px rgba(0,0,0,0.70),
-    inset 0 1px 0 rgba(255,245,205,0.11),
-    inset 0 -10px 18px rgba(0,0,0,0.38);
+    0 17px 34px rgba(0,0,0,0.70),
+    inset 0 1px 0 rgba(255,245,205,0.055),
+    inset 0 -12px 19px rgba(0,0,0,0.42);
 }
 
-/* Papier/Pin */
+/* Polaroid */
 
 .daily-polaroid,
 .polaroid {
   background:
-    radial-gradient(circle at 18% 9%, rgba(255,255,255,0.62), transparent 19%),
-    radial-gradient(circle at 80% 86%, rgba(95,59,24,0.09), transparent 26%),
-    linear-gradient(145deg, rgba(255,241,213,0.86), rgba(215,176,112,0.92)),
+    radial-gradient(circle at 18% 9%, rgba(255,255,255,0.52), transparent 19%),
+    radial-gradient(circle at 80% 86%, rgba(95,59,24,0.095), transparent 26%),
+    linear-gradient(145deg, rgba(255,241,213,0.82), rgba(215,176,112,0.90)),
     var(--br-paper);
   background-size: auto, auto, auto, 720px 720px;
   background-position: left top, right bottom, center, center;
@@ -207,28 +199,24 @@
   display: none;
 }
 
-/* BOTTOM NAV
-   Nähte auf der Nav bleiben nur als gerade obere/untere Linie.
-   Keine eckigen Stitch-Ecken mehr.
-*/
+/* Bottom Nav */
 
 .bottom-nav {
-  border: 1px solid rgba(220,160,84,0.34);
+  border: 1px solid rgba(220,160,84,0.30);
   background:
-    radial-gradient(circle at 50% 0%, rgba(255,226,170,0.15), transparent 42%),
-    radial-gradient(circle at 18% 12%, rgba(255,255,255,0.045), transparent 22%),
-    linear-gradient(180deg, rgba(82,34,13,0.94), rgba(16,5,2,0.99)),
+    radial-gradient(circle at 50% 0%, rgba(255,226,170,0.085), transparent 42%),
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,0.026), transparent 22%),
+    linear-gradient(180deg, rgba(74,31,13,0.90), rgba(14,5,2,0.995)),
     var(--br-leather-panel);
-  background-size: auto, auto, auto, 900px 560px;
+  background-size: auto, auto, auto, 720px 448px;
   background-position: center top, left top, center, center bottom;
   background-repeat: no-repeat, no-repeat, no-repeat, repeat;
   box-shadow:
-    0 26px 76px rgba(0,0,0,0.78),
-    inset 0 1px 0 rgba(255,242,200,0.085),
-    inset 0 -11px 20px rgba(0,0,0,0.42);
+    0 26px 76px rgba(0,0,0,0.80),
+    inset 0 1px 0 rgba(255,242,200,0.055),
+    inset 0 -12px 22px rgba(0,0,0,0.46);
 }
 
-/* Keine eckigen Rundum-Nähte. Nur dezente obere/untere Sattlernaht */
 .bottom-nav::before {
   content: "";
   position: absolute;
@@ -240,10 +228,10 @@
   border-radius: 19px;
   pointer-events: none;
   background:
-    var(--br-stitch-h) top center / 1300px 13px repeat-x,
-    var(--br-stitch-h) bottom center / 1300px 13px repeat-x;
-  opacity: 0.35;
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.20));
+    var(--br-stitch-h) top center / 1300px 12px repeat-x,
+    var(--br-stitch-h) bottom center / 1300px 12px repeat-x;
+  opacity: 0.26;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.18));
   box-shadow: none;
 }
 
@@ -255,9 +243,9 @@
   border-radius: 23px;
   pointer-events: none;
   box-shadow:
-    inset 0 0 0 1px rgba(255,226,160,0.048),
-    inset 0 2px 3px rgba(255,245,205,0.030),
-    inset 0 -8px 15px rgba(0,0,0,0.34);
+    inset 0 0 0 1px rgba(255,226,160,0.038),
+    inset 0 2px 3px rgba(255,245,205,0.020),
+    inset 0 -9px 16px rgba(0,0,0,0.40);
 }
 
 .nav-item {
@@ -265,41 +253,38 @@
   z-index: 3;
 }
 
-/* aktiver FEED Button unten weniger klobig, runder, dunkler, edler */
 .nav-item.active {
   color: var(--br-gold);
   border-radius: 18px;
   background:
-    radial-gradient(circle at 42% 10%, rgba(255,235,185,0.13), transparent 48%),
-    radial-gradient(circle at bottom, rgba(0,0,0,0.24), transparent 48%),
-    linear-gradient(145deg, rgba(92,40,16,0.72), rgba(30,10,4,0.88)),
+    radial-gradient(circle at 42% 8%, rgba(255,235,185,0.080), transparent 46%),
+    radial-gradient(circle at bottom, rgba(0,0,0,0.26), transparent 48%),
+    linear-gradient(145deg, rgba(84,36,15,0.66), rgba(27,9,4,0.88)),
     var(--br-leather-panel);
-  background-size: auto, auto, auto, 900px 560px;
+  background-size: auto, auto, auto, 720px 448px;
   background-position: top, bottom, center, center;
   box-shadow:
-    inset 0 0 0 1px rgba(216,174,103,0.18),
-    inset 0 -5px 10px rgba(0,0,0,0.22),
-    0 7px 14px rgba(0,0,0,0.22);
+    inset 0 0 0 1px rgba(216,174,103,0.14),
+    inset 0 -6px 11px rgba(0,0,0,0.25),
+    0 7px 14px rgba(0,0,0,0.20);
 }
 
-/* Plus Button komplett entschärft:
-   kleiner optischer Ring, weniger "Bullseye", mehr Lederknopf.
-*/
+/* Plus Button */
 
 .create-button {
   color: var(--br-gold);
-  border: 1px solid rgba(230,174,92,0.42);
+  border: 1px solid rgba(230,174,92,0.38);
   background:
-    radial-gradient(circle at 35% 22%, rgba(255,235,178,0.20), transparent 28%),
+    radial-gradient(circle at 35% 20%, rgba(255,235,178,0.11), transparent 27%),
     radial-gradient(circle at 70% 86%, rgba(0,0,0,0.38), transparent 43%),
-    linear-gradient(145deg, rgba(112,48,19,0.86), rgba(23,7,3,0.99)),
+    linear-gradient(145deg, rgba(96,40,16,0.84), rgba(20,6,3,0.995)),
     var(--br-leather-panel);
-  background-size: auto, auto, auto, 900px 560px;
+  background-size: auto, auto, auto, 720px 448px;
   background-position: left top, right bottom, center, center;
   box-shadow:
-    0 20px 42px rgba(0,0,0,0.74),
-    inset 0 1px 0 rgba(255,248,218,0.10),
-    inset 0 -9px 16px rgba(0,0,0,0.40);
+    0 19px 40px rgba(0,0,0,0.74),
+    inset 0 1px 0 rgba(255,248,218,0.060),
+    inset 0 -10px 18px rgba(0,0,0,0.44);
 }
 
 .create-button::before {
@@ -312,9 +297,9 @@
   pointer-events: none;
   background: none;
   box-shadow:
-    inset 0 0 0 1px rgba(216,174,103,0.22),
-    inset 0 3px 5px rgba(255,245,205,0.035),
-    inset 0 -6px 10px rgba(0,0,0,0.32);
+    inset 0 0 0 1px rgba(190,118,55,0.28),
+    inset 0 3px 5px rgba(255,245,205,0.020),
+    inset 0 -7px 12px rgba(0,0,0,0.36);
   opacity: 1;
   filter: none;
 }
@@ -327,11 +312,11 @@
   border-radius: 999px;
   pointer-events: none;
   background:
-    radial-gradient(circle at 38% 18%, rgba(255,230,170,0.12), transparent 33%),
-    linear-gradient(180deg, rgba(255,255,255,0.026), transparent 52%, rgba(0,0,0,0.18));
+    radial-gradient(circle at 38% 16%, rgba(255,230,170,0.060), transparent 31%),
+    linear-gradient(180deg, rgba(255,255,255,0.014), transparent 52%, rgba(0,0,0,0.22));
   box-shadow:
-    inset 0 0 0 1px rgba(255,226,160,0.050),
-    inset 0 -8px 14px rgba(0,0,0,0.34);
+    inset 0 0 0 1px rgba(255,226,160,0.038),
+    inset 0 -9px 15px rgba(0,0,0,0.40);
 }
 
 .create-button svg {
@@ -339,10 +324,10 @@
   z-index: 4;
   width: 31px;
   height: 31px;
-  stroke-width: 2.15;
+  stroke-width: 2.1;
 }
 
-/* Cards/Sheets */
+/* Cards */
 
 .roadbook-card,
 .weekly-car,
@@ -354,10 +339,10 @@
 .create-sheet,
 .entry-form {
   background:
-    radial-gradient(circle at top, rgba(255,218,154,0.070), transparent 36%),
-    linear-gradient(145deg, rgba(70,30,12,0.78), rgba(18,6,3,0.94)),
+    radial-gradient(circle at top, rgba(255,218,154,0.052), transparent 36%),
+    linear-gradient(145deg, rgba(62,26,11,0.78), rgba(15,5,2,0.95)),
     var(--br-leather-main);
-  background-size: auto, auto, 900px 900px;
+  background-size: auto, auto, 720px 720px;
   background-position: center top, center, center;
   background-repeat: no-repeat, no-repeat, repeat;
 }
@@ -374,13 +359,13 @@
   .task-card,
   .create-sheet,
   .entry-form {
-    background-size: auto, auto, 900px 900px;
+    background-size: auto, auto, 720px 720px;
   }
 
   .road-control-button,
   .create-button,
   .nav-item.active,
   .bottom-nav {
-    background-size: auto, auto, auto, 900px 560px;
+    background-size: auto, auto, auto, 720px 448px;
   }
 }
