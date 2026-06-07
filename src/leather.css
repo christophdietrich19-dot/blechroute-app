@@ -1,4 +1,4 @@
-/* Blechroute Material System 1.0 */
+/* Blechroute Material System 1.1 - Stitch Fix */
 
 :root {
   --br-leather-main: url("/blechroute-app/textures/leather-main.webp");
@@ -13,38 +13,34 @@
 
 .app-screen {
   background:
-    radial-gradient(circle at 50% 0%, rgba(255, 216, 145, 0.13), transparent 25%),
-    radial-gradient(circle at 16% 16%, rgba(170, 77, 24, 0.12), transparent 34%),
-    radial-gradient(circle at 88% 82%, rgba(0, 0, 0, 0.46), transparent 40%),
-    linear-gradient(160deg, rgba(68, 23, 7, 0.56), rgba(10, 3, 1, 0.98)),
+    radial-gradient(circle at 50% 0%, rgba(255,216,145,.11), transparent 25%),
+    radial-gradient(circle at 16% 16%, rgba(170,77,24,.1), transparent 34%),
+    radial-gradient(circle at 88% 82%, rgba(0,0,0,.48), transparent 40%),
+    linear-gradient(160deg, rgba(68,23,7,.58), rgba(10,3,1,.98)),
     var(--br-leather-main);
   background-size: auto, auto, auto, auto, 980px 980px;
   background-position: center top, left top, right bottom, center, center;
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
 }
 
-.app-screen::before { opacity: 0.28; }
+.app-screen::before { opacity: .24; }
 
 .app-screen::after {
   background:
-    linear-gradient(to bottom, rgba(255, 220, 145, 0.035), transparent 15%, transparent 72%, rgba(0, 0, 0, 0.58)),
-    radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.42));
+    linear-gradient(to bottom, rgba(255,220,145,.03), transparent 15%, transparent 72%, rgba(0,0,0,.6)),
+    radial-gradient(circle at center, transparent 42%, rgba(0,0,0,.44));
 }
 
 .app-header {
   background:
-    radial-gradient(circle at 50% 0%, rgba(255, 226, 164, 0.18), transparent 32%),
-    linear-gradient(180deg, rgba(80, 29, 8, 0.72), rgba(16, 5, 2, 0.96)),
+    radial-gradient(circle at 50% 0%, rgba(255,226,164,.14), transparent 32%),
+    linear-gradient(180deg, rgba(75,26,8,.72), rgba(16,5,2,.97)),
     var(--br-leather-main);
   background-size: auto, auto, 980px 980px;
   background-position: center top, center, center top;
   background-repeat: no-repeat, no-repeat, repeat;
-  border-bottom: 1px solid rgba(8, 2, 1, 0.92);
-  box-shadow:
-    0 20px 44px rgba(0, 0, 0, 0.68),
-    inset 0 1px 0 rgba(255, 238, 194, 0.14),
-    inset 0 -1px 0 rgba(255, 207, 130, 0.17),
-    inset 0 -18px 30px rgba(0, 0, 0, 0.42);
+  border-bottom: 1px solid rgba(8,2,1,.92);
+  box-shadow: 0 20px 44px rgba(0,0,0,.68), inset 0 1px 0 rgba(255,238,194,.12), inset 0 -1px 0 rgba(255,207,130,.14), inset 0 -18px 30px rgba(0,0,0,.44);
 }
 
 .app-header::before {
@@ -54,166 +50,138 @@
   height: 86px;
   border-radius: 25px 25px 18px 18px;
   pointer-events: none;
-  border: 1px solid rgba(230, 173, 93, 0.24);
-  background:
-    linear-gradient(180deg, rgba(255, 235, 178, 0.05), rgba(0, 0, 0, 0.14)),
-    var(--br-leather-panel);
+  border: 1px solid rgba(230,173,93,.19);
+  background: linear-gradient(180deg, rgba(255,235,178,.04), rgba(0,0,0,.15)), var(--br-leather-panel);
   background-size: auto, 760px 480px;
   background-position: center, center;
   background-repeat: no-repeat, repeat;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 238, 190, 0.12),
-    inset 0 -8px 16px rgba(0, 0, 0, 0.34),
-    0 12px 24px rgba(0, 0, 0, 0.3);
-  opacity: 0.94;
+  box-shadow: inset 0 1px 0 rgba(255,238,190,.09), inset 0 -8px 16px rgba(0,0,0,.36), 0 12px 24px rgba(0,0,0,.3);
+  opacity: .92;
 }
 
 .app-header::after {
   content: "";
   position: absolute;
-  left: 15px;
-  right: 15px;
-  bottom: 78px;
-  height: 38px;
+  left: 18px;
+  right: 18px;
+  bottom: 80px;
+  height: 24px;
   pointer-events: none;
-  background:
-    var(--br-stitch-h) center / 720px 38px repeat-x,
-    var(--br-edge) center / 720px 54px repeat-x;
-  opacity: 0.82;
-  filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.42));
+  background: var(--br-stitch-h) center / 900px 24px repeat-x, var(--br-edge) center / 900px 34px repeat-x;
+  opacity: .48;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.3));
 }
 
 .brand-line { position: relative; z-index: 3; }
-
 .brand-center h1 {
   color: var(--br-gold-soft);
-  text-shadow:
-    0 1px 0 rgba(43, 15, 4, 0.96),
-    0 2px 0 rgba(255, 236, 184, 0.12),
-    0 10px 22px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 1px 0 rgba(43,15,4,.96), 0 2px 0 rgba(255,236,184,.1), 0 10px 22px rgba(0,0,0,.72);
 }
-
-.brand-center p { color: rgba(246, 231, 203, 0.72); }
+.brand-center p { color: rgba(246,231,203,.7); }
 
 .road-control-button {
   isolation: isolate;
-  border: 1px solid rgba(227, 169, 92, 0.34);
-  color: rgba(244, 212, 142, 0.92);
+  border: 1px solid rgba(227,169,92,.28);
+  color: rgba(244,212,142,.9);
   background:
-    radial-gradient(circle at 34% 16%, rgba(255, 230, 170, 0.17), transparent 33%),
-    radial-gradient(circle at 72% 90%, rgba(0, 0, 0, 0.35), transparent 46%),
-    linear-gradient(145deg, rgba(100, 38, 11, 0.7), rgba(18, 6, 2, 0.96)),
+    radial-gradient(circle at 34% 16%, rgba(255,230,170,.14), transparent 33%),
+    radial-gradient(circle at 72% 90%, rgba(0,0,0,.36), transparent 46%),
+    linear-gradient(145deg, rgba(100,38,11,.68), rgba(18,6,2,.97)),
     var(--br-leather-panel);
   background-size: auto, auto, auto, 760px 480px;
   background-position: left top, right bottom, center, center;
   background-repeat: no-repeat, no-repeat, no-repeat, repeat;
-  box-shadow:
-    0 15px 26px rgba(0, 0, 0, 0.62),
-    inset 0 1px 0 rgba(255, 245, 205, 0.11),
-    inset 0 -9px 16px rgba(0, 0, 0, 0.42);
+  box-shadow: 0 15px 26px rgba(0,0,0,.62), inset 0 1px 0 rgba(255,245,205,.08), inset 0 -9px 16px rgba(0,0,0,.42);
 }
 
 .road-control-button::before {
   content: "";
   position: absolute;
-  inset: 7px;
+  inset: 9px;
   z-index: 1;
-  border-radius: 12px;
+  border-radius: 11px;
   pointer-events: none;
   background:
-    var(--br-stitch-h) top center / 620px 32px repeat-x,
-    var(--br-stitch-h) bottom center / 620px 32px repeat-x,
-    var(--br-stitch-v) left center / 32px 620px repeat-y,
-    var(--br-stitch-v) right center / 32px 620px repeat-y;
-  opacity: 0.72;
-  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.44));
+    var(--br-stitch-h) top center / 900px 18px repeat-x,
+    var(--br-stitch-h) bottom center / 900px 18px repeat-x,
+    var(--br-stitch-v) left center / 18px 900px repeat-y,
+    var(--br-stitch-v) right center / 18px 900px repeat-y;
+  opacity: .34;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.28));
 }
 
 .road-control-button::after {
   content: "";
   position: absolute;
-  inset: 3px;
+  inset: 4px;
   z-index: 1;
-  border-radius: 14px;
+  border-radius: 13px;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(255, 237, 188, 0.052), transparent 28%, transparent 67%, rgba(0, 0, 0, 0.3));
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 226, 160, 0.07),
-    inset 0 2px 2px rgba(255, 244, 215, 0.05),
-    inset 0 -7px 11px rgba(0, 0, 0, 0.33);
+  background: linear-gradient(180deg, rgba(255,237,188,.042), transparent 28%, transparent 67%, rgba(0,0,0,.3));
+  box-shadow: inset 0 0 0 1px rgba(255,226,160,.055), inset 0 2px 2px rgba(255,244,215,.038), inset 0 -7px 11px rgba(0,0,0,.34);
 }
 
 .road-control-button span,
-.road-control-button .control-content {
-  position: relative;
-  z-index: 4;
-}
+.road-control-button .control-content { position: relative; z-index: 4; }
 
 .road-control-button.active {
-  border-color: rgba(244, 212, 142, 0.62);
+  border-color: rgba(244,212,142,.5);
   color: var(--br-gold-soft);
   background:
-    radial-gradient(circle at 34% 16%, rgba(255, 232, 178, 0.25), transparent 34%),
-    radial-gradient(circle at 72% 90%, rgba(0, 0, 0, 0.36), transparent 46%),
-    linear-gradient(145deg, rgba(128, 55, 18, 0.78), rgba(27, 8, 3, 0.98)),
+    radial-gradient(circle at 34% 16%, rgba(255,232,178,.2), transparent 34%),
+    radial-gradient(circle at 72% 90%, rgba(0,0,0,.36), transparent 46%),
+    linear-gradient(145deg, rgba(125,52,17,.74), rgba(27,8,3,.98)),
     var(--br-leather-panel);
   background-size: auto, auto, auto, 760px 480px;
 }
 
 .bottom-nav {
   isolation: isolate;
-  border: 1px solid rgba(226, 168, 90, 0.3);
+  border: 1px solid rgba(226,168,90,.26);
   background:
-    radial-gradient(circle at 50% 0%, rgba(255, 226, 170, 0.13), transparent 42%),
-    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.05), transparent 22%),
-    linear-gradient(180deg, rgba(76, 31, 10, 0.86), rgba(16, 5, 2, 0.98)),
+    radial-gradient(circle at 50% 0%, rgba(255,226,170,.1), transparent 42%),
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,.04), transparent 22%),
+    linear-gradient(180deg, rgba(70,28,9,.9), rgba(13,4,2,.99)),
     var(--br-leather-main);
   background-size: auto, auto, auto, 980px 980px;
   background-position: center top, left top, center, center bottom;
   background-repeat: no-repeat, no-repeat, no-repeat, repeat;
-  box-shadow:
-    0 24px 66px rgba(0, 0, 0, 0.72),
-    inset 0 1px 0 rgba(255, 242, 200, 0.1),
-    inset 0 -10px 18px rgba(0, 0, 0, 0.42);
+  box-shadow: 0 24px 66px rgba(0,0,0,.72), inset 0 1px 0 rgba(255,242,200,.08), inset 0 -10px 18px rgba(0,0,0,.44);
 }
 
 .bottom-nav::before {
   content: "";
   position: absolute;
-  inset: 8px;
+  inset: 10px;
   z-index: 1;
-  border-radius: 20px;
+  border-radius: 18px;
   pointer-events: none;
   background:
-    var(--br-stitch-h) top center / 720px 38px repeat-x,
-    var(--br-stitch-h) bottom center / 720px 38px repeat-x,
-    var(--br-stitch-v) left center / 38px 720px repeat-y,
-    var(--br-stitch-v) right center / 38px 720px repeat-y;
-  opacity: 0.72;
-  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.44));
+    var(--br-stitch-h) top center / 900px 20px repeat-x,
+    var(--br-stitch-h) bottom center / 900px 20px repeat-x,
+    var(--br-stitch-v) left center / 20px 900px repeat-y,
+    var(--br-stitch-v) right center / 20px 900px repeat-y;
+  opacity: .32;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.28));
 }
 
 .bottom-nav::after {
   content: "";
   position: absolute;
-  inset: 3px;
+  inset: 4px;
   z-index: 0;
-  border-radius: 23px;
+  border-radius: 22px;
   pointer-events: none;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 226, 160, 0.06),
-    inset 0 2px 3px rgba(255, 245, 205, 0.04),
-    inset 0 -8px 15px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(255,226,160,.05), inset 0 2px 3px rgba(255,245,205,.035), inset 0 -8px 15px rgba(0,0,0,.36);
 }
 
 .nav-item { position: relative; z-index: 3; }
-
 .nav-item.active {
   color: var(--br-gold-soft);
   background:
-    radial-gradient(circle at top, rgba(255, 235, 185, 0.17), transparent 50%),
-    radial-gradient(circle at bottom, rgba(0, 0, 0, 0.22), transparent 48%),
-    linear-gradient(145deg, rgba(92, 40, 15, 0.76), rgba(32, 10, 4, 0.88)),
+    radial-gradient(circle at top, rgba(255,235,185,.14), transparent 50%),
+    radial-gradient(circle at bottom, rgba(0,0,0,.24), transparent 48%),
+    linear-gradient(145deg, rgba(86,35,12,.78), rgba(29,9,4,.9)),
     var(--br-leather-panel);
   background-size: auto, auto, auto, 760px 480px;
   background-position: top, bottom, center, center;
@@ -221,48 +189,42 @@
 
 .create-button {
   isolation: isolate;
-  border: 1px solid rgba(244, 212, 142, 0.48);
+  border: 1px solid rgba(244,212,142,.4);
   color: var(--br-gold-soft);
   background:
-    radial-gradient(circle at 34% 22%, rgba(255, 235, 178, 0.24), transparent 30%),
-    radial-gradient(circle at 70% 86%, rgba(0, 0, 0, 0.42), transparent 45%),
-    linear-gradient(145deg, rgba(124, 54, 19, 0.82), rgba(28, 8, 3, 0.98)),
+    radial-gradient(circle at 34% 22%, rgba(255,235,178,.2), transparent 30%),
+    radial-gradient(circle at 70% 86%, rgba(0,0,0,.44), transparent 45%),
+    linear-gradient(145deg, rgba(115,47,15,.82), rgba(25,7,3,.98)),
     var(--br-leather-panel);
   background-size: auto, auto, auto, 760px 480px;
   background-position: left top, right bottom, center, center;
-  box-shadow:
-    0 20px 42px rgba(0, 0, 0, 0.74),
-    inset 0 1px 0 rgba(255, 248, 218, 0.14),
-    inset 0 -10px 17px rgba(0, 0, 0, 0.42);
+  box-shadow: 0 18px 38px rgba(0,0,0,.72), inset 0 1px 0 rgba(255,248,218,.1), inset 0 -9px 16px rgba(0,0,0,.42);
 }
 
 .create-button::before {
   content: "";
   position: absolute;
-  inset: 9px;
+  inset: 11px;
   z-index: 1;
   border-radius: 999px;
   pointer-events: none;
   background:
-    radial-gradient(circle, transparent 56%, rgba(203, 137, 69, 0.62) 57%, rgba(90, 45, 14, 0.28) 72%, transparent 73%),
+    radial-gradient(circle, transparent 57%, rgba(174,106,48,.42) 58%, rgba(65,29,9,.28) 72%, transparent 73%),
     var(--br-stitch-h);
-  background-size: auto, 420px 28px;
+  background-size: auto, 900px 16px;
   background-position: center, center;
-  opacity: 0.75;
-  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.48));
+  opacity: .42;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.35));
 }
 
 .create-button::after {
   content: "";
   position: absolute;
-  inset: 4px;
+  inset: 5px;
   z-index: 1;
   border-radius: 999px;
   pointer-events: none;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 226, 160, 0.08),
-    inset 0 3px 4px rgba(255, 245, 205, 0.055),
-    inset 0 -8px 14px rgba(0, 0, 0, 0.36);
+  box-shadow: inset 0 0 0 1px rgba(255,226,160,.065), inset 0 3px 4px rgba(255,245,205,.045), inset 0 -8px 14px rgba(0,0,0,.36);
 }
 
 .create-button svg { position: relative; z-index: 4; }
@@ -277,8 +239,8 @@
 .create-sheet,
 .entry-form {
   background:
-    radial-gradient(circle at top, rgba(255, 218, 154, 0.08), transparent 36%),
-    linear-gradient(145deg, rgba(70, 31, 13, 0.78), rgba(18, 6, 3, 0.94)),
+    radial-gradient(circle at top, rgba(255,218,154,.075), transparent 36%),
+    linear-gradient(145deg, rgba(70,31,13,.78), rgba(18,6,3,.94)),
     var(--br-leather-main);
   background-size: auto, auto, 980px 980px;
   background-position: center top, center, center;
@@ -288,9 +250,9 @@
 .daily-polaroid,
 .polaroid {
   background:
-    radial-gradient(circle at 18% 9%, rgba(255, 255, 255, 0.66), transparent 19%),
-    radial-gradient(circle at 80% 86%, rgba(95, 59, 24, 0.08), transparent 26%),
-    linear-gradient(145deg, rgba(255, 240, 207, 0.84), rgba(210, 171, 104, 0.9)),
+    radial-gradient(circle at 18% 9%, rgba(255,255,255,.66), transparent 19%),
+    radial-gradient(circle at 80% 86%, rgba(95,59,24,.08), transparent 26%),
+    linear-gradient(145deg, rgba(255,240,207,.84), rgba(210,171,104,.9)),
     var(--br-paper);
   background-size: auto, auto, auto, 720px 720px;
   background-position: left top, right bottom, center, center;
@@ -303,16 +265,14 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  width: 44px;
-  height: 44px;
-  top: -24px;
+  width: 42px;
+  height: 42px;
+  top: -23px;
   box-shadow: none;
 }
 
 .daily-polaroid::after,
-.polaroid::after {
-  display: none;
-}
+.polaroid::after { display: none; }
 
 .polaroid-row {
   overflow-y: visible;
@@ -320,10 +280,7 @@
   padding-bottom: 26px;
 }
 
-.section-head {
-  overflow: visible;
-  margin-bottom: 0;
-}
+.section-head { overflow: visible; margin-bottom: 0; }
 
 @media (max-width: 700px) {
   .app-screen,
@@ -337,22 +294,14 @@
   .profile-card,
   .task-card,
   .create-sheet,
-  .entry-form {
-    background-size: auto, auto, auto, 980px 980px;
-  }
+  .entry-form { background-size: auto, auto, auto, 980px 980px; }
 
   .road-control-button,
   .create-button,
-  .nav-item.active {
-    background-size: auto, auto, auto, 760px 480px;
-  }
+  .nav-item.active { background-size: auto, auto, auto, 760px 480px; }
 
   .daily-polaroid,
-  .polaroid {
-    background-size: auto, auto, auto, 720px 720px;
-  }
+  .polaroid { background-size: auto, auto, auto, 720px 720px; }
 
-  .polaroid-row {
-    padding-top: 44px;
-  }
+  .polaroid-row { padding-top: 44px; }
 }
