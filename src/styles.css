@@ -1,6 +1,9 @@
-/* Blechroute Public UI Reset v2
-   Vollständiger sichtbarer Neuaufbau.
-   Ziel: weniger Demo, mehr Premium-App.
+/* Blechroute Leather Patch v5
+   Sauberer öffentlicher UI-Stand:
+   - weniger Glanz
+   - mehr Leder-Patch-Charakter
+   - runde Naht-Andeutung ohne eckige PNG-Rahmen
+   - Header, Top Buttons, Bottom Nav und Plus Button neu gewichtet
 */
 
 :root {
@@ -305,22 +308,22 @@ svg {
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  min-height: 64px;
+  min-height: 62px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(244, 212, 142, 0.34);
-  border-radius: 21px;
+  border: 1px solid rgba(244, 212, 142, 0.28);
+  border-radius: 20px;
   color: rgba(244, 212, 142, 0.88);
   background:
-    radial-gradient(circle at 45% 18%, rgba(255, 220, 154, 0.20), transparent 38%),
+    radial-gradient(circle at 45% 10%, rgba(255, 220, 154, 0.11), transparent 36%),
     radial-gradient(circle at 65% 88%, rgba(0, 0, 0, 0.34), transparent 45%),
-    linear-gradient(145deg, #6b2f13, #2b0f05 74%, #120502);
+    linear-gradient(145deg, #5c2710, #291006 74%, #120502);
   box-shadow:
-    0 14px 25px rgba(0, 0, 0, 0.58),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    inset 0 -7px 13px rgba(0, 0, 0, 0.34);
+    0 14px 25px rgba(0, 0, 0, 0.56),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    inset 0 -8px 14px rgba(0, 0, 0, 0.36);
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.74rem;
+  font-size: 0.73rem;
   font-weight: 900;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -335,9 +338,9 @@ svg {
   border-radius: 14px;
   pointer-events: none;
   box-shadow:
-    inset 0 0 0 1px rgba(246, 231, 203, 0.10),
-    inset 0 2px 4px rgba(255, 245, 210, 0.035),
-    inset 0 -5px 9px rgba(0, 0, 0, 0.22);
+    inset 0 0 0 1px rgba(156, 92, 44, 0.30),
+    inset 0 2px 4px rgba(255, 245, 210, 0.020),
+    inset 0 -6px 10px rgba(0, 0, 0, 0.30);
 }
 
 .road-control-button::after {
@@ -347,7 +350,7 @@ svg {
   border-radius: inherit;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(255, 240, 190, 0.04), transparent 46%, rgba(0, 0, 0, 0.16));
+    linear-gradient(180deg, rgba(255, 240, 190, 0.018), transparent 46%, rgba(0, 0, 0, 0.20));
   opacity: 0.9;
 }
 
@@ -376,18 +379,18 @@ svg {
 
 .road-control-button.active {
   color: var(--gold-light);
-  border-color: rgba(244, 212, 142, 0.62);
+  border-color: rgba(244, 212, 142, 0.50);
   background:
-    radial-gradient(circle at 44% 18%, rgba(255, 229, 173, 0.30), transparent 38%),
+    radial-gradient(circle at 44% 10%, rgba(255, 229, 173, 0.13), transparent 38%),
     radial-gradient(circle at 62% 84%, rgba(0, 0, 0, 0.28), transparent 44%),
-    linear-gradient(145deg, #87431d, #351407 76%, #160602);
+    linear-gradient(145deg, #6d3015, #301207 76%, #160602);
 }
 
 .road-control-button.main-control {
-  min-height: 70px;
+  min-height: 68px;
   transform: translateY(-3px);
-  border-radius: 23px;
-  font-size: 0.9rem;
+  border-radius: 22px;
+  font-size: 0.88rem;
   letter-spacing: 0.17em;
 }
 
@@ -1103,16 +1106,16 @@ svg {
   align-items: center;
   gap: 4px;
   padding: 9px;
-  border: 1px solid rgba(244, 212, 142, 0.28);
+  border: 1px solid rgba(244, 212, 142, 0.26);
   border-radius: 28px;
   background:
-    radial-gradient(circle at 50% 0%, rgba(255, 226, 170, 0.14), transparent 44%),
-    radial-gradient(circle at 20% 12%, rgba(255, 255, 255, 0.045), transparent 22%),
-    linear-gradient(180deg, rgba(82, 38, 15, 0.99), rgba(24, 8, 3, 0.99));
+    radial-gradient(circle at 50% 0%, rgba(255, 226, 170, 0.08), transparent 44%),
+    radial-gradient(circle at 20% 12%, rgba(255, 255, 255, 0.025), transparent 22%),
+    linear-gradient(180deg, rgba(63, 27, 12, 0.99), rgba(18, 6, 3, 0.99));
   box-shadow:
-    0 20px 58px rgba(0, 0, 0, 0.66),
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    inset 0 -8px 13px rgba(0, 0, 0, 0.28);
+    0 20px 58px rgba(0, 0, 0, 0.68),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    inset 0 -9px 15px rgba(0, 0, 0, 0.34);
   backdrop-filter: blur(18px);
 }
 
@@ -1124,9 +1127,9 @@ svg {
   border-radius: 20px;
   pointer-events: none;
   box-shadow:
-    inset 0 0 0 1px rgba(246, 231, 203, 0.10),
-    inset 0 2px 3px rgba(255, 245, 205, 0.025),
-    inset 0 -6px 10px rgba(0, 0, 0, 0.28);
+    inset 0 0 0 1px rgba(246, 231, 203, 0.08),
+    inset 0 2px 3px rgba(255, 245, 205, 0.018),
+    inset 0 -7px 12px rgba(0, 0, 0, 0.32);
 }
 
 .nav-item {
@@ -1137,7 +1140,7 @@ svg {
   place-items: center;
   gap: 2px;
   border: 0;
-  border-radius: 19px;
+  border-radius: 18px;
   color: rgba(246, 231, 203, 0.58);
   background: transparent;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
@@ -1155,50 +1158,51 @@ svg {
 .nav-item.active {
   color: var(--gold-light);
   background:
-    radial-gradient(circle at top, rgba(255, 235, 185, 0.20), transparent 50%),
-    linear-gradient(145deg, rgba(96, 45, 18, 0.88), rgba(45, 17, 7, 0.86));
+    radial-gradient(circle at top, rgba(255, 235, 185, 0.10), transparent 50%),
+    linear-gradient(145deg, rgba(75, 33, 14, 0.80), rgba(32, 12, 5, 0.86));
   box-shadow:
-    inset 0 0 0 1px rgba(216, 174, 103, 0.22),
-    0 8px 18px rgba(0, 0, 0, 0.24);
+    inset 0 0 0 1px rgba(216, 174, 103, 0.16),
+    inset 0 -6px 11px rgba(0, 0, 0, 0.24),
+    0 7px 14px rgba(0, 0, 0, 0.20);
 }
 
 .create-button {
   position: relative;
   z-index: 3;
-  width: 86px;
-  height: 74px;
+  width: 84px;
+  height: 72px;
   display: grid;
   place-items: center;
   padding: 7px;
-  border: 1px solid rgba(244, 212, 142, 0.46);
+  border: 1px solid rgba(244, 212, 142, 0.36);
   border-radius: 999px;
   color: var(--gold-light);
   background:
-    radial-gradient(circle at 36% 22%, rgba(255, 229, 169, 0.22), transparent 30%),
-    radial-gradient(circle at 70% 86%, rgba(0, 0, 0, 0.4), transparent 45%),
-    linear-gradient(145deg, #8b461d, #351407 72%, #160602);
+    radial-gradient(circle at 36% 20%, rgba(255, 229, 169, 0.12), transparent 28%),
+    radial-gradient(circle at 70% 86%, rgba(0, 0, 0, 0.36), transparent 43%),
+    linear-gradient(145deg, #6c3216, #2a1006 72%, #130502);
   box-shadow:
     0 18px 36px rgba(0, 0, 0, 0.66),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.07),
-    inset 0 -7px 12px rgba(0, 0, 0, 0.24);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 -8px 14px rgba(0, 0, 0, 0.34);
   transform: translateY(-21px);
 }
 
 .create-button::before {
   content: "";
   position: absolute;
-  inset: 9px;
+  inset: 12px;
   border: 0;
   border-radius: 999px;
   box-shadow:
-    inset 0 0 0 1px rgba(246, 231, 203, 0.12),
-    inset 0 -5px 10px rgba(0, 0, 0, 0.28);
+    inset 0 0 0 1px rgba(216, 174, 103, 0.20),
+    inset 0 -6px 11px rgba(0, 0, 0, 0.32);
 }
 
 .create-button svg {
-  width: 32px;
-  height: 32px;
-  stroke-width: 2.2;
+  width: 31px;
+  height: 31px;
+  stroke-width: 2.1;
 }
 
 /* Overlays */
