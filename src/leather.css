@@ -1,8 +1,13 @@
-/* Blechroute Saddle Stitch v8
-   Aufbau auf v7:
-   - keine grauen Asset-Rahmen
-   - CSS-only Sattlernaht in Braun/Gold
-   - mehr Zielbild-Charakter ohne kaputte PNGs
+/* Blechroute Stable Clean v9
+   Rückkehr zur sauberen v7-Basis.
+   Entfernt:
+   - Fake-Stichmuster aus v8
+   - graue Asset-Rahmen aus v6
+   - graue Streifen
+   - weißen Pin-Kreis
+
+   Ziel:
+   sauber, ruhig, nicht kaputt.
 */
 
 :root {
@@ -11,17 +16,15 @@
   --br-paper: url("/blechroute-app/textures/paper-polaroid.webp");
 
   --br-gold: #f1cf89;
-  --br-stitch: rgba(183, 112, 52, 0.52);
-  --br-stitch-soft: rgba(226, 158, 78, 0.28);
-  --br-groove: rgba(8, 2, 1, 0.52);
+  --br-gold-muted: rgba(241, 207, 137, 0.74);
 }
 
 /* Grundfläche */
 
 .app-screen {
   background:
-    radial-gradient(circle at 50% -8%, rgba(255, 214, 142, 0.075), transparent 24%),
-    radial-gradient(circle at 8% 18%, rgba(185, 94, 38, 0.095), transparent 30%),
+    radial-gradient(circle at 50% -8%, rgba(255, 214, 142, 0.08), transparent 24%),
+    radial-gradient(circle at 8% 18%, rgba(185, 94, 38, 0.10), transparent 30%),
     radial-gradient(circle at 92% 82%, rgba(0, 0, 0, 0.58), transparent 43%),
     linear-gradient(160deg, rgba(54, 18, 6, 0.46), rgba(8, 3, 1, 0.98)),
     var(--br-leather-main);
@@ -31,13 +34,13 @@
 }
 
 .app-screen::before {
-  opacity: 0.13;
+  opacity: 0.12;
   mix-blend-mode: soft-light;
 }
 
 .app-screen::after {
   background:
-    linear-gradient(to bottom, rgba(255, 220, 145, 0.014), transparent 13%, transparent 72%, rgba(0, 0, 0, 0.62)),
+    linear-gradient(to bottom, rgba(255, 220, 145, 0.016), transparent 13%, transparent 72%, rgba(0, 0, 0, 0.62)),
     radial-gradient(circle at center, transparent 38%, rgba(0, 0, 0, 0.38));
 }
 
@@ -45,9 +48,9 @@
 
 .app-header {
   background:
-    radial-gradient(circle at 48% 0%, rgba(255, 220, 150, 0.060), transparent 31%),
-    radial-gradient(circle at 7% 26%, rgba(255,255,255,0.020), transparent 19%),
-    linear-gradient(180deg, rgba(70, 26, 9, 0.56), rgba(13, 4, 2, 0.96)),
+    radial-gradient(circle at 48% 0%, rgba(255, 220, 150, 0.065), transparent 31%),
+    radial-gradient(circle at 7% 26%, rgba(255,255,255,0.022), transparent 19%),
+    linear-gradient(180deg, rgba(70, 26, 9, 0.58), rgba(13, 4, 2, 0.96)),
     var(--br-leather-main);
   background-size: auto, auto, auto, 760px 760px;
   background-position: center top, left top, center, center top;
@@ -61,8 +64,8 @@
 
 .app-header::before {
   background:
-    radial-gradient(circle at 50% 0%, rgba(255, 222, 150, 0.040), transparent 43%),
-    linear-gradient(180deg, rgba(255, 235, 178, 0.012), rgba(0, 0, 0, 0.14)),
+    radial-gradient(circle at 50% 0%, rgba(255, 222, 150, 0.045), transparent 43%),
+    linear-gradient(180deg, rgba(255, 235, 178, 0.014), rgba(0, 0, 0, 0.14)),
     var(--br-leather-main);
   background-size: auto, auto, 760px 760px;
   background-position: center top, center, center top;
@@ -76,20 +79,13 @@
     inset 0 -12px 20px rgba(0, 0, 0, 0.40);
 }
 
-/* stärkere untere Lederkante wie im Zielbild, aber ohne graues Bild */
+/* Headerkante: ruhig, keine Musterbalken */
 .app-header::after {
-  height: 16px;
+  height: 11px;
   background:
-    radial-gradient(ellipse at center, rgba(230, 150, 72, 0.25), transparent 58%) center / 100% 5px no-repeat,
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 12px,
-      rgba(176, 104, 49, 0.45) 12px 18px,
-      transparent 18px 28px
-    ) center / 100% 8px no-repeat,
-    linear-gradient(to bottom, rgba(5, 2, 1, 0.88), rgba(211, 124, 58, 0.13), rgba(5, 2, 1, 0.88));
-  opacity: 0.60;
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.22));
+    linear-gradient(to bottom, rgba(5, 2, 1, 0.82), rgba(207, 135, 66, 0.16), rgba(5, 2, 1, 0.82));
+  opacity: 0.58;
+  filter: none;
 }
 
 .brand-center h1 {
@@ -107,14 +103,14 @@
     inset 0 0 0 1px rgba(255,255,255,0.15);
 }
 
-/* Top Buttons: Leder-Patches mit CSS-Sattlernaht */
+/* Top Buttons: sauberer Leder-Patch ohne falsche Naht */
 
 .road-control-button {
   border-radius: 20px;
   border: 1px solid rgba(224, 164, 86, 0.34);
   color: rgba(244, 212, 142, 0.92);
   background:
-    radial-gradient(circle at 45% 8%, rgba(255, 225, 158, 0.055), transparent 34%),
+    radial-gradient(circle at 45% 8%, rgba(255, 225, 158, 0.070), transparent 34%),
     radial-gradient(circle at 70% 95%, rgba(0,0,0,0.42), transparent 46%),
     linear-gradient(145deg, rgba(93, 39, 16, 0.62), rgba(18, 6, 3, 0.990)),
     var(--br-leather-panel);
@@ -127,7 +123,7 @@
     inset 0 -11px 18px rgba(0,0,0,0.46);
 }
 
-/* feine, braune Naht oben/unten + Lederfurche, keine eckige PNG-Naht */
+/* Nur eingelassene Lederkante, keine gestrichelten Stiche */
 .road-control-button::before {
   content: "";
   position: absolute;
@@ -135,26 +131,12 @@
   z-index: 1;
   border-radius: 14px;
   pointer-events: none;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 8px,
-      var(--br-stitch) 8px 13px,
-      transparent 13px 20px
-    ) top center / calc(100% - 18px) 2px no-repeat,
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 8px,
-      rgba(112, 61, 26, 0.70) 8px 13px,
-      transparent 13px 20px
-    ) bottom center / calc(100% - 18px) 2px no-repeat,
-    linear-gradient(to right, transparent, rgba(230, 150, 72, 0.14), transparent) top 2px center / 92% 1px no-repeat,
-    linear-gradient(to right, transparent, rgba(0, 0, 0, 0.28), transparent) bottom 2px center / 92% 1px no-repeat;
-  opacity: 0.92;
+  background: none;
+  opacity: 1;
   filter: none;
   box-shadow:
-    inset 0 0 0 1px rgba(176, 104, 49, 0.24),
-    inset 0 2px 4px rgba(255, 230, 170, 0.016),
+    inset 0 0 0 1px rgba(176, 104, 49, 0.34),
+    inset 0 2px 4px rgba(255, 230, 170, 0.020),
     inset 0 -6px 10px rgba(0, 0, 0, 0.34),
     0 1px 0 rgba(255, 220, 145, 0.020);
 }
@@ -167,10 +149,10 @@
   border-radius: 16px;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 47% 0%, rgba(255, 222, 154, 0.040), transparent 52%),
-    linear-gradient(180deg, rgba(255,237,188,0.008), transparent 45%, rgba(0,0,0,0.26));
+    radial-gradient(ellipse at 47% 0%, rgba(255, 222, 154, 0.045), transparent 52%),
+    linear-gradient(180deg, rgba(255,237,188,0.010), transparent 45%, rgba(0,0,0,0.26));
   box-shadow:
-    inset 0 0 0 1px rgba(255,226,160,0.026),
+    inset 0 0 0 1px rgba(255,226,160,0.030),
     inset 0 -8px 13px rgba(0,0,0,0.30);
 }
 
@@ -184,9 +166,9 @@
   border-color: rgba(244, 212, 142, 0.48);
   color: var(--br-gold);
   background:
-    radial-gradient(circle at 45% 8%, rgba(255, 226, 166, 0.075), transparent 34%),
+    radial-gradient(circle at 45% 8%, rgba(255, 226, 166, 0.090), transparent 34%),
     radial-gradient(circle at 70% 95%, rgba(0,0,0,0.40), transparent 46%),
-    linear-gradient(145deg, rgba(108, 47, 20, 0.66), rgba(23, 7, 3, 0.995)),
+    linear-gradient(145deg, rgba(108, 47, 20, 0.68), rgba(23, 7, 3, 0.995)),
     var(--br-leather-panel);
   background-size: auto, auto, auto, 700px 438px;
   box-shadow:
@@ -195,7 +177,7 @@
     inset 0 -12px 19px rgba(0,0,0,0.42);
 }
 
-/* Polaroid: Papier + sauberer CSS-Pin */
+/* Polaroid + sauberer Pin */
 
 .daily-polaroid,
 .polaroid {
@@ -209,33 +191,32 @@
   background-repeat: no-repeat, no-repeat, no-repeat, repeat;
 }
 
-/* Pin etwas kleiner und realistischer */
 .daily-polaroid::before,
 .polaroid::before {
   content: "";
   position: absolute;
-  top: -17px;
+  top: -18px;
   left: 50%;
   z-index: 8;
-  width: 29px;
-  height: 29px;
+  width: 31px;
+  height: 31px;
   transform: translateX(-50%);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 32% 28%, rgba(255, 250, 205, 0.94) 0 9%, transparent 10%),
+    radial-gradient(circle at 32% 28%, rgba(255, 250, 205, 0.96) 0 9%, transparent 10%),
     radial-gradient(circle at 38% 35%, #ffe2a0 0 17%, #d5943f 39%, #8c4e1f 70%, #321304 100%);
   box-shadow:
-    inset 0 2px 2px rgba(255, 255, 255, 0.28),
+    inset 0 2px 2px rgba(255, 255, 255, 0.32),
     inset 0 -5px 7px rgba(55, 21, 6, 0.5),
     0 6px 9px rgba(0, 0, 0, 0.34),
-    0 12px 22px rgba(0, 0, 0, 0.22);
+    0 12px 22px rgba(0, 0, 0, 0.26);
 }
 
 .daily-polaroid::after,
 .polaroid::after {
   content: "";
   position: absolute;
-  top: 6px;
+  top: 7px;
   left: 50%;
   z-index: 6;
   width: 2px;
@@ -250,7 +231,7 @@
     -1px 0 1px rgba(255, 255, 255, 0.14);
 }
 
-/* Bottom Nav: mehr genähtes Leder, keine grauen Balken */
+/* Bottom Nav: sauber, ohne Dash-Muster */
 
 .bottom-nav {
   border: 1px solid rgba(220,160,84,0.30);
@@ -271,31 +252,19 @@
 .bottom-nav::before {
   content: "";
   position: absolute;
-  left: 13px;
-  right: 13px;
+  left: 12px;
+  right: 12px;
   top: 10px;
   bottom: 10px;
   z-index: 1;
   border-radius: 20px;
   pointer-events: none;
   background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 9px,
-      rgba(176,104,49,0.38) 9px 15px,
-      transparent 15px 24px
-    ) top center / calc(100% - 18px) 2px no-repeat,
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 9px,
-      rgba(112,61,26,0.50) 9px 15px,
-      transparent 15px 24px
-    ) bottom center / calc(100% - 18px) 2px no-repeat,
-    linear-gradient(to right, transparent, rgba(202, 121, 52, 0.18), transparent) top 3px center / 100% 1px no-repeat,
-    linear-gradient(to right, transparent, rgba(0, 0, 0, 0.28), transparent) bottom 3px center / 100% 1px no-repeat;
+    linear-gradient(to right, transparent, rgba(202, 121, 52, 0.24), transparent) top center / 100% 1px no-repeat,
+    linear-gradient(to right, transparent, rgba(202, 121, 52, 0.20), transparent) bottom center / 100% 1px no-repeat;
   opacity: 0.75;
   box-shadow:
-    inset 0 0 0 1px rgba(255,226,160,0.028),
+    inset 0 0 0 1px rgba(255,226,160,0.030),
     inset 0 -8px 14px rgba(0,0,0,0.26);
 }
 
@@ -337,16 +306,16 @@
 
 .create-button {
   color: var(--br-gold);
-  border: 1px solid rgba(230,174,92,0.36);
+  border: 1px solid rgba(230,174,92,0.34);
   background:
-    radial-gradient(circle at 35% 20%, rgba(255,235,178,0.066), transparent 27%),
-    radial-gradient(circle at 70% 86%, rgba(0,0,0,0.40), transparent 43%),
-    linear-gradient(145deg, rgba(82,35,15,0.84), rgba(17,5,2,0.995)),
+    radial-gradient(circle at 35% 20%, rgba(255,235,178,0.062), transparent 27%),
+    radial-gradient(circle at 70% 86%, rgba(0,0,0,0.38), transparent 43%),
+    linear-gradient(145deg, rgba(82,35,15,0.82), rgba(17,5,2,0.995)),
     var(--br-leather-panel);
   background-size: auto, auto, auto, 700px 438px;
   background-position: left top, right bottom, center, center;
   box-shadow:
-    0 19px 40px rgba(0,0,0,0.76),
+    0 19px 40px rgba(0,0,0,0.74),
     inset 0 1px 0 rgba(255,248,218,0.040),
     inset 0 -10px 18px rgba(0,0,0,0.46);
 }
@@ -361,9 +330,9 @@
   pointer-events: none;
   background: none;
   box-shadow:
-    inset 0 0 0 1px rgba(190,118,55,0.26),
+    inset 0 0 0 1px rgba(190,118,55,0.24),
     inset 0 3px 5px rgba(255,245,205,0.014),
-    inset 0 -7px 12px rgba(0,0,0,0.40);
+    inset 0 -7px 12px rgba(0,0,0,0.38);
   opacity: 1;
   filter: none;
 }
@@ -377,10 +346,10 @@
   pointer-events: none;
   background:
     radial-gradient(circle at 38% 16%, rgba(255,230,170,0.040), transparent 31%),
-    linear-gradient(180deg, rgba(255,255,255,0.008), transparent 52%, rgba(0,0,0,0.26));
+    linear-gradient(180deg, rgba(255,255,255,0.008), transparent 52%, rgba(0,0,0,0.24));
   box-shadow:
     inset 0 0 0 1px rgba(255,226,160,0.030),
-    inset 0 -9px 15px rgba(0,0,0,0.44);
+    inset 0 -9px 15px rgba(0,0,0,0.42);
 }
 
 .create-button svg {
