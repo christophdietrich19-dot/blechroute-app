@@ -1,6 +1,9 @@
-/* Blechroute Asset Pack v6 Material Layer
-   Nutzt die neuen echten Bilder aus:
-   public/textures und public/overlays
+/* Blechroute Asset Cleanup v7
+   Repariert Asset Pack v6:
+   - graue Rahmen bei MAP FEED MENU entfernt
+   - graue Streifen in Header und Bottom Nav entfernt
+   - weiße Pin-Fläche entfernt
+   - Ledertexturen bleiben aktiv
 */
 
 :root {
@@ -8,17 +11,11 @@
   --br-leather-panel: url("/blechroute-app/textures/leather-panel.webp");
   --br-paper: url("/blechroute-app/textures/paper-polaroid.webp");
 
-  --br-button-frame: url("/blechroute-app/overlays/button-stitch-frame.png");
-  --br-stitch-h: url("/blechroute-app/overlays/stitch-horizontal.png");
-  --br-pressed-edge: url("/blechroute-app/overlays/pressed-edge.png");
-  --br-leather-frame: url("/blechroute-app/overlays/leather-frame.png");
-  --br-pin: url("/blechroute-app/overlays/brass-pin.png");
-
   --br-gold: #f1cf89;
   --br-gold-muted: rgba(241, 207, 137, 0.74);
 }
 
-/* echtes Leder-Fundament */
+/* Grundfläche */
 
 .app-screen {
   background:
@@ -43,7 +40,7 @@
     radial-gradient(circle at center, transparent 38%, rgba(0, 0, 0, 0.38));
 }
 
-/* Header mit echter Lederstruktur */
+/* Header: keine grauen Streifen mehr */
 
 .app-header {
   background:
@@ -79,12 +76,11 @@
 }
 
 .app-header::after {
-  height: 20px;
+  height: 11px;
   background:
-    var(--br-stitch-h) center / 1500px 34px repeat-x,
-    var(--br-pressed-edge) center / 1500px 34px repeat-x;
-  opacity: 0.38;
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.20));
+    linear-gradient(to bottom, rgba(5, 2, 1, 0.82), rgba(207, 135, 66, 0.16), rgba(5, 2, 1, 0.82));
+  opacity: 0.58;
+  filter: none;
 }
 
 .brand-center h1 {
@@ -102,55 +98,57 @@
     inset 0 0 0 1px rgba(255,255,255,0.15);
 }
 
-/* Top Buttons: echte Lederfläche plus echter Naht-Rahmen als Bild */
+/* Top Buttons: keine hellgrauen Stitch-Frame-PNGs mehr */
 
 .road-control-button {
   border-radius: 20px;
-  border: 1px solid rgba(224, 164, 86, 0.30);
-  color: rgba(244, 212, 142, 0.90);
+  border: 1px solid rgba(224, 164, 86, 0.34);
+  color: rgba(244, 212, 142, 0.92);
   background:
-    radial-gradient(circle at 45% 8%, rgba(255, 225, 158, 0.055), transparent 34%),
-    radial-gradient(circle at 70% 95%, rgba(0,0,0,0.40), transparent 46%),
-    linear-gradient(145deg, rgba(93, 39, 16, 0.58), rgba(18, 6, 3, 0.990)),
+    radial-gradient(circle at 45% 8%, rgba(255, 225, 158, 0.070), transparent 34%),
+    radial-gradient(circle at 70% 95%, rgba(0,0,0,0.42), transparent 46%),
+    linear-gradient(145deg, rgba(93, 39, 16, 0.62), rgba(18, 6, 3, 0.990)),
     var(--br-leather-panel);
   background-size: auto, auto, auto, 700px 438px;
   background-position: left top, right bottom, center, center;
   background-repeat: no-repeat, no-repeat, no-repeat, repeat;
   box-shadow:
     0 16px 32px rgba(0,0,0,0.68),
-    inset 0 1px 0 rgba(255,245,205,0.036),
+    inset 0 1px 0 rgba(255,245,205,0.040),
     inset 0 -11px 18px rgba(0,0,0,0.46);
 }
 
+/* Runde Lederkante statt Bildrahmen */
 .road-control-button::before {
   content: "";
   position: absolute;
-  inset: 2px;
+  inset: 8px;
   z-index: 1;
-  border-radius: 19px;
+  border-radius: 14px;
   pointer-events: none;
-  background-image: var(--br-button-frame);
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.52;
-  filter: saturate(0.92) contrast(1.02);
-  box-shadow: none;
+  background: none;
+  opacity: 1;
+  filter: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(176, 104, 49, 0.34),
+    inset 0 2px 4px rgba(255, 230, 170, 0.020),
+    inset 0 -6px 10px rgba(0, 0, 0, 0.34),
+    0 1px 0 rgba(255, 220, 145, 0.020);
 }
 
 .road-control-button::after {
   content: "";
   position: absolute;
-  inset: 6px;
+  inset: 4px;
   z-index: 1;
-  border-radius: 15px;
+  border-radius: 16px;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 47% 0%, rgba(255, 222, 154, 0.035), transparent 52%),
-    linear-gradient(180deg, rgba(255,237,188,0.008), transparent 45%, rgba(0,0,0,0.24));
+    radial-gradient(ellipse at 47% 0%, rgba(255, 222, 154, 0.045), transparent 52%),
+    linear-gradient(180deg, rgba(255,237,188,0.010), transparent 45%, rgba(0,0,0,0.26));
   box-shadow:
-    inset 0 0 0 1px rgba(255,226,160,0.026),
-    inset 0 -8px 13px rgba(0,0,0,0.28);
+    inset 0 0 0 1px rgba(255,226,160,0.030),
+    inset 0 -8px 13px rgba(0,0,0,0.30);
 }
 
 .road-control-button span,
@@ -160,12 +158,12 @@
 }
 
 .road-control-button.active {
-  border-color: rgba(244, 212, 142, 0.44);
+  border-color: rgba(244, 212, 142, 0.48);
   color: var(--br-gold);
   background:
-    radial-gradient(circle at 45% 8%, rgba(255, 226, 166, 0.070), transparent 34%),
-    radial-gradient(circle at 70% 95%, rgba(0,0,0,0.38), transparent 46%),
-    linear-gradient(145deg, rgba(108, 47, 20, 0.62), rgba(23, 7, 3, 0.995)),
+    radial-gradient(circle at 45% 8%, rgba(255, 226, 166, 0.090), transparent 34%),
+    radial-gradient(circle at 70% 95%, rgba(0,0,0,0.40), transparent 46%),
+    linear-gradient(145deg, rgba(108, 47, 20, 0.68), rgba(23, 7, 3, 0.995)),
     var(--br-leather-panel);
   background-size: auto, auto, auto, 700px 438px;
   box-shadow:
@@ -174,11 +172,7 @@
     inset 0 -12px 19px rgba(0,0,0,0.42);
 }
 
-.road-control-button.active::before {
-  opacity: 0.62;
-}
-
-/* Polaroid mit echtem Papier und echter Stecknadel */
+/* Polaroid: Papier bleibt, Pin wird sauber per CSS gebaut */
 
 .daily-polaroid,
 .polaroid {
@@ -192,30 +186,54 @@
   background-repeat: no-repeat, no-repeat, no-repeat, repeat;
 }
 
+/* Pin ohne weißen Kreis */
 .daily-polaroid::before,
 .polaroid::before {
-  background-image: var(--br-pin);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 42px;
-  height: 42px;
-  top: -23px;
-  box-shadow: none;
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  z-index: 8;
+  width: 31px;
+  height: 31px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 250, 205, 0.96) 0 9%, transparent 10%),
+    radial-gradient(circle at 38% 35%, #ffe2a0 0 17%, #d5943f 39%, #8c4e1f 70%, #321304 100%);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, 0.32),
+    inset 0 -5px 7px rgba(55, 21, 6, 0.5),
+    0 6px 9px rgba(0, 0, 0, 0.34),
+    0 12px 22px rgba(0, 0, 0, 0.26);
 }
 
 .daily-polaroid::after,
 .polaroid::after {
-  display: none;
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  z-index: 6;
+  width: 2px;
+  height: 22px;
+  transform-origin: top center;
+  transform: translateX(-50%) rotate(11deg);
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, #555 0%, #cfcfcf 34%, #f8f8f8 52%, #8d8d8d 80%, #444 100%);
+  box-shadow:
+    1px 2px 4px rgba(0, 0, 0, 0.28),
+    -1px 0 1px rgba(255, 255, 255, 0.14);
 }
 
-/* Bottom Navigation: echter Lederstreifen als Linie */
+/* Bottom Nav: graue Streifen weg */
 
 .bottom-nav {
-  border: 1px solid rgba(220,160,84,0.28);
+  border: 1px solid rgba(220,160,84,0.30);
   background:
-    radial-gradient(circle at 50% 0%, rgba(255,226,170,0.055), transparent 42%),
-    radial-gradient(circle at 18% 12%, rgba(255,255,255,0.018), transparent 22%),
+    radial-gradient(circle at 50% 0%, rgba(255,226,170,0.060), transparent 42%),
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,0.020), transparent 22%),
     linear-gradient(180deg, rgba(64,28,12,0.88), rgba(13,4,2,0.995)),
     var(--br-leather-panel);
   background-size: auto, auto, auto, 700px 438px;
@@ -232,17 +250,18 @@
   position: absolute;
   left: 12px;
   right: 12px;
-  top: 9px;
-  bottom: 9px;
+  top: 10px;
+  bottom: 10px;
   z-index: 1;
   border-radius: 20px;
   pointer-events: none;
   background:
-    var(--br-stitch-h) top center / 1500px 24px repeat-x,
-    var(--br-stitch-h) bottom center / 1500px 24px repeat-x;
-  opacity: 0.28;
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.16));
-  box-shadow: none;
+    linear-gradient(to right, transparent, rgba(202, 121, 52, 0.24), transparent) top center / 100% 1px no-repeat,
+    linear-gradient(to right, transparent, rgba(202, 121, 52, 0.20), transparent) bottom center / 100% 1px no-repeat;
+  opacity: 0.75;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,226,160,0.030),
+    inset 0 -8px 14px rgba(0,0,0,0.26);
 }
 
 .bottom-nav::after {
@@ -269,7 +288,7 @@
   background:
     radial-gradient(circle at 42% 8%, rgba(255,235,185,0.050), transparent 46%),
     radial-gradient(circle at bottom, rgba(0,0,0,0.26), transparent 48%),
-    linear-gradient(145deg, rgba(72,31,13,0.62), rgba(25,8,4,0.88)),
+    linear-gradient(145deg, rgba(72,31,13,0.66), rgba(25,8,4,0.88)),
     var(--br-leather-panel);
   background-size: auto, auto, auto, 700px 438px;
   background-position: top, bottom, center, center;
@@ -287,7 +306,7 @@
   background:
     radial-gradient(circle at 35% 20%, rgba(255,235,178,0.062), transparent 27%),
     radial-gradient(circle at 70% 86%, rgba(0,0,0,0.38), transparent 43%),
-    linear-gradient(145deg, rgba(82,35,15,0.78), rgba(17,5,2,0.995)),
+    linear-gradient(145deg, rgba(82,35,15,0.82), rgba(17,5,2,0.995)),
     var(--br-leather-panel);
   background-size: auto, auto, auto, 700px 438px;
   background-position: left top, right bottom, center, center;
