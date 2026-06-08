@@ -16,6 +16,7 @@ export default function AppMenu({
   onGoToFeed,
   onGoToDiscover,
   onGoToGarage,
+  onGoToCommunity,
   onGoToMoments,
   onGoToSaved,
   onGoToNotifications,
@@ -80,6 +81,17 @@ export default function AppMenu({
             <div>
               <strong>Map & Orte</strong>
               <small>Spots, Routen und Fundstücke entdecken</small>
+            </div>
+          </button>
+
+          <button type="button" onClick={() => goToPage(onGoToCommunity)}>
+            <span>
+              <IconProfile />
+            </span>
+
+            <div>
+              <strong>Community</strong>
+              <small>Profile, Garagen und Bilder von Freunden ansehen</small>
             </div>
           </button>
 

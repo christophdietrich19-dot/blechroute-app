@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import AppMenu from "./components/AppMenu";
 import BottomNavigation from "./components/BottomNavigation";
+import CommunityPage from "./components/CommunityPage";
 import CommunityProfileSheet from "./components/CommunityProfileSheet";
 import CreateMenu from "./components/CreateMenu";
 import EntryForm from "./components/EntryForm";
@@ -52,6 +53,10 @@ function AppShell({ appState, setAppState, onResetDemo }) {
 
   function goToGarage() {
     setActivePage("garage");
+  }
+
+  function goToCommunity() {
+    setActivePage("community");
   }
 
   function goToMoments() {
@@ -505,6 +510,8 @@ function AppShell({ appState, setAppState, onResetDemo }) {
           />
         )}
 
+        {activePage === "community" && <CommunityPage />}
+
         {activePage === "moments" && (
           <MomentsPage
             appState={appState}
@@ -577,6 +584,7 @@ function AppShell({ appState, setAppState, onResetDemo }) {
             onGoToFeed={goToFeed}
             onGoToDiscover={goToMap}
             onGoToGarage={goToGarage}
+            onGoToCommunity={goToCommunity}
             onGoToMoments={goToMoments}
             onGoToSaved={goToSaved}
             onGoToNotifications={goToNotifications}
