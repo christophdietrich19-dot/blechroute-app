@@ -510,7 +510,7 @@ function AppShell({ appState, setAppState, onResetDemo }) {
           />
         )}
 
-        {activePage === "community" && <CommunityPage />}
+        {activePage === "community" && <CommunityPage onOpenMenu={openMenu} />}
 
         {activePage === "moments" && (
           <MomentsPage

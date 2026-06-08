@@ -21,9 +21,17 @@ function hasSocialLinks(profile) {
   return Object.values(profile.socials || {}).some(Boolean);
 }
 
-function CommunityOverview({ onOpenProfile }) {
+function CommunityOverview({ onOpenProfile, onOpenMenu }) {
   return (
     <section className="community-page">
+      <button
+        className="community-back-button community-menu-button"
+        type="button"
+        onClick={onOpenMenu}
+      >
+        ← Menü
+      </button>
+
       <div className="community-hero">
         <p className="section-label">Community</p>
         <h2>Fahrer aus deiner Route</h2>
@@ -151,7 +159,7 @@ function CommunityLightbox({ image, onClose }) {
   );
 }
 
-export default function CommunityPage() {
+export default function CommunityPage({ onOpenMenu }) {
   const [activeProfileId, setActiveProfileId] = useState(null);
   const [lightboxImage, setLightboxImage] = useState(null);
 
@@ -161,15 +169,20 @@ export default function CommunityPage() {
 
   return (
     <>
-      {activeProfile ? (
-        <CommunityProfile
-          profile={activeProfile}
-          onBack={() => setActiveProfileId(null)}
-          onOpenImage={setLightboxImage}
-        />
-      ) : (
-        <CommunityOverview onOpenProfile={setActiveProfileId} />
-      )}
+      <div className="screen-page community-screen-page">
+        {activeProfile ? (
+          <CommunityProfile
+            profile={activeProfile}
+            onBack={() => setActiveProfileId(null)}
+            onOpenImage={setLightboxImage}
+          />
+        ) : (
+          <CommunityOverview
+            onOpenProfile={setActiveProfileId}
+            onOpenMenu={onOpenMenu}
+          />
+        )}
+      </div>
 
       <CommunityLightbox
         image={lightboxImage}

@@ -1,16 +1,33 @@
-/* Blechroute Community UI */
+/* Blechroute Community UI
+   Mobile Fix v2:
+   - eigene scrollbare screen-page
+   - oben nicht mehr abgeschnitten
+   - unten genug Platz über der Bottom Nav
+   - schönerer Zurück-Button
+   - mobile Karten und Polaroids sauberer
+*/
+
+.community-screen-page {
+  padding-top: 24px;
+  padding-bottom: calc(var(--nav-height) + 96px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
 
 .community-page {
   width: 100%;
   max-width: 100%;
   display: grid;
   gap: 18px;
-  padding-bottom: 18px;
+  padding-bottom: 28px;
 }
 
 .community-hero {
   display: grid;
   gap: 8px;
+  padding-top: 2px;
 }
 
 .community-hero h2,
@@ -34,6 +51,7 @@
 .community-profile-list {
   display: grid;
   gap: 14px;
+  padding-bottom: 24px;
 }
 
 .community-profile-card {
@@ -41,7 +59,7 @@
   width: 100%;
   min-height: 142px;
   display: grid;
-  grid-template-columns: 112px 1fr 22px;
+  grid-template-columns: 112px minmax(0, 1fr) 22px;
   gap: 14px;
   align-items: center;
   padding: 13px 12px;
@@ -142,24 +160,33 @@
 
 .community-back-button {
   justify-self: start;
+  min-height: 42px;
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
-  padding: 0 12px;
-  border: 1px solid rgba(216, 174, 103, 0.22);
+  gap: 8px;
+  padding: 0 14px;
+  border: 1px solid rgba(216, 174, 103, 0.25);
   border-radius: 999px;
   color: var(--paper-soft);
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(0, 0, 0, 0.08)),
-    rgba(45, 19, 8, 0.78);
+    radial-gradient(circle at 35% 0%, rgba(255, 230, 174, 0.075), transparent 42%),
+    linear-gradient(145deg, rgba(79, 34, 14, 0.82), rgba(18, 6, 3, 0.94));
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 245, 205, 0.035),
+    inset 0 -8px 14px rgba(0, 0, 0, 0.32);
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 900;
 }
 
+.community-menu-button {
+  margin-bottom: 2px;
+}
+
 .community-profile-head {
   display: grid;
-  grid-template-columns: 82px 1fr;
+  grid-template-columns: 82px minmax(0, 1fr);
   gap: 14px;
   align-items: center;
   padding: 15px;
@@ -215,6 +242,7 @@
 .community-garage {
   display: grid;
   gap: 14px;
+  padding-bottom: 34px;
 }
 
 .community-vehicle-card {
@@ -227,6 +255,7 @@
   box-shadow:
     0 18px 44px rgba(0, 0, 0, 0.30),
     inset 0 1px 0 rgba(255, 245, 205, 0.025);
+  overflow: visible;
 }
 
 .community-vehicle-card h3 {
@@ -244,7 +273,7 @@
   align-items: flex-start;
   overflow-x: auto;
   overflow-y: visible;
-  padding: 18px 2px 12px;
+  padding: 18px 2px 18px;
   scrollbar-width: none;
 }
 
@@ -358,29 +387,99 @@
   line-height: 1;
 }
 
-@media (max-width: 390px) {
+@media (max-width: 700px) {
+  .community-screen-page {
+    height: 100dvh;
+    padding-top: calc(18px + env(safe-area-inset-top));
+    padding-bottom: calc(158px + env(safe-area-inset-bottom));
+  }
+
+  .community-page {
+    gap: 16px;
+    padding-bottom: 48px;
+  }
+
+  .community-hero h2,
+  .community-profile-head h2 {
+    font-size: clamp(2rem, 9vw, 2.55rem);
+  }
+
+  .community-profile-list {
+    padding-bottom: 62px;
+  }
+
+  .community-garage {
+    padding-bottom: 96px;
+  }
+}
+
+@media (max-width: 430px) {
   .community-profile-card {
-    grid-template-columns: 92px 1fr 18px;
-    min-height: 124px;
+    grid-template-columns: 98px minmax(0, 1fr) 18px;
+    min-height: 126px;
     gap: 11px;
     padding: 11px;
+    border-radius: 22px;
   }
 
   .community-profile-preview {
-    width: 92px;
-    height: 92px;
+    width: 98px;
+    height: 98px;
+    border-radius: 18px;
   }
 
   .community-profile-content h3 {
-    font-size: 1.4rem;
+    font-size: 1.42rem;
   }
 
   .community-profile-content p {
     font-size: 0.76rem;
   }
 
+  .community-card-kicker {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+  }
+
+  .community-profile-head {
+    grid-template-columns: 74px minmax(0, 1fr);
+    padding: 13px;
+    border-radius: 22px;
+  }
+
+  .community-profile-head img {
+    width: 74px;
+    height: 74px;
+    border-radius: 16px;
+  }
+
+  .community-vehicle-card {
+    padding: 14px 12px 16px;
+    border-radius: 22px;
+  }
+
   .community-polaroid {
-    flex-basis: 156px;
-    width: 156px;
+    flex-basis: 154px;
+    width: 154px;
+  }
+}
+
+@media (max-width: 360px) {
+  .community-profile-card {
+    grid-template-columns: 82px minmax(0, 1fr) 16px;
+  }
+
+  .community-profile-preview {
+    width: 82px;
+    height: 82px;
+  }
+
+  .community-profile-content h3 {
+    font-size: 1.28rem;
+  }
+
+  .community-polaroid {
+    flex-basis: 142px;
+    width: 142px;
   }
 }
