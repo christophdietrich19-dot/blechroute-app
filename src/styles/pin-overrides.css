@@ -1,193 +1,156 @@
-/*
-  Blechroute – Pin Shadow Fix v11
-  Ziel:
-  - Schatten deutlich sauberer und ruhiger
-  - Pin leicht höher gesetzt
-  - sichtbare Spitze weiter reduziert
-  - in allen Bereichen etwas kleiner und realistischer
+/* Blechroute Real Pin Restore v12
+   Fix für v11:
+   v11 hat zu allgemein auf .pin gezielt.
+   Der sichtbare Pin kommt aber über ::before.
+   Deshalb überschreibt diese Datei jetzt wieder gezielt alle Pin-Pseudo-Elemente.
 */
 
-:root {
-  --pin-default-size: 50px;
-  --pin-feed-size: 46px;
-  --pin-polaroid-size: 40px;
-  --pin-community-size: 38px;
-  --pin-profile-size: 40px;
-
-  --pin-tilt: -6deg;
-  --pin-lift: -58%;
-  --pin-crop-bottom: 30%;
-
-  --pin-shadow: 0 6px 12px rgba(0, 0, 0, 0.18), 0 2px 4px rgba(0, 0, 0, 0.10);
-  --pin-saturate: 0.98;
-  --pin-brightness: 0.98;
-  --pin-contrast: 1.01;
+/* Community / Profil Polaroids */
+.community-polaroid {
+  padding-top: 20px !important;
 }
 
-.pin,
-.brass-pin,
-.push-pin,
-.paper-pin,
-.pin-image,
-.pin-overlay,
-.card-pin,
-.hero-pin,
-.feed-pin,
-.moment-pin,
-.community-pin,
-.polaroid-pin,
-.profile-pin,
-[class*="pin-image"],
-[class*="pin-overlay"],
-[class*="polaroid-pin"],
-[class*="community-pin"],
-[class*="feed-pin"],
-[class*="moment-pin"],
-[class*="profile-pin"] {
-  width: var(--pin-default-size);
-  height: var(--pin-default-size);
-  object-fit: contain;
-  display: block;
-  position: absolute;
-  left: 50%;
-  top: 0;
-  z-index: 4;
-  pointer-events: none;
-  user-select: none;
-  transform: translate(-50%, var(--pin-lift)) rotate(var(--pin-tilt));
-  transform-origin: 50% 22%;
+.community-polaroid::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -12px !important;
+  left: 50% !important;
+  z-index: 20 !important;
+  width: 24px !important;
+  height: 36px !important;
+  transform: translateX(-50%) rotate(-5deg) !important;
+  transform-origin: 50% 24% !important;
+  border-radius: 0 !important;
+  background-image: url("/blechroute-app/overlays/brass-pin-clean.png") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  clip-path: inset(0 0 28% 0) !important;
   filter:
-    saturate(var(--pin-saturate))
-    brightness(var(--pin-brightness))
-    contrast(var(--pin-contrast))
-    drop-shadow(var(--pin-shadow));
-  clip-path: inset(0 0 var(--pin-crop-bottom) 0 round 999px);
+    saturate(0.94)
+    brightness(0.96)
+    contrast(1.02)
+    drop-shadow(0 3px 3px rgba(0, 0, 0, 0.22)) !important;
+  pointer-events: none !important;
 }
 
-.pin-wrap,
-.pin-holder,
-.pin-anchor,
-[class*="pin-wrap"],
-[class*="pin-holder"],
-[class*="pin-anchor"] {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  z-index: 4;
-  transform: translateX(-50%);
-  pointer-events: none;
+.community-polaroid::after {
+  display: none !important;
+  content: none !important;
 }
 
-.pin-wrap img,
-.pin-holder img,
-.pin-anchor img,
-[class*="pin-wrap"] img,
-[class*="pin-holder"] img,
-[class*="pin-anchor"] img {
-  width: var(--pin-default-size);
-  height: var(--pin-default-size);
-  object-fit: contain;
-  display: block;
-  transform: translateY(var(--pin-lift)) rotate(var(--pin-tilt));
-  transform-origin: 50% 22%;
+/* Große Feed- und Roadbook-Polaroids */
+.daily-polaroid::before,
+.polaroid::before,
+.feed-polaroid::before,
+.moment-polaroid::before,
+.roadbook-polaroid::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -19px !important;
+  left: 50% !important;
+  z-index: 30 !important;
+  width: 31px !important;
+  height: 46px !important;
+  transform: translateX(-50%) rotate(-4deg) !important;
+  transform-origin: 50% 24% !important;
+  border-radius: 0 !important;
+  background-image: url("/blechroute-app/overlays/brass-pin-clean.png") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  clip-path: inset(0 0 28% 0) !important;
   filter:
-    saturate(var(--pin-saturate))
-    brightness(var(--pin-brightness))
-    contrast(var(--pin-contrast))
-    drop-shadow(var(--pin-shadow));
-  clip-path: inset(0 0 var(--pin-crop-bottom) 0 round 999px);
+    saturate(0.94)
+    brightness(0.96)
+    contrast(1.02)
+    drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25)) !important;
+  pointer-events: none !important;
 }
 
-.feed-card .pin,
-.feed-card .brass-pin,
-.feed-card .push-pin,
-.feed-card .pin-image,
-.feed-card .pin-overlay,
-.hero-card .pin,
-.hero-card .brass-pin,
-.hero-card .push-pin,
-.hero-card .pin-image,
-.hero-card .pin-overlay,
-.roadbook-card .pin,
-.roadbook-card .brass-pin,
-.roadbook-card .push-pin,
-.roadbook-card .pin-image,
-.roadbook-card .pin-overlay,
-[class*="feed-card"] .pin,
-[class*="roadbook-card"] .pin,
-[class*="hero-card"] .pin {
-  width: var(--pin-feed-size);
-  height: var(--pin-feed-size);
-  transform: translate(-50%, -60%) rotate(-5deg);
+.daily-polaroid::after,
+.polaroid::after,
+.feed-polaroid::after,
+.moment-polaroid::after,
+.roadbook-polaroid::after {
+  display: none !important;
+  content: none !important;
 }
 
-.polaroid .pin,
-.polaroid .brass-pin,
-.polaroid .push-pin,
-.polaroid .pin-image,
-.polaroid .pin-overlay,
-.moment-card .pin,
-.moment-card .brass-pin,
-.moment-card .push-pin,
-.moment-card .pin-image,
-.moment-card .pin-overlay,
-[class*="polaroid"] .pin,
-[class*="polaroid"] .brass-pin,
-[class*="moment-card"] .pin,
-[class*="moment-card"] .brass-pin {
-  width: var(--pin-polaroid-size);
-  height: var(--pin-polaroid-size);
-  transform: translate(-50%, -58%) rotate(-6deg);
+/* Profil/Garage Sonderfälle, falls diese Klassen zusätzlich vorkommen */
+.profile-polaroid::before,
+.garage-polaroid::before,
+.profile-gallery .polaroid::before,
+.garage-polaroids .polaroid::before {
+  content: "" !important;
+  top: -15px !important;
+  width: 27px !important;
+  height: 40px !important;
+  transform: translateX(-50%) rotate(-5deg) !important;
+  background-image: url("/blechroute-app/overlays/brass-pin-clean.png") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  clip-path: inset(0 0 28% 0) !important;
+  filter:
+    saturate(0.94)
+    brightness(0.96)
+    contrast(1.02)
+    drop-shadow(0 3px 3px rgba(0, 0, 0, 0.22)) !important;
 }
 
-.community-card .pin,
-.community-card .brass-pin,
-.community-card .push-pin,
-.community-card .pin-image,
-.community-card .pin-overlay,
-.community-profile .pin,
-.community-profile .brass-pin,
-.community-profile .push-pin,
-.community-profile .pin-image,
-.community-profile .pin-overlay,
-[class*="community"] .pin,
-[class*="community"] .brass-pin {
-  width: var(--pin-community-size);
-  height: var(--pin-community-size);
-  transform: translate(-50%, -57%) rotate(-6deg);
-}
-
-.profile-gallery .pin,
-.profile-gallery .brass-pin,
-.profile-gallery .push-pin,
-.profile-gallery .pin-image,
-.profile-gallery .pin-overlay,
-.garage-polaroids .pin,
-.garage-polaroids .brass-pin,
-.garage-polaroids .push-pin,
-.garage-polaroids .pin-image,
-.garage-polaroids .pin-overlay,
-[class*="profile-gallery"] .pin,
-[class*="garage-polaroids"] .pin {
-  width: var(--pin-profile-size);
-  height: var(--pin-profile-size);
-  transform: translate(-50%, -57%) rotate(-6deg);
-}
-
-@media (max-width: 768px) {
-  :root {
-    --pin-feed-size: 44px;
-    --pin-polaroid-size: 38px;
-    --pin-community-size: 36px;
-    --pin-profile-size: 38px;
-  }
+/* Der alte künstliche CSS-Nadel-Strich muss überall weg. */
+.profile-polaroid::after,
+.garage-polaroid::after,
+.profile-gallery .polaroid::after,
+.garage-polaroids .polaroid::after {
+  display: none !important;
+  content: none !important;
 }
 
 @media (max-width: 430px) {
-  :root {
-    --pin-feed-size: 42px;
-    --pin-polaroid-size: 36px;
-    --pin-community-size: 34px;
-    --pin-profile-size: 36px;
+  .community-polaroid {
+    padding-top: 19px !important;
+  }
+
+  .community-polaroid::before {
+    top: -11px !important;
+    width: 22px !important;
+    height: 33px !important;
+  }
+
+  .daily-polaroid::before,
+  .polaroid::before,
+  .feed-polaroid::before,
+  .moment-polaroid::before,
+  .roadbook-polaroid::before {
+    top: -18px !important;
+    width: 29px !important;
+    height: 43px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .community-polaroid::before {
+    top: -10px !important;
+    width: 21px !important;
+    height: 31px !important;
+  }
+
+  .daily-polaroid::before,
+  .polaroid::before,
+  .feed-polaroid::before,
+  .moment-polaroid::before,
+  .roadbook-polaroid::before {
+    top: -17px !important;
+    width: 27px !important;
+    height: 40px !important;
   }
 }
