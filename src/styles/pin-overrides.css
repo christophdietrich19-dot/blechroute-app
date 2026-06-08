@@ -1,22 +1,21 @@
-/* Blechroute Clean Pin + Text Fix v8
+/* Blechroute Pin + Community Text Refine v9
    - echter freigestellter Pin bleibt aktiv
-   - Community-Pins kleiner
-   - Feed-Pin mit stärkerem Override
-   - keine CSS-Fake-Pins mehr
+   - alle Pins kleiner/dezenter
+   - Text wurde in CommunityPage.jsx geändert
 */
 
 .community-polaroid {
-  padding-top: 24px !important;
+  padding-top: 21px !important;
 }
 
 .community-polaroid::before {
   content: "" !important;
   position: absolute !important;
-  top: -19px !important;
+  top: -15px !important;
   left: 50% !important;
   z-index: 20 !important;
-  width: 34px !important;
-  height: 50px !important;
+  width: 27px !important;
+  height: 40px !important;
   transform: translateX(-50%) rotate(1deg) !important;
   border-radius: 0 !important;
   background-image: url("/blechroute-app/overlays/brass-pin-clean.png") !important;
@@ -25,7 +24,7 @@
   background-position: center !important;
   background-color: transparent !important;
   box-shadow: none !important;
-  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.32)) !important;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.30)) !important;
   pointer-events: none !important;
 }
 
@@ -34,8 +33,7 @@
   content: none !important;
 }
 
-/* Große Polaroids im Feed und in Momenten.
-   Mehrere Selektoren, damit es auch greift, wenn die Karte anders heißt. */
+/* Große Polaroids im Feed und Momentbereich */
 .daily-polaroid::before,
 .polaroid::before,
 .feed-polaroid::before,
@@ -43,11 +41,11 @@
 .roadbook-polaroid::before {
   content: "" !important;
   position: absolute !important;
-  top: -31px !important;
+  top: -24px !important;
   left: 50% !important;
   z-index: 30 !important;
-  width: 46px !important;
-  height: 66px !important;
+  width: 35px !important;
+  height: 52px !important;
   transform: translateX(-50%) rotate(1deg) !important;
   border-radius: 0 !important;
   background-image: url("/blechroute-app/overlays/brass-pin-clean.png") !important;
@@ -56,7 +54,7 @@
   background-position: center !important;
   background-color: transparent !important;
   box-shadow: none !important;
-  filter: drop-shadow(0 7px 7px rgba(0, 0, 0, 0.36)) !important;
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.34)) !important;
   pointer-events: none !important;
 }
 
@@ -71,13 +69,13 @@
 
 @media (max-width: 430px) {
   .community-polaroid {
-    padding-top: 23px !important;
+    padding-top: 20px !important;
   }
 
   .community-polaroid::before {
-    top: -18px !important;
-    width: 32px !important;
-    height: 47px !important;
+    top: -14px !important;
+    width: 25px !important;
+    height: 37px !important;
   }
 
   .daily-polaroid::before,
@@ -85,16 +83,26 @@
   .feed-polaroid::before,
   .moment-polaroid::before,
   .roadbook-polaroid::before {
-    top: -29px !important;
-    width: 43px !important;
-    height: 62px !important;
+    top: -23px !important;
+    width: 33px !important;
+    height: 49px !important;
   }
 }
 
 @media (max-width: 360px) {
   .community-polaroid::before {
-    top: -17px !important;
-    width: 30px !important;
-    height: 44px !important;
+    top: -13px !important;
+    width: 23px !important;
+    height: 35px !important;
+  }
+
+  .daily-polaroid::before,
+  .polaroid::before,
+  .feed-polaroid::before,
+  .moment-polaroid::before,
+  .roadbook-polaroid::before {
+    top: -21px !important;
+    width: 31px !important;
+    height: 46px !important;
   }
 }
