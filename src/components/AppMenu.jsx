@@ -1,3 +1,5 @@
+import "../styles/community.css";
+
 import {
   IconBookmark,
   IconCamera,
@@ -31,7 +33,7 @@ export default function AppMenu({
   return (
     <div className="create-overlay" role="presentation" onClick={onClose}>
       <div
-        className="create-sheet"
+        className="create-sheet app-menu-sheet"
         role="dialog"
         aria-modal="true"
         aria-label="Blechroute Menü"
@@ -42,11 +44,25 @@ export default function AppMenu({
         <p className="section-label">Menü</p>
         <h2>Blechroute steuern</h2>
         <p>
-          Schnell zu deinen Bereichen springen, Aktivitäten prüfen oder einfach
-          weiter im Roadbook stöbern.
+          Spring direkt in die wichtigsten Bereiche oder öffne die Community.
         </p>
 
-        <div className="create-options">
+        <div className="app-menu-feature">
+          <button type="button" onClick={() => goToPage(onGoToCommunity)}>
+            <span>
+              <IconProfile />
+            </span>
+
+            <div>
+              <strong>Community</strong>
+              <small>Freunde, Profile, Garagen und Bilder ansehen</small>
+            </div>
+          </button>
+        </div>
+
+        <div className="app-menu-group-label">Navigation</div>
+
+        <div className="create-options app-menu-options">
           <button type="button" onClick={() => goToPage(onGoToFeed)}>
             <span>
               <IconHome />
@@ -58,21 +74,6 @@ export default function AppMenu({
             </div>
           </button>
 
-          <button type="button" onClick={() => goToPage(onGoToNotifications)}>
-            <span>
-              <IconHeart />
-            </span>
-
-            <div>
-              <strong>Aktivität</strong>
-              <small>
-                {unreadCount > 0
-                  ? `${unreadCount} neue Meldungen`
-                  : "Keine neuen Meldungen"}
-              </small>
-            </div>
-          </button>
-
           <button type="button" onClick={() => goToPage(onGoToDiscover)}>
             <span>
               <IconMapPin />
@@ -81,17 +82,6 @@ export default function AppMenu({
             <div>
               <strong>Map & Orte</strong>
               <small>Spots, Routen und Fundstücke entdecken</small>
-            </div>
-          </button>
-
-          <button type="button" onClick={() => goToPage(onGoToCommunity)}>
-            <span>
-              <IconProfile />
-            </span>
-
-            <div>
-              <strong>Community</strong>
-              <small>Profile, Garagen und Bilder von Freunden ansehen</small>
             </div>
           </button>
 
@@ -114,6 +104,25 @@ export default function AppMenu({
             <div>
               <strong>Momente</strong>
               <small>Polaroids, Erinnerungen und Roadbook-Beiträge</small>
+            </div>
+          </button>
+        </div>
+
+        <div className="app-menu-group-label">Persönlich</div>
+
+        <div className="create-options app-menu-options">
+          <button type="button" onClick={() => goToPage(onGoToNotifications)}>
+            <span>
+              <IconHeart />
+            </span>
+
+            <div>
+              <strong>Aktivität</strong>
+              <small>
+                {unreadCount > 0
+                  ? `${unreadCount} neue Meldungen`
+                  : "Keine neuen Meldungen"}
+              </small>
             </div>
           </button>
 
@@ -140,25 +149,11 @@ export default function AppMenu({
           </button>
         </div>
 
-        <article
-          style={{
-            marginTop: "14px",
-            padding: "14px",
-            border: "1px solid rgba(216, 174, 103, 0.18)",
-            borderRadius: "18px",
-            background: "rgba(24, 9, 4, 0.42)"
-          }}
-        >
+        <article className="app-menu-beta-card">
           <p className="section-label">Beta</p>
-          <p
-            style={{
-              margin: "8px 0 0",
-              color: "var(--paper-soft)",
-              lineHeight: 1.45
-            }}
-          >
+          <p>
             Diese Version speichert lokal im Browser. Echte Konten, Cloud,
-            Bilderupload und Community kommen später mit dem Backend.
+            Bilderupload und offene Community kommen später mit dem Backend.
           </p>
         </article>
 

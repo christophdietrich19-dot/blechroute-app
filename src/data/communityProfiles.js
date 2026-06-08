@@ -20,8 +20,8 @@ export const communityProfiles = [
         ]
       },
       {
-        id: "leon-lexus-gs400",
-        name: "Lexus GS 400",
+        id: "leon-lexus-gs430",
+        name: "Lexus GS 430",
         images: [
           "/blechroute-app/community/leon-lexus-gs400-01.webp",
           "/blechroute-app/community/leon-lexus-gs400-02.webp"
@@ -101,4 +101,22 @@ export const communityProfiles = [
 
 export function getCommunityProfileById(profileId) {
   return communityProfiles.find((profile) => profile.id === profileId) || null;
+}
+
+export function getCommunityStats() {
+  const vehicleCount = communityProfiles.reduce((sum, profile) => {
+    return sum + profile.vehicles.length;
+  }, 0);
+
+  const imageCount = communityProfiles.reduce((sum, profile) => {
+    return sum + profile.vehicles.reduce((vehicleSum, vehicle) => {
+      return vehicleSum + vehicle.images.length;
+    }, 0);
+  }, 0);
+
+  return {
+    profileCount: communityProfiles.length,
+    vehicleCount,
+    imageCount
+  };
 }

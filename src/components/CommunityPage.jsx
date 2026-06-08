@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 
-import { communityProfiles } from "../data/communityProfiles";
+import { communityProfiles, getCommunityStats } from "../data/communityProfiles";
 import "../styles/community.css";
 
 function countVehicles(profile) {
@@ -22,6 +22,8 @@ function hasSocialLinks(profile) {
 }
 
 function CommunityOverview({ onOpenProfile, onOpenMenu }) {
+  const stats = getCommunityStats();
+
   return (
     <section className="community-page">
       <button
@@ -32,13 +34,28 @@ function CommunityOverview({ onOpenProfile, onOpenMenu }) {
         ← Menü
       </button>
 
-      <div className="community-hero">
+      <div className="community-hero community-hero-card">
         <p className="section-label">Community</p>
         <h2>Fahrer aus deiner Route</h2>
         <p>
-          Profile, Garagen und Momente von Menschen, die Blechroute mit Leben
-          füllen.
+          Profile, Garagen und Bilder von Freunden. Alles sauber gesammelt wie
+          ein kleines Roadbook der Szene.
         </p>
+
+        <div className="community-stats-row">
+          <span>
+            <strong>{stats.profileCount}</strong>
+            Profile
+          </span>
+          <span>
+            <strong>{stats.vehicleCount}</strong>
+            Fahrzeuge
+          </span>
+          <span>
+            <strong>{stats.imageCount}</strong>
+            Bilder
+          </span>
+        </div>
       </div>
 
       <div className="community-profile-list">
@@ -60,9 +77,13 @@ function CommunityOverview({ onOpenProfile, onOpenMenu }) {
               </span>
               <h3>{profile.name}</h3>
               <p>{vehicleLine(profile)}</p>
-              <small>
-                {countImages(profile)} {countImages(profile) === 1 ? "Bild" : "Bilder"} ansehen
-              </small>
+
+              <div className="community-mini-meta">
+                <span>
+                  {countImages(profile)} {countImages(profile) === 1 ? "Bild" : "Bilder"}
+                </span>
+                <span>Profil ansehen</span>
+              </div>
             </div>
 
             <span className="community-card-arrow">›</span>
@@ -113,11 +134,19 @@ function CommunityProfile({ profile, onBack, onOpenImage }) {
       )}
 
       <div className="community-garage">
-        <p className="section-label">Garage</p>
+        <div className="community-section-title">
+          <p className="section-label">Garage</p>
+          <span>{profile.name}</span>
+        </div>
 
         {profile.vehicles.map((vehicle) => (
           <article className="community-vehicle-card" key={vehicle.id}>
-            <h3>{vehicle.name}</h3>
+            <div className="community-vehicle-head">
+              <h3>{vehicle.name}</h3>
+              <span>
+                {vehicle.images.length} {vehicle.images.length === 1 ? "Bild" : "Bilder"}
+              </span>
+            </div>
 
             <div className="community-polaroid-stack">
               {vehicle.images.map((image, index) => (
