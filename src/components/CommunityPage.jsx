@@ -38,8 +38,8 @@ function CommunityOverview({ onOpenProfile, onOpenMenu }) {
         <p className="section-label">Community</p>
         <h2>Fahrer aus deiner Route</h2>
         <p>
-          Profile, Garagen und Bilder von Freunden. Alles sauber gesammelt wie
-          ein kleines Roadbook der Szene.
+          Profile aus der Runde. Mit Garagen, Bildern und den Autos, die
+          unterwegs nicht einfach nur vorbeifahren.
         </p>
 
         <div className="community-stats-row">

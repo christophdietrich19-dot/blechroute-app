@@ -1,4 +1,9 @@
-/* Blechroute Community Polish v3 */
+/* Blechroute Community Polish v4
+   Schwerpunkt:
+   - Pins sitzen weniger im Bild
+   - Polaroids haben oben mehr Papierfläche
+   - Community-Text natürlicher
+*/
 
 .community-screen-page {
   padding-top: 24px;
@@ -101,7 +106,7 @@
 .community-profile-list {
   display: grid;
   gap: 14px;
-  padding-bottom: 62px;
+  padding-bottom: 80px;
 }
 
 .community-profile-card {
@@ -319,7 +324,7 @@
 .community-garage {
   display: grid;
   gap: 14px;
-  padding-bottom: 96px;
+  padding-bottom: 110px;
 }
 
 .community-vehicle-card {
@@ -363,11 +368,11 @@
 
 .community-polaroid-stack {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   align-items: flex-start;
   overflow-x: auto;
   overflow-y: visible;
-  padding: 18px 2px 18px;
+  padding: 22px 6px 24px;
   scrollbar-width: none;
 }
 
@@ -379,9 +384,9 @@
   position: relative;
   flex: 0 0 174px;
   width: 174px;
-  padding: 9px 9px 13px;
+  padding: 22px 9px 13px;
   border: 0;
-  border-radius: 8px;
+  border-radius: 9px;
   color: rgba(43, 26, 15, 0.74);
   background:
     radial-gradient(circle at 18% 9%, rgba(255, 255, 255, 0.48), transparent 19%),
@@ -396,20 +401,20 @@
 .community-polaroid::before {
   content: "";
   position: absolute;
-  top: -13px;
+  top: -8px;
   left: 50%;
   z-index: 3;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   transform: translateX(-50%);
   border-radius: 999px;
   background:
-    radial-gradient(circle at 32% 28%, rgba(255, 250, 205, 0.92) 0 8%, transparent 9%),
+    radial-gradient(circle at 32% 28%, rgba(255, 250, 205, 0.88) 0 8%, transparent 9%),
     radial-gradient(circle at 38% 35%, #ffe2a0 0 16%, #d5943f 38%, #8c4e1f 70%, #321304 100%);
   box-shadow:
-    inset 0 2px 2px rgba(255, 255, 255, 0.24),
-    inset 0 -5px 7px rgba(55, 21, 6, 0.48),
-    0 6px 9px rgba(0, 0, 0, 0.30);
+    inset 0 2px 2px rgba(255, 255, 255, 0.22),
+    inset 0 -5px 7px rgba(55, 21, 6, 0.46),
+    0 5px 8px rgba(0, 0, 0, 0.28);
 }
 
 .community-polaroid img {
@@ -481,7 +486,7 @@
   line-height: 1;
 }
 
-/* AppMenu polish */
+/* AppMenu polish from v3 stays active */
 
 .app-menu-sheet {
   padding-bottom: 18px;
@@ -583,7 +588,7 @@
   }
 
   .community-garage {
-    padding-bottom: 110px;
+    padding-bottom: 120px;
   }
 }
 
@@ -635,6 +640,7 @@
   .community-polaroid {
     flex-basis: 154px;
     width: 154px;
+    padding-top: 21px;
   }
 }
 
