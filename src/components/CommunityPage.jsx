@@ -36,10 +36,10 @@ function CommunityOverview({ onOpenProfile, onOpenMenu }) {
 
       <div className="community-hero community-hero-card">
         <p className="section-label">Community</p>
-        <h2>Fahrer aus deiner Route</h2>
+        <h2>Garagen aus der Runde</h2>
         <p>
-          Profile aus der Runde. Mit Garagen, Bildern und den Autos, die
-          unterwegs nicht einfach nur vorbeifahren.
+          Echte Profile, echte Autos und die Bilder dazu. Erstmal klein,
+          aber genau hier wächst später die Blechroute-Community.
         </p>
 
         <div className="community-stats-row">
