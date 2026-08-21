@@ -1,7 +1,7 @@
 export default function WeeklyCarCard({ car }) {
   return (
     <article className="weekly-car">
-      <img src={car.image} alt={car.headline} />
+      <img src={car.image} alt={car.headline} loading="lazy" decoding="async" />
 
       <div>
         <p className="section-label">{car.title}</p>

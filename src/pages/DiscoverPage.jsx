@@ -169,7 +169,7 @@ export default function DiscoverPage({
 
             return (
               <article className="spot-card" key={spot.id}>
-                <img src={spot.image} alt={spot.title} />
+                <img src={spot.image} alt={spot.title} loading="lazy" decoding="async" />
 
                 <div>
                   <p className="section-label">{spot.category}</p>

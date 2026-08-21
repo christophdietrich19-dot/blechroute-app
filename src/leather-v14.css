@@ -1,0 +1,874 @@
+/* Blechroute Leather System v14
+   One restrained material layer on top of the stable application styles.
+   Textures, seams and metal are decoration only; every control stays real HTML.
+*/
+
+:root {
+  --br-leather-main: url("/blechroute-app/textures/leather-main.webp");
+  --br-leather-panel: url("/blechroute-app/textures/leather-panel.webp");
+  --br-paper: url("/blechroute-app/textures/paper-polaroid.webp");
+  --br-stitch-h: url("/blechroute-app/overlays/stitch-fine-horizontal.png");
+  --br-stitch-v: url("/blechroute-app/overlays/stitch-fine-vertical.png");
+  --br-gold: #d9b36e;
+  --br-gold-bright: #f2d99c;
+  --br-cream: #f4e7ce;
+  --br-muted: rgba(244, 231, 206, 0.72);
+  --br-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --br-safe-top: env(safe-area-inset-top, 0px);
+  --nav-height: 96px;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(242, 217, 156, 0.94);
+  outline-offset: 3px;
+}
+
+html,
+body,
+#root {
+  background: #090503;
+}
+
+.site {
+  min-height: 100dvh;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 50% -15%, rgba(190, 123, 64, 0.16), transparent 35%),
+    linear-gradient(145deg, #090503, #170a05 52%, #050302);
+}
+
+.phone-shell {
+  width: min(100%, 1120px);
+  max-width: 1120px;
+  height: calc(100dvh - 40px);
+  min-height: min(720px, calc(100dvh - 40px));
+  padding: 7px;
+  border-radius: 34px;
+  background: #080402;
+  box-shadow:
+    0 32px 90px rgba(0, 0, 0, 0.64),
+    0 0 0 1px rgba(216, 179, 110, 0.16),
+    inset 0 1px 0 rgba(255, 244, 216, 0.05);
+}
+
+.app-screen {
+  isolation: isolate;
+  border-radius: 28px;
+  background-image:
+    linear-gradient(160deg, rgba(30, 13, 8, 0.13), rgba(7, 3, 2, 0.64)),
+    var(--br-leather-main);
+  background-position: center, center top;
+  background-repeat: no-repeat, no-repeat;
+  background-size: auto, cover;
+}
+
+.app-screen::before {
+  z-index: 0;
+  opacity: 0.08;
+}
+
+.app-screen::after {
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% -8%, rgba(255, 229, 177, 0.08), transparent 28%),
+    linear-gradient(to bottom, transparent 62%, rgba(0, 0, 0, 0.24));
+}
+
+.screen-page {
+  z-index: 2;
+  height: 100%;
+  padding: 0 28px 122px;
+  overscroll-behavior-y: contain;
+  scroll-behavior: smooth;
+}
+
+/* Compact masthead: one leather nameplate and three real controls. */
+
+.app-header {
+  width: calc(100% + 56px);
+  max-width: calc(100% + 56px);
+  margin: 0 -28px 24px;
+  padding: 14px 28px 16px;
+  border: 0;
+  background: rgba(8, 3, 2, 0.42);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.28),
+    inset 0 -1px 0 rgba(219, 171, 101, 0.08);
+}
+
+.app-header::before {
+  inset: 9px 28px auto;
+  height: 72px;
+  z-index: 1;
+  border: 1px solid rgba(30, 11, 5, 0.86);
+  border-radius: 20px;
+  background-image:
+    var(--br-stitch-h), var(--br-stitch-h), var(--br-stitch-v), var(--br-stitch-v),
+    radial-gradient(circle at 45% 0%, rgba(255, 232, 183, 0.10), transparent 38%),
+    linear-gradient(155deg, rgba(91, 48, 25, 0.38), rgba(15, 6, 3, 0.72)),
+    var(--br-leather-panel);
+  background-position:
+    left 18px top 7px, left 18px bottom 7px, left 7px top 17px, right 7px top 17px,
+    center top, center, center;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y, no-repeat, no-repeat, repeat;
+  background-size: auto 3px, auto 3px, 3px auto, 3px auto, auto, auto, 720px 460px;
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 240, 205, 0.08),
+    inset 0 -7px 13px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+.app-header::after {
+  display: none;
+}
+
+.brand-line {
+  z-index: 3;
+  min-height: 62px;
+}
+
+.brand-center h1 {
+  color: var(--br-gold-bright);
+  font-size: clamp(2rem, 4vw, 2.55rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  text-shadow: 0 1px 0 rgba(43, 16, 6, 0.95), 0 4px 10px rgba(0, 0, 0, 0.62);
+}
+
+.brand-center p {
+  max-width: 290px;
+  margin-top: 5px;
+  color: rgba(244, 231, 206, 0.68);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.68);
+}
+
+.brand-avatar {
+  top: 10px;
+  right: 18px;
+  width: 43px;
+  height: 43px;
+  border: 2px solid #2d140a;
+  box-shadow: 0 0 0 2px rgba(217, 179, 110, 0.56), 0 7px 14px rgba(0, 0, 0, 0.46);
+}
+
+.road-control-row {
+  z-index: 5;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 0 4px;
+}
+
+.road-control-button,
+.road-control-button.main-control {
+  min-height: 48px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(39, 14, 6, 0.9);
+  border-radius: 14px;
+  color: rgba(244, 221, 173, 0.82);
+  background-image:
+    var(--br-stitch-h), var(--br-stitch-h),
+    radial-gradient(circle at 50% 0%, rgba(255, 235, 193, 0.075), transparent 50%),
+    linear-gradient(155deg, rgba(88, 46, 24, 0.34), rgba(15, 6, 3, 0.72)),
+    var(--br-leather-panel);
+  background-position: left 14px top 6px, left 14px bottom 6px, center top, center, center;
+  background-repeat: repeat-x, repeat-x, no-repeat, no-repeat, repeat;
+  background-size: auto 3px, auto 3px, auto, auto, 720px 460px;
+  box-shadow:
+    0 8px 15px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 241, 207, 0.06),
+    inset 0 -5px 9px rgba(0, 0, 0, 0.22);
+  transition: transform 120ms ease, color 120ms ease, filter 120ms ease;
+}
+
+.road-control-button::before {
+  inset: 4px;
+  z-index: 1;
+  border-radius: 10px;
+  background: none;
+  box-shadow: inset 0 0 0 1px rgba(221, 167, 94, 0.09);
+}
+
+.road-control-button::after {
+  display: none;
+}
+
+.road-control-button.active {
+  border-color: rgba(217, 179, 110, 0.55);
+  color: var(--br-gold-bright);
+  filter: brightness(1.08);
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.36),
+    inset 0 0 0 1px rgba(246, 218, 156, 0.13),
+    inset 0 -5px 9px rgba(0, 0, 0, 0.20);
+}
+
+.road-control-button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.control-content {
+  position: relative;
+  z-index: 3;
+}
+
+/* Content hierarchy */
+
+.welcome-block {
+  margin-bottom: 24px;
+}
+
+.section-label {
+  color: var(--br-gold);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.48);
+}
+
+.welcome-block h2 {
+  margin-top: 7px;
+  color: var(--br-cream);
+  font-size: clamp(2rem, 4.8vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.042em;
+  text-shadow: 0 6px 16px rgba(0, 0, 0, 0.42);
+}
+
+.welcome-block p:not(.section-label) {
+  max-width: 680px;
+  margin-top: 7px;
+  color: var(--br-muted);
+  font-size: clamp(0.96rem, 1.6vw, 1.08rem);
+  line-height: 1.45;
+}
+
+.section-head h2 {
+  color: var(--br-cream);
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.36);
+}
+
+.section-head > span {
+  color: rgba(217, 179, 110, 0.72);
+}
+
+/* Paper stays paper; leather does not compete with the photographs. */
+
+.daily-highlight {
+  gap: 20px;
+}
+
+.daily-polaroid,
+.polaroid,
+.community-polaroid {
+  border: 1px solid rgba(92, 59, 29, 0.24);
+  background-image:
+    radial-gradient(circle at 14% 6%, rgba(255, 255, 255, 0.28), transparent 24%),
+    linear-gradient(145deg, rgba(255, 248, 229, 0.10), rgba(153, 101, 42, 0.05)),
+    var(--br-paper);
+  background-position: left top, center, center;
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-size: auto, auto, 620px 620px;
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.36),
+    0 3px 7px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.50);
+}
+
+.daily-polaroid {
+  padding: 12px 12px 17px;
+  border-radius: 8px;
+  transform: rotate(-0.35deg);
+  transform-origin: 50% 8%;
+}
+
+.daily-polaroid > img,
+.polaroid img {
+  border-radius: 3px;
+  filter: saturate(0.95) contrast(1.03);
+  box-shadow: 0 0 0 1px rgba(60, 35, 18, 0.25);
+}
+
+.polaroid-topline {
+  margin-bottom: 9px;
+}
+
+.mini-author {
+  grid-template-columns: 38px 1fr;
+  gap: 9px;
+}
+
+.mini-author img {
+  width: 38px;
+  height: 38px;
+}
+
+.polaroid-caption-row {
+  margin-top: 10px;
+}
+
+.daily-polaroid h3 {
+  font-size: 1.18rem;
+}
+
+/* Secondary surfaces: flat, quiet leather with one consistent edge. */
+
+.roadbook-card,
+.weekly-car,
+.garage-card,
+.spot-card,
+.note-card,
+.profile-card,
+.task-card,
+.create-sheet,
+.entry-form,
+.community-sheet,
+.app-menu-beta-card,
+.stat-card {
+  border-color: rgba(196, 143, 78, 0.22);
+  background-image:
+    linear-gradient(150deg, rgba(45, 20, 11, 0.34), rgba(8, 4, 2, 0.68)),
+    var(--br-leather-main);
+  background-position: center, center;
+  background-repeat: no-repeat, repeat;
+  background-size: auto, 760px 760px;
+  box-shadow: 0 13px 28px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 238, 199, 0.035);
+}
+
+.soft-action,
+.profile-actions button,
+.create-options button,
+.app-menu-feature button,
+.close-sheet,
+.search-book {
+  border-color: rgba(196, 143, 78, 0.24);
+  background-image:
+    linear-gradient(155deg, rgba(82, 43, 23, 0.30), rgba(13, 6, 3, 0.66)),
+    var(--br-leather-panel);
+  background-position: center, center;
+  background-repeat: no-repeat, repeat;
+  background-size: auto, 720px 460px;
+  box-shadow: 0 5px 11px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 239, 203, 0.04);
+}
+
+.roadbook-author-button,
+.roadbook-secondary-action,
+.soft-action {
+  min-height: 44px;
+}
+
+.entry-form input,
+.entry-form textarea,
+.entry-form select {
+  min-height: 48px;
+  border-color: rgba(217, 179, 110, 0.25);
+  background: rgba(8, 4, 2, 0.42);
+  box-shadow: inset 0 2px 7px rgba(0, 0, 0, 0.22);
+}
+
+/* Navigation: lower and lighter; the plus button no longer dominates the page. */
+
+.bottom-nav {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  bottom: 14px;
+  z-index: 500;
+  width: min(680px, calc(100% - 48px));
+  height: 72px;
+  transform: translateX(-50%);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 64px minmax(0, 1fr) minmax(0, 1fr);
+  gap: 3px;
+  padding: 7px 9px;
+  overflow: visible;
+  isolation: isolate;
+  border: 1px solid rgba(36, 13, 6, 0.94);
+  border-radius: 23px;
+  background-image:
+    var(--br-stitch-h), var(--br-stitch-h), var(--br-stitch-v), var(--br-stitch-v),
+    linear-gradient(180deg, rgba(87, 47, 25, 0.34), rgba(13, 6, 3, 0.76)),
+    var(--br-leather-panel);
+  background-position:
+    left 20px top 6px, left 20px bottom 6px, left 7px top 18px, right 7px top 18px,
+    center, center;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y, no-repeat, repeat;
+  background-size: auto 3px, auto 3px, 3px auto, 3px auto, auto, 720px 460px;
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.52),
+    inset 0 1px 0 rgba(255, 241, 207, 0.055),
+    inset 0 -6px 10px rgba(0, 0, 0, 0.23);
+  backdrop-filter: blur(14px);
+}
+
+.bottom-nav::before {
+  inset: 4px;
+  z-index: 1;
+  border-radius: 18px;
+  background: none;
+  box-shadow: inset 0 0 0 1px rgba(216, 179, 110, 0.07);
+}
+
+.bottom-nav::after {
+  display: none;
+}
+
+.nav-item {
+  z-index: 3;
+  min-width: 0;
+  min-height: 54px;
+  height: 54px;
+  color: rgba(244, 231, 206, 0.58);
+}
+
+.nav-item.active {
+  color: var(--br-gold-bright);
+  background: rgba(54, 27, 15, 0.44);
+  box-shadow: inset 0 0 0 1px rgba(217, 179, 110, 0.12);
+}
+
+.create-button {
+  z-index: 5;
+  width: 60px;
+  height: 60px;
+  padding: 6px;
+  transform: translateY(-15px);
+  border: 2px solid #32180c;
+  color: #ffe2a1;
+  background:
+    radial-gradient(circle at 34% 25%, rgba(255, 250, 214, 0.72) 0 4%, transparent 6%),
+    radial-gradient(circle at 45% 40%, #e7b65f 0 10%, #b66e2d 46%, #603015 76%, #241006 100%);
+  box-shadow:
+    0 0 0 2px rgba(128, 70, 32, 0.90),
+    0 0 0 4px rgba(217, 179, 110, 0.32),
+    0 10px 22px rgba(0, 0, 0, 0.52),
+    inset 0 2px 2px rgba(255, 245, 207, 0.25),
+    inset 0 -6px 9px rgba(50, 20, 7, 0.46);
+}
+
+.create-button::before {
+  inset: 8px;
+  z-index: 1;
+  border: 1px solid rgba(83, 38, 14, 0.58);
+  background: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 224, 154, 0.10);
+}
+
+.create-button::after {
+  display: none;
+}
+
+.create-button svg {
+  z-index: 3;
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 2px 2px rgba(53, 21, 7, 0.48));
+}
+
+.create-button:active {
+  transform: translateY(-14px) scale(0.96);
+}
+
+.toast {
+  border-color: rgba(217, 179, 110, 0.38);
+  background: rgba(28, 12, 6, 0.96);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .road-control-button:hover,
+  .nav-item:hover,
+  .soft-action:hover,
+  .profile-actions button:hover,
+  .create-options button:hover,
+  .app-menu-feature button:hover,
+  .close-sheet:hover {
+    color: var(--br-gold-bright);
+    filter: brightness(1.07);
+  }
+
+  .create-button:hover {
+    filter: brightness(1.07) saturate(1.04);
+  }
+}
+
+/* Real desktop/tablet layout. It is no longer forced into a 430 px phone mockup. */
+
+@media (min-width: 900px) {
+  .app-header {
+    display: grid;
+    grid-template-columns: minmax(310px, 0.92fr) minmax(430px, 1.08fr);
+    align-items: center;
+    gap: 24px;
+    min-height: 104px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .app-header::before {
+    width: calc((100% - 80px) * 0.43);
+    max-width: 430px;
+    height: 72px;
+  }
+
+  .brand-line {
+    min-height: 64px;
+  }
+
+  .road-control-row {
+    margin-top: 0;
+  }
+
+  .welcome-block {
+    margin-bottom: 28px;
+  }
+
+  .daily-highlight {
+    grid-template-columns: minmax(420px, 1.12fr) minmax(280px, 0.88fr);
+    align-items: center;
+    gap: 42px;
+    max-width: 980px;
+    margin: 0 auto 34px;
+  }
+
+  .daily-copy {
+    display: block;
+  }
+
+  .daily-copy h2 {
+    margin: 9px 0 8px;
+    color: var(--br-cream);
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 500;
+    line-height: 1.02;
+  }
+
+  .daily-copy > p:last-child {
+    margin: 0;
+    color: var(--br-muted);
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+
+  .polaroid-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    overflow: visible;
+    padding: 32px 5px 26px;
+  }
+
+  .polaroid {
+    width: auto;
+  }
+
+  .bottom-nav {
+    bottom: 18px;
+  }
+}
+
+@media (max-width: 899px) {
+  .site,
+  .phone-shell,
+  .app-screen,
+  .screen-page {
+    min-height: 100svh;
+    height: 100dvh;
+  }
+
+  .site {
+    display: block;
+    padding: 0;
+  }
+
+  .phone-shell {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .app-screen {
+    border-radius: 0;
+  }
+
+  .screen-page {
+    padding: 0 18px calc(108px + var(--br-safe-bottom));
+  }
+
+  .app-header {
+    width: calc(100% + 36px);
+    max-width: calc(100% + 36px);
+    margin-left: -18px;
+    margin-right: -18px;
+    padding: calc(11px + var(--br-safe-top)) 18px 13px;
+  }
+
+  .app-header::before {
+    top: calc(7px + var(--br-safe-top));
+    left: 18px;
+    right: 18px;
+    height: 68px;
+  }
+
+  .brand-line {
+    min-height: 58px;
+  }
+
+  .road-control-row {
+    margin-top: 12px;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: calc(10px + var(--br-safe-bottom));
+    width: min(620px, calc(100vw - 24px));
+  }
+}
+
+@media (max-width: 520px) {
+  .screen-page {
+    padding-left: max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+  }
+
+  .app-header {
+    width: calc(100% + 28px);
+    max-width: calc(100% + 28px);
+    margin: 0 -14px 20px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .app-header::before {
+    left: 14px;
+    right: 14px;
+  }
+
+  .brand-center h1 {
+    font-size: clamp(1.78rem, 8vw, 2.15rem);
+  }
+
+  .brand-center p {
+    max-width: 185px;
+    font-size: 0.56rem;
+  }
+
+  .brand-avatar {
+    right: 14px;
+    width: 39px;
+    height: 39px;
+  }
+
+  .road-control-row {
+    gap: 8px;
+    padding: 0;
+  }
+
+  .road-control-button,
+  .road-control-button.main-control {
+    min-height: 46px;
+    border-radius: 13px;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+  }
+
+  .control-content {
+    gap: 6px;
+  }
+
+  .control-content svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .welcome-block {
+    margin-bottom: 20px;
+  }
+
+  .welcome-block h2 {
+    font-size: clamp(1.92rem, 9vw, 2.25rem);
+  }
+
+  .welcome-block p:not(.section-label) {
+    font-size: 0.96rem;
+  }
+
+  .daily-polaroid {
+    padding: 10px 10px 15px;
+  }
+
+  .daily-polaroid::before,
+  .polaroid::before,
+  .feed-polaroid::before,
+  .moment-polaroid::before,
+  .roadbook-polaroid::before {
+    top: -15px !important;
+    width: 25px !important;
+    height: 37px !important;
+  }
+
+  .mini-author {
+    grid-template-columns: 34px 1fr;
+    gap: 8px;
+  }
+
+  .mini-author img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .mini-author strong {
+    font-size: 0.8rem;
+  }
+
+  .mini-author small,
+  .polaroid-time {
+    font-size: 0.64rem;
+  }
+
+  .daily-polaroid h3 {
+    font-size: 1.05rem;
+  }
+
+  .bottom-nav {
+    width: calc(100vw - 20px);
+    height: 70px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 58px minmax(0, 1fr) minmax(0, 1fr);
+    padding: 7px;
+  }
+
+  .nav-item {
+    min-height: 52px;
+    height: 52px;
+    font-size: 0.58rem;
+  }
+
+  .nav-item svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .create-button {
+    width: 56px;
+    height: 56px;
+    transform: translateY(-13px);
+  }
+
+  .create-button:active {
+    transform: translateY(-12px) scale(0.96);
+  }
+}
+
+@media (max-width: 360px) {
+  .road-control-row {
+    gap: 6px;
+  }
+
+  .road-control-button,
+  .road-control-button.main-control {
+    font-size: 0.54rem;
+    letter-spacing: 0.09em;
+  }
+
+  .brand-center h1 {
+    font-size: 1.72rem;
+  }
+
+  .brand-center p {
+    max-width: 150px;
+  }
+
+  .nav-item span {
+    font-size: 0.53rem;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .site {
+    padding: 0;
+  }
+
+  .phone-shell,
+  .app-screen,
+  .screen-page {
+    width: 100%;
+    max-width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    border-radius: 0;
+  }
+
+  .phone-shell {
+    padding: 0;
+  }
+
+  .screen-page {
+    padding: 0 18px 106px;
+  }
+
+  .app-header {
+    display: grid;
+    grid-template-columns: minmax(270px, 0.88fr) minmax(360px, 1.12fr);
+    align-items: center;
+    gap: 18px;
+    min-height: 84px;
+    margin-bottom: 16px;
+    padding: 9px 18px;
+  }
+
+  .app-header::before {
+    top: 7px;
+    bottom: 7px;
+    left: 18px;
+    right: auto;
+    width: calc((100% - 54px) * 0.4);
+    height: auto;
+  }
+
+  .brand-line {
+    min-height: 58px;
+  }
+
+  .road-control-row {
+    margin-top: 0;
+  }
+
+  .welcome-block {
+    margin-bottom: 18px;
+  }
+
+  .welcome-block h2 {
+    font-size: 2rem;
+  }
+
+  .welcome-block p:not(.section-label) {
+    font-size: 0.94rem;
+  }
+
+  .bottom-nav {
+    height: 66px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-page {
+    scroll-behavior: auto;
+  }
+
+  .road-control-button,
+  .create-button,
+  .nav-item {
+    transition: none;
+  }
+}

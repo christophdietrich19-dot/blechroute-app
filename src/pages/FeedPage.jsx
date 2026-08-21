@@ -89,7 +89,9 @@ export default function FeedPage({
 
       <div className="section-head">
         <h2>Dein Roadbook</h2>
-        <span>{ownEntries.length} Einträge</span>
+        <span>
+          {ownEntries.length} {ownEntries.length === 1 ? "Eintrag" : "Einträge"}
+        </span>
       </div>
 
       <RoadbookCard

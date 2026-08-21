@@ -234,7 +234,12 @@ export default function RoadbookCard({
         </div>
 
         <div className="roadbook-image" style={{ marginTop: "14px" }}>
-          <img src={entry.image} alt={entry.title} />
+          <img
+            src={entry.image}
+            alt={entry.title}
+            loading="lazy"
+            decoding="async"
+          />
           <span className="paper-label">{entry.type}</span>
           <span className="date-stamp">{entry.date}</span>
         </div>
@@ -282,7 +287,9 @@ export default function RoadbookCard({
               type="button"
               onClick={() => setCommentsOpen((current) => !current)}
             >
-              <span>{comments.length} Kommentare</span>
+              <span>
+                {comments.length} {comments.length === 1 ? "Kommentar" : "Kommentare"}
+              </span>
             </button>
           </div>
 

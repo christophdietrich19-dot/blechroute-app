@@ -15,7 +15,7 @@ export default function GarageCard({ vehicle, onOpen }) {
         cursor: "pointer"
       }}
     >
-      <img src={vehicle.image} alt={vehicle.name} />
+      <img src={vehicle.image} alt={vehicle.name} loading="lazy" decoding="async" />
 
       <div>
         <p className="section-label">{vehicle.status}</p>
