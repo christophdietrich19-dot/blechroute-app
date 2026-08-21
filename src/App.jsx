@@ -37,6 +37,19 @@ function AppShell({ appState, setAppState, onResetDemo }) {
   const [selectedCommunityUser, setSelectedCommunityUser] = useState(null);
   const [toast, setToast] = useState("");
 
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const activeScreen = document.querySelector(".screen-page");
+
+      if (activeScreen) {
+        activeScreen.scrollTop = 0;
+        activeScreen.scrollLeft = 0;
+      }
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [activePage]);
+
   function showToast(message) {
     setToast(message);
 

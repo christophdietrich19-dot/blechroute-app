@@ -34,6 +34,7 @@ export default function AppHeader({
           }
           type="button"
           onClick={onOpenMap}
+          aria-current={activePage === "discover" ? "page" : undefined}
         >
           <span className="control-content">
             <IconMapPin />
@@ -49,14 +50,21 @@ export default function AppHeader({
           }
           type="button"
           onClick={onOpenFeed}
+          aria-current={activePage === "feed" ? "page" : undefined}
         >
           <span>FEED</span>
         </button>
 
-        <button className="road-control-button" type="button" onClick={onOpenMenu}>
+        <button
+          className="road-control-button"
+          type="button"
+          onClick={onOpenMenu}
+          aria-label="Menü öffnen"
+          aria-haspopup="dialog"
+        >
           <span className="control-content">
             <span className="menu-lines">☰</span>
-            MENU
+            MENÜ
           </span>
         </button>
       </div>

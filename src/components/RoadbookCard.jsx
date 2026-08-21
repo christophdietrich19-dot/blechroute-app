@@ -126,6 +126,7 @@ export default function RoadbookCard({
           }}
         >
           <button
+            className="roadbook-author-button"
             type="button"
             onClick={handleOpenAuthor}
             style={{
@@ -185,6 +186,7 @@ export default function RoadbookCard({
 
           {isOwnEntry ? (
             <button
+              className="roadbook-secondary-action"
               type="button"
               onClick={() => setEditorOpen(true)}
               style={{
@@ -208,6 +210,7 @@ export default function RoadbookCard({
             </button>
           ) : (
             <button
+              className="roadbook-secondary-action"
               type="button"
               onClick={() => setFollowing((current) => !current)}
               style={{

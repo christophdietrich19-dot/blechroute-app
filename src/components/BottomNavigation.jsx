@@ -13,6 +13,7 @@ export default function BottomNavigation({ activePage, onChangePage, onOpenCreat
         className={activePage === "feed" ? "nav-item active" : "nav-item"}
         type="button"
         onClick={() => onChangePage("feed")}
+        aria-current={activePage === "feed" ? "page" : undefined}
       >
         <IconHome />
         <span>Feed</span>
@@ -22,12 +23,19 @@ export default function BottomNavigation({ activePage, onChangePage, onOpenCreat
         className={activePage === "garage" ? "nav-item active" : "nav-item"}
         type="button"
         onClick={() => onChangePage("garage")}
+        aria-current={activePage === "garage" ? "page" : undefined}
       >
         <IconGarage />
         <span>Garage</span>
       </button>
 
-      <button className="create-button" type="button" onClick={onOpenCreate}>
+      <button
+        className="create-button"
+        type="button"
+        onClick={onOpenCreate}
+        aria-label="Neuen Eintrag erstellen"
+        aria-haspopup="dialog"
+      >
         <IconPlus />
       </button>
 
@@ -35,6 +43,7 @@ export default function BottomNavigation({ activePage, onChangePage, onOpenCreat
         className={activePage === "moments" ? "nav-item active" : "nav-item"}
         type="button"
         onClick={() => onChangePage("moments")}
+        aria-current={activePage === "moments" ? "page" : undefined}
       >
         <IconCamera />
         <span>Momente</span>
@@ -44,6 +53,7 @@ export default function BottomNavigation({ activePage, onChangePage, onOpenCreat
         className={activePage === "profile" ? "nav-item active" : "nav-item"}
         type="button"
         onClick={() => onChangePage("profile")}
+        aria-current={activePage === "profile" ? "page" : undefined}
       >
         <IconProfile />
         <span>Profil</span>
