@@ -6,6 +6,7 @@
 :root {
   --br16-leather: url("/blechroute-app/textures/leather-main.webp");
   --br16-panel: url("/blechroute-app/textures/leather-panel.webp");
+  --br16-button: url("/blechroute-app/textures/leather-button-real.jpg");
   --br16-paper: url("/blechroute-app/textures/paper-polaroid.webp");
   --br16-panel-frame: url("/blechroute-app/overlays/leather-panel-v16.png");
   --br16-frame: url("/blechroute-app/overlays/leather-frame.png");
@@ -154,30 +155,43 @@ select:focus-visible {
     inset 0 0 0 1px rgba(255, 255, 255, 0.20);
 }
 
-/* Drei eigenständige, gepolsterte Lederknöpfe */
+/* Drei gepolsterte Lederknöpfe in einer gemeinsamen, versenkten Leiste */
 
 .road-control-row {
+  position: relative;
+  isolation: isolate;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr) minmax(0, 1fr);
-  gap: 7px;
+  gap: 5px;
   margin-top: 8px;
-  padding: 0;
+  padding: 5px;
+  border: 1px solid rgba(83, 42, 20, 0.88);
+  border-radius: 21px;
+  background:
+    linear-gradient(180deg, rgba(108, 55, 27, 0.18), rgba(12, 4, 2, 0.64)),
+    var(--br16-button) center / cover no-repeat;
+  box-shadow:
+    0 10px 17px rgba(0, 0, 0, 0.58),
+    0 1px 0 rgba(255, 226, 174, 0.08) inset,
+    0 -7px 10px rgba(0, 0, 0, 0.48) inset,
+    0 0 0 3px rgba(20, 7, 3, 0.54) inset;
 }
 
 .road-control-button,
 .road-control-button.main-control {
-  min-height: 58px;
+  z-index: 1;
+  min-height: 52px;
   transform: none;
   overflow: visible;
   border: 0;
-  border-radius: 19px;
+  border-radius: 16px;
   color: #e3c17c;
   background: transparent;
   box-shadow: none;
   filter: none;
   font-family: Georgia, "Times New Roman", ui-serif, serif;
-  font-size: 0.78rem;
+  font-size: 0.92rem;
   font-weight: 400;
-  letter-spacing: 0.10em;
+  letter-spacing: 0.08em;
 }
 
 .road-control-button::before {
@@ -186,22 +200,35 @@ select:focus-visible {
   position: absolute;
   inset: 0;
   z-index: 0;
-  border: 0;
-  border-radius: 0;
-  background: var(--br16-panel-frame) center / 100% 100% no-repeat;
-  clip-path: inset(6.5% 2.4% 6.5% 2.4% round 19px);
-  filter:
-    saturate(0.82)
-    brightness(0.76)
-    contrast(1.22)
-    drop-shadow(0 7px 5px rgba(0, 0, 0, 0.56));
-  box-shadow: none;
+  border: 1px solid rgba(116, 65, 31, 0.92);
+  border-radius: 15px;
+  background:
+    radial-gradient(circle at 42% 4%, rgba(255, 226, 171, 0.16), transparent 39%),
+    linear-gradient(155deg, rgba(119, 61, 29, 0.22), rgba(19, 7, 3, 0.62)),
+    var(--br16-button) center / cover no-repeat;
+  clip-path: none;
+  filter: saturate(0.86) contrast(1.10);
+  box-shadow:
+    0 5px 9px rgba(0, 0, 0, 0.50),
+    0 2px 2px rgba(255, 226, 177, 0.08) inset,
+    0 -9px 12px rgba(16, 5, 2, 0.50) inset,
+    0 0 0 3px rgba(28, 9, 3, 0.52) inset;
   pointer-events: none;
 }
 
 .road-control-button::after {
-  display: none;
-  content: none;
+  display: block;
+  content: "";
+  position: absolute;
+  inset: 4px;
+  z-index: 1;
+  border: 1px solid rgba(220, 163, 86, 0.16);
+  border-radius: 11px;
+  box-shadow:
+    0 1px 0 rgba(255, 233, 188, 0.07) inset,
+    0 -3px 5px rgba(0, 0, 0, 0.31) inset,
+    0 0 0 1px rgba(39, 13, 5, 0.36);
+  pointer-events: none;
 }
 
 .road-control-button.active {
@@ -210,12 +237,17 @@ select:focus-visible {
 }
 
 .road-control-button.active::before {
-  filter:
-    sepia(0.20)
-    saturate(1.08)
-    brightness(0.88)
-    contrast(1.18)
-    drop-shadow(0 8px 6px rgba(0, 0, 0, 0.58));
+  border-color: rgba(190, 123, 50, 0.92);
+  background:
+    radial-gradient(circle at 42% 16%, rgba(255, 222, 149, 0.50), transparent 48%),
+    linear-gradient(145deg, rgba(194, 112, 43, 0.53), rgba(54, 19, 6, 0.54)),
+    var(--br16-button) center / cover no-repeat;
+  filter: sepia(0.12) saturate(1.10) brightness(1.03) contrast(1.08);
+  box-shadow:
+    0 10px 17px rgba(0, 0, 0, 0.56),
+    0 2px 2px rgba(255, 236, 191, 0.15) inset,
+    0 -9px 12px rgba(28, 8, 2, 0.44) inset,
+    0 0 0 3px rgba(75, 29, 8, 0.48) inset;
 }
 
 .control-content {
@@ -443,36 +475,58 @@ select:focus-visible {
 }
 
 .create-button {
-  width: 78px;
-  height: 78px;
+  width: 72px;
+  height: 72px;
   transform: translateY(-13px);
-  border: 2px solid #2d1208;
+  overflow: visible;
+  border: 2px solid #1f0a03;
   color: #f8db98;
   background:
-    radial-gradient(circle at 33% 23%, rgba(255, 249, 207, 0.94) 0 3%, transparent 5%),
-    radial-gradient(circle at 40% 32%, #e7b65d 0 9%, #b7752d 37%, #6a3517 70%, #281006 100%);
+    radial-gradient(circle at 35% 10%, rgba(255, 221, 168, 0.10), transparent 34%),
+    linear-gradient(150deg, rgba(91, 41, 19, 0.12), rgba(16, 5, 2, 0.68)),
+    var(--br16-button) center / cover no-repeat;
   box-shadow:
-    0 0 0 3px #7a421d,
-    0 0 0 5px #2a1107,
-    0 0 0 7px rgba(205, 145, 64, 0.48),
+    0 0 0 2px #4b2410,
+    0 0 0 4px #170702,
+    0 0 0 5px rgba(111, 56, 24, 0.46),
     0 13px 18px rgba(0, 0, 0, 0.70),
-    inset 0 3px 3px rgba(255, 244, 201, 0.34),
-    inset 0 -10px 13px rgba(48, 17, 5, 0.60);
+    inset 0 3px 3px rgba(255, 229, 181, 0.08),
+    inset 0 -10px 13px rgba(20, 6, 2, 0.70);
 }
 
 .create-button::before {
   inset: 9px;
-  border: 1px solid rgba(75, 33, 11, 0.76);
-  background: radial-gradient(circle at 39% 31%, rgba(255, 228, 161, 0.16), transparent 48%);
+  z-index: 1;
+  border: 2px solid rgba(70, 31, 10, 0.90);
+  background:
+    radial-gradient(circle at 32% 25%, rgba(255, 250, 210, 0.95) 0 4%, transparent 6%),
+    radial-gradient(circle at 41% 35%, #efc06a 0 11%, #c27d31 42%, #7b3d18 72%, #351306 100%);
   box-shadow:
-    inset 0 0 0 2px rgba(255, 224, 151, 0.11),
-    inset 0 -7px 11px rgba(73, 27, 7, 0.37);
+    0 0 0 2px rgba(176, 105, 44, 0.72),
+    0 4px 7px rgba(0, 0, 0, 0.56),
+    inset 0 3px 3px rgba(255, 241, 194, 0.30),
+    inset 0 -8px 11px rgba(56, 18, 5, 0.48);
+}
+
+.create-button::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  z-index: 2;
+  border: 1px solid rgba(218, 158, 78, 0.28);
+  border-radius: 999px;
+  box-shadow:
+    0 1px 0 rgba(255, 225, 171, 0.12) inset,
+    0 -2px 4px rgba(0, 0, 0, 0.35) inset;
+  pointer-events: none;
 }
 
 .create-button svg {
-  width: 35px;
-  height: 35px;
-  stroke-width: 1.75;
+  position: relative;
+  z-index: 3;
+  width: 38px;
+  height: 38px;
+  stroke-width: 2.8;
   filter: drop-shadow(0 2px 2px rgba(55, 20, 5, 0.72));
 }
 
@@ -597,13 +651,14 @@ select:focus-visible {
   }
 
   .road-control-row {
-    gap: 4px;
+    gap: 3px;
+    padding: 4px;
   }
 
   .road-control-button,
   .road-control-button.main-control {
-    min-height: 54px;
-    font-size: 0.66rem;
+    min-height: 48px;
+    font-size: 0.76rem;
     letter-spacing: 0.07em;
   }
 
@@ -644,8 +699,8 @@ select:focus-visible {
   }
 
   .create-button {
-    width: 67px;
-    height: 67px;
+    width: 64px;
+    height: 64px;
     transform: translateY(-12px);
   }
 }
