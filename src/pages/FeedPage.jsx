@@ -52,7 +52,7 @@ export default function FeedPage({
   };
 
   return (
-    <section className="screen-page">
+    <section className="screen-page feed-page">
       <AppHeader
         userProfile={user}
         activePage={activePage}
