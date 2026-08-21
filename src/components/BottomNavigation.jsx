@@ -1,7 +1,7 @@
 import {
   IconCamera,
   IconGarage,
-  IconHome,
+  IconBook,
   IconPlus,
   IconProfile
 } from "../icons/Icons";
@@ -15,7 +15,7 @@ export default function BottomNavigation({ activePage, onChangePage, onOpenCreat
         onClick={() => onChangePage("feed")}
         aria-current={activePage === "feed" ? "page" : undefined}
       >
-        <IconHome />
+        <IconBook />
         <span>Feed</span>
       </button>
 

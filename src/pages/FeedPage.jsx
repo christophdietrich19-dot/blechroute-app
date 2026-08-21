@@ -64,7 +64,7 @@ export default function FeedPage({
       <div className="welcome-block">
         <p className="section-label">Roadbook</p>
         <h2>Guten Abend, {user.name}.</h2>
-        <p>Schön, dass du wieder da bist. Welche Erinnerung bleibt heute?</p>
+        <p>Deine nächste Geschichte beginnt auf der Straße.</p>
       </div>
 
       <DailyHighlight moment={dailyMoment} />

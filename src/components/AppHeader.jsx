@@ -52,7 +52,10 @@ export default function AppHeader({
           onClick={onOpenFeed}
           aria-current={activePage === "feed" ? "page" : undefined}
         >
-          <span>FEED</span>
+          <span className="control-content">
+            <span className="feed-lines" aria-hidden="true">☰</span>
+            FEED
+          </span>
         </button>
 
         <button
