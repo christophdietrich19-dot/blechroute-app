@@ -26,8 +26,6 @@ import {
   saveStoredState
 } from "./utils/storage";
 
-import "./styles/pin-overrides.css";
-
 function AppShell({ appState, setAppState, onResetDemo }) {
   const [activePage, setActivePage] = useState("feed");
   const [createOpen, setCreateOpen] = useState(false);
