@@ -1,0 +1,310 @@
+/* Blechroute Real Pin Restore v12
+   Fix für v11:
+   v11 hat zu allgemein auf .pin gezielt.
+   Der sichtbare Pin kommt aber über ::before.
+   Deshalb überschreibt diese Datei jetzt wieder gezielt alle Pin-Pseudo-Elemente.
+*/
+
+/* Community / Profil Polaroids */
+.community-polaroid {
+  padding-top: 20px !important;
+}
+
+.community-polaroid::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -12px !important;
+  left: 50% !important;
+  z-index: 20 !important;
+  width: 24px !important;
+  height: 36px !important;
+  transform: translateX(-50%) rotate(-5deg) !important;
+  transform-origin: 50% 24% !important;
+  border-radius: 0 !important;
+  background-image: url("/blechroute-app/overlays/brass-pin-clean.png") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  clip-path: inset(0 0 28% 0) !important;
+  filter:
+    saturate(0.94)
+    brightness(0.96)
+    contrast(1.02)
+    drop-shadow(0 3px 3px rgba(0, 0, 0, 0.22)) !important;
+  pointer-events: none !important;
+}
+
+.community-polaroid::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Große Feed- und Roadbook-Polaroids */
+.daily-polaroid::before,
+.polaroid::before,
+.feed-polaroid::before,
+.moment-polaroid::before,
+.roadbook-polaroid::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -19px !important;
+  left: 50% !important;
+  z-index: 30 !important;
+  width: 31px !important;
+  height: 46px !important;
+  transform: translateX(-50%) rotate(-4deg) !important;
+  transform-origin: 50% 24% !important;
+  border-radius: 0 !important;
+  background-image: url("/blechroute-app/overlays/brass-pin-clean.png") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  clip-path: inset(0 0 28% 0) !important;
+  filter:
+    saturate(0.94)
+    brightness(0.96)
+    contrast(1.02)
+    drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25)) !important;
+  pointer-events: none !important;
+}
+
+.daily-polaroid::after,
+.polaroid::after,
+.feed-polaroid::after,
+.moment-polaroid::after,
+.roadbook-polaroid::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Profil/Garage Sonderfälle, falls diese Klassen zusätzlich vorkommen */
+.profile-polaroid::before,
+.garage-polaroid::before,
+.profile-gallery .polaroid::before,
+.garage-polaroids .polaroid::before {
+  content: "" !important;
+  top: -15px !important;
+  width: 27px !important;
+  height: 40px !important;
+  transform: translateX(-50%) rotate(-5deg) !important;
+  background-image: url("/blechroute-app/overlays/brass-pin-clean.png") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  clip-path: inset(0 0 28% 0) !important;
+  filter:
+    saturate(0.94)
+    brightness(0.96)
+    contrast(1.02)
+    drop-shadow(0 3px 3px rgba(0, 0, 0, 0.22)) !important;
+}
+
+/* Der alte künstliche CSS-Nadel-Strich muss überall weg. */
+.profile-polaroid::after,
+.garage-polaroid::after,
+.profile-gallery .polaroid::after,
+.garage-polaroids .polaroid::after {
+  display: none !important;
+  content: none !important;
+}
+
+@media (max-width: 430px) {
+  .community-polaroid {
+    padding-top: 19px !important;
+  }
+
+  .community-polaroid::before {
+    top: -11px !important;
+    width: 22px !important;
+    height: 33px !important;
+  }
+
+  .daily-polaroid::before,
+  .polaroid::before,
+  .feed-polaroid::before,
+  .moment-polaroid::before,
+  .roadbook-polaroid::before {
+    top: -18px !important;
+    width: 29px !important;
+    height: 43px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .community-polaroid::before {
+    top: -10px !important;
+    width: 21px !important;
+    height: 31px !important;
+  }
+
+  .daily-polaroid::before,
+  .polaroid::before,
+  .feed-polaroid::before,
+  .moment-polaroid::before,
+  .roadbook-polaroid::before {
+    top: -17px !important;
+    width: 27px !important;
+    height: 40px !important;
+  }
+}
+
+/* v17: flache, gealterte Messingzwecke statt glänzender Kugel. */
+
+.community-polaroid::before,
+.daily-polaroid::before,
+.polaroid::before,
+.feed-polaroid::before,
+.moment-polaroid::before,
+.roadbook-polaroid::before,
+.profile-polaroid::before,
+.garage-polaroid::before,
+.profile-gallery .polaroid::before,
+.garage-polaroids .polaroid::before {
+  background-image: url("/blechroute-app/overlays/brass-pin-real-v17.png") !important;
+  background-size: 160% auto !important;
+  background-position: center 46% !important;
+  background-repeat: no-repeat !important;
+  clip-path: none !important;
+  transform: translateX(-50%) rotate(-2deg) !important;
+  filter:
+    brightness(0.91)
+    saturate(0.78)
+    contrast(1.13)
+    drop-shadow(0 2px 1px rgba(0, 0, 0, 0.55))
+    drop-shadow(2px 5px 3px rgba(0, 0, 0, 0.34)) !important;
+}
+
+.daily-polaroid::before {
+  top: -14px !important;
+  width: 38px !important;
+  height: 48px !important;
+}
+
+.polaroid::before,
+.feed-polaroid::before,
+.moment-polaroid::before,
+.roadbook-polaroid::before,
+.profile-polaroid::before,
+.garage-polaroid::before,
+.profile-gallery .polaroid::before,
+.garage-polaroids .polaroid::before {
+  top: -13px !important;
+  width: 34px !important;
+  height: 43px !important;
+}
+
+.community-polaroid::before {
+  top: -12px !important;
+  width: 31px !important;
+  height: 39px !important;
+}
+
+@media (max-width: 360px) {
+  .daily-polaroid::before {
+    top: -13px !important;
+    width: 35px !important;
+    height: 44px !important;
+  }
+
+  .polaroid::before,
+  .feed-polaroid::before,
+  .moment-polaroid::before,
+  .roadbook-polaroid::before,
+  .profile-polaroid::before,
+  .garage-polaroid::before,
+  .profile-gallery .polaroid::before,
+  .garage-polaroids .polaroid::before {
+    top: -12px !important;
+    width: 31px !important;
+    height: 39px !important;
+  }
+
+  .community-polaroid::before {
+    top: -11px !important;
+    width: 29px !important;
+    height: 36px !important;
+  }
+}
+
+/* v19: flache, matte Messingzwecke ohne langen sichtbaren Schaft. */
+
+.community-polaroid::before,
+.daily-polaroid::before,
+.polaroid::before,
+.feed-polaroid::before,
+.moment-polaroid::before,
+.roadbook-polaroid::before,
+.profile-polaroid::before,
+.garage-polaroid::before,
+.profile-gallery .polaroid::before,
+.garage-polaroids .polaroid::before {
+  background-image: url("/blechroute-app/overlays/brass-pin-flat-top-v19.png") !important;
+  background-size: 126% auto !important;
+  background-position: center 48% !important;
+  transform: translateX(-50%) rotate(-1deg) !important;
+  filter:
+    brightness(0.86)
+    saturate(0.70)
+    contrast(1.14)
+    drop-shadow(0 1px 1px rgba(18, 7, 2, 0.62))
+    drop-shadow(1px 3px 2px rgba(18, 7, 2, 0.24)) !important;
+}
+
+.daily-polaroid::before {
+  top: -13px !important;
+  width: 38px !important;
+  height: 46px !important;
+}
+
+.polaroid::before,
+.feed-polaroid::before,
+.moment-polaroid::before,
+.roadbook-polaroid::before,
+.profile-polaroid::before,
+.garage-polaroid::before,
+.profile-gallery .polaroid::before,
+.garage-polaroids .polaroid::before {
+  top: -12px !important;
+  width: 34px !important;
+  height: 41px !important;
+}
+
+.community-polaroid::before {
+  top: -11px !important;
+  width: 30px !important;
+  height: 36px !important;
+}
+
+@media (max-width: 360px) {
+  .daily-polaroid::before {
+    top: -12px !important;
+    width: 35px !important;
+    height: 42px !important;
+  }
+
+  .polaroid::before,
+  .feed-polaroid::before,
+  .moment-polaroid::before,
+  .roadbook-polaroid::before,
+  .profile-polaroid::before,
+  .garage-polaroid::before,
+  .profile-gallery .polaroid::before,
+  .garage-polaroids .polaroid::before {
+    top: -11px !important;
+    width: 31px !important;
+    height: 37px !important;
+  }
+
+  .community-polaroid::before {
+    top: -10px !important;
+    width: 28px !important;
+    height: 33px !important;
+  }
+}
