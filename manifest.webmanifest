@@ -1,0 +1,20 @@
+{
+  "name": "Blechroute – digitales Roadbook",
+  "short_name": "Blechroute",
+  "description": "Touren, Orte, Fahrzeuge und Erinnerungen auf Rädern.",
+  "lang": "de-DE",
+  "start_url": "/blechroute-app/",
+  "scope": "/blechroute-app/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#070302",
+  "theme_color": "#100c08",
+  "icons": [
+    {
+      "src": "/blechroute-app/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
