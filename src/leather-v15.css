@@ -1,0 +1,386 @@
+/* Blechroute Leather v15
+   Locked scope: no layout, width, spacing or breakpoint changes.
+   This file only skins the original geometry with leather, seams, paper and brass.
+*/
+
+:root {
+  --br-main: url("/blechroute-app/textures/leather-main.webp");
+  --br-panel: url("/blechroute-app/textures/leather-panel.webp");
+  --br-paper: url("/blechroute-app/textures/paper-polaroid.webp");
+  --br-stitch-h: url("/blechroute-app/overlays/stitch-fine-horizontal.png");
+  --br-stitch-v: url("/blechroute-app/overlays/stitch-fine-vertical.png");
+  --br-cream: #f4e5c7;
+  --br-gold: #d7ad65;
+  --br-gold-light: #f1d18b;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(241, 209, 139, 0.94);
+  outline-offset: 3px;
+}
+
+/* One continuous leather surface. */
+
+.site {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(190, 124, 64, 0.12), transparent 32%),
+    linear-gradient(145deg, #070402, #170a05 52%, #050302);
+}
+
+.phone-shell {
+  background: #080402;
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, 0.70),
+    0 0 0 1px rgba(213, 164, 91, 0.15),
+    inset 0 1px 0 rgba(255, 241, 205, 0.045);
+}
+
+.app-screen {
+  isolation: isolate;
+  background-image:
+    radial-gradient(circle at 48% -8%, rgba(255, 225, 167, 0.08), transparent 29%),
+    linear-gradient(160deg, rgba(39, 17, 9, 0.12), rgba(6, 3, 2, 0.60)),
+    var(--br-main);
+  background-position: center top, center, center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: auto, auto, cover;
+}
+
+.app-screen::before {
+  opacity: 0.08;
+  mix-blend-mode: soft-light;
+}
+
+.app-screen::after {
+  background:
+    radial-gradient(circle at center, transparent 48%, rgba(0, 0, 0, 0.25)),
+    linear-gradient(to bottom, rgba(255, 230, 180, 0.015), transparent 70%, rgba(0, 0, 0, 0.36));
+}
+
+/* Stitched leather nameplate, using the original header dimensions. */
+
+.app-header {
+  border-bottom-color: rgba(30, 11, 5, 0.78);
+  background-image:
+    radial-gradient(circle at 50% -5%, rgba(255, 227, 171, 0.075), transparent 34%),
+    linear-gradient(180deg, rgba(50, 22, 12, 0.30), rgba(8, 4, 2, 0.72)),
+    var(--br-main);
+  background-position: center top, center, center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: auto, auto, cover;
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255, 239, 200, 0.05),
+    inset 0 -10px 18px rgba(0, 0, 0, 0.30);
+}
+
+.app-header::before {
+  border-color: rgba(41, 15, 6, 0.90);
+  background-image:
+    var(--br-stitch-h),
+    var(--br-stitch-h),
+    var(--br-stitch-v),
+    var(--br-stitch-v),
+    radial-gradient(circle at 44% 0%, rgba(255, 232, 182, 0.11), transparent 38%),
+    linear-gradient(150deg, rgba(111, 59, 30, 0.32), rgba(20, 8, 4, 0.66)),
+    var(--br-main);
+  background-position:
+    left 20px top 8px,
+    left 20px bottom 8px,
+    left 8px top 20px,
+    right 8px top 20px,
+    center top,
+    center,
+    center;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y, no-repeat, no-repeat, no-repeat;
+  background-size: auto 6px, auto 6px, 6px auto, 6px auto, auto, auto, cover;
+  box-shadow:
+    0 13px 27px rgba(0, 0, 0, 0.53),
+    inset 0 2px 1px rgba(255, 240, 205, 0.08),
+    inset 0 -10px 17px rgba(0, 0, 0, 0.31),
+    inset 0 0 0 4px rgba(37, 14, 7, 0.18);
+}
+
+.app-header::after {
+  background: linear-gradient(to bottom, rgba(4, 2, 1, 0.66), rgba(184, 109, 52, 0.10), transparent);
+  opacity: 0.62;
+}
+
+.brand-center h1 {
+  color: var(--br-gold-light);
+  font-size: clamp(2.1rem, 10vw, 2.25rem);
+  text-shadow:
+    0 1px 0 rgba(47, 18, 7, 0.95),
+    0 2px 0 rgba(255, 239, 198, 0.10),
+    0 7px 15px rgba(0, 0, 0, 0.68);
+}
+
+.brand-center p {
+  color: rgba(244, 229, 199, 0.66);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.70);
+}
+
+.brand-avatar {
+  border-color: rgba(48, 20, 9, 0.94);
+  box-shadow:
+    0 0 0 2px rgba(215, 173, 101, 0.62),
+    0 0 0 4px rgba(45, 18, 8, 0.48),
+    0 9px 18px rgba(0, 0, 0, 0.58),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+/* Real seams on the existing top controls. */
+
+.road-control-button {
+  isolation: isolate;
+  border-color: rgba(46, 17, 7, 0.92);
+  color: rgba(244, 218, 164, 0.86);
+  background-image:
+    radial-gradient(circle at 45% 0%, rgba(255, 234, 190, 0.09), transparent 43%),
+    linear-gradient(155deg, rgba(103, 53, 27, 0.34), rgba(18, 7, 3, 0.69)),
+    var(--br-main);
+  background-position: center top, center, center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: auto, auto, cover;
+  box-shadow:
+    0 11px 21px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255, 240, 205, 0.07),
+    inset 0 -7px 12px rgba(0, 0, 0, 0.31);
+}
+
+.road-control-button::before {
+  border: 0;
+  background-image:
+    var(--br-stitch-h),
+    var(--br-stitch-h),
+    var(--br-stitch-v),
+    var(--br-stitch-v);
+  background-position:
+    left 12px top 3px,
+    left 12px bottom 3px,
+    left 3px top 12px,
+    right 3px top 12px;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: auto 5px, auto 5px, 5px auto, 5px auto;
+  box-shadow: inset 0 0 0 1px rgba(219, 166, 93, 0.12);
+}
+
+.road-control-button::after {
+  background: linear-gradient(180deg, rgba(255, 241, 205, 0.025), transparent 48%, rgba(0, 0, 0, 0.18));
+}
+
+.road-control-button.active {
+  border-color: rgba(220, 175, 100, 0.58);
+  color: var(--br-gold-light);
+  box-shadow:
+    0 12px 23px rgba(0, 0, 0, 0.50),
+    inset 0 0 0 1px rgba(244, 210, 142, 0.14),
+    inset 0 -7px 12px rgba(0, 0, 0, 0.27);
+}
+
+.section-label {
+  color: var(--br-gold);
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.64);
+}
+
+.welcome-block h2,
+.section-head h2 {
+  color: var(--br-cream);
+  text-shadow: 0 7px 17px rgba(0, 0, 0, 0.54);
+}
+
+.welcome-block p:not(.section-label) {
+  color: rgba(244, 229, 199, 0.84);
+}
+
+/* Paper, photograph and real brass pin. */
+
+.daily-polaroid,
+.polaroid,
+.community-polaroid {
+  border-color: rgba(91, 55, 25, 0.22);
+  background-image:
+    radial-gradient(circle at 15% 7%, rgba(255, 255, 255, 0.30), transparent 23%),
+    linear-gradient(145deg, rgba(255, 249, 232, 0.10), rgba(146, 94, 38, 0.045)),
+    var(--br-paper);
+  background-position: left top, center, center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: auto, auto, cover;
+  box-shadow:
+    0 24px 42px rgba(0, 0, 0, 0.46),
+    0 4px 8px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.50),
+    inset 0 -1px 0 rgba(94, 55, 23, 0.14);
+}
+
+.daily-polaroid > img,
+.polaroid img {
+  border-color: rgba(58, 34, 18, 0.28);
+  filter: sepia(0.05) saturate(0.98) contrast(1.035);
+  box-shadow: 0 0 0 1px rgba(65, 37, 18, 0.26), inset 0 0 13px rgba(0, 0, 0, 0.10);
+}
+
+/* Quiet leather for the existing cards and sheets. */
+
+.roadbook-card,
+.weekly-car,
+.garage-card,
+.spot-card,
+.note-card,
+.profile-card,
+.task-card,
+.create-sheet,
+.entry-form,
+.community-sheet,
+.app-menu-beta-card,
+.stat-card {
+  border-color: rgba(193, 135, 70, 0.28);
+  background-image:
+    radial-gradient(circle at 42% 0%, rgba(255, 222, 164, 0.055), transparent 39%),
+    linear-gradient(150deg, rgba(53, 24, 13, 0.34), rgba(8, 4, 2, 0.72)),
+    var(--br-main);
+  background-position: center top, center, center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: auto, auto, cover;
+  box-shadow:
+    0 17px 37px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 238, 199, 0.045),
+    inset 0 -7px 13px rgba(0, 0, 0, 0.20);
+}
+
+.soft-action,
+.profile-actions button,
+.create-options button,
+.app-menu-feature button,
+.close-sheet,
+.search-book {
+  border-color: rgba(197, 137, 70, 0.28);
+  background-image:
+    linear-gradient(155deg, rgba(98, 49, 25, 0.33), rgba(15, 6, 3, 0.69)),
+    var(--br-main);
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-size: auto, cover;
+  box-shadow: inset 0 1px 0 rgba(255, 240, 205, 0.05), 0 6px 12px rgba(0, 0, 0, 0.20);
+}
+
+/* Stitched bottom bar in the original size and position. */
+
+.bottom-nav {
+  isolation: isolate;
+  border-color: rgba(44, 16, 7, 0.94);
+  background-image:
+    linear-gradient(180deg, rgba(91, 47, 24, 0.34), rgba(13, 5, 3, 0.75)),
+    var(--br-main);
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-size: auto, cover;
+  box-shadow:
+    0 22px 58px rgba(0, 0, 0, 0.70),
+    inset 0 1px 0 rgba(255, 241, 207, 0.065),
+    inset 0 -9px 15px rgba(0, 0, 0, 0.34);
+}
+
+.bottom-nav::before {
+  border: 0;
+  background-image:
+    var(--br-stitch-h),
+    var(--br-stitch-h),
+    var(--br-stitch-v),
+    var(--br-stitch-v);
+  background-position:
+    left 17px top 2px,
+    left 17px bottom 2px,
+    left 2px top 17px,
+    right 2px top 17px;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: auto 5px, auto 5px, 5px auto, 5px auto;
+  box-shadow: inset 0 0 0 1px rgba(220, 172, 97, 0.10);
+}
+
+.bottom-nav::after {
+  background: radial-gradient(ellipse at 48% 0%, rgba(255, 233, 185, 0.05), transparent 58%);
+}
+
+.nav-item {
+  color: rgba(244, 229, 199, 0.61);
+}
+
+.nav-item.active {
+  color: var(--br-gold-light);
+  background-image:
+    linear-gradient(150deg, rgba(87, 43, 22, 0.42), rgba(20, 8, 4, 0.64)),
+    var(--br-main);
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-size: auto, cover;
+  box-shadow: inset 0 0 0 1px rgba(216, 174, 103, 0.16), 0 7px 14px rgba(0, 0, 0, 0.20);
+}
+
+/* Brass centre button, retaining its original dimensions. */
+
+.create-button {
+  border-color: rgba(54, 23, 9, 0.96);
+  color: #ffe4a6;
+  background:
+    radial-gradient(circle at 34% 24%, rgba(255, 252, 218, 0.86) 0 4%, transparent 6%),
+    radial-gradient(circle at 44% 38%, #f0c36d 0 12%, #bd7831 44%, #6b3517 72%, #2a1107 100%);
+  box-shadow:
+    0 0 0 3px rgba(124, 62, 27, 0.95),
+    0 0 0 5px rgba(215, 173, 101, 0.40),
+    0 17px 34px rgba(0, 0, 0, 0.68),
+    inset 0 3px 3px rgba(255, 247, 207, 0.30),
+    inset 0 -8px 13px rgba(49, 18, 6, 0.53);
+}
+
+.create-button::before {
+  border-color: rgba(84, 39, 14, 0.68);
+  background: radial-gradient(circle at 44% 32%, rgba(255, 235, 176, 0.14), transparent 48%);
+  box-shadow: inset 0 0 0 2px rgba(255, 224, 151, 0.12), inset 0 -6px 10px rgba(76, 30, 9, 0.34);
+}
+
+.create-button svg {
+  filter: drop-shadow(0 2px 2px rgba(63, 24, 7, 0.60));
+}
+
+.entry-form input,
+.entry-form textarea,
+.entry-form select {
+  border-color: rgba(216, 174, 103, 0.28);
+  background: rgba(8, 4, 2, 0.48);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.27);
+}
+
+.toast {
+  border-color: rgba(216, 174, 103, 0.44);
+  background: rgba(31, 13, 6, 0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .road-control-button:hover,
+  .nav-item:hover,
+  .soft-action:hover,
+  .profile-actions button:hover,
+  .create-options button:hover,
+  .app-menu-feature button:hover,
+  .close-sheet:hover {
+    color: var(--br-gold-light);
+    filter: brightness(1.07);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .road-control-button,
+  .create-button,
+  .nav-item {
+    transition: none;
+  }
+}

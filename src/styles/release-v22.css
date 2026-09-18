@@ -1,0 +1,297 @@
+/* Blechroute v22 - geschlossene Safe Areas, Leder-Login und Beta-Ausgabe ohne Zugangsdaten. */
+
+html,
+body,
+#root {
+  background: #120704;
+}
+
+.auth-page {
+  position: relative;
+  isolation: isolate;
+  padding: max(14px, env(safe-area-inset-top)) 14px max(14px, env(safe-area-inset-bottom));
+  background:
+    radial-gradient(ellipse at 50% -8%, rgba(222, 157, 76, 0.2), transparent 42%),
+    linear-gradient(160deg, rgba(40, 16, 7, 0.2), rgba(5, 2, 1, 0.68)),
+    var(--br16-leather, url("/blechroute-app/textures/leather-main.webp")) center / cover fixed;
+}
+
+.auth-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.58));
+  pointer-events: none;
+}
+
+.auth-card {
+  width: min(100%, 438px);
+  max-height: calc(100dvh - max(28px, env(safe-area-inset-top) + env(safe-area-inset-bottom)));
+  padding: 26px 23px 21px;
+  border: 1px solid rgba(79, 34, 14, 0.95);
+  border-radius: 31px;
+  background:
+    linear-gradient(150deg, rgba(125, 61, 25, 0.2), rgba(8, 3, 2, 0.44)),
+    var(--br16-panel, url("/blechroute-app/textures/leather-panel.webp")) center / cover;
+  box-shadow:
+    0 0 0 4px rgba(12, 5, 2, 0.88),
+    0 0 0 5px rgba(202, 133, 57, 0.25),
+    0 28px 70px rgba(0, 0, 0, 0.72),
+    inset 0 2px 1px rgba(255, 220, 156, 0.1),
+    inset 0 -18px 35px rgba(0, 0, 0, 0.34);
+  scrollbar-color: rgba(202, 142, 67, 0.42) transparent;
+}
+
+.auth-card::before {
+  inset: 10px;
+  border: 2px dashed rgba(218, 151, 68, 0.62);
+  border-radius: 22px;
+  filter: drop-shadow(0 1px 1px #130704);
+}
+
+.auth-card::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  z-index: 0;
+  border: 1px solid rgba(24, 9, 3, 0.9);
+  border-radius: 25px;
+  box-shadow: inset 0 0 0 1px rgba(240, 184, 99, 0.08);
+  pointer-events: none;
+}
+
+.auth-brand img {
+  width: 82px;
+  height: 82px;
+  margin-bottom: 8px;
+  border: 2px solid rgba(235, 184, 97, 0.72);
+  border-radius: 22px;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 4px rgba(37, 14, 5, 0.9),
+    0 10px 18px rgba(0, 0, 0, 0.58),
+    inset 0 1px rgba(255, 232, 181, 0.18);
+  filter: saturate(0.92) contrast(1.04);
+}
+
+.auth-brand h1 {
+  margin-top: 6px;
+  color: #f2d79d;
+  font-size: clamp(2.2rem, 10vw, 3.05rem);
+  letter-spacing: 0.035em;
+}
+
+.auth-brand .section-label {
+  color: #d9a555;
+  letter-spacing: 0.2em;
+}
+
+.auth-brand > p:last-child {
+  max-width: 330px;
+  margin-top: 9px;
+  color: #d5b98d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.96rem;
+}
+
+.auth-tagline span {
+  display: block;
+}
+
+.auth-tagline span + span {
+  margin-top: 2px;
+}
+
+.auth-form {
+  gap: 12px;
+  margin-top: 19px;
+}
+
+.auth-form > label:not(.auth-consent) {
+  color: #e5c78f;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.auth-form input:not([type="checkbox"]) {
+  min-height: 49px;
+  border: 1px solid rgba(212, 146, 62, 0.45);
+  border-radius: 13px;
+  color: #f5e5c6;
+  caret-color: #efc372;
+  background:
+    linear-gradient(155deg, rgba(8, 3, 2, 0.66), rgba(39, 14, 5, 0.65)),
+    var(--br16-button, url("/blechroute-app/textures/leather-button-real.jpg")) center / cover;
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.76),
+    inset 0 0 0 2px rgba(19, 7, 3, 0.5),
+    0 1px rgba(255, 225, 166, 0.08);
+}
+
+.auth-form input:not([type="checkbox"]):focus {
+  outline: 2px solid rgba(235, 179, 88, 0.46);
+  outline-offset: 2px;
+}
+
+.auth-consent {
+  color: #d0b58b;
+}
+
+.auth-consent input {
+  appearance: none;
+  display: grid;
+  place-content: center;
+  border: 1px solid #c88b3d;
+  border-radius: 5px;
+  background: #170805;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.72);
+}
+
+.auth-consent input::before {
+  content: "";
+  width: 10px;
+  height: 6px;
+  transform: rotate(-45deg) scale(0);
+  border-left: 3px solid #2b1307;
+  border-bottom: 3px solid #2b1307;
+  transition: transform 120ms ease;
+}
+
+.auth-consent input:checked {
+  background: linear-gradient(145deg, #f1cb7d, #aa6428);
+}
+
+.auth-consent input:checked::before {
+  transform: rotate(-45deg) scale(1);
+}
+
+.auth-submit {
+  position: relative;
+  min-height: 54px;
+  overflow: hidden;
+  border: 1px solid rgba(224, 159, 77, 0.58);
+  border-radius: 15px;
+  color: #f5d58e;
+  background:
+    linear-gradient(145deg, rgba(113, 52, 19, 0.48), rgba(16, 5, 2, 0.42)),
+    var(--br16-button, url("/blechroute-app/textures/leather-button-real.jpg")) center / cover;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.8);
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.44),
+    inset 0 0 0 3px rgba(24, 9, 3, 0.62),
+    inset 0 1px rgba(255, 226, 164, 0.12);
+}
+
+.auth-submit::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(223, 157, 72, 0.63);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.auth-submit:active {
+  transform: translateY(1px);
+  filter: brightness(0.92);
+}
+
+.auth-demo-hint {
+  gap: 6px;
+  margin-top: 16px;
+  border-color: rgba(213, 147, 67, 0.34);
+  color: #cfb48b;
+  background:
+    linear-gradient(145deg, rgba(40, 15, 5, 0.78), rgba(8, 3, 2, 0.68)),
+    var(--br16-button, url("/blechroute-app/textures/leather-button-real.jpg")) center / cover;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.62);
+}
+
+.auth-demo-hint strong {
+  color: #edc77c;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 700px) {
+  .phone-shell::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 490;
+    height: calc(64px + env(safe-area-inset-bottom));
+    background:
+      linear-gradient(to bottom, rgba(24, 9, 4, 0.1), rgba(7, 3, 2, 0.72)),
+      var(--br16-leather) center bottom / cover;
+    pointer-events: none;
+  }
+
+  .road-control-sticky {
+    top: 0;
+    padding-top: calc(3px + env(safe-area-inset-top));
+    background:
+      linear-gradient(180deg, rgba(36, 15, 7, 0.08), rgba(10, 4, 2, 0.16)),
+      var(--br16-leather) center top / cover;
+    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.18);
+  }
+
+  .bottom-nav {
+    bottom: calc(1px + env(safe-area-inset-bottom));
+  }
+
+  .beta-watermark {
+    display: none;
+  }
+
+  .auth-card {
+    padding: 22px 18px 18px;
+    border-radius: 27px;
+  }
+
+  .auth-card::before {
+    border-radius: 19px;
+  }
+
+  .auth-brand img {
+    width: 72px;
+    height: 72px;
+    border-radius: 19px;
+  }
+}
+
+@media (max-height: 720px) {
+  .auth-page {
+    align-items: start;
+  }
+
+  .auth-card {
+    max-height: calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    padding-top: 19px;
+  }
+
+  .auth-brand img {
+    width: 62px;
+    height: 62px;
+  }
+
+  .auth-form {
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .auth-page {
+    padding-inline: 8px;
+  }
+
+  .auth-card {
+    padding-inline: 16px;
+  }
+
+  .auth-brand h1 {
+    font-size: 2.08rem;
+  }
+}
