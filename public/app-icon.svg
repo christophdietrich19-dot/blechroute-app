@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Blechroute">
+  <defs>
+    <linearGradient id="leather" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6f3517"/>
+      <stop offset="0.55" stop-color="#351407"/>
+      <stop offset="1" stop-color="#130603"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="118" fill="#090402"/>
+  <rect x="34" y="34" width="444" height="444" rx="96" fill="url(#leather)" stroke="#2a0e05" stroke-width="18"/>
+  <rect x="58" y="58" width="396" height="396" rx="76" fill="none" stroke="#d0a05a" stroke-width="8" stroke-dasharray="8 13"/>
+  <path d="M162 130h112c70 0 112 32 112 88 0 35-17 60-50 74 43 12 65 41 65 86 0 68-49 104-135 104H162V130Zm82 69v65h36c24 0 37-11 37-33 0-21-13-32-39-32h-34Zm0 126v82h43c30 0 45-14 45-41 0-28-15-41-46-41h-42Z" fill="#f1d18c"/>
+</svg>
