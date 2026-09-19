@@ -41,7 +41,7 @@ export default function AuthGate({ onAuthenticated }) {
     <div className="auth-page">
       <main className="auth-card" aria-labelledby="auth-title">
         <div className="auth-brand">
-          <img src={`${import.meta.env.BASE_URL}app-icon-v22.png`} alt="" />
+          <img src={`${import.meta.env.BASE_URL}app-icon-v23.png`} alt="" />
           <p className="section-label">Vertrauliche Beta</p>
           <h1 id="auth-title">Blechroute</h1>
           <p className="auth-tagline">

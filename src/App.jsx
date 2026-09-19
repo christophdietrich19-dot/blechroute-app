@@ -56,6 +56,7 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
   const [shareEntry, setShareEntry] = useState(null);
   const [toast, setToast] = useState("");
   const lastBackPress = useRef(0);
+  const pageHistory = useRef(["feed"]);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -95,8 +96,9 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
       if (menuOpen) return setMenuOpen(false);
       if (createOpen) return setCreateOpen(false);
 
-      if (activePage !== "feed") {
-        setActivePage("feed");
+      if (pageHistory.current.length > 1) {
+        pageHistory.current.pop();
+        setActivePage(pageHistory.current[pageHistory.current.length - 1] || "feed");
         return;
       }
 
@@ -130,40 +132,46 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
     shareEntry
   ]);
 
+  function navigateToPage(page) {
+    if (!page || page === activePage) return;
+    pageHistory.current.push(page);
+    setActivePage(page);
+  }
+
   function goToFeed() {
-    setActivePage("feed");
+    navigateToPage("feed");
   }
 
   function goToMap() {
-    setActivePage("discover");
+    navigateToPage("discover");
   }
 
   function goToGarage() {
-    setActivePage("garage");
+    navigateToPage("garage");
   }
 
   function goToCommunity() {
-    setActivePage("community");
+    navigateToPage("community");
   }
 
   function goToMoments() {
-    setActivePage("moments");
+    navigateToPage("moments");
   }
 
   function goToSaved() {
-    setActivePage("saved");
+    navigateToPage("saved");
   }
 
   function goToNotifications() {
-    setActivePage("notifications");
+    navigateToPage("notifications");
   }
 
   function goToMessages() {
-    setActivePage("messages");
+    navigateToPage("messages");
   }
 
   function goToProfile() {
-    setActivePage("profile");
+    navigateToPage("profile");
   }
 
   function markConversationRead(conversationId) {
@@ -330,7 +338,7 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
     }
 
     if (user.handle === appState.user.handle) {
-      setActivePage("profile");
+      navigateToPage("profile");
       return;
     }
 

@@ -5,7 +5,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const credentialsPath = path.join(root, ".private", "tester-credentials.json");
-const apkOutputDir = path.join(root, "outputs", "release-v22", "apk");
+const apkOutputDir = path.join(root, "outputs", "release-v23", "apk");
 const sourceApk = path.join(root, "android", "app", "build", "outputs", "apk", "debug", "app-debug.apk");
 const isWindows = process.platform === "win32";
 const gradleCommand = process.env.BLECHROUTE_GRADLE_BIN || (isWindows ? "gradlew.bat" : "./gradlew");
@@ -50,7 +50,7 @@ for (const [index, account] of credentials.accounts.entries()) {
   };
   run(process.execPath, [path.join(root, "node_modules", "vite", "bin", "vite.js"), "build", "--configLoader", "runner", "--logLevel", "error"], { env });
   run(process.execPath, [path.join(root, "node_modules", "@capacitor", "cli", "bin", "capacitor"), "sync", "android"], { env });
-  run(gradleCommand, ["assembleDebug", "--console=plain", "--quiet"], {
+  run(gradleCommand, ["assembleDebug", "--no-daemon", "--console=plain", "--quiet"], {
     cwd: path.join(root, "android"),
     env,
     shell: isWindows
@@ -58,4 +58,4 @@ for (const [index, account] of credentials.accounts.entries()) {
   await copyFile(sourceApk, path.join(apkOutputDir, account.apkName));
 }
 
-console.log(`\nFertig: ${credentials.accounts.length} APKs in outputs/release-v22/apk.`);
+console.log(`\nFertig: ${credentials.accounts.length} APKs in outputs/release-v23/apk.`);

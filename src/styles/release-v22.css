@@ -6,10 +6,19 @@ body,
   background: #120704;
 }
 
+:root {
+  /* Capacitor 8 stellt Android-Systemabstaende als eigene CSS-Variablen bereit.
+     Im Browser bleiben die normalen env()-Werte massgeblich. */
+  --br-safe-top: max(env(safe-area-inset-top, 0px), var(--safe-area-inset-top, 0px));
+  --br-safe-right: max(env(safe-area-inset-right, 0px), var(--safe-area-inset-right, 0px));
+  --br-safe-bottom: max(env(safe-area-inset-bottom, 0px), var(--safe-area-inset-bottom, 0px));
+  --br-safe-left: max(env(safe-area-inset-left, 0px), var(--safe-area-inset-left, 0px));
+}
+
 .auth-page {
   position: relative;
   isolation: isolate;
-  padding: max(14px, env(safe-area-inset-top)) 14px max(14px, env(safe-area-inset-bottom));
+  padding: max(14px, var(--br-safe-top)) max(14px, var(--br-safe-right)) max(14px, var(--br-safe-bottom)) max(14px, var(--br-safe-left));
   background:
     radial-gradient(ellipse at 50% -8%, rgba(222, 157, 76, 0.2), transparent 42%),
     linear-gradient(160deg, rgba(40, 16, 7, 0.2), rgba(5, 2, 1, 0.68)),
@@ -27,7 +36,7 @@ body,
 
 .auth-card {
   width: min(100%, 438px);
-  max-height: calc(100dvh - max(28px, env(safe-area-inset-top) + env(safe-area-inset-bottom)));
+  max-height: calc(100dvh - max(28px, var(--br-safe-top) + var(--br-safe-bottom)));
   padding: 26px 23px 21px;
   border: 1px solid rgba(79, 34, 14, 0.95);
   border-radius: 31px;
@@ -216,22 +225,13 @@ body,
 
 @media (max-width: 700px) {
   .phone-shell::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 490;
-    height: calc(64px + env(safe-area-inset-bottom));
-    background:
-      linear-gradient(to bottom, rgba(24, 9, 4, 0.1), rgba(7, 3, 2, 0.72)),
-      var(--br16-leather) center bottom / cover;
-    pointer-events: none;
+    content: none;
+    display: none;
   }
 
   .road-control-sticky {
     top: 0;
-    padding-top: calc(3px + env(safe-area-inset-top));
+    padding-top: calc(3px + var(--br-safe-top));
     background:
       linear-gradient(180deg, rgba(36, 15, 7, 0.08), rgba(10, 4, 2, 0.16)),
       var(--br16-leather) center top / cover;
@@ -239,7 +239,8 @@ body,
   }
 
   .bottom-nav {
-    bottom: calc(1px + env(safe-area-inset-bottom));
+    z-index: 500;
+    bottom: calc(1px + var(--br-safe-bottom));
   }
 
   .beta-watermark {
@@ -268,7 +269,7 @@ body,
   }
 
   .auth-card {
-    max-height: calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    max-height: calc(100dvh - 16px - var(--br-safe-top) - var(--br-safe-bottom));
     padding-top: 19px;
   }
 

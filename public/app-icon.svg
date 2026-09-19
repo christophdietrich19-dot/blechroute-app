@@ -1,13 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Blechroute">
   <defs>
-    <linearGradient id="leather" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#6f3517"/>
-      <stop offset="0.55" stop-color="#351407"/>
-      <stop offset="1" stop-color="#130603"/>
+    <linearGradient id="leather" x1="72" y1="44" x2="438" y2="470" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#783b1b"/>
+      <stop offset="0.52" stop-color="#3b170a"/>
+      <stop offset="1" stop-color="#170704"/>
     </linearGradient>
+    <linearGradient id="gold" x1="170" y1="118" x2="356" y2="410" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe3a1"/>
+      <stop offset="0.42" stop-color="#e3ac52"/>
+      <stop offset="1" stop-color="#9b541e"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#050100" flood-opacity=".72"/>
+    </filter>
   </defs>
-  <rect width="512" height="512" rx="118" fill="#090402"/>
-  <rect x="34" y="34" width="444" height="444" rx="96" fill="url(#leather)" stroke="#2a0e05" stroke-width="18"/>
-  <rect x="58" y="58" width="396" height="396" rx="76" fill="none" stroke="#d0a05a" stroke-width="8" stroke-dasharray="8 13"/>
-  <path d="M162 130h112c70 0 112 32 112 88 0 35-17 60-50 74 43 12 65 41 65 86 0 68-49 104-135 104H162V130Zm82 69v65h36c24 0 37-11 37-33 0-21-13-32-39-32h-34Zm0 126v82h43c30 0 45-14 45-41 0-28-15-41-46-41h-42Z" fill="#f1d18c"/>
+  <rect width="512" height="512" rx="116" fill="#100503"/>
+  <rect x="30" y="30" width="452" height="452" rx="100" fill="url(#leather)" stroke="#9b5828" stroke-width="10"/>
+  <rect x="49" y="49" width="414" height="414" rx="84" fill="none" stroke="#e2ae5c" stroke-width="6" stroke-dasharray="7 11" opacity=".95"/>
+  <path d="M151 112h122c82 0 128 39 128 103 0 37-18 66-52 83 43 17 65 51 65 97 0 74-53 112-148 112H151V112Zm91 72v78h38c28 0 43-14 43-40 0-25-16-38-47-38h-34Zm0 148v89h47c34 0 51-15 51-45 0-29-18-44-53-44h-45Z" fill="url(#gold)" filter="url(#shadow)"/>
+  <path d="M202 398c22-80 56-133 112-172" fill="none" stroke="#321308" stroke-width="18" stroke-linecap="round"/>
+  <path d="M217 396c20-66 47-108 91-142" fill="none" stroke="#f6cf79" stroke-width="7" stroke-linecap="round" stroke-dasharray="21 16"/>
+  <circle cx="315" cy="215" r="19" fill="#2d1107" stroke="#f1c96f" stroke-width="8"/>
 </svg>
