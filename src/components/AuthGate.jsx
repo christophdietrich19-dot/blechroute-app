@@ -6,6 +6,7 @@ import LegalSheet from "./LegalSheet";
 export default function AuthGate({ onAuthenticated }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [accepted, setAccepted] = useState(() => hasAcceptedTerms());
   const [legalTab, setLegalTab] = useState(null);
   const [notice, setNotice] = useState("");
@@ -41,7 +42,7 @@ export default function AuthGate({ onAuthenticated }) {
     <div className="auth-page">
       <main className="auth-card" aria-labelledby="auth-title">
         <div className="auth-brand">
-          <img src={`${import.meta.env.BASE_URL}app-icon-v23.png`} alt="" />
+          <img src={`${import.meta.env.BASE_URL}app-icon-v22.png`} alt="" />
           <p className="section-label">Vertrauliche Beta</p>
           <h1 id="auth-title">Blechroute</h1>
           <p className="auth-tagline">
@@ -61,15 +62,31 @@ export default function AuthGate({ onAuthenticated }) {
               onChange={(event) => setUsername(event.target.value)}
             />
           </label>
-          <label>
-            Passwort
-            <input
-              value={password}
-              type="password"
-              autoComplete="current-password"
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </label>
+          <div className="auth-password-group">
+            <label htmlFor="auth-password">Passwort</label>
+            <div className="auth-password-field">
+              <input
+                id="auth-password"
+                value={password}
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
+                onChange={(event) => setPassword(event.target.value)}
+              />
+              <button
+                type="button"
+                className="auth-password-toggle"
+                onClick={() => setShowPassword((current) => !current)}
+                aria-label={showPassword ? "Passwort verbergen" : "Passwort anzeigen"}
+                aria-pressed={showPassword}
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M2.5 12s3.5-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.5 5.5-9.5 5.5S2.5 12 2.5 12Z" />
+                  <circle cx="12" cy="12" r="2.6" />
+                  {!showPassword && <path d="M4 20 20 4" />}
+                </svg>
+              </button>
+            </div>
+          </div>
 
           <label className="auth-consent">
             <input

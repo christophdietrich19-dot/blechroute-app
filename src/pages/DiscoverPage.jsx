@@ -118,6 +118,7 @@ export default function DiscoverPage({
           display: "flex",
           gap: "8px",
           overflowX: "auto",
+          overflowY: "hidden",
           padding: "12px 2px 2px",
           scrollbarWidth: "none"
         }}

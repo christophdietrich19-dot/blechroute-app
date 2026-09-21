@@ -102,6 +102,7 @@ export default function GaragePage({
           display: "flex",
           gap: "8px",
           overflowX: "auto",
+          overflowY: "hidden",
           padding: "2px 2px 12px",
           scrollbarWidth: "none"
         }}

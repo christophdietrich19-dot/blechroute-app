@@ -53,14 +53,20 @@ export default function VehicleDetail({
     <div className="create-overlay form-overlay" role="presentation" onClick={onClose}>
       <div
         className="entry-form"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Fahrzeugakte ${vehicle.name}`}
         onClick={(event) => event.stopPropagation()}
         style={{
           alignSelf: "end"
         }}
       >
-        <div className="sheet-handle" />
-
-        <p className="section-label">Fahrzeugakte</p>
+        <div className="detail-dialog-topline">
+          <p className="section-label">Fahrzeugakte</p>
+          <button type="button" onClick={onClose} aria-label="Fahrzeugakte schließen">
+            Schließen
+          </button>
+        </div>
         <h2>{vehicle.name}</h2>
         <p>
           {vehicle.year} · {vehicle.type} · {vehicle.engine}

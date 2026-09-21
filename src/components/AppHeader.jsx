@@ -22,11 +22,23 @@ export default function AppHeader({
           </div>
 
           <div className="header-utilities">
-            <button type="button" onClick={onOpenNotifications} aria-label="Benachrichtigungen öffnen">
+            <button
+              className={activePage === "notifications" ? "active" : undefined}
+              type="button"
+              onClick={onOpenNotifications}
+              aria-label="Benachrichtigungen öffnen"
+              aria-current={activePage === "notifications" ? "page" : undefined}
+            >
               <IconBell />
               {notificationCount > 0 && <span>{Math.min(notificationCount, 9)}</span>}
             </button>
-            <button type="button" onClick={onOpenMessages} aria-label="Nachrichten öffnen">
+            <button
+              className={activePage === "messages" ? "active" : undefined}
+              type="button"
+              onClick={onOpenMessages}
+              aria-label="Nachrichten öffnen"
+              aria-current={activePage === "messages" ? "page" : undefined}
+            >
               <IconMail />
               {messageCount > 0 && <span>{Math.min(messageCount, 9)}</span>}
             </button>

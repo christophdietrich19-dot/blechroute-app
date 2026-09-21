@@ -162,6 +162,8 @@ svg {
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
   padding: 0 20px calc(var(--nav-height) + 34px);
   scrollbar-width: none;
 }
@@ -645,7 +647,7 @@ svg {
   width: 100%;
   max-width: 100%;
   overflow-x: auto;
-  overflow-y: visible;
+  overflow-y: hidden;
   padding: 32px 4px 24px;
   margin-top: -2px;
   scroll-snap-type: x mandatory;
@@ -1208,8 +1210,7 @@ svg {
   align-items: flex-end;
   justify-content: center;
   padding: 14px 14px calc(18px + env(safe-area-inset-bottom));
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   background: rgba(0, 0, 0, 0.58);
   backdrop-filter: blur(8px);
   overscroll-behavior: contain;
@@ -1229,6 +1230,7 @@ svg {
   padding: 12px 14px 16px;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior-y: contain;
   border: 1px solid rgba(216, 174, 103, 0.24);
   border-radius: 28px;
   background:
@@ -1244,6 +1246,30 @@ svg {
   margin: 0 auto 14px;
   border-radius: 999px;
   background: rgba(246, 231, 203, 0.24);
+}
+
+.detail-dialog-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.detail-dialog-topline .section-label {
+  margin: 0;
+}
+
+.detail-dialog-topline button {
+  flex: 0 0 auto;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid rgba(216, 174, 103, 0.3);
+  border-radius: 12px;
+  color: var(--gold-light);
+  background: rgba(18, 7, 3, 0.7);
+  font: inherit;
+  cursor: pointer;
 }
 
 .create-sheet h2,
@@ -1618,8 +1644,7 @@ svg {
     align-items: flex-end;
     justify-content: center;
     padding: 14px 14px calc(18px + env(safe-area-inset-bottom));
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   .form-overlay {

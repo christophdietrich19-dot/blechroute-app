@@ -1,22 +1,24 @@
 import {
   IconCamera,
   IconGarage,
-  IconBook,
+  IconMenu,
   IconPlus,
   IconProfile
 } from "../icons/Icons";
 
-export default function BottomNavigation({ activePage, onChangePage, onOpenCreate }) {
+export default function BottomNavigation({ activePage, menuOpen, onChangePage, onOpenCreate, onOpenMenu }) {
   return (
     <nav className="bottom-nav" aria-label="Hauptnavigation">
       <button
-        className={activePage === "feed" ? "nav-item active" : "nav-item"}
+        className={menuOpen ? "nav-item active" : "nav-item"}
         type="button"
-        onClick={() => onChangePage("feed")}
-        aria-current={activePage === "feed" ? "page" : undefined}
+        onClick={onOpenMenu}
+        aria-label="Menü öffnen"
+        aria-haspopup="dialog"
+        aria-expanded={menuOpen}
       >
-        <IconBook />
-        <span>Feed</span>
+        <IconMenu />
+        <span>Menü</span>
       </button>
 
       <button

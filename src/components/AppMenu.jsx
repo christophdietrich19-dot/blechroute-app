@@ -47,9 +47,12 @@ export default function AppMenu({
         aria-label="Blechroute Menü"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="sheet-handle" />
-
-        <p className="section-label">Menü</p>
+        <div className="detail-dialog-topline">
+          <p className="section-label">Menü</p>
+          <button type="button" onClick={onClose} aria-label="Menü schließen">
+            Schließen
+          </button>
+        </div>
         <h2>Blechroute steuern</h2>
         <p>
           Spring direkt in die wichtigsten Bereiche oder öffne die Community.

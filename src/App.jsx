@@ -917,8 +917,10 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
 
         <BottomNavigation
           activePage={activePage}
+          menuOpen={menuOpen}
           onChangePage={setActivePage}
           onOpenCreate={() => setCreateOpen(true)}
+          onOpenMenu={openMenu}
         />
 
         {toast && <div className="toast">{toast}</div>}

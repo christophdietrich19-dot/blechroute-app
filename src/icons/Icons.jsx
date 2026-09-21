@@ -122,6 +122,27 @@ export function IconMenuSliders() {
   );
 }
 
+export function IconPalm() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 9c-.2 4.7-.4 8.3-1.5 12" />
+      <path d="M12 9c-2.3-2-5.6-2.3-8.5-.7 3.4-.1 5.6.8 7.1 2.6" />
+      <path d="M12 9c-1.1-3.2-3.5-5.3-6.6-5.6 2.7 1.6 4.2 3.5 4.7 6" />
+      <path d="M12 9c1.2-3.2 3.8-5.2 6.9-5.1-2.8 1.4-4.5 3.2-5.1 5.7" />
+      <path d="M12 9c2.5-1.8 5.7-1.8 8.5 0-3.4-.3-5.7.4-7.3 2" />
+      <path d="M9.2 21h3.7" />
+    </svg>
+  );
+}
+
+export function IconMenu() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  );
+}
+
 export function IconMail() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">

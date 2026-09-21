@@ -270,7 +270,7 @@ html[data-platform="android"] .garage-polaroids .polaroid::before {
   position: absolute;
   z-index: 3;
   top: 43px;
-  right: 24px;
+  right: max(40px, calc(32px + var(--br-safe-right, 0px)));
   display: flex;
   gap: 7px;
 }
@@ -285,6 +285,17 @@ html[data-platform="android"] .garage-polaroids .polaroid::before {
   color: #e8bd70;
   background: linear-gradient(145deg, rgba(81, 34, 14, 0.88), rgba(15, 5, 2, 0.96));
   box-shadow: 0 7px 14px rgba(0, 0, 0, 0.45), inset 0 1px rgba(255, 242, 207, 0.08);
+}
+.header-utilities button.active {
+  border-color: rgba(244, 212, 142, 0.82);
+  color: var(--gold-light);
+  background:
+    radial-gradient(circle at 50% 35%, rgba(244, 212, 142, 0.24), transparent 67%),
+    linear-gradient(145deg, rgba(111, 51, 20, 0.96), rgba(35, 12, 5, 0.98));
+  box-shadow:
+    0 0 0 2px rgba(216, 174, 103, 0.19),
+    0 7px 14px rgba(0, 0, 0, 0.45),
+    inset 0 1px rgba(255, 242, 207, 0.2);
 }
 .header-utilities svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; }
 .header-utilities button span {
@@ -413,9 +424,9 @@ html[data-platform="android"] .garage-polaroids .polaroid::before {
 .app-loading span { color: var(--paper-muted); }
 
 @media (max-width: 700px) {
-  .header-utilities { top: 37px; right: 16px; gap: 5px; }
+  .header-utilities { top: 37px; right: max(30px, calc(24px + var(--br-safe-right, 0px))); gap: 5px; }
   .header-utilities button { width: 34px; height: 34px; }
-  .brand-center { padding-right: 86px; }
+  .brand-center { padding-right: 100px; }
   .auth-card { padding: 24px 19px 20px; border-radius: 28px; }
 }
 

@@ -1,6 +1,7 @@
 import AppHeader from "../components/AppHeader";
 import PolaroidCard from "../components/PolaroidCard";
 import RoadbookCard from "../components/RoadbookCard";
+import { IconPalm } from "../icons/Icons";
 
 export default function MomentsPage({
   appState,
@@ -41,7 +42,12 @@ export default function MomentsPage({
       />
 
       <div className="welcome-block">
-        <p className="section-label">Momente</p>
+        <p className="section-label moments-kicker">
+          <span>Momente</span>
+          <span className="moments-palm" role="img" aria-label="In Erinnerung an Oliver Palme">
+            <IconPalm />
+          </span>
+        </p>
         <h2>Deine Erinnerungen auf einen Blick.</h2>
         <p>
           Alles, was nicht nur Strecke war. Fotos, kleine Geschichten und diese
