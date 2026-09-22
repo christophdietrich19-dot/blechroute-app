@@ -780,14 +780,12 @@ select:focus-visible {
   box-shadow: none;
 }
 
-/* FEED hat zusätzlich main-control; derselbe aktive Leder-Glow muss deshalb
-   die spätere transparente Grundfläche genauso überstimmen wie bei MAP. */
+/* Der aktive Zustand wird nur auf der geformten Lederauflage (::before)
+   gezeichnet. Eine Füllung des rechteckigen Button-Elements ragt sonst
+   sichtbar über die Nähte hinaus, besonders beim FEED-Button. */
 .road-control-button.active,
 .road-control-button.main-control.active {
-  background:
-    radial-gradient(circle at 44% 10%, rgba(255, 229, 173, 0.13), transparent 38%),
-    radial-gradient(circle at 62% 84%, rgba(0, 0, 0, 0.28), transparent 44%),
-    linear-gradient(145deg, #6d3015, #301207 76%, #160602);
+  background: transparent;
 }
 
 .road-control-button::before {
