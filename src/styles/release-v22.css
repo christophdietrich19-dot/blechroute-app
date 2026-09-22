@@ -21,11 +21,16 @@ body,
   padding-top: max(32px, calc(20px + var(--br-safe-top)));
 }
 
+.moments-page .welcome-block {
+  overflow: visible;
+  padding-top: 9px;
+}
+
 .moments-kicker {
   position: relative;
-  width: clamp(195px, 55vw, 250px);
+  width: clamp(108px, 27.2vw, 132px);
   aspect-ratio: 2.8;
-  margin: -8px 0 -7px;
+  margin: 0 0 7px -12px;
 }
 
 .moments-kicker img {
@@ -36,6 +41,13 @@ body,
   max-width: none;
   height: auto;
   pointer-events: none;
+}
+
+.road-control-sticky.is-scrolled {
+  background:
+    linear-gradient(180deg, rgba(29, 14, 7, 0.82), rgba(15, 7, 3, 0.9)),
+    var(--br16-leather) center top / cover;
+  box-shadow: 0 7px 12px rgba(0, 0, 0, 0.24);
 }
 
 .auth-page {
@@ -304,10 +316,8 @@ body,
   .road-control-sticky {
     top: 0;
     padding-top: calc(3px + var(--br-safe-top));
-    background:
-      linear-gradient(180deg, rgba(36, 15, 7, 0.08), rgba(10, 4, 2, 0.16)),
-      var(--br16-leather) center top / cover;
-    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.18);
+    background: transparent;
+    box-shadow: none;
   }
 
   .bottom-nav {

@@ -26,7 +26,7 @@ export default function MomentsPage({
   const momentEntries = entries.filter((entry) => entry.type === "Moment");
 
   return (
-    <section className="screen-page">
+    <section className="screen-page moments-page">
       <AppHeader
         compact
         userProfile={user}

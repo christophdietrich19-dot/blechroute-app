@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { IconBell, IconBook, IconMail, IconMapPin } from "../icons/Icons";
 
 export default function AppHeader({
@@ -12,6 +13,19 @@ export default function AppHeader({
   messageCount = 0,
   notificationCount = 0
 }) {
+  const stickyRef = useRef(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const scrollArea = stickyRef.current?.closest(".screen-page");
+    if (!scrollArea) return undefined;
+
+    const updateScrolled = () => setIsScrolled(scrollArea.scrollTop > 6);
+    updateScrolled();
+    scrollArea.addEventListener("scroll", updateScrolled, { passive: true });
+    return () => scrollArea.removeEventListener("scroll", updateScrolled);
+  }, []);
+
   return (
     <>
       <header className={compact ? "app-header compact" : "app-header"}>
@@ -46,7 +60,7 @@ export default function AppHeader({
         </div>
       </header>
 
-      <div className="road-control-sticky">
+      <div ref={stickyRef} className={isScrolled ? "road-control-sticky is-scrolled" : "road-control-sticky"}>
         <div className="road-control-row" aria-label="Schnellnavigation">
           <button
             className={
