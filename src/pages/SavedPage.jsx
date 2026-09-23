@@ -1,12 +1,17 @@
 import AppHeader from "../components/AppHeader";
 import RoadbookCard from "../components/RoadbookCard";
+import { isEntryVisible } from "../data/appSchema";
 
 export default function SavedPage({
   appState,
   activePage,
   currentUser,
   savedEntryIds = [],
+  likedEntryIds = [],
+  followingHandles = [],
   onToggleSavedEntry,
+  onToggleLikedEntry,
+  onToggleFollow,
   onUpdateEntry,
   onDeleteEntry,
   onOpenFeed,
@@ -17,6 +22,7 @@ export default function SavedPage({
   unreadMessages = 0,
   unreadNotifications = 0,
   onOpenCommunityProfile,
+  blockedProfiles = [],
   onReportEntry,
   onShareEntry,
   onRepostEntry
@@ -24,7 +30,7 @@ export default function SavedPage({
   const { user, entries } = appState;
 
   const savedEntries = entries.filter((entry) =>
-    savedEntryIds.includes(entry.id)
+    savedEntryIds.includes(entry.id) && isEntryVisible(entry, user, blockedProfiles)
   );
 
   return (
@@ -90,7 +96,11 @@ export default function SavedPage({
               key={entry.id}
               currentUser={currentUser}
               savedEntryIds={savedEntryIds}
+              likedEntryIds={likedEntryIds}
+              followingHandles={followingHandles}
               onToggleSavedEntry={onToggleSavedEntry}
+              onToggleLikedEntry={onToggleLikedEntry}
+              onToggleFollow={onToggleFollow}
               onUpdateEntry={onUpdateEntry}
               onDeleteEntry={onDeleteEntry}
               onOpenCommunityProfile={onOpenCommunityProfile}

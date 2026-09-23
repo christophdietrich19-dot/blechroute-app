@@ -10,7 +10,7 @@ export const TESTER_CONFIG = Object.freeze({
   credentialsConfigured: /^[0-9a-f]{32}$/.test(configuredSalt) && /^[0-9a-f]{64}$/.test(configuredHash),
   supportEmail: "kontakt@christoph-it.de",
   releaseName: "Vertrauliche Testversion",
-  version: "0.1.0-beta.7"
+  version: "0.1.0-beta.8"
 });
 
 function hexToBytes(value) {

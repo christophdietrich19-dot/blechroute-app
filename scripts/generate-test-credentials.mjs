@@ -60,7 +60,7 @@ const accounts = [
 ];
 
 const generatedAt = new Date().toISOString();
-const payload = { generatedAt, version: "0.1.0-beta.7", accounts };
+const payload = { generatedAt, version: "0.1.0-beta.8", accounts };
 const lines = [
   "BLECHROUTE – VERTRAULICHE TESTZUGÄNGE",
   `Stand: ${generatedAt}`,

@@ -15,7 +15,10 @@ export default function MessagesPage({
   onSendMessage,
   onReadConversation
 }) {
-  const conversations = appState.conversations || [];
+  const blockedHandles = new Set((appState.blockedProfiles || []).map((profile) => profile.key));
+  const conversations = (appState.conversations || []).filter((conversation) =>
+    !blockedHandles.has(`handle:${conversation.participant?.handle}`)
+  );
   const [selectedId, setSelectedId] = useState(conversations[0]?.id || null);
   const [draft, setDraft] = useState("");
   const selected = useMemo(
@@ -32,8 +35,7 @@ export default function MessagesPage({
     event.preventDefault();
     const clean = draft.trim().slice(0, 1000);
     if (!clean || !selected) return;
-    onSendMessage(selected.id, clean);
-    setDraft("");
+    if (onSendMessage(selected.id, clean)) setDraft("");
   }
 
   return (
@@ -86,7 +88,7 @@ export default function MessagesPage({
 
           <div className="chat-messages">
             {selected.messages.map((message) => (
-              <p className={message.from === "Christoph" ? "own" : ""} key={message.id}>
+              <p className={message.senderId === "self" || message.from === appState.user.name || message.from === "Christoph" ? "own" : ""} key={message.id}>
                 <span>{message.text}</span>
                 <small>{message.time}</small>
               </p>

@@ -1,13 +1,19 @@
 import { useState } from "react";
 import EntryEditor from "./EntryEditor";
 import { IconBookmark, IconEdit, IconFlag, IconHeart, IconMapPin, IconRepeat, IconShare } from "../icons/Icons";
+import { makeId } from "../utils/storage";
+import { isOwnAuthor } from "../data/appSchema";
 
 export default function RoadbookCard({
   entry,
   featured = false,
   currentUser,
   savedEntryIds = [],
+  likedEntryIds = [],
+  followingHandles = [],
   onToggleSavedEntry,
+  onToggleLikedEntry,
+  onToggleFollow,
   onUpdateEntry,
   onDeleteEntry,
   onOpenCommunityProfile,
@@ -15,13 +21,14 @@ export default function RoadbookCard({
   onShareEntry,
   onRepostEntry
 }) {
-  const [likedByMe, setLikedByMe] = useState(false);
-  const [following, setFollowing] = useState(false);
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [commentText, setCommentText] = useState("");
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editingCommentText, setEditingCommentText] = useState("");
   const [editorOpen, setEditorOpen] = useState(false);
 
   const likes = Number(entry.likes || 0);
+  const likedByMe = likedEntryIds.includes(entry.id);
   const isSavedByMe = savedEntryIds.includes(entry.id);
   const saved = Number(entry.saved || 0) + (isSavedByMe ? 1 : 0);
   const comments = entry.comments || [];
@@ -34,7 +41,8 @@ export default function RoadbookCard({
     bio: currentUser?.bio || "Roadbook Profil"
   };
 
-  const isOwnEntry = !entry.author || entry.author.handle === currentUser?.handle;
+  const isOwnEntry = isOwnAuthor(entry.author, currentUser);
+  const following = followingHandles.includes(author.handle);
 
   function safeUpdate(updater) {
     if (onUpdateEntry) {
@@ -43,14 +51,7 @@ export default function RoadbookCard({
   }
 
   function handleLike() {
-    const nextLiked = !likedByMe;
-
-    setLikedByMe(nextLiked);
-
-    safeUpdate((currentEntry) => ({
-      ...currentEntry,
-      likes: Math.max(0, Number(currentEntry.likes || 0) + (nextLiked ? 1 : -1))
-    }));
+    onToggleLikedEntry?.(entry.id);
   }
 
   function handleSave() {
@@ -69,8 +70,10 @@ export default function RoadbookCard({
     }
 
     const newComment = {
-      id: Date.now(),
+      id: makeId(),
+      authorId: currentUser?.id,
       author: currentUser?.name || "Christoph",
+      authorHandle: currentUser?.handle,
       text: cleanText
     };
 
@@ -81,6 +84,36 @@ export default function RoadbookCard({
 
     setCommentText("");
     setCommentsOpen(true);
+  }
+
+  function handleEditComment(event) {
+    event.preventDefault();
+    const cleanText = editingCommentText.trim().slice(0, 500);
+    if (!cleanText || editingCommentId === null) return;
+    safeUpdate((currentEntry) => ({
+      ...currentEntry,
+      comments: (currentEntry.comments || []).map((comment) =>
+        comment.id === editingCommentId && comment.authorId === currentUser?.id
+          ? { ...comment, text: cleanText, edited: true }
+          : comment
+      )
+    }));
+    setEditingCommentId(null);
+    setEditingCommentText("");
+  }
+
+  function handleDeleteComment(commentId) {
+    if (!window.confirm("Deinen Kommentar wirklich löschen?")) return;
+    safeUpdate((currentEntry) => ({
+      ...currentEntry,
+      comments: (currentEntry.comments || []).filter((comment) =>
+        comment.id !== commentId || comment.authorId !== currentUser?.id
+      )
+    }));
+    if (editingCommentId === commentId) {
+      setEditingCommentId(null);
+      setEditingCommentText("");
+    }
   }
 
   function handleSaveEdit(nextEntry) {
@@ -215,7 +248,8 @@ export default function RoadbookCard({
             <button
               className="roadbook-secondary-action"
               type="button"
-              onClick={() => setFollowing((current) => !current)}
+              onClick={() => onToggleFollow?.(author.handle)}
+              aria-pressed={following}
               style={{
                 border: "1px solid rgba(216, 174, 103, 0.24)",
                 borderRadius: "999px",
@@ -271,6 +305,7 @@ export default function RoadbookCard({
               className={likedByMe ? "soft-action active" : "soft-action"}
               type="button"
               onClick={handleLike}
+              aria-pressed={likedByMe}
             >
               <IconHeart />
               <span>{likes}</span>
@@ -333,7 +368,8 @@ export default function RoadbookCard({
             >
               {comments.length > 0 ? (
                 comments.map((comment) => (
-                  <p
+                  <div
+                    className="roadbook-comment"
                     key={comment.id}
                     style={{
                       margin: "0 0 8px",
@@ -342,11 +378,39 @@ export default function RoadbookCard({
                       lineHeight: 1.45
                     }}
                   >
-                    <strong style={{ color: "var(--gold-light)" }}>
-                      {comment.author}
-                    </strong>{" "}
-                    {comment.text}
-                  </p>
+                    {editingCommentId === comment.id ? (
+                      <form className="comment-edit-form" onSubmit={handleEditComment}>
+                        <textarea
+                          value={editingCommentText}
+                          maxLength={500}
+                          aria-label="Kommentar bearbeiten"
+                          onChange={(event) => setEditingCommentText(event.target.value)}
+                        />
+                        <div className="comment-own-actions">
+                          <button type="submit" disabled={!editingCommentText.trim()}>Speichern</button>
+                          <button type="button" onClick={() => setEditingCommentId(null)}>Abbrechen</button>
+                        </div>
+                      </form>
+                    ) : (
+                      <>
+                        <p style={{ margin: 0 }}>
+                          <strong style={{ color: "var(--gold-light)" }}>
+                            {comment.authorId === currentUser?.id ? currentUser.name : comment.author}
+                          </strong>{" "}
+                          {comment.text}{comment.edited ? " · bearbeitet" : ""}
+                        </p>
+                        {comment.authorId && comment.authorId === currentUser?.id && (
+                          <div className="comment-own-actions">
+                            <button type="button" onClick={() => {
+                              setEditingCommentId(comment.id);
+                              setEditingCommentText(comment.text);
+                            }}>Bearbeiten</button>
+                            <button type="button" onClick={() => handleDeleteComment(comment.id)}>Löschen</button>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
                 ))
               ) : (
                 <p

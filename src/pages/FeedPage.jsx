@@ -3,14 +3,19 @@ import DailyHighlight from "../components/DailyHighlight";
 import PolaroidCard from "../components/PolaroidCard";
 import RoadbookCard from "../components/RoadbookCard";
 import WeeklyCarCard from "../components/WeeklyCarCard";
-import { carImages, defaultRoadbookEntries, defaultVehicles } from "../data/demoData";
+import { carImages, defaultVehicles } from "../data/demoData";
+import { isEntryVisible, isOwnAuthor } from "../data/appSchema";
 
 export default function FeedPage({
   appState,
   activePage,
   currentUser,
   savedEntryIds,
+  likedEntryIds,
+  followingHandles,
   onToggleSavedEntry,
+  onToggleLikedEntry,
+  onToggleFollow,
   onUpdateEntry,
   onDeleteEntry,
   onOpenFeed,
@@ -28,18 +33,16 @@ export default function FeedPage({
 }) {
   const { user, entries, polaroids, vehicles } = appState;
 
-  const featuredEntry = entries[0] || defaultRoadbookEntries[0];
+  const visibleEntries = entries.filter((entry) => isEntryVisible(entry, user, blockedProfiles));
   const weeklyVehicle = vehicles[0] || defaultVehicles[0];
 
-  const ownEntries = entries.filter(
-    (entry) => !entry.author || entry.author.handle === user.handle
+  const ownEntries = visibleEntries.filter(
+    (entry) => isOwnAuthor(entry.author, user)
   );
+  const featuredEntry = ownEntries[0] || visibleEntries[0];
 
-  const blockedKeys = new Set(blockedProfiles.map((item) => item.key));
-  const communityEntries = entries.filter(
-    (entry) => entry.author &&
-      entry.author.handle !== user.handle &&
-      !blockedKeys.has(`handle:${entry.author.handle}`)
+  const communityEntries = visibleEntries.filter(
+    (entry) => !isOwnAuthor(entry.author, user) && entry.id !== featuredEntry?.id
   );
 
   const dailyMoment = {
@@ -109,27 +112,39 @@ export default function FeedPage({
         </span>
       </div>
 
-      <RoadbookCard
-        entry={featuredEntry}
-        featured
-        currentUser={currentUser}
-        savedEntryIds={savedEntryIds}
-        onToggleSavedEntry={onToggleSavedEntry}
-        onUpdateEntry={onUpdateEntry}
-        onDeleteEntry={onDeleteEntry}
-        onOpenCommunityProfile={onOpenCommunityProfile}
-        onReportEntry={onReportEntry}
-        onShareEntry={onShareEntry}
-        onRepostEntry={onRepostEntry}
-      />
+      {featuredEntry ? (
+        <RoadbookCard
+          entry={featuredEntry}
+          featured
+          currentUser={currentUser}
+          savedEntryIds={savedEntryIds}
+          likedEntryIds={likedEntryIds}
+          followingHandles={followingHandles}
+          onToggleSavedEntry={onToggleSavedEntry}
+          onToggleLikedEntry={onToggleLikedEntry}
+          onToggleFollow={onToggleFollow}
+          onUpdateEntry={onUpdateEntry}
+          onDeleteEntry={onDeleteEntry}
+          onOpenCommunityProfile={onOpenCommunityProfile}
+          onReportEntry={onReportEntry}
+          onShareEntry={onShareEntry}
+          onRepostEntry={onRepostEntry}
+        />
+      ) : (
+        <article className="note-card"><h2>Dein Roadbook ist noch leer.</h2><p>Über das Plus kannst du deine erste Tour festhalten.</p></article>
+      )}
 
-      {ownEntries.slice(1, 3).map((entry) => (
+      {ownEntries.filter((entry) => entry.id !== featuredEntry?.id).slice(0, 2).map((entry) => (
         <RoadbookCard
           entry={entry}
           key={entry.id}
           currentUser={currentUser}
           savedEntryIds={savedEntryIds}
+          likedEntryIds={likedEntryIds}
+          followingHandles={followingHandles}
           onToggleSavedEntry={onToggleSavedEntry}
+          onToggleLikedEntry={onToggleLikedEntry}
+          onToggleFollow={onToggleFollow}
           onUpdateEntry={onUpdateEntry}
           onDeleteEntry={onDeleteEntry}
           onOpenCommunityProfile={onOpenCommunityProfile}
@@ -152,7 +167,11 @@ export default function FeedPage({
               key={entry.id}
               currentUser={currentUser}
               savedEntryIds={savedEntryIds}
+              likedEntryIds={likedEntryIds}
+              followingHandles={followingHandles}
               onToggleSavedEntry={onToggleSavedEntry}
+              onToggleLikedEntry={onToggleLikedEntry}
+              onToggleFollow={onToggleFollow}
               onUpdateEntry={onUpdateEntry}
               onDeleteEntry={onDeleteEntry}
               onOpenCommunityProfile={onOpenCommunityProfile}

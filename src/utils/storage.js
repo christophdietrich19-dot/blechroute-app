@@ -1,4 +1,5 @@
 import { STORAGE_KEY } from "../data/demoData";
+import { normalizeAppState } from "../data/appSchema";
 
 const DB_NAME = "blechroute-local-beta";
 const DB_VERSION = 1;
@@ -13,26 +14,6 @@ export function getTodayLabel() {
     day: "2-digit",
     month: "short"
   }).format(new Date());
-}
-
-function normalizeState(parsed) {
-  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
-
-  return {
-    ...parsed,
-    followingHandles: Array.isArray(parsed.followingHandles) ? parsed.followingHandles : [],
-    followingVehicleIds: Array.isArray(parsed.followingVehicleIds) ? parsed.followingVehicleIds : [],
-    blockedProfiles: Array.isArray(parsed.blockedProfiles) ? parsed.blockedProfiles : [],
-    reports: Array.isArray(parsed.reports) ? parsed.reports : [],
-    reposts: Array.isArray(parsed.reposts) ? parsed.reposts : [],
-    savedEntryIds: Array.isArray(parsed.savedEntryIds) ? parsed.savedEntryIds : [],
-    notifications: Array.isArray(parsed.notifications) ? parsed.notifications : [],
-    conversations: Array.isArray(parsed.conversations) ? parsed.conversations : [],
-    vehicles: Array.isArray(parsed.vehicles) ? parsed.vehicles : [],
-    entries: Array.isArray(parsed.entries) ? parsed.entries : [],
-    spots: Array.isArray(parsed.spots) ? parsed.spots : [],
-    polaroids: Array.isArray(parsed.polaroids) ? parsed.polaroids : []
-  };
 }
 
 function openDatabase() {
@@ -59,17 +40,27 @@ async function databaseOperation(mode, operation) {
     const transaction = database.transaction(STORE_NAME, mode);
     const store = transaction.objectStore(STORE_NAME);
     const request = operation(store);
-    request.onerror = () => reject(request.error);
-    request.onsuccess = () => resolve(request.result);
-    transaction.oncomplete = () => database.close();
-    transaction.onerror = () => reject(transaction.error);
+    let result;
+    request.onsuccess = () => { result = request.result; };
+    transaction.oncomplete = () => {
+      database.close();
+      resolve(result);
+    };
+    transaction.onabort = () => {
+      database.close();
+      reject(transaction.error || new Error("Speichervorgang abgebrochen."));
+    };
+    transaction.onerror = () => {
+      database.close();
+      reject(transaction.error || new Error("Speichervorgang fehlgeschlagen."));
+    };
   });
 }
 
 export async function loadStoredState() {
   try {
     const stored = await databaseOperation("readonly", (store) => store.get(STORAGE_KEY));
-    const normalized = normalizeState(stored);
+    const normalized = normalizeAppState(stored);
     if (normalized) return normalized;
   } catch {
     // Fallback und Migration aus älteren LocalStorage-Versionen.
@@ -78,7 +69,7 @@ export async function loadStoredState() {
   try {
     const legacy = localStorage.getItem(STORAGE_KEY);
     if (!legacy) return null;
-    const normalized = normalizeState(JSON.parse(legacy));
+    const normalized = normalizeAppState(JSON.parse(legacy));
     if (normalized) await saveStoredState(normalized);
     return normalized;
   } catch {
@@ -103,19 +94,23 @@ export async function saveStoredState(appState) {
 }
 
 export async function clearStoredState() {
+  let databaseCleared = !("indexedDB" in window);
   try {
     await databaseOperation("readwrite", (store) => store.delete(STORAGE_KEY));
+    databaseCleared = true;
   } catch {
-    // LocalStorage wird unabhängig davon ebenfalls bereinigt.
+    // Ein Fehlschlag der Datenbank darf nicht als vollständige Löschung gelten.
   }
 
+  let legacyCleared = false;
   try {
     localStorage.removeItem(STORAGE_KEY);
+    legacyCleared = true;
   } catch {
-    return false;
+    // Beide Speicherorte werden unabhängig voneinander versucht.
   }
 
-  return true;
+  return databaseCleared && legacyCleared;
 }
 
 export async function requestPersistentStorage() {

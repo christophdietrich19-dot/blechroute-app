@@ -5,7 +5,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const credentialsPath = path.join(root, ".private", "tester-credentials.json");
-const apkOutputDir = path.join(root, "outputs", "release-v27", "apk");
+const apkOutputDir = path.join(root, "outputs", "release-v28", "apk");
 const sourceApk = path.join(root, "android", "app", "build", "outputs", "apk", "debug", "app-debug.apk");
 const isWindows = process.platform === "win32";
 const gradleCommand = process.env.BLECHROUTE_GRADLE_BIN || (isWindows ? "gradlew.bat" : "./gradlew");
@@ -58,4 +58,4 @@ for (const [index, account] of credentials.accounts.entries()) {
   await copyFile(sourceApk, path.join(apkOutputDir, account.apkName));
 }
 
-console.log(`\nFertig: ${credentials.accounts.length} APKs in outputs/release-v27/apk.`);
+console.log(`\nFertig: ${credentials.accounts.length} APKs in outputs/release-v28/apk.`);

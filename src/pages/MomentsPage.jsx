@@ -1,15 +1,22 @@
 import AppHeader from "../components/AppHeader";
 import PolaroidCard from "../components/PolaroidCard";
 import RoadbookCard from "../components/RoadbookCard";
+import { isEntryVisible } from "../data/appSchema";
 
 export default function MomentsPage({
   appState,
   activePage,
   currentUser,
   savedEntryIds,
+  likedEntryIds,
+  followingHandles,
   onToggleSavedEntry,
+  onToggleLikedEntry,
+  onToggleFollow,
   onUpdateEntry,
   onDeleteEntry,
+  onOpenCommunityProfile,
+  blockedProfiles = [],
   onReportEntry,
   onShareEntry,
   onRepostEntry,
@@ -23,7 +30,9 @@ export default function MomentsPage({
 }) {
   const { user, entries, polaroids } = appState;
 
-  const momentEntries = entries.filter((entry) => entry.type === "Moment");
+  const momentEntries = entries.filter((entry) =>
+    entry.type === "Moment" && isEntryVisible(entry, user, blockedProfiles)
+  );
 
   return (
     <section className="screen-page moments-page">
@@ -80,9 +89,14 @@ export default function MomentsPage({
               key={entry.id}
               currentUser={currentUser}
               savedEntryIds={savedEntryIds}
+              likedEntryIds={likedEntryIds}
+              followingHandles={followingHandles}
               onToggleSavedEntry={onToggleSavedEntry}
+              onToggleLikedEntry={onToggleLikedEntry}
+              onToggleFollow={onToggleFollow}
               onUpdateEntry={onUpdateEntry}
               onDeleteEntry={onDeleteEntry}
+              onOpenCommunityProfile={onOpenCommunityProfile}
               onReportEntry={onReportEntry}
               onShareEntry={onShareEntry}
               onRepostEntry={onRepostEntry}

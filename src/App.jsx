@@ -24,15 +24,14 @@ import ProfilePage from "./pages/ProfilePage";
 import SavedPage from "./pages/SavedPage";
 
 import { createDefaultState } from "./data/demoData";
+import { isOwnAuthor } from "./data/appSchema";
 import { TESTER_CONFIG } from "./config/testerConfig";
+import { createLocalAppDataGateway } from "./services/appDataGateway";
 
 import {
-  clearStoredState,
   getTodayLabel,
-  loadStoredState,
   makeId,
-  requestPersistentStorage,
-  saveStoredState
+  requestPersistentStorage
 } from "./utils/storage";
 import {
   acceptTerms,
@@ -43,7 +42,7 @@ import {
   saveSession
 } from "./utils/session";
 
-function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
+function AppShell({ appState, setAppState, onResetDemo, onLogout, onClearPersonalData, storageWarning }) {
   const [activePage, setActivePage] = useState("feed");
   const [createOpen, setCreateOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -184,6 +183,13 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
   }
 
   function sendMessage(conversationId, text) {
+    const recipient = (appState.conversations || []).find((conversation) => conversation.id === conversationId);
+    if (!recipient || (appState.blockedProfiles || []).some(
+      (profile) => profile.key === `handle:${recipient.participant?.handle}`
+    )) {
+      showToast("Dieser Kontakt ist blockiert oder nicht verfügbar.");
+      return false;
+    }
     setAppState((current) => ({
       ...current,
       conversations: (current.conversations || []).map((conversation) => {
@@ -194,7 +200,8 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
             ...conversation.messages,
             {
               id: makeId(),
-              from: "Christoph",
+              senderId: "self",
+              from: current.user.name,
               text,
               time: new Intl.DateTimeFormat("de-DE", { hour: "2-digit", minute: "2-digit" }).format(new Date())
             }
@@ -202,11 +209,12 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
         };
       })
     }));
+    return true;
   }
 
   function forwardEntry(conversationId) {
     if (!shareEntry) return;
-    sendMessage(conversationId, `Geteilter Beitrag: „${shareEntry.title}“ · ${shareEntry.vehicle}`);
+    if (!sendMessage(conversationId, `Geteilter Beitrag: „${shareEntry.title}“ · ${shareEntry.vehicle}`)) return;
     setShareEntry(null);
     showToast("Beitrag wurde im Demo-Chat geteilt.");
   }
@@ -243,6 +251,7 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
       comments: [],
       repostSource: entry.author?.name || "Community",
       author: {
+        id: appState.user.id,
         name: appState.user.name,
         handle: appState.user.handle,
         region: appState.user.region,
@@ -337,7 +346,7 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
       return;
     }
 
-    if (user.handle === appState.user.handle) {
+    if (user.id === appState.user.id || user.handle === appState.user.handle) {
       navigateToPage("profile");
       return;
     }
@@ -471,12 +480,13 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
   }
 
   async function clearPersonalData() {
-    await clearStoredState();
-    clearAllLocalAccessData();
-    setAppState(createDefaultState());
+    const cleared = await onClearPersonalData();
+    if (!cleared) {
+      showToast("Lokale Daten konnten nicht vollständig gelöscht werden.");
+      return;
+    }
     setSelectedCommunityUser(null);
     setModerationTarget(null);
-    onLogout();
   }
 
   function toggleSavedEntry(entryId) {
@@ -504,6 +514,23 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
           : `„${entry.title}“ liegt jetzt in deinen gespeicherten Beiträgen.`
       });
     }
+  }
+
+  function toggleLikedEntry(entryId) {
+    setAppState((current) => {
+      if (!current.entries.some((entry) => entry.id === entryId)) return current;
+      const likedEntryIds = current.likedEntryIds || [];
+      const wasLiked = likedEntryIds.includes(entryId);
+      return {
+        ...current,
+        likedEntryIds: wasLiked
+          ? likedEntryIds.filter((id) => id !== entryId)
+          : [...likedEntryIds, entryId],
+        entries: current.entries.map((entry) => entry.id === entryId
+          ? { ...entry, likes: Math.max(0, Number(entry.likes || 0) + (wasLiked ? -1 : 1)) }
+          : entry)
+      };
+    });
   }
 
   function handleChoose(type) {
@@ -543,7 +570,8 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
         ...current,
         entries: nextEntries,
         polaroids: nextPolaroids,
-        savedEntryIds: (current.savedEntryIds || []).filter((id) => id !== entryId)
+        savedEntryIds: (current.savedEntryIds || []).filter((id) => id !== entryId),
+        likedEntryIds: (current.likedEntryIds || []).filter((id) => id !== entryId)
       };
     });
 
@@ -597,6 +625,7 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
 
     setAppState((current) => {
       const author = {
+        id: current.user.id,
         name: current.user.name,
         handle: current.user.handle,
         region: current.user.region,
@@ -740,7 +769,21 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
   function handleProfileSave(nextUser) {
     setAppState((current) => ({
       ...current,
-      user: nextUser
+      user: { ...nextUser, id: current.user.id },
+      entries: current.entries.map((entry) => isOwnAuthor(entry.author, current.user)
+        ? {
+            ...entry,
+            author: {
+              ...entry.author,
+              id: current.user.id,
+              name: nextUser.name,
+              handle: nextUser.handle,
+              avatar: nextUser.avatar,
+              region: nextUser.region,
+              bio: nextUser.bio
+            }
+          }
+        : entry)
     }));
 
     addNotification({
@@ -768,14 +811,22 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
   const notifications = appState.notifications || [];
   const unreadCount = notifications.filter((notification) => !notification.read).length;
   const unreadMessages = (appState.conversations || []).reduce(
-    (sum, conversation) => sum + Number(conversation.unread || 0),
+    (sum, conversation) => sum + (
+      (appState.blockedProfiles || []).some((profile) =>
+        profile.key === `handle:${conversation.participant?.handle}`
+      ) ? 0 : Number(conversation.unread || 0)
+    ),
     0
   );
 
   const sharedRoadbookProps = {
     currentUser: appState.user,
     savedEntryIds: appState.savedEntryIds || [],
+    likedEntryIds: appState.likedEntryIds || [],
+    followingHandles: appState.followingHandles || [],
     onToggleSavedEntry: toggleSavedEntry,
+    onToggleLikedEntry: toggleLikedEntry,
+    onToggleFollow: toggleFollow,
     onUpdateEntry: updateEntry,
     onDeleteEntry: deleteEntry,
     onOpenCommunityProfile: handleOpenCommunityProfile,
@@ -924,6 +975,11 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
         />
 
         {toast && <div className="toast">{toast}</div>}
+        {storageWarning && (
+          <div className="storage-warning" role="alert">
+            Änderungen konnten nicht gespeichert werden. Bitte sichere deine Daten über Menü → Datenschutz.
+          </div>
+        )}
 
         {createOpen && (
           <CreateMenu
@@ -996,7 +1052,11 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
         {shareEntry && (
           <ShareSheet
             entry={shareEntry}
-            conversations={appState.conversations || []}
+            conversations={(appState.conversations || []).filter((conversation) =>
+              !(appState.blockedProfiles || []).some((profile) =>
+                profile.key === `handle:${conversation.participant?.handle}`
+              )
+            )}
             onClose={() => setShareEntry(null)}
             onForward={forwardEntry}
             onSystemShare={systemShareEntry}
@@ -1031,26 +1091,55 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout }) {
 export default function App() {
   const [appState, setAppState] = useState(() => createDefaultState());
   const [storageReady, setStorageReady] = useState(false);
+  const [storageWarning, setStorageWarning] = useState(false);
   const [session, setSession] = useState(() => loadSession());
+  const gateway = useRef(null);
+  if (!gateway.current) gateway.current = createLocalAppDataGateway();
+  const skipNextSave = useRef(false);
 
   useEffect(() => {
     let active = true;
-    loadStoredState().then((stored) => {
+    gateway.current.load().then((stored) => {
       if (!active) return;
       if (stored) setAppState(stored);
       setStorageReady(true);
       requestPersistentStorage();
+    }).catch(() => {
+      if (!active) return;
+      setStorageWarning(true);
+      setStorageReady(true);
     });
     return () => { active = false; };
   }, []);
 
   useEffect(() => {
-    if (storageReady) saveStoredState(appState);
+    if (!storageReady) return;
+    if (skipNextSave.current) {
+      skipNextSave.current = false;
+      return;
+    }
+    let active = true;
+    gateway.current.save(appState).then((saved) => {
+      if (active) setStorageWarning(!saved);
+    }).catch(() => {
+      if (active) setStorageWarning(true);
+    });
+    return () => { active = false; };
   }, [appState, storageReady]);
 
   async function handleResetDemo() {
-    await clearStoredState();
+    await gateway.current.clear();
     setAppState(createDefaultState());
+  }
+
+  async function handleClearPersonalData() {
+    const cleared = await gateway.current.clear();
+    if (!cleared) return false;
+    skipNextSave.current = true;
+    clearAllLocalAccessData();
+    setAppState(createDefaultState());
+    setSession(null);
+    return true;
   }
 
   function handleAuthenticated() {
@@ -1078,6 +1167,8 @@ export default function App() {
         setAppState={setAppState}
         onResetDemo={handleResetDemo}
         onLogout={handleLogout}
+        onClearPersonalData={handleClearPersonalData}
+        storageWarning={storageWarning}
       />
     </div>
   );

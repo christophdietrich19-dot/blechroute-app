@@ -37,6 +37,7 @@ export const communityUsers = [
 ];
 
 export const defaultUser = {
+  id: "user-christoph",
   name: "Christoph",
   handle: "@christoph",
   email: "kontakt@christoph-it.de",
@@ -306,6 +307,7 @@ export function createDefaultState() {
     followingHandles: [],
     followingVehicleIds: [],
     reposts: [],
+    likedEntryIds: [],
     blockedProfiles: [],
     reports: [],
     savedEntryIds: [],

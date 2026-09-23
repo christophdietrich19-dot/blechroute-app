@@ -252,7 +252,7 @@ export default function CommunityPage({
 
   const blockedKeys = new Set(blockedProfiles.map((item) => item.key));
   const visibleProfiles = communityProfiles.filter(
-    (profile) => !blockedKeys.has(`community:${profile.id}`)
+    (profile) => !blockedKeys.has(`community:${profile.id}`) && !blockedKeys.has(`handle:${profile.handle}`)
   );
 
   function handleToggleBlock(key, label) {

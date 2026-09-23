@@ -10,6 +10,7 @@ export default function ShareSheet({ entry, conversations = [], onClose, onForwa
         <p>Direkt an einen Demo-Chat senden oder über die Freigabe deines Geräts teilen.</p>
 
         <div className="share-recipient-list">
+          {conversations.length === 0 && <p>Kein verfügbarer Demo-Chat vorhanden.</p>}
           {conversations.map((conversation) => (
             <button type="button" onClick={() => onForward(conversation.id)} key={conversation.id}>
               <img src={conversation.participant.avatar} alt="" />

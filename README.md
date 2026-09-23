@@ -40,3 +40,5 @@ Zugangsdaten, personalisierte APKs, Build-Ausgaben und lokale Testdaten werden a
 - Android 9 (API 28) oder neuer, Hochformat auf Smartphones
 
 Echte Konten, serverseitige Zugriffskontrolle, Synchronisierung, Push-Nachrichten und öffentliche Community-Funktionen folgen erst mit dem späteren Backend.
+
+Der aktuelle Funktionsstand und die Reihenfolge des Ausbaus stehen in [docs/WEG_ZUR_OEFFENTLICHEN_APP.md](docs/WEG_ZUR_OEFFENTLICHEN_APP.md). Der technische Entwurf für den späteren Server steht in [docs/SERVERVERTRAG-ENTWURF.md](docs/SERVERVERTRAG-ENTWURF.md).
