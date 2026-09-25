@@ -9,7 +9,7 @@ await mkdir(output, { recursive: true });
 function brandSvg(background = "") {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254">
   <defs><clipPath id="leather-edge"><rect x="10" y="10" width="1234" height="1234" rx="180"/></clipPath></defs>
-  ${background ? `<rect width="1254" height="1254" fill="${background}"/>` : ""}
+${background ? `  <rect width="1254" height="1254" fill="${background}"/>` : ""}
   <image width="1254" height="1254" clip-path="url(#leather-edge)" href="data:image/jpeg;base64,${source.toString("base64")}"/>
 </svg>\n`;
 }
