@@ -12,9 +12,9 @@
   "theme_color": "#100c08",
   "icons": [
     {
-      "src": "/blechroute-app/design-v31/br-hauptlogo.jpg",
-      "sizes": "1254x1254",
-      "type": "image/jpeg",
+      "src": "/blechroute-app/design-v35/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ]

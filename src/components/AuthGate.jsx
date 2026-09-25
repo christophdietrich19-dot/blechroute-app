@@ -51,7 +51,7 @@ export default function AuthGate({ onAuthenticated }) {
             <img src={`${import.meta.env.BASE_URL}bmw_am_see_im_goldenen_licht.png`} alt="" />
           </div>
           <div className="auth-wordmark">
-            <img src={`${import.meta.env.BASE_URL}design-v31/br-hauptlogo.jpg`} alt="" />
+            <img src={`${import.meta.env.BASE_URL}design-v35/br-hauptlogo.svg`} alt="" />
             <div><p className="section-label">Vertrauliche Beta</p><h1 id="auth-title">Blechroute</h1></div>
           </div>
           <p className="auth-tagline">Autos. Straßen. Geschichten.</p>

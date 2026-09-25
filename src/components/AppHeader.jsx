@@ -34,7 +34,7 @@ export default function AppHeader({
         <StitchedBorder />
         <div className="brand-line">
           <div className="brand-center">
-            <img className="brand-mark" src={`${import.meta.env.BASE_URL}design-v31/br-hauptlogo.jpg`} alt="" />
+            <img className="brand-mark" src={`${import.meta.env.BASE_URL}design-v35/br-hauptlogo.svg`} alt="" />
             <div className="brand-copy">
               <h1>Blechroute</h1>
               <p>{userProfile?.name || "Mehr als nur Ziele."}</p>
