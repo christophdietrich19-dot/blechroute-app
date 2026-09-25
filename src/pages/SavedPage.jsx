@@ -1,3 +1,4 @@
+import StitchedBorder from "../components/StitchedBorder";
 import AppHeader from "../components/AppHeader";
 import RoadbookCard from "../components/RoadbookCard";
 import { isEntryVisible } from "../data/appSchema";
@@ -110,7 +111,7 @@ export default function SavedPage({
             />
           ))
         ) : (
-          <article className="note-card">
+          <article className="note-card"><StitchedBorder />
             <p className="section-label">Noch nichts gemerkt</p>
             <h2>Deine gespeicherten Beiträge erscheinen hier.</h2>
             <p>
@@ -132,7 +133,7 @@ export default function SavedPage({
         )}
       </div>
 
-      <article className="note-card">
+      <article className="note-card"><StitchedBorder />
         <p className="section-label">Später</p>
         <h2>Aus gespeicherten Beiträgen kann mehr werden.</h2>
         <p>

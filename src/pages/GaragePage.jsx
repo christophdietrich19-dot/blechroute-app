@@ -1,7 +1,9 @@
+import StitchedBorder from "../components/StitchedBorder";
 import { useMemo, useState } from "react";
 import AppHeader from "../components/AppHeader";
 import GarageCard from "../components/GarageCard";
 import VehicleDetail from "../components/VehicleDetail";
+import { IconGarage, IconBook, IconEdit } from "../icons/Icons";
 
 export default function GaragePage({
   appState,
@@ -50,7 +52,7 @@ export default function GaragePage({
   }
 
   return (
-    <section className="screen-page">
+    <section className="screen-page garage-page">
       <AppHeader
         compact
         userProfile={appState.user}
@@ -64,14 +66,28 @@ export default function GaragePage({
         notificationCount={unreadNotifications}
       />
 
-      <div className="welcome-block">
+      <div className="welcome-block garage-heading">
         <p className="section-label">Garage</p>
-        <h2>Deine Fahrzeuge, deine Geschichten.</h2>
-        <p>
-          Hier liegt nicht nur Blech. Hier liegen Projekte, Erinnerungen und
-          alles, was später Teil deiner Route wird.
-        </p>
+        <h2>{appState.vehicles[0]?.name || "Deine Garage"}</h2>
+        <p>Mehr als ein Auto. Deine Fahrzeuggeschichte.</p>
       </div>
+
+      {appState.vehicles[0] && (
+        <button className="garage-feature" type="button" onClick={() => setSelectedVehicleId(appState.vehicles[0].id)}>
+          <span className="garage-feature-photo">
+            <img src={appState.vehicles[0].image} alt={appState.vehicles[0].name} />
+            <small>Mehr als ein Auto.</small>
+          </span>
+          <span className="garage-feature-title">{appState.vehicles[0].name}</span>
+          <span className="garage-feature-subtitle">Fahrzeugakte öffnen →</span>
+        </button>
+      )}
+
+      {appState.vehicles[0] && <div className="vehicle-summary-list">
+        <button type="button" onClick={() => setSelectedVehicleId(appState.vehicles[0].id)}><StitchedBorder /><IconGarage /><span><strong>Fahrzeugdaten</strong><small>{[appState.vehicles[0].year, appState.vehicles[0].type, appState.vehicles[0].engine].filter(Boolean).join(" · ")}</small></span><span aria-hidden="true">›</span></button>
+        <button type="button" onClick={() => setSelectedVehicleId(appState.vehicles[0].id)}><StitchedBorder /><IconBook /><span><strong>Meine Geschichte</strong><small>{appState.vehicles[0].story}</small></span><span aria-hidden="true">›</span></button>
+        <button type="button" onClick={() => setSelectedVehicleId(appState.vehicles[0].id)}><StitchedBorder /><IconEdit /><span><strong>Status & Sichtbarkeit</strong><small>{appState.vehicles[0].status} · {appState.vehicles[0].visibility}</small></span><span aria-hidden="true">›</span></button>
+      </div>}
 
       <div
         style={{
@@ -123,7 +139,7 @@ export default function GaragePage({
       </div>
 
       <div className="section-head">
-        <h2>Fahrzeugakte</h2>
+        <h2>Alle Fahrzeuge</h2>
         <span>{filteredVehicles.length} Treffer</span>
       </div>
 
@@ -137,7 +153,7 @@ export default function GaragePage({
             />
           ))
         ) : (
-          <article className="note-card">
+          <article className="note-card"><StitchedBorder />
             <p className="section-label">Keine Treffer</p>
             <h2>Für diesen Filter gibt es noch kein Fahrzeug.</h2>
             <p>
@@ -148,7 +164,7 @@ export default function GaragePage({
         )}
       </div>
 
-      <article className="note-card">
+      <article className="note-card"><StitchedBorder />
         <p className="section-label">Garagen Idee</p>
         <h2>Jedes Auto bekommt später seine eigene Chronik.</h2>
         <p>

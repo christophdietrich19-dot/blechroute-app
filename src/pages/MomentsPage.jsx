@@ -1,7 +1,10 @@
+import StitchedBorder from "../components/StitchedBorder";
 import AppHeader from "../components/AppHeader";
 import PolaroidCard from "../components/PolaroidCard";
 import RoadbookCard from "../components/RoadbookCard";
 import { isEntryVisible } from "../data/appSchema";
+import { IconPalm } from "../icons/Icons";
+import { MapPaper } from "../components/RoadbookArtwork";
 
 export default function MomentsPage({
   appState,
@@ -23,6 +26,7 @@ export default function MomentsPage({
   onOpenFeed,
   onOpenMap,
   onOpenMenu,
+  onCreateMoment,
   onOpenMessages,
   onOpenNotifications,
   unreadMessages = 0,
@@ -50,31 +54,25 @@ export default function MomentsPage({
       />
 
       <div className="welcome-block">
-        <p className="section-label moments-kicker">
-          <img
-            src={`${import.meta.env.BASE_URL}overlays/moments-leather-palm-v25.png`}
-            alt="Momente – in Erinnerung an Oliver Palme"
-            width="1609"
-            height="977"
-          />
-        </p>
-        <h2>Deine Erinnerungen auf einen Blick.</h2>
+        <div className="moments-title-row">
+          <p className="section-label moments-kicker">Momente</p>
+          <span className="moments-palm" aria-hidden="true"><IconPalm /></span>
+        </div>
+        <h2>Geschichten, die bleiben.</h2>
         <p>
-          Alles, was nicht nur Strecke war. Fotos, kleine Geschichten und diese
-          Augenblicke, die man später wiederfinden möchte.
+          Besondere Orte. Starke Augenblicke.
+          Ein Stück auf dem gemeinsamen Weg.
         </p>
       </div>
 
-      <div className="section-head">
-        <h2>Polaroids</h2>
-        <span>{polaroids.length} Bilder</span>
+      <div className="moments-collage">
+        <MapPaper />
+        {polaroids.map((item, index) => <PolaroidCard item={item} tilted={index % 2 === 1} key={item.id} />)}
       </div>
 
-      <div className="polaroid-row">
-        {polaroids.map((item, index) => (
-          <PolaroidCard item={item} tilted={index % 2 === 1} key={item.id} />
-        ))}
-      </div>
+      <button className="story-primary-action" type="button" onClick={onCreateMoment}>
+        <StitchedBorder />Moment teilen <span aria-hidden="true">→</span>
+      </button>
 
       <div className="section-head">
         <h2>Roadbook Momente</h2>
@@ -103,7 +101,7 @@ export default function MomentsPage({
             />
           ))
         ) : (
-          <article className="note-card">
+          <article className="note-card"><StitchedBorder />
             <p className="section-label">Noch leer</p>
             <h2>Hier erscheinen deine gespeicherten Momente.</h2>
             <p>
@@ -114,7 +112,7 @@ export default function MomentsPage({
         )}
       </div>
 
-      <article className="note-card">
+      <article className="note-card"><StitchedBorder />
         <p className="section-label">Idee</p>
         <h2>Ein guter Moment braucht nicht viel.</h2>
         <p>

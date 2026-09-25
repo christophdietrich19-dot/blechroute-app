@@ -122,6 +122,30 @@ export function IconMenuSliders() {
   );
 }
 
+// Same 24px, rounded-stroke family as the existing icons. The approved bottom
+// navigation uses a front-facing car for Garage, not a building.
+export function IconCar() {
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 10 2-6h10l2 6M4 10h16v8H4zM6 18v3M18 18v3M2 10h2M20 10h2"/><path d="M7 14h2M15 14h2M9 18h6"/></svg>;
+}
+
+export function IconClock() {
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>;
+}
+
+export function IconRoad() {
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3 3 21M16 3l5 18M12 3v3M12 10v3M12 17v4"/></svg>;
+}
+
+export function IconUsers() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="9" cy="8" r="3" />
+      <path d="M2.5 20c.8-3.8 3.2-6 6.5-6s5.7 2.2 6.5 6" />
+      <path d="M16 5.3a2.8 2.8 0 0 1 0 5.4M17.4 14.5c2.2.5 3.6 2.4 4.1 5.5" />
+    </svg>
+  );
+}
+
 export function IconPalm() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">

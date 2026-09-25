@@ -22,6 +22,7 @@ import MessagesPage from "./pages/MessagesPage";
 import NotificationsPage from "./pages/NotificationsPage";
 import ProfilePage from "./pages/ProfilePage";
 import SavedPage from "./pages/SavedPage";
+import RoadbookMapPage from "./pages/RoadbookMapPage";
 
 import { createDefaultState } from "./data/demoData";
 import { isOwnAuthor } from "./data/appSchema";
@@ -143,6 +144,10 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout, onClearPersona
 
   function goToMap() {
     navigateToPage("discover");
+  }
+
+  function goToRoadbookMap() {
+    navigateToPage("roadbook-map");
   }
 
   function goToGarage() {
@@ -855,6 +860,8 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout, onClearPersona
             onOpenFeed={goToFeed}
             onOpenMap={goToMap}
             onOpenMenu={openMenu}
+            onOpenCommunity={goToCommunity}
+            onOpenRoadbookMap={goToRoadbookMap}
             {...sharedHeaderProps}
             {...sharedRoadbookProps}
           />
@@ -868,6 +875,18 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout, onClearPersona
             onOpenMap={goToMap}
             onOpenMenu={openMenu}
             {...sharedHeaderProps}
+          />
+        )}
+
+        {activePage === "roadbook-map" && (
+          <RoadbookMapPage
+            appState={appState}
+            activePage={activePage}
+            onOpenFeed={goToFeed}
+            onOpenMap={goToMap}
+            onOpenMenu={openMenu}
+            {...sharedHeaderProps}
+            {...sharedRoadbookProps}
           />
         )}
 
@@ -886,6 +905,11 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout, onClearPersona
 
         {activePage === "community" && (
           <CommunityPage
+            user={appState.user}
+            activePage={activePage}
+            onOpenFeed={goToFeed}
+            onOpenMap={goToMap}
+            {...sharedHeaderProps}
             onOpenMenu={openMenu}
             {...sharedHeaderProps}
             blockedProfiles={appState.blockedProfiles || []}
@@ -905,6 +929,7 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout, onClearPersona
             onOpenFeed={goToFeed}
             onOpenMap={goToMap}
             onOpenMenu={openMenu}
+            onCreateMoment={() => handleChoose("moment")}
             {...sharedHeaderProps}
             {...sharedRoadbookProps}
           />
@@ -941,6 +966,8 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout, onClearPersona
           <ProfilePage
             appState={appState}
             activePage={activePage}
+            onOpenGarage={goToGarage}
+            onOpenRoadbookMap={goToRoadbookMap}
             onEditProfile={() => setEditProfile(true)}
             onResetDemo={onResetDemo}
             onOpenFeed={goToFeed}
@@ -969,7 +996,7 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout, onClearPersona
         <BottomNavigation
           activePage={activePage}
           menuOpen={menuOpen}
-          onChangePage={setActivePage}
+          onChangePage={navigateToPage}
           onOpenCreate={() => setCreateOpen(true)}
           onOpenMenu={openMenu}
         />
@@ -991,11 +1018,14 @@ function AppShell({ appState, setAppState, onResetDemo, onLogout, onClearPersona
         {menuOpen && (
           <AppMenu
             user={appState.user}
+            unreadMessages={unreadMessages}
+            onCreate={() => setCreateOpen(true)}
             savedCount={(appState.savedEntryIds || []).length}
             unreadCount={unreadCount}
             onClose={() => setMenuOpen(false)}
             onGoToFeed={goToFeed}
             onGoToDiscover={goToMap}
+            onGoToRoadbookMap={goToRoadbookMap}
             onGoToGarage={goToGarage}
             onGoToCommunity={goToCommunity}
             onGoToMoments={goToMoments}

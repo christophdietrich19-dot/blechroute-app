@@ -168,7 +168,7 @@ export default function EntryEditor({ entry, onCancel, onSave, onDelete }) {
               border: "1px solid rgba(216, 174, 103, 0.18)",
               borderRadius: "18px",
               overflow: "hidden",
-              background: "rgba(24, 9, 4, 0.4)"
+              background: "var(--leather-inset-surface)"
             }}
           >
             <img

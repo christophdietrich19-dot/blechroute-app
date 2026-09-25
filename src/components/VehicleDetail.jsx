@@ -84,8 +84,7 @@ export default function VehicleDetail({
             marginTop: "14px",
             border: "1px solid rgba(216, 174, 103, 0.18)",
             borderRadius: "20px",
-            background:
-              "radial-gradient(circle at 50% 42%, rgba(246, 231, 203, 0.09), transparent 45%), linear-gradient(145deg, rgba(30, 12, 5, 0.9), rgba(7, 3, 2, 0.9))"
+            background: "var(--leather-inset-surface)"
           }}
         />
 

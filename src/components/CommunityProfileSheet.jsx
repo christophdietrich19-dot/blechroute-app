@@ -1,3 +1,4 @@
+import StitchedBorder from "./StitchedBorder";
 import { IconHeart, IconMapPin } from "../icons/Icons";
 
 export default function CommunityProfileSheet({
@@ -97,7 +98,7 @@ export default function CommunityProfileSheet({
               </article>
             ))
           ) : (
-            <article className="note-card">
+            <article className="note-card"><StitchedBorder />
               <p className="section-label">Noch leer</p>
               <h2>Von diesem Nutzer sind noch keine Beiträge sichtbar.</h2>
               <p>

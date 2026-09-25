@@ -1,6 +1,8 @@
+import StitchedBorder from "../components/StitchedBorder";
 import { useMemo, useState } from "react";
 import AppHeader from "../components/AppHeader";
 import { IconBookmark, IconMapPin } from "../icons/Icons";
+import { MapPaper, CompassRose } from "../components/RoadbookArtwork";
 
 export default function DiscoverPage({
   appState,
@@ -77,6 +79,18 @@ export default function DiscoverPage({
         messageCount={unreadMessages}
         notificationCount={unreadNotifications}
       />
+
+      <div className="discover-map-preview" aria-label="Dekorative Roadbook-Karte; keine Navigation">
+        <MapPaper />
+        <CompassRose />
+        <span className="discover-map-kicker">Dein Roadbook</span>
+        <span className="discover-map-trail" aria-hidden="true" />
+        <span className="discover-map-pin discover-map-pin-a" aria-hidden="true">●</span>
+        <span className="discover-map-pin discover-map-pin-b" aria-hidden="true">●</span>
+        <span className="discover-map-pin discover-map-pin-c" aria-hidden="true">●</span>
+        <strong>Orte entdecken</strong>
+        <small>Illustration · noch keine Routenführung</small>
+      </div>
 
       <div className="welcome-block">
         <p className="section-label">Map & Orte</p>
@@ -214,7 +228,7 @@ export default function DiscoverPage({
             );
           })
         ) : (
-          <article className="note-card">
+          <article className="note-card"><StitchedBorder />
             <p className="section-label">Keine Treffer</p>
             <h2>Zu deiner Suche wurde kein Ort gefunden.</h2>
             <p>
@@ -235,7 +249,7 @@ export default function DiscoverPage({
         )}
       </div>
 
-      <article className="note-card">
+      <article className="note-card"><StitchedBorder />
         <p className="section-label">Wochenidee</p>
         <h2>Finde einen Ort, an dem du sonst nur vorbeifährst.</h2>
         <p>

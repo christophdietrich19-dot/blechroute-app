@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { IconBell, IconBook, IconMail, IconMapPin } from "../icons/Icons";
+import StitchedBorder from "./StitchedBorder";
 
 export default function AppHeader({
   compact = false,
+  menuOpen = false,
   userProfile,
   activePage,
   onOpenFeed,
@@ -29,10 +31,14 @@ export default function AppHeader({
   return (
     <>
       <header className={compact ? "app-header compact" : "app-header"}>
+        <StitchedBorder />
         <div className="brand-line">
           <div className="brand-center">
-            <h1>Blechroute</h1>
-            <p>{userProfile?.name || "Christoph"}</p>
+            <img className="brand-mark" src={`${import.meta.env.BASE_URL}design-v31/br-hauptlogo.jpg`} alt="" />
+            <div className="brand-copy">
+              <h1>Blechroute</h1>
+              <p>{userProfile?.name || "Mehr als nur Ziele."}</p>
+            </div>
           </div>
 
           <div className="header-utilities">
@@ -62,6 +68,7 @@ export default function AppHeader({
 
       <div ref={stickyRef} className={isScrolled ? "road-control-sticky is-scrolled" : "road-control-sticky"}>
         <div className="road-control-row" aria-label="Schnellnavigation">
+          <StitchedBorder />
           <button
             className={
               activePage === "discover"
@@ -72,6 +79,7 @@ export default function AppHeader({
             onClick={onOpenMap}
             aria-current={activePage === "discover" ? "page" : undefined}
           >
+            <StitchedBorder />
             <span className="control-content">
               <IconMapPin />
               MAP
@@ -88,6 +96,7 @@ export default function AppHeader({
             onClick={onOpenFeed}
             aria-current={activePage === "feed" ? "page" : undefined}
           >
+            <StitchedBorder />
             <span className="control-content">
               <IconBook />
               FEED
@@ -95,12 +104,13 @@ export default function AppHeader({
           </button>
 
           <button
-            className="road-control-button"
+            className={menuOpen ? "road-control-button active" : "road-control-button"}
             type="button"
             onClick={onOpenMenu}
-            aria-label="Menü öffnen"
+            aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
             aria-haspopup="dialog"
           >
+            <StitchedBorder />
             <span className="control-content">
               <span className="menu-lines" aria-hidden="true">☰</span>
               MENÜ

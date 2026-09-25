@@ -7,14 +7,14 @@
   "start_url": "/blechroute-app/",
   "scope": "/blechroute-app/",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "any",
   "background_color": "#070302",
   "theme_color": "#100c08",
   "icons": [
     {
-      "src": "/blechroute-app/app-icon-v22.png",
+      "src": "/blechroute-app/design-v31/br-hauptlogo.jpg",
       "sizes": "1254x1254",
-      "type": "image/png",
+      "type": "image/jpeg",
       "purpose": "any maskable"
     }
   ]

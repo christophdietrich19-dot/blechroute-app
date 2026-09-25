@@ -1,231 +1,62 @@
 import "../styles/community.css";
-
-import {
-  IconBookmark,
-  IconCamera,
-  IconGarage,
-  IconHeart,
-  IconHome,
-  IconLogout,
-  IconMail,
-  IconMapPin,
-  IconProfile,
-  IconShield
-} from "../icons/Icons";
+import AppHeader from "./AppHeader";
+import BottomNavigation from "./BottomNavigation";
+import StitchedBorder from "./StitchedBorder";
+import { IconBookmark, IconCamera, IconGarage, IconHeart, IconHome, IconLogout, IconMail, IconMapPin, IconProfile, IconUsers, IconShield } from "../icons/Icons";
 
 export default function AppMenu({
-  user,
-  savedCount = 0,
-  unreadCount = 0,
-  onClose,
-  onGoToFeed,
-  onGoToDiscover,
-  onGoToGarage,
-  onGoToCommunity,
-  onGoToMoments,
-  onGoToSaved,
-  onGoToNotifications,
-  onGoToMessages,
-  onGoToProfile,
-  onOpenPublicSafety,
-  onOpenLegal,
-  onReportError,
-  onLogout,
-  onResetDemo
+  user, savedCount = 0, unreadCount = 0, unreadMessages = 0,
+  onClose, onGoToFeed, onGoToDiscover, onGoToRoadbookMap, onGoToGarage,
+  onGoToCommunity, onGoToMoments, onGoToSaved, onGoToNotifications,
+  onGoToMessages, onGoToProfile, onOpenPublicSafety, onOpenLegal,
+  onReportError, onLogout, onResetDemo, onCreate
 }) {
-  function goToPage(callback) {
-    callback();
-    onClose();
+  function go(callback) { callback?.(); onClose(); }
+  const mainItems = [
+    [IconProfile, "Profil", onGoToProfile],
+    [IconGarage, "Fahrzeuge", onGoToGarage],
+    [IconMapPin, "Meine Wege & Touren", onGoToRoadbookMap],
+    [IconCamera, "Momente", onGoToMoments],
+    [IconUsers, "Community", onGoToCommunity],
+    [IconHeart, "Benachrichtigungen", onGoToNotifications, unreadCount],
+    [IconShield, "Sicherheit & Datenschutz", onOpenPublicSafety]
+  ];
+  const moreItems = [
+    [IconHome, "Feed", onGoToFeed],
+    [IconMapPin, "Map & Orte", onGoToDiscover],
+    [IconMail, "Nachrichten", onGoToMessages, unreadMessages],
+    [IconBookmark, "Gespeichert", onGoToSaved, savedCount],
+    [IconShield, "Fehler melden", onReportError]
+  ];
+  function renderItems(items) {
+    return items.map(([Icon, label, callback, count]) => <button type="button" key={label} onClick={() => go(callback)}>
+      <StitchedBorder />
+      <Icon /><span>{label}</span>{count > 0 && <small>{count}</small>}<span className="menu-chevron" aria-hidden="true">›</span>
+    </button>);
   }
-
-  return (
-    <div className="create-overlay" role="presentation" onClick={onClose}>
-      <div
-        className="create-sheet app-menu-sheet"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Blechroute Menü"
-        onClick={(event) => event.stopPropagation()}
-      >
-        <div className="detail-dialog-topline">
-          <p className="section-label">Menü</p>
-          <button type="button" onClick={onClose} aria-label="Menü schließen">
-            Schließen
-          </button>
+  return <div className="create-overlay app-menu-overlay" role="presentation" onClick={onClose}>
+    <div className="create-sheet app-menu-sheet" role="dialog" aria-modal="true" aria-label="Blechroute Menü" onClick={event => event.stopPropagation()}>
+      <section className="screen-page app-menu-scroll">
+        <AppHeader userProfile={user} activePage="menu" menuOpen onOpenFeed={() => go(onGoToFeed)} onOpenMap={() => go(onGoToDiscover)} onOpenMenu={onClose} onOpenMessages={() => go(onGoToMessages)} onOpenNotifications={() => go(onGoToNotifications)} messageCount={unreadMessages} notificationCount={unreadCount} />
+        <div className="menu-roadbook-intro">
+          <div><p className="section-label">Mein Bereich</p><h2>Immer<br />weiter.</h2><p>Autos verbinden Orte.<br />Und besondere Menschen.</p></div>
+          <figure className="menu-polaroid"><img src={user?.avatar} alt="Dein Roadbook" /><figcaption>Gute Straßen.<br />Gute Geschichten.</figcaption></figure>
         </div>
-        <h2>Blechroute steuern</h2>
-        <p>
-          Spring direkt in die wichtigsten Bereiche oder öffne die Community.
-        </p>
-
-        <div className="app-menu-feature">
-          <button type="button" onClick={() => goToPage(onGoToCommunity)}>
-            <span>
-              <IconProfile />
-            </span>
-
-            <div>
-              <strong>Community</strong>
-              <small>Freunde, Profile, Garagen und Bilder ansehen</small>
-            </div>
-          </button>
-        </div>
-
-        <div className="app-menu-group-label">Navigation</div>
-
-        <div className="create-options app-menu-options">
-          <button type="button" onClick={() => goToPage(onGoToFeed)}>
-            <span>
-              <IconHome />
-            </span>
-
-            <div>
-              <strong>Feed</strong>
-              <small>Zurück zu deinen Momenten und Community-Beiträgen</small>
-            </div>
-          </button>
-
-          <button type="button" onClick={() => goToPage(onGoToDiscover)}>
-            <span>
-              <IconMapPin />
-            </span>
-
-            <div>
-              <strong>Map & Orte</strong>
-              <small>Spots, Routen und Fundstücke entdecken</small>
-            </div>
-          </button>
-
-          <button type="button" onClick={() => goToPage(onGoToGarage)}>
-            <span>
-              <IconGarage />
-            </span>
-
-            <div>
-              <strong>Garage</strong>
-              <small>Deine Fahrzeuge und Geschichten ansehen</small>
-            </div>
-          </button>
-
-          <button type="button" onClick={() => goToPage(onGoToMoments)}>
-            <span>
-              <IconCamera />
-            </span>
-
-            <div>
-              <strong>Momente</strong>
-              <small>Polaroids, Erinnerungen und Roadbook-Beiträge</small>
-            </div>
-          </button>
-        </div>
-
-        <div className="app-menu-group-label">Persönlich</div>
-
-        <div className="create-options app-menu-options">
-          <button type="button" onClick={() => goToPage(onGoToNotifications)}>
-            <span>
-              <IconHeart />
-            </span>
-
-            <div>
-              <strong>Aktivität</strong>
-              <small>
-                {unreadCount > 0
-                  ? `${unreadCount} neue Meldungen`
-                  : "Keine neuen Meldungen"}
-              </small>
-            </div>
-          </button>
-
-          <button type="button" onClick={() => goToPage(onGoToMessages)}>
-            <span>
-              <IconMail />
-            </span>
-            <div>
-              <strong>Nachrichten</strong>
-              <small>Private Einzel- und Gruppenchats vorbereiten</small>
-            </div>
-          </button>
-
-          <button type="button" onClick={() => goToPage(onGoToSaved)}>
-            <span>
-              <IconBookmark />
-            </span>
-
-            <div>
-              <strong>Gespeichert</strong>
-              <small>{savedCount} gemerkte Beiträge im Roadbook</small>
-            </div>
-          </button>
-
-          <button type="button" onClick={() => goToPage(onGoToProfile)}>
-            <span>
-              <IconProfile />
-            </span>
-
-            <div>
-              <strong>Profil</strong>
-              <small>{user?.handle || "Dein Roadbook Profil öffnen"}</small>
-            </div>
-          </button>
-
-          <button type="button" onClick={() => goToPage(onOpenPublicSafety)}>
-            <span>
-              <IconShield />
-            </span>
-
-            <div>
-              <strong>Sicherheit &amp; Datenschutz</strong>
-              <small>Datenexport, Blockierungen, Regeln und Beta-Status</small>
-            </div>
-          </button>
-
-          <button type="button" onClick={() => { onReportError(); onClose(); }}>
-            <span>
-              <IconShield />
-            </span>
-            <div>
-              <strong>Fehler melden</strong>
-              <small>Vorbereitete E-Mail mit Tester- und Geräteangaben</small>
-            </div>
-          </button>
-        </div>
-
-        <div className="app-menu-group-label">Rechtliches</div>
+        <nav className="menu-leather-list" aria-label="Deine Bereiche">{renderItems(mainItems)}</nav>
+        <p className="app-menu-group-label">Weitere Funktionen</p>
+        <nav className="menu-leather-list" aria-label="Weitere Funktionen">{renderItems(moreItems)}</nav>
+        <p className="app-menu-group-label">Rechtliches</p>
         <div className="legal-menu-links">
-          <button type="button" onClick={() => { onOpenLegal("imprint"); onClose(); }}>Impressum</button>
-          <button type="button" onClick={() => { onOpenLegal("privacy"); onClose(); }}>Datenschutz</button>
-          <button type="button" onClick={() => { onOpenLegal("rules"); onClose(); }}>Community-Regeln</button>
-          <button type="button" onClick={() => { onOpenLegal("test"); onClose(); }}>Testbedingungen</button>
+          <button type="button" onClick={() => go(() => onOpenLegal("imprint"))}>Impressum</button>
+          <button type="button" onClick={() => go(() => onOpenLegal("privacy"))}>Datenschutz</button>
+          <button type="button" onClick={() => go(() => onOpenLegal("rules"))}>Community-Regeln</button>
+          <button type="button" onClick={() => go(() => onOpenLegal("test"))}>Testbedingungen</button>
         </div>
-
-        <article className="app-menu-beta-card">
-          <p className="section-label">Beta</p>
-          <p>
-            Diese Version speichert lokal im Browser. Echte Konten, Cloud,
-            Bilderupload und offene Community kommen später mit dem Backend.
-          </p>
-        </article>
-
-        <button
-          className="close-sheet"
-          type="button"
-          onClick={() => {
-            onResetDemo();
-            onClose();
-          }}
-        >
-          Demo zurücksetzen
-        </button>
-
-        <button className="close-sheet" type="button" onClick={onClose}>
-          Schließen
-        </button>
-
-        <button className="close-sheet logout-button" type="button" onClick={onLogout}>
-          <IconLogout /> Abmelden
-        </button>
-      </div>
+        <article className="app-menu-beta-card"><p className="section-label">Vertrauliche Beta</p><p>Diese Version speichert lokal auf deinem Gerät. Echte Konten, gemeinsame Beiträge und geräteübergreifende Daten kommen später mit dem Backend.</p></article>
+        <button className="close-sheet" type="button" onClick={() => go(onResetDemo)}>Demo zurücksetzen</button>
+        <button className="close-sheet logout-button" type="button" onClick={onLogout}><IconLogout /> Abmelden</button>
+      </section>
+      <BottomNavigation activePage="menu" onOpenMenu={onClose} onChangePage={page => go(page === "garage" ? onGoToGarage : page === "moments" ? onGoToMoments : onGoToProfile)} onOpenCreate={() => go(onCreate)} />
     </div>
-  );
+  </div>;
 }

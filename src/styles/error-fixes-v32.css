@@ -1,0 +1,262 @@
+/* Fehlerbericht v32 + approved v33 tonal refinement: one uninterrupted leather
+   source, transparent thread, and four consistent material roles on all routes. */
+:root {
+  --leather-bg: #1d140e;
+  --leather-panel: #49301f;
+  --leather-dark: #21170f;
+  /* Translucent tints retain the actual grain: no flat-color replacement,
+     no filter on children, no tiling or incompatible second leather image. */
+  --leather-grain: var(--br16-leather) center / max(100%, 1000px) max(100%, 1000px) no-repeat;
+  --leather-surface: linear-gradient(#120d0842, #120d0842) no-repeat, var(--leather-grain) #1d140e;
+  --leather-panel-surface: linear-gradient(#79523433, #79523433) no-repeat, var(--leather-grain) #49301f;
+  --leather-button-surface: linear-gradient(160deg, #a46a3a4d, #86522c3d) no-repeat, var(--leather-grain) #58391f;
+  --leather-inset-surface: linear-gradient(#0d09064d, #0d09064d) no-repeat, var(--leather-grain) #21170f;
+  --app-leather: var(--leather-surface);
+  --brief-cognac: var(--leather-button-surface);
+  --brief-dark-leather: var(--leather-inset-surface);
+  --leather-edge: #b18a555c;
+  --leather-lift: inset 0 2px 3px #e2c39360, inset 0 -3px 3px #100b07cc, 0 3px 0 #130d09, 0 6px 10px #0b070699;
+  --leather-card-shadow: inset 0 1px 1px #e0c39424, inset 0 -1px 2px #110b0780, 0 3px 7px #0d08054d;
+}
+
+/* Grounds stay espresso; nested panels and controls carry the warmer roles.
+   All surfaces keep the same grain scale, enlarged only to cover, never tiled. */
+.app-screen, .auth-page, .app-menu-overlay .app-menu-sheet,
+.entry-form, .entry-form.moment-roadbook-form,
+.create-sheet:not(.app-menu-sheet) { background: var(--leather-surface); }
+.screen-page, .feed-hero, .polaroid-row { background: none; }
+.auth-card { background: transparent; box-shadow: none; }
+.auth-page { padding: 0; }
+.auth-card { padding-top: calc(30px + var(--br-safe-top)); padding-bottom: calc(28px + var(--br-safe-bottom)); scrollbar-width: thin; scrollbar-color: #9172485c transparent; }
+.auth-card::-webkit-scrollbar { width: 4px; }
+.auth-card::-webkit-scrollbar-track { background: transparent; }
+.auth-card::-webkit-scrollbar-thumb { border-radius: 9px; background: #9172485c; }
+.auth-brand, .auth-footer, .auth-demo-hint { background: none; }
+.auth-footer { padding-bottom: 8px; }
+
+.task-card, .note-card, .roadbook-quote, .roadbook-map-teaser,
+.roadbook-card, .feed-community-list .roadbook-card,
+.weekly-car, .garage-card, .spot-card, .profile-card, .community-profile-card, .community-hero-card,
+.public-notice-card, .public-status-card, .public-status-card.warning, .app-menu-beta-card,
+.screen-page:not(.profile-page) .stat-card, .entry-form .stat-card,
+.notification-card, .conversation-card, .conversation-card.active,
+.chat-panel, .community-profile-head, .community-vehicle-card,
+.auth-form, .auth-notice {
+  background: var(--leather-panel-surface);
+  border: 1px solid var(--leather-edge);
+  border-radius: 14px;
+  box-shadow: var(--leather-card-shadow);
+}
+.task-card, .note-card { padding: 22px; }
+.roadbook-card, .feed-community-list .roadbook-card { padding: 5px; }
+.app-menu-beta-card { margin-block: 20px 16px; padding: 18px; }
+.app-menu-beta-card p:last-child { font-size: .95rem; line-height: 1.5; }
+.auth-form { border-radius: 17px; }
+.screen-page .soft-action, .legal-menu-links button,
+.public-tabs button, .public-tabs button.active, .roadbook-secondary-action,
+.profile-edit, .create-options button, .close-sheet, .public-action-button,
+.form-actions > button, .form-actions > .ghost-button,
+.auth-social-future button, .header-utilities button, .header-utilities button.active,
+.profile-actions button, .legal-tabs button, .legal-tabs button.active,
+.blocked-list button, .safety-actions button, .community-back-button,
+.community-social-row a, .vehicle-follow-button, .vehicle-follow-button.active,
+.share-recipient-list button, .image-source-actions button,
+.chat-compose button, .detail-dialog-topline button,
+.roadbook-comment-form button, .comment-own-actions button,
+.community-lightbox-close {
+  background: var(--leather-button-surface);
+  border-color: var(--leather-edge);
+  box-shadow: inset 0 1px #dfc39226, 0 2px 3px #100b0759;
+}
+.search-book { background: var(--leather-inset-surface); box-shadow: inset 0 2px 5px #100a0799, 0 1px #dfc39224; }
+.vehicle-follow-button.active { color: #f1d5a1; border-color: #c29a627d; }
+.profile-preview-row, .community-stats-row span, .community-mini-meta span {
+  background: var(--leather-panel-surface);
+}
+.roadbook-card .roadbook-comments, .chat-compose,
+.chat-messages p:not(.own) { background: var(--leather-inset-surface); }
+
+/* All leather-backed fields, including editors and safety/report dialogs.
+   The intentional paper writing area in the Moment form stays paper. */
+.auth-form input:not([type=checkbox]):not([type=radio]),
+.entry-form:not(.moment-roadbook-form) input:not([type=checkbox]):not([type=radio]):not([type=file]),
+.entry-form:not(.moment-roadbook-form) textarea,
+.entry-form:not(.moment-roadbook-form) select,
+.moment-roadbook-form > label > select,
+.moment-roadbook-form .demo-image-select select,
+.roadbook-card textarea, .chat-compose textarea {
+  background: var(--leather-inset-surface);
+  color: #f1ddbb;
+  box-shadow: inset 0 2px 5px #100a0780, 0 1px #dfc39224;
+}
+.entry-form select option { background-color: #281a11; color: #f1ddbb; }
+.moment-roadbook-form .entry-details-paper select option { background-color: #ead8b7; color: #49321f; }
+.search-book input::placeholder { color: #c2ab87; opacity: 1; }
+.screen-page .soft-action.active { color: #f1d5a1; border-color: #c29a627d; }
+.screen-page .stat-card { min-height: 65px; }
+.roadbook-card .roadbook-actions .soft-action { background: transparent; box-shadow: none; border: 0; }
+.roadbook-card .roadbook-actions .soft-action.active { color: #f2c17e; }
+.roadbook-card .roadbook-actions .soft-action:first-child.active { color: #e6a38a; }
+
+/* Remove every photographic edge, including the fallback frames on cards that
+   do not carry stitching. These images included leather strips in the seam. */
+.app-header::before, .app-header.compact::before,
+.app-header::after, .app-header.compact::after,
+.road-control-row::before, .bottom-nav::before,
+.garage-card::before, .spot-card::before, .profile-card::before,
+.community-profile-card::before, .community-hero-card::before,
+.note-card:not(:has(> .stitched-border))::before,
+.profile-edit::before, .create-options button::before,
+.roadbook-card::before, .feed-community-list .roadbook-card::before {
+  content: none; display: none; border: 0; border-image: none; background: none;
+  mask: none; clip-path: none; filter: none;
+}
+
+/* The decorative SVG has no bitmap/background. Geometry and dash lengths are
+   CSS pixels; panel resizing cannot turn a stitch into a long dark stripe. */
+.stitched-border.stitched-border {
+  position: absolute; inset: 0; z-index: 0; display: block;
+  width: 100%; height: 100%; margin: 0; padding: 0;
+  border: 0; border-image: none; border-radius: inherit; background: none;
+  clip-path: none; mask: none; filter: none; opacity: 1; pointer-events: none;
+}
+.stitched-border > .stitch-outline {
+  display: block; position: absolute; inset: 0;
+  width: 100%; height: 100%; margin: 0; padding: 0;
+  fill: none; stroke: none; filter: none; overflow: visible;
+}
+.bottom-nav .create-button > .stitched-border > .stitch-outline { width: 100%; height: 100%; stroke: none; filter: none; }
+.stitch-outline rect { width: calc(100% - 16px); height: calc(100% - 16px); }
+.stitch-outline .stitch-line {
+  fill: none; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 3.2 4.8; stroke-dashoffset: 1;
+}
+.stitch-outline .stitch-holes { stroke: #110b07; stroke-width: 2.8; opacity: .7; }
+.stitch-outline .stitch-shadow { stroke: #140d08; stroke-width: 1.4; transform: translateY(.65px); }
+.stitch-outline .stitch-thread { stroke: #b89766; stroke-width: 1.05; opacity: .76; }
+.roadbook-card > .stitched-border { opacity: .72; }
+.roadbook-card::after { opacity: .64; }
+
+/* Walnut header and bars above espresso, with raised cognac controls. */
+.app-header, .app-header.compact {
+  position: relative; isolation: isolate; margin-top: calc(10px + var(--br-safe-top));
+  margin-bottom: 12px; padding: 12px 16px;
+  border: 1px solid var(--leather-edge); border-radius: 17px;
+  background: var(--leather-panel-surface); box-shadow: var(--leather-card-shadow);
+}
+.brand-line { position: relative; z-index: 1; }
+.road-control-sticky, .road-control-sticky.is-scrolled,
+.road-control-sticky::before { background: var(--leather-surface); }
+.road-control-row {
+  position: relative; isolation: isolate; gap: clamp(7px,2vw,14px);
+  min-height: 72px; padding: 12px;
+  border: 1px solid var(--leather-edge); border-radius: 16px;
+  background: var(--leather-panel-surface); box-shadow: var(--leather-card-shadow);
+}
+.road-control-row > .stitched-border { opacity: .55; }
+.road-control-button, .road-control-button.main-control,
+.road-control-button.active, .road-control-button.main-control.active {
+  position: relative; isolation: isolate; z-index: 1;
+  min-width: 0; min-height: 46px; padding: 9px 4px;
+  border: 1px solid #ac825158; border-radius: 11px;
+  color: #ddbd88; background: var(--leather-button-surface);
+  box-shadow: var(--leather-lift); transform: translateY(-1px);
+}
+.road-control-button > .stitched-border { opacity: .53; }
+.road-control-button .control-content { position: relative; z-index: 1; }
+.road-control-button.active, .road-control-button.main-control.active { color: #f6ddb0; border-color: #c8a16b94; }
+.road-control-button:active, .road-control-button.main-control:active {
+  transform: translateY(1px); box-shadow: inset 0 1px 3px #0e0906b3, 0 1px #dbbb8340;
+}
+.menu-leather-list { gap: 12px; }
+.menu-leather-list button, .vehicle-summary-list button, .auth-submit,
+.moments-page .story-primary-action {
+  position: relative; isolation: isolate;
+  border: 1px solid var(--leather-edge); background: var(--leather-button-surface);
+  box-shadow: var(--leather-lift);
+}
+.menu-leather-list button { min-height: 58px; padding: 17px 22px; border-radius: 13px; }
+.menu-leather-list button > .stitched-border { opacity: .68; }
+.menu-leather-list button:hover { filter: none; border-color: #c5a477a3; }
+.menu-leather-list button:active, .auth-submit:active,
+.moments-page .story-primary-action:active { transform: translateY(2px); box-shadow: inset 0 1px 3px #130c0899, 0 1px #af8d5540; }
+.app-menu-scroll .close-sheet, .app-menu-scroll .logout-button {
+  min-height: 50px; border-radius: 12px; color: #e8cd9d;
+  background: var(--leather-button-surface); box-shadow: var(--leather-lift);
+}
+.profile-actions button { background: var(--leather-button-surface); box-shadow: var(--leather-lift); }
+.moments-page .story-primary-action {
+  min-height: 66px; margin-block: 21px 28px; padding: 20px 52px;
+  border-radius: 14px; color: #f1d4a2;
+}
+
+/* Calmer Inbox rows: no dark-orange gradients, giant frames or oversized titles.
+   Read/unread is conveyed by a small marker, wording and a subtle left edge. */
+.notification-stats { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 9px; margin-bottom: 16px; }
+.notification-list { gap: 12px; }
+.notification-card { position: relative; margin: 0; padding: 17px; border-radius: 12px; }
+.notification-card.is-unread { border-left: 2px solid #c5a16a; }
+.notification-card.is-read { border-color: #997b4e36; }
+.notification-body { display: grid; grid-template-columns: 30px minmax(0,1fr); gap: 12px; align-items: start; }
+.notification-icon { display: grid; place-items: center; width: 30px; height: 32px; color: #cba56c; }
+.notification-icon svg { width: 22px; height: 22px; stroke-width: 1.5; }
+.notification-copy { min-width: 0; }
+.notification-copy .section-label { margin: 0 0 6px; font: 600 .59rem/1.5 system-ui,sans-serif; letter-spacing: .085em; color: #c6a878; }
+.notification-card.is-unread .section-label::before { content: ""; display: inline-block; width: 4px; height: 4px; margin: 0 5px 2px 0; border-radius: 50%; background: #dab47a; }
+.notification-copy h2 { margin: 0; color: #efddbd; font: 400 1.1rem/1.28 Georgia,serif; }
+.notification-copy > p:last-child { margin: 8px 0 0; color: #cbb998; font: .87rem/1.45 Georgia,serif; }
+.notifications-page .notification-read-action {
+  min-height: 44px; margin: 8px 0 -5px 42px; padding: 8px 0;
+  border: 0; border-radius: 4px; color: #d9b985; background: none; box-shadow: none;
+  font: .72rem/1.3 system-ui,sans-serif; text-decoration: underline; text-underline-offset: 4px;
+}
+
+/* Real map area occupies the paper instead of a little square above an empty
+   sheet. Remove the paper crest only; the approved quote engraving stays. */
+.roadbook-photo-scene { margin: 24px 2px 30px; padding: 27px 0 64px; }
+.regional-paper-map { inset: 0 4px 6px 0; overflow: hidden; }
+.regional-paper-back { inset: 14px 7px 0 9px; }
+.regional-map-window { left: 5px; top: 5px; width: calc(100% - 10px); height: calc(100% - 36px); object-fit: cover; object-position: left center; opacity: .8; }
+.regional-lake-label { top: 32%; left: 10px; padding: 2px 3px; background: #eee0bcad; font-size: 11px; }
+.regional-coordinates { right: 10px; bottom: 8px; }
+.feed-hero .daily-polaroid { width: 77%; transform: rotate(2deg); }
+
+/* Keep the same icon size/baseline and a quiet gold selection dot. The keyboard
+   focus indicator wraps just the icon, never the entire selected segment. */
+.bottom-nav {
+  bottom: calc(19px + var(--br-safe-bottom)); height: 76px;
+  padding: 8px 6px; border-radius: 16px; border-color: var(--leather-edge);
+  background: var(--leather-panel-surface); box-shadow: var(--leather-lift), 0 -2px 8px #100a0759;
+}
+.bottom-nav > .stitched-border { opacity: .7; }
+.bottom-nav .nav-item, .bottom-nav .nav-item.active { position: relative; border-radius: 10px; gap: 3px; color: #ceb183; }
+.bottom-nav .nav-item.active { color: #f1d5a5; }
+.bottom-nav .nav-item svg { width: 23px; height: 23px; stroke-width: 1.6; }
+.bottom-nav .nav-item.active::after { width: 4px; height: 4px; bottom: 0; background: #d6ad6e; box-shadow: 0 1px 1px #150d09; }
+.bottom-nav .nav-item:focus-visible { outline: none; }
+.bottom-nav .nav-item:focus-visible > svg { outline: 2px solid #e7c18b; outline-offset: 4px; border-radius: 5px; }
+.bottom-nav .create-button {
+  position: relative; isolation: isolate; width: 58px; height: 58px; transform: translateY(-8px);
+  border: 1px solid #c29b637d; color: #e3bc81; background: var(--leather-button-surface);
+  box-shadow: inset 0 1px 2px #f0d09a59, inset 0 -3px 4px #120c09b3, 0 3px 0 #160e09, 0 6px 9px #090604a6;
+}
+.bottom-nav .create-button > svg { width: 28px; height: 28px; stroke-width: 1.75; }
+.bottom-nav .create-button > .stitched-border { opacity: .7; }
+.beta-watermark { display: block; bottom: calc(3px + var(--br-safe-bottom)); padding: 0; border: 0; background: transparent; box-shadow: none; font-size: 8px; line-height: 12px; color: #c1a77899; }
+.screen-page { padding-bottom: calc(126px + var(--br-safe-bottom)); scroll-padding-top: calc(100px + var(--br-safe-top)); scroll-padding-bottom: calc(126px + var(--br-safe-bottom)); }
+.app-menu-sheet > .app-menu-scroll { padding-bottom: calc(126px + var(--br-safe-bottom)); }
+
+@media (max-width: 350px) {
+  .app-header, .app-header.compact { padding-inline: 12px; }
+  .road-control-row { padding-inline: 9px; gap: 7px; }
+  .road-control-button, .road-control-button.main-control { letter-spacing: .025em; }
+  .bottom-nav .create-button { width: 52px; height: 52px; }
+  .notification-card { padding: 15px 13px; }
+  .notification-body { grid-template-columns: 24px minmax(0,1fr); gap: 9px; }
+  .notification-icon { width: 24px; }
+  .notifications-page .notification-read-action { margin-left: 33px; }
+}
+@media (orientation: landscape) and (max-height: 550px) {
+  .app-header, .app-header.compact { padding-block: 11px; }
+  .bottom-nav { height: 68px; padding-block: 5px; }
+}

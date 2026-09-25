@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { credentialsMatch } from "../config/testerConfig";
 import { hasAcceptedTerms } from "../utils/session";
 import LegalSheet from "./LegalSheet";
+import StitchedBorder from "./StitchedBorder";
 
 export default function AuthGate({ onAuthenticated }) {
   const [username, setUsername] = useState("");
@@ -12,6 +13,7 @@ export default function AuthGate({ onAuthenticated }) {
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const noticeRef = useRef(null);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -35,23 +37,28 @@ export default function AuthGate({ onAuthenticated }) {
   }
 
   function showComingSoon(label) {
-    setNotice(`${label} wird mit dem späteren Blechroute-Server freigeschaltet.`);
+    setNotice(label === "Registrierung"
+      ? "Registrierung bald verfügbar. Während der Testphase vergibt Christoph die Zugangsdaten persönlich – nach Bestätigung der Testbedingungen und Community-Regeln."
+      : "Passwort zurücksetzen wird erst nach der Testphase verfügbar. Deine Zugangsdaten erhältst du während der Beta persönlich von Christoph – nach Bestätigung der Testbedingungen und Community-Regeln.");
+    requestAnimationFrame(() => noticeRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" }));
   }
 
   return (
     <div className="auth-page">
       <main className="auth-card" aria-labelledby="auth-title">
         <div className="auth-brand">
-          <img src={`${import.meta.env.BASE_URL}app-icon-v22.png`} alt="" />
-          <p className="section-label">Vertrauliche Beta</p>
-          <h1 id="auth-title">Blechroute</h1>
-          <p className="auth-tagline">
-            <span>Dein Roadbook. Deine Fahrzeuge.</span>
-            <span>Deine Geschichten.</span>
-          </p>
+          <div className="auth-polaroid" aria-hidden="true">
+            <img src={`${import.meta.env.BASE_URL}bmw_am_see_im_goldenen_licht.png`} alt="" />
+          </div>
+          <div className="auth-wordmark">
+            <img src={`${import.meta.env.BASE_URL}design-v31/br-hauptlogo.jpg`} alt="" />
+            <div><p className="section-label">Vertrauliche Beta</p><h1 id="auth-title">Blechroute</h1></div>
+          </div>
+          <p className="auth-tagline">Autos. Straßen. Geschichten.</p>
         </div>
 
         <form className="auth-form" onSubmit={handleSubmit}>
+          <StitchedBorder />
           <label>
             Benutzername
             <input
@@ -102,17 +109,33 @@ export default function AuthGate({ onAuthenticated }) {
           </label>
 
           {error && <p className="auth-error" role="alert">{error}</p>}
-          {notice && <p className="auth-notice" role="status">{notice}</p>}
-
           <button className="auth-submit" type="submit" disabled={submitting}>
+            <StitchedBorder />
             {submitting ? "Zugang wird geprüft…" : "Anmelden"}
           </button>
         </form>
+
+        <div className="auth-social-future" aria-label="Weitere Anmeldewege in Vorbereitung">
+          <span>Später auch mit</span>
+          <div>
+            <button type="button" disabled aria-label="Mit Google anmelden – bald verfügbar">Google <small>Bald verfügbar</small></button>
+            <button type="button" disabled aria-label="Mit Apple anmelden – bald verfügbar">Apple <small>Bald verfügbar</small></button>
+          </div>
+        </div>
 
         <div className="auth-secondary-actions">
           <button type="button" onClick={() => showComingSoon("Registrierung")}>Registrieren</button>
           <button type="button" onClick={() => showComingSoon("Passwort zurücksetzen")}>Passwort vergessen</button>
         </div>
+        {notice && (
+          <div ref={noticeRef} className="auth-notice" role="status">
+            <p>{notice}</p>
+            <div className="auth-notice-links">
+              <button type="button" onClick={() => setLegalTab("test")}>Testbedingungen lesen</button>
+              <button type="button" onClick={() => setLegalTab("rules")}>Community-Regeln lesen</button>
+            </div>
+          </div>
+        )}
 
         <article className="auth-demo-hint">
           <strong>Zugang nur nach Freigabe</strong>

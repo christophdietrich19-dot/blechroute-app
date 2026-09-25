@@ -1,21 +1,22 @@
 import {
   IconCamera,
-  IconGarage,
+  IconCar,
   IconMenu,
   IconPlus,
   IconProfile
 } from "../icons/Icons";
+import StitchedBorder from "./StitchedBorder";
 
-export default function BottomNavigation({ activePage, menuOpen, onChangePage, onOpenCreate, onOpenMenu }) {
+export default function BottomNavigation({ activePage, onChangePage, onOpenCreate, onOpenMenu }) {
   return (
     <nav className="bottom-nav" aria-label="Hauptnavigation">
+      <StitchedBorder />
       <button
-        className={menuOpen ? "nav-item active" : "nav-item"}
+        className={activePage === "menu" ? "nav-item active" : "nav-item"}
         type="button"
         onClick={onOpenMenu}
         aria-label="Menü öffnen"
         aria-haspopup="dialog"
-        aria-expanded={menuOpen}
       >
         <IconMenu />
         <span>Menü</span>
@@ -27,7 +28,7 @@ export default function BottomNavigation({ activePage, menuOpen, onChangePage, o
         onClick={() => onChangePage("garage")}
         aria-current={activePage === "garage" ? "page" : undefined}
       >
-        <IconGarage />
+        <IconCar />
         <span>Garage</span>
       </button>
 
@@ -39,6 +40,7 @@ export default function BottomNavigation({ activePage, menuOpen, onChangePage, o
         aria-haspopup="dialog"
       >
         <IconPlus />
+        <StitchedBorder round />
       </button>
 
       <button

@@ -8,7 +8,7 @@ export default function DailyHighlight({ moment }) {
           <div className="mini-author">
             <img src={moment.image} alt={moment.author} />
             <div>
-              <strong>Christoph Dietrich</strong>
+              <strong>{moment.author || "Christoph"}</strong>
               <small>
                 <IconMapPin />
                 {moment.place || "Lausitz"}

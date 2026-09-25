@@ -187,17 +187,19 @@ export default function EntryForm({ type, vehicles, onCancel, onSave }) {
 
   return (
     <div className="create-overlay form-overlay" role="presentation" onClick={onCancel}>
-      <form className="entry-form" onSubmit={handleSubmit} onClick={(event) => event.stopPropagation()}>
+      <form className={`entry-form${type === "moment" ? " moment-roadbook-form" : ""}`} role="dialog" aria-modal="true" aria-label={copy.title} onSubmit={handleSubmit} onClick={(event) => event.stopPropagation()}>
         <div className="sheet-handle" />
 
         <p className="section-label">{copy.label}</p>
         <h2>{copy.title}</h2>
         <p>{copy.text}</p>
 
+        <div className="entry-details-paper">
         <label>
           {copy.titleLabel}
           <input
             value={form.title}
+            aria-label={copy.titleLabel}
             type="text"
             maxLength={80}
             placeholder={copy.titlePlaceholder}
@@ -210,6 +212,7 @@ export default function EntryForm({ type, vehicles, onCancel, onSave }) {
             Kurzer Untertitel
             <input
               value={form.subtitle}
+              aria-label="Kurzer Untertitel"
               type="text"
               maxLength={100}
               placeholder={
@@ -229,6 +232,7 @@ export default function EntryForm({ type, vehicles, onCancel, onSave }) {
             Fahrzeug *
             <select
               value={form.vehicle}
+              aria-label="Fahrzeug *"
               onChange={(event) => updateField("vehicle", event.target.value)}
             >
               {vehicles.length > 0 ? (
@@ -305,6 +309,7 @@ export default function EntryForm({ type, vehicles, onCancel, onSave }) {
             Ort / Region {type === "spot" ? "*" : ""}
             <input
               value={form.region}
+              aria-label={type === "spot" ? "Ort / Region *" : "Ort / Region"}
               type="text"
               maxLength={80}
               placeholder={
@@ -353,11 +358,13 @@ export default function EntryForm({ type, vehicles, onCancel, onSave }) {
           {copy.descriptionLabel}
           <textarea
             value={form.description}
+            aria-label={copy.descriptionLabel}
             maxLength={1000}
             placeholder={copy.descriptionPlaceholder}
             onChange={(event) => updateField("description", event.target.value)}
           />
         </label>
+        </div>
 
         <fieldset className="image-source-fieldset">
           <legend>Bild</legend>
@@ -386,7 +393,7 @@ export default function EntryForm({ type, vehicles, onCancel, onSave }) {
           />
           <label className="demo-image-select">
             Oder Demo-Bild verwenden
-            <select value={form.image} onChange={(event) => updateField("image", event.target.value)}>
+            <select aria-label="Oder Demo-Bild verwenden" value={form.image} onChange={(event) => updateField("image", event.target.value)}>
               {imageOptions.map((option) => (
                 <option value={option.value} key={option.value}>{option.label}</option>
               ))}
@@ -401,12 +408,13 @@ export default function EntryForm({ type, vehicles, onCancel, onSave }) {
 
         {form.image && (
           <div
+            className="entry-photo-preview"
             style={{
               marginTop: "12px",
               border: "1px solid rgba(216, 174, 103, 0.18)",
               borderRadius: "18px",
               overflow: "hidden",
-              background: "rgba(24, 9, 4, 0.4)"
+              background: "var(--leather-inset-surface)"
             }}
           >
             <img
@@ -419,7 +427,7 @@ export default function EntryForm({ type, vehicles, onCancel, onSave }) {
                 padding: type === "vehicle" ? "10px" : 0,
                 background:
                   type === "vehicle"
-                    ? "radial-gradient(circle at 50% 42%, rgba(246, 231, 203, 0.09), transparent 45%), linear-gradient(145deg, rgba(30, 12, 5, 0.9), rgba(7, 3, 2, 0.9))"
+                    ? "var(--leather-inset-surface)"
                     : "transparent"
               }}
             />
@@ -430,6 +438,7 @@ export default function EntryForm({ type, vehicles, onCancel, onSave }) {
           Sichtbarkeit
           <select
             value={form.visibility}
+            aria-label="Sichtbarkeit"
             onChange={(event) => updateField("visibility", event.target.value)}
           >
             {visibilityOptions.map((visibility) => (

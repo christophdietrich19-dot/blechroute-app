@@ -1,6 +1,7 @@
 import { useState } from "react";
 import EntryEditor from "./EntryEditor";
-import { IconBookmark, IconEdit, IconFlag, IconHeart, IconMapPin, IconRepeat, IconShare } from "../icons/Icons";
+import StitchedBorder from "./StitchedBorder";
+import { IconBookmark, IconCar, IconClock, IconEdit, IconFlag, IconHeart, IconMapPin, IconRepeat, IconRoad, IconShare, IconUsers } from "../icons/Icons";
 import { makeId } from "../utils/storage";
 import { isOwnAuthor } from "../data/appSchema";
 
@@ -153,68 +154,23 @@ export default function RoadbookCard({
   return (
     <>
       <article className={featured ? "roadbook-card featured" : "roadbook-card"}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "11px",
-            padding: "14px 16px 0"
-          }}
-        >
-          <button
-            className="roadbook-author-button"
+        <StitchedBorder />
+        <div className="roadbook-author-row">
+          <button className="roadbook-author-button"
             type="button"
             onClick={handleOpenAuthor}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "42px 1fr",
-              alignItems: "center",
-              gap: "11px",
-              minWidth: 0,
-              flex: 1,
-              border: 0,
-              padding: 0,
-              color: "inherit",
-              background: "transparent",
-              textAlign: "left"
-            }}
           >
             <img
               src={author.avatar}
               alt={author.name}
-              style={{
-                width: "42px",
-                height: "42px",
-                objectFit: "cover",
-                borderRadius: "14px",
-                border: "1px solid rgba(216, 174, 103, 0.32)"
-              }}
             />
 
-            <div style={{ minWidth: 0 }}>
-              <strong
-                style={{
-                  display: "block",
-                  color: "var(--paper)",
-                  fontSize: "0.95rem",
-                  lineHeight: 1.1
-                }}
-              >
+            <div>
+              <strong>
                 {author.name}
               </strong>
 
-              <span
-                style={{
-                  display: "block",
-                  marginTop: "3px",
-                  color: "var(--paper-muted)",
-                  fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-                  fontSize: "0.72rem",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap"
-                }}
-              >
+              <span>
                 {author.handle} · {entry.date}
               </span>
             </div>
@@ -225,21 +181,6 @@ export default function RoadbookCard({
               className="roadbook-secondary-action"
               type="button"
               onClick={() => setEditorOpen(true)}
-              style={{
-                border: "1px solid rgba(216, 174, 103, 0.24)",
-                borderRadius: "999px",
-                color: "var(--gold-light)",
-                background: "rgba(54, 22, 8, 0.72)",
-                padding: "8px 10px",
-                fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-                fontSize: "0.68rem",
-                fontWeight: 900,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "6px"
-              }}
             >
               <IconEdit />
               <span>Ändern</span>
@@ -250,27 +191,13 @@ export default function RoadbookCard({
               type="button"
               onClick={() => onToggleFollow?.(author.handle)}
               aria-pressed={following}
-              style={{
-                border: "1px solid rgba(216, 174, 103, 0.24)",
-                borderRadius: "999px",
-                color: following ? "var(--paper-ink)" : "var(--gold-light)",
-                background: following
-                  ? "linear-gradient(145deg, var(--gold-light), var(--gold))"
-                  : "rgba(54, 22, 8, 0.72)",
-                padding: "8px 10px",
-                fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-                fontSize: "0.68rem",
-                fontWeight: 900,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase"
-              }}
             >
               {following ? "Folgt" : "Folgen"}
             </button>
           )}
         </div>
 
-        <div className="roadbook-image" style={{ marginTop: "14px" }}>
+        <div className="roadbook-image">
           <img
             src={entry.image}
             alt={entry.title}
@@ -278,7 +205,7 @@ export default function RoadbookCard({
             decoding="async"
           />
           <span className="paper-label">{entry.type}</span>
-          <span className="date-stamp">{entry.date}</span>
+
         </div>
 
         <div className="roadbook-content">
@@ -287,10 +214,10 @@ export default function RoadbookCard({
           <p>{entry.text}</p>
 
           <div className="roadbook-meta">
-            <span>{entry.vehicle}</span>
-            <span>{entry.distance}</span>
-            <span>{entry.duration}</span>
-            <span>{entry.visibility}</span>
+            <span><IconCar />{entry.vehicle}</span>
+            <span><IconRoad />{entry.distance}</span>
+            <span><IconClock />{entry.duration}</span>
+            <span><IconUsers />{entry.visibility}</span>
           </div>
 
           <div className="roadbook-meta">
@@ -357,26 +284,12 @@ export default function RoadbookCard({
           </div>
 
           {commentsOpen && (
-            <div
-              style={{
-                marginTop: "14px",
-                padding: "12px",
-                border: "1px solid rgba(216, 174, 103, 0.16)",
-                borderRadius: "18px",
-                background: "rgba(24, 9, 4, 0.42)"
-              }}
-            >
+            <div className="roadbook-comments">
               {comments.length > 0 ? (
                 comments.map((comment) => (
                   <div
                     className="roadbook-comment"
                     key={comment.id}
-                    style={{
-                      margin: "0 0 8px",
-                      color: "var(--paper-soft)",
-                      fontSize: "0.86rem",
-                      lineHeight: 1.45
-                    }}
                   >
                     {editingCommentId === comment.id ? (
                       <form className="comment-edit-form" onSubmit={handleEditComment}>
@@ -393,8 +306,8 @@ export default function RoadbookCard({
                       </form>
                     ) : (
                       <>
-                        <p style={{ margin: 0 }}>
-                          <strong style={{ color: "var(--gold-light)" }}>
+                        <p>
+                          <strong>
                             {comment.authorId === currentUser?.id ? currentUser.name : comment.author}
                           </strong>{" "}
                           {comment.text}{comment.edited ? " · bearbeitet" : ""}
@@ -413,62 +326,21 @@ export default function RoadbookCard({
                   </div>
                 ))
               ) : (
-                <p
-                  style={{
-                    margin: "0 0 10px",
-                    color: "var(--paper-muted)",
-                    fontSize: "0.86rem",
-                    lineHeight: 1.45
-                  }}
-                >
+                <p>
                   Noch keine Kommentare. Sag etwas zu diesem Moment.
                 </p>
               )}
 
-              <form
-                onSubmit={handleAddComment}
-                style={{
-                  display: "grid",
-                  gap: "9px",
-                  marginTop: "12px"
-                }}
-              >
+              <form className="roadbook-comment-form" onSubmit={handleAddComment}>
                 <textarea
                   value={commentText}
                   maxLength={500}
                   placeholder="Kommentar schreiben..."
                   onChange={(event) => setCommentText(event.target.value)}
-                  style={{
-                    width: "100%",
-                    minHeight: "74px",
-                    resize: "vertical",
-                    border: "1px solid rgba(216, 174, 103, 0.2)",
-                    borderRadius: "14px",
-                    padding: "10px",
-                    color: "var(--paper)",
-                    background: "rgba(255, 255, 255, 0.055)",
-                    outline: "none",
-                    fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-                    fontSize: "0.84rem"
-                  }}
                 />
 
                 <button
                   type="submit"
-                  style={{
-                    justifySelf: "start",
-                    border: "1px solid rgba(216, 174, 103, 0.34)",
-                    borderRadius: "999px",
-                    color: "var(--paper-ink)",
-                    background:
-                      "linear-gradient(145deg, var(--gold-light), var(--gold))",
-                    padding: "9px 12px",
-                    fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-                    fontSize: "0.74rem",
-                    fontWeight: 900,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase"
-                  }}
                 >
                   Senden
                 </button>

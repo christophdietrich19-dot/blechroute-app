@@ -1,7 +1,9 @@
+import StitchedBorder from "./StitchedBorder";
 import { useMemo, useState } from "react";
 
 import { communityProfiles, getCommunityStats } from "../data/communityProfiles";
 import "../styles/community.css";
+import AppHeader from "./AppHeader";
 
 function countVehicles(profile) {
   return profile.vehicles.length;
@@ -91,7 +93,7 @@ function CommunityOverview({ profiles, hiddenCount, onOpenProfile, onOpenMenu })
       </div>
 
       {hiddenCount > 0 && (
-        <article className="note-card community-hidden-note">
+        <article className="note-card community-hidden-note"><StitchedBorder />
           <p className="section-label">Sicherheit</p>
           <h2>{hiddenCount} blockierte Profile ausgeblendet.</h2>
           <p>Blockierungen kannst du im Menü unter Sicherheit &amp; Datenschutz aufheben.</p>
@@ -234,6 +236,14 @@ function CommunityLightbox({ image, onClose }) {
 }
 
 export default function CommunityPage({
+  user,
+  activePage,
+  onOpenFeed,
+  onOpenMap,
+  onOpenMessages,
+  onOpenNotifications,
+  unreadMessages = 0,
+  unreadNotifications = 0,
   onOpenMenu,
   blockedProfiles = [],
   followingHandles = [],
@@ -266,6 +276,7 @@ export default function CommunityPage({
   return (
     <>
       <div className="screen-page community-screen-page">
+        <AppHeader compact userProfile={user} activePage={activePage} onOpenFeed={onOpenFeed} onOpenMap={onOpenMap} onOpenMenu={onOpenMenu} onOpenMessages={onOpenMessages} onOpenNotifications={onOpenNotifications} messageCount={unreadMessages} notificationCount={unreadNotifications} />
         {activeProfile ? (
           <CommunityProfile
             profile={activeProfile}

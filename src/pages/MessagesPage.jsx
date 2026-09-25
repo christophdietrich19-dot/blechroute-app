@@ -1,3 +1,4 @@
+import StitchedBorder from "../components/StitchedBorder";
 import { useMemo, useState } from "react";
 import AppHeader from "../components/AppHeader";
 import { IconMail } from "../icons/Icons";
@@ -106,7 +107,7 @@ export default function MessagesPage({
           </form>
         </article>
       ) : (
-        <article className="note-card"><h2>Noch keine Unterhaltung.</h2></article>
+        <article className="note-card"><StitchedBorder /><h2>Noch keine Unterhaltung.</h2></article>
       )}
     </section>
   );

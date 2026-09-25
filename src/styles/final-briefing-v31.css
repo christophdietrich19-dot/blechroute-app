@@ -1,0 +1,380 @@
+/* Finales Designbriefing 24.09.2026. Presentation only; no navigation/data changes.
+   One material family, fluid controls and decorative layers below real content. */
+:root {
+  --leather-bg: #2a1710;
+  --leather-panel: #8a4b22;
+  --leather-dark: #5b301b;
+  --brass: #c99a52;
+  --cream: #f4ebdd;
+  --paper: var(--cream);
+  --paper-soft: #e8d8bd;
+  --paper-muted: #c8b595;
+  --gold: var(--brass);
+  --gold-light: #e7c084;
+  --brief-gold: var(--brass);
+  --brief-cream: var(--cream);
+  --ui-gutter: clamp(12px, 3.5vw, 24px);
+  --brief-cognac: linear-gradient(130deg,#51321fa3,#2e1c11b5),var(--br30-leather) center / 350px auto repeat;
+  --brief-dark-leather: linear-gradient(135deg,#322116bf,#170e09c9),var(--br30-leather) center / 350px auto repeat;
+  --app-leather: linear-gradient(125deg,#29181055,#160d086b),var(--br16-leather) center / 640px auto repeat;
+  --brief-edge-mask: linear-gradient(to bottom,#000 11px,transparent 18px),linear-gradient(to top,#000 11px,transparent 18px),linear-gradient(to right,#000 11px,transparent 18px),linear-gradient(to left,#000 11px,transparent 18px);
+}
+html, body, #root, .site { background-color: var(--leather-bg); }
+.phone-shell { width: min(100%,820px); max-width: 820px; }
+.app-screen, .auth-card, .app-menu-overlay .app-menu-sheet { background: var(--app-leather); }
+.screen-page {
+  padding-inline: max(var(--ui-gutter),var(--br-safe-left)) max(var(--ui-gutter),var(--br-safe-right));
+  padding-bottom: calc(112px + var(--br-safe-bottom));
+  scroll-padding-top: calc(82px + var(--br-safe-top));
+}
+.app-menu-sheet > .app-menu-scroll { padding-inline: var(--ui-gutter); padding-bottom: calc(112px + var(--br-safe-bottom)); }
+.app-screen::before, .app-screen::after { display: none; }
+.entry-list, .feed-hero, .welcome-block, .profile-heading, .garage-heading { min-width: 0; }
+.entry-list, .roadbook-content { overflow-wrap: anywhere; }
+.feed-page .feed-welcome h2 { white-space: normal; overflow-wrap: anywhere; }
+
+/* Real thread scaled consistently; no stretched panel textures in the border. */
+.stitched-border.stitched-border {
+  inset: -7px;
+  width: calc(100% + 14px); height: calc(100% + 14px);
+  clip-path: inset(7px round 15px);
+  border-width: 18px;
+  border-image-source: var(--br31-frame);
+  border-image-slice: 60;
+  border-image-width: 18px;
+  filter: saturate(.75) brightness(.95);
+}
+.garage-card::before, .spot-card::before, .profile-card::before,
+.community-profile-card::before, .community-hero-card::before,
+.note-card:not(:has(> .stitched-border))::before,
+.profile-edit::before, .create-options button::before {
+  inset: -7px;
+  clip-path: inset(7px round 15px);
+  border-width: 18px;
+  border-image-source: var(--br31-frame);
+  border-image-slice: 60;
+  border-image-width: 18px;
+  filter: saturate(.75) brightness(.95);
+}
+.task-card, .note-card, .menu-leather-list button, .roadbook-map-teaser,
+.vehicle-summary-list button, .roadbook-quote { border-radius: 15px; color: var(--cream); }
+.menu-leather-list { gap: 9px; }
+.menu-leather-list button { min-height: 54px; padding: 15px 22px; font-weight: 400; }
+.menu-leather-list button > svg, .vehicle-summary-list svg { color: var(--brass); }
+.menu-leather-list button > span:not(.menu-chevron) { min-width: 0; overflow-wrap: anywhere; }
+.menu-chevron { color: #e6bb7a; }
+.task-card, .note-card { padding: 23px; }
+.auth-submit, .profile-edit, .public-action-button, .form-actions > button { color: #f1d5a9; }
+
+/* Header: exact approved logo, reserved 44px touch areas inside the seam. */
+.app-header, .app-header.compact {
+  width: 100%; max-width: 100%; height: auto; min-height: 0;
+  margin: 0 0 6px; padding: calc(20px + var(--br-safe-top)) 15px 18px;
+}
+.app-header::before, .app-header.compact::before {
+  inset: calc(10px + var(--br-safe-top)) 0 5px;
+  border: 1px solid #8c6234; border-radius: 18px;
+  background: var(--brief-cognac); background-blend-mode: normal;
+  clip-path: none; filter: none;
+  box-shadow: 0 5px 10px #10070180,inset 0 1px 1px #efc88d3d;
+}
+.app-header::after, .app-header.compact::after,
+.road-control-row::before, .bottom-nav::before {
+  content: ""; display: block; position: absolute;
+  inset: -7px; z-index: 0; width: auto; height: auto;
+  border: 18px solid transparent;
+  border-image: var(--br31-frame) 60 / 18px / 0 round;
+  border-radius: inherit; background: none; background-blend-mode: normal;
+  clip-path: inset(7px round 15px); mask-image: var(--brief-edge-mask);
+  filter: saturate(.75) brightness(.95);
+  box-shadow: none; opacity: 1; pointer-events: none;
+}
+.app-header::after, .app-header.compact::after { inset: calc(3px + var(--br-safe-top)) -7px -2px; }
+.brand-line { height: auto; min-height: 69px; grid-template-columns: minmax(0,1fr) 92px; gap: 6px; }
+.brand-center { grid-template-columns: clamp(40px,12vw,60px) minmax(0,1fr); gap: clamp(5px,1.5vw,10px); }
+.brand-mark { width: clamp(40px,12vw,60px); height: auto; aspect-ratio: 1; border: 0; border-radius: 11px; box-shadow: 0 3px 5px #150a0590; }
+.brand-center h1 { font-size: clamp(1rem,4.15vw,1.65rem); letter-spacing: 0; }
+.brand-center p { font-size: .55rem; letter-spacing: .1em; }
+.header-utilities { gap: 4px; transform: none; }
+.header-utilities button { width: 44px; height: 44px; padding: 10px; flex: 0 0 44px; background: var(--brief-dark-leather); }
+.header-utilities svg { width: 20px; height: 20px; }
+.header-utilities button span { top: -3px; right: -1px; min-width: 17px; height: 17px; line-height: 17px; }
+.auth-wordmark > img { border: 0; }
+
+/* Floating quick navigation stays opaque in every scroll state, including the
+   status-bar inset. Its backing also seals the narrow page gutters. */
+.road-control-sticky, .road-control-sticky.is-scrolled {
+  position: sticky; top: 0; z-index: 450;
+  width: 100%; max-width: 100%; margin: 0 0 16px;
+  padding: calc(5px + var(--br-safe-top)) 0 8px;
+  background: var(--app-leather); box-shadow: none;
+}
+.road-control-sticky::before {
+  content: ""; position: absolute; z-index: -1;
+  inset: 0 calc(-1 * max(var(--ui-gutter),var(--br-safe-right))) 0 calc(-1 * max(var(--ui-gutter),var(--br-safe-left)));
+  background: var(--app-leather); pointer-events: none;
+}
+.road-control-row {
+  min-height: 62px; gap: clamp(3px,1vw,9px); padding: 8px 10px;
+  border: 1px solid #80572e; border-radius: 16px;
+  background: var(--brief-dark-leather);
+  box-shadow: 0 5px 9px #0e060590,inset 0 1px 1px #e9b16a33;
+}
+.road-control-button, .road-control-button.main-control {
+  min-height: 44px; height: auto; padding: 6px 2px;
+  color: #dfb97d; border: 1px solid #9e6f393d; border-radius: 10px;
+  background: transparent; box-shadow: inset 0 1px 2px #12070490;
+  font: 400 clamp(.75rem,3.1vw,.93rem)/1.1 Georgia,serif; letter-spacing: .06em;
+}
+.road-control-button::before, .road-control-button.active::before,
+.road-control-button.main-control::before { display: none; content: none; }
+.road-control-button.active, .road-control-button.main-control.active {
+  background: linear-gradient(#ba82412b,#7b4b2330);
+  color: #f3d9a9; border-color: #b3874b91;
+  box-shadow: inset 0 1px 2px #deb58135,0 2px 3px #180b0570;
+}
+.road-control-button .control-content { gap: 5px; }
+.road-control-button svg { width: 18px; height: 18px; }
+
+/* Slim five-column bar, symmetrical around the action. Selection is ONLY a dot.
+   A keyboard focus outline remains intentional and is not a selected-state box. */
+.bottom-nav {
+  position: absolute; left: max(9px,var(--br-safe-left)); right: max(9px,var(--br-safe-right));
+  bottom: calc(6px + var(--br-safe-bottom)); width: auto; max-width: none;
+  height: 76px; min-height: 76px; margin: 0; padding: 8px 7px 9px;
+  grid-template-columns: repeat(5,minmax(0,1fr)); gap: 0;
+  border: 1px solid #886035; border-radius: 16px;
+  background: var(--brief-dark-leather); filter: none;
+  box-shadow: 0 -4px 12px #160a067a,0 4px 6px #0b040399;
+}
+.bottom-nav .nav-item, .bottom-nav .nav-item.active {
+  min-width: 0; width: 100%; min-height: 52px; height: 57px;
+  padding: 1px 1px 8px; gap: 4px;
+  color: #d7af74; border: 0; border-radius: 0;
+  background: transparent; box-shadow: none; filter: none; text-shadow: none;
+  font: 400 clamp(.63rem,2.6vw,.76rem)/1.15 Georgia,serif; letter-spacing: 0;
+}
+.bottom-nav .nav-item.active { color: #f0d6a6; }
+.bottom-nav .nav-item svg { width: 24px; height: 24px; stroke-width: 1.65; filter: drop-shadow(0 1px 0 #160a05); }
+.bottom-nav .nav-item::before, .bottom-nav .nav-item::after { display: none; content: none; }
+.bottom-nav .nav-item.active::after {
+  content: ""; display: block; position: absolute; width: 5px; height: 5px;
+  left: 50%; top: auto; bottom: 0; transform: translateX(-50%);
+  border: 0; border-radius: 50%; background: radial-gradient(circle at 35% 30%,#ffe2a9,var(--brass) 65%,#815623);
+  box-shadow: 0 1px 1px #170a04; filter: none;
+}
+.bottom-nav .create-button {
+  width: clamp(50px,14vw,60px); height: clamp(50px,14vw,60px);
+  align-self: center; justify-self: center; transform: translateY(-9px);
+  border: 1px solid #ba8b47; border-radius: 50%; background: var(--brief-dark-leather);
+  color: var(--brass); box-shadow: 0 3px 0 #160a04,0 5px 8px #080301b3,inset 0 0 0 3px #352012,inset 0 0 0 4px #a17a416e;
+  filter: none;
+}
+.bottom-nav .create-button svg { width: 27px; height: 27px; color: #e3bb7b; stroke-width: 1.8; }
+.bottom-nav .create-button:active { transform: translateY(-8px) scale(.97); }
+
+/* Clean integrated feed card: restrained sewn edge and four brass corner studs. */
+.roadbook-card, .feed-community-list .roadbook-card {
+  --paper: var(--cream); --paper-muted: #c8b595;
+  border: 1px solid #896038; border-radius: 14px;
+  background: var(--brief-dark-leather);
+  padding: 5px; isolation: isolate;
+  box-shadow: 0 6px 12px #10060180,inset 0 0 0 3px #21120966;
+}
+.roadbook-card::before, .feed-community-list .roadbook-card::before {
+  content: ""; display: block; position: absolute; z-index: -1; inset: -6px;
+  border: 18px solid transparent; border-image: var(--br31-frame) 60 / 18px / 0 round;
+  border-radius: inherit; background: none; opacity: .8;
+  mask-image: var(--brief-edge-mask); clip-path: inset(7px round 14px); filter: sepia(.7) brightness(.9); pointer-events: none;
+}
+.roadbook-card::after {
+  content: ""; display: block; position: absolute; inset: 8px; z-index: 0;
+  background: radial-gradient(circle at 35% 30%,#f3d39a,#a47b3e 45%,#392413 65%,transparent 74%) left top / 6px 6px no-repeat,
+    radial-gradient(circle at 35% 30%,#f3d39a,#a47b3e 45%,#392413 65%,transparent 74%) right top / 6px 6px no-repeat,
+    radial-gradient(circle at 35% 30%,#f3d39a,#a47b3e 45%,#392413 65%,transparent 74%) left bottom / 6px 6px no-repeat,
+    radial-gradient(circle at 35% 30%,#f3d39a,#a47b3e 45%,#392413 65%,transparent 74%) right bottom / 6px 6px no-repeat;
+  pointer-events: none;
+}
+.roadbook-author-row { padding: 14px 13px 0; }
+.roadbook-secondary-action { min-height: 44px; }
+.roadbook-card .roadbook-image { margin: 12px 9px 0; width: calc(100% - 18px); border-radius: 7px; }
+.roadbook-card .roadbook-image img { aspect-ratio: 1.46; }
+.roadbook-card .roadbook-content { padding: 13px 13px 16px; }
+.roadbook-card .roadbook-meta { gap: 6px 12px; }
+.roadbook-card .roadbook-meta:first-of-type { padding-top: 9px; border-top: 1px solid #a076433e; }
+.roadbook-card .roadbook-meta > span { min-width: 0; font-size: .69rem; }
+.roadbook-card .roadbook-meta > span + span::before { content: none; }
+.roadbook-card .roadbook-meta svg { flex: 0 0 14px; color: var(--brass); }
+.roadbook-card .roadbook-actions { gap: 2px 12px; }
+.roadbook-card .roadbook-actions .soft-action { min-height: 44px; font-size: .74rem; }
+
+/* Approved lake/crest crop and exact live coordinates, never the rounded raster text. */
+.roadbook-quote {
+  grid-template-columns: minmax(0,.9fr) minmax(0,1.25fr); gap: 8px;
+  padding: 22px 18px; min-height: 146px; color: #ebc68d;
+}
+.roadbook-quote .quote-mark { display: none; }
+.roadbook-quote p { font: 400 clamp(.9rem,3.8vw,1.16rem)/1.28 Georgia,serif; }
+.silbersee-artwork { min-width: 0; margin: 0; color: #d0a05b; }
+.silbersee-artwork > svg { display: block; width: 100%; height: auto; overflow: hidden; }
+.silbersee-artwork figcaption { display: flex; justify-content: center; flex-wrap: wrap; gap: 2px 6px; margin-top: 7px; color: #e3c18b; font: .63rem/1.4 Georgia,serif; text-align: center; }
+.silbersee-artwork figcaption span { white-space: nowrap; }
+
+/* Two deliberate paper layers. The map is a crop of the approved reference;
+   decorations are independent of stored entries and never imply a user trip. */
+.roadbook-photo-scene { margin: 26px 2px 26px; padding: 9px 0 51px; }
+.regional-roadbook { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.regional-paper-back, .regional-paper-map {
+  position: absolute; inset: 13px 5px 5px 5px; border: 1px solid #c6ac7a;
+  border-radius: 2px; background: var(--br31-paper) center / cover,#decca6;
+  box-shadow: 0 4px 8px #130a0580;
+}
+.regional-paper-back { transform: rotate(3deg); background-position: right top; filter: brightness(.85); }
+.regional-paper-map { inset: 5px 12px 8px 3px; transform: rotate(-4deg); }
+.regional-map-window { position: absolute; left: 3px; top: 20px; width: 44%; height: auto; border: 0; opacity: .84; }
+.regional-lake-label { position: absolute; left: 6px; top: 129px; color: #483920; font: italic 10px Georgia,serif; }
+.regional-crest { position: absolute; left: 15px; bottom: 55px; width: 48px; color: #694b2f; transform: rotate(-4deg); }
+.regional-crest svg { display: block; width: 100%; height: auto; overflow: hidden; }
+.regional-coordinates { position: absolute; right: 12px; bottom: 7px; color: #5c432a; font: .68rem/1.4 Georgia,serif; letter-spacing: .015em; }
+.feed-hero .daily-polaroid { width: 81%; max-width: 470px; margin: 0 0 0 auto; transform: rotate(2deg); }
+.feed-hero .daily-polaroid > img { aspect-ratio: 1.35; }
+
+/* Fastening overlaps the paper edge; no floating head above the photograph. */
+:is(.community-polaroid,.daily-polaroid,.polaroid,.feed-polaroid,.moment-polaroid,.roadbook-polaroid,.profile-polaroid,.garage-polaroid,.profile-portrait,.auth-polaroid,.menu-polaroid,.garage-feature)::before { top: -5px !important; }
+.moments-collage .polaroid::before, .menu-polaroid::before, .community-polaroid::before { top: -3px !important; }
+
+/* Quiet Moments identity, no memorial name/photo and no extra mockup controls. */
+.moments-page .welcome-block { padding-top: 7px; }
+.moments-title-row { display: flex; align-items: center; justify-content: flex-start; gap: 10px; margin: 0 0 13px; }
+.moments-page .moments-title-row .moments-kicker {
+  position: static; width: auto; height: auto; aspect-ratio: auto; margin: 0; padding: 0;
+  color: #edcf9b; background: none; font: 400 1.7rem/1.1 Georgia,serif;
+  letter-spacing: 0; text-transform: none; white-space: nowrap;
+}
+.moments-title-row .moments-palm { position: static; display: block; width: 29px; height: 31px; margin: 0; padding: 0; color: #d7b16f; }
+.moments-title-row .moments-palm svg { width: 29px; height: 31px; }
+.moments-page .welcome-block > h2 { margin-top: 0; }
+.moments-page .story-primary-action {
+  position: relative; isolation: isolate; width: 100%; min-height: 62px;
+  margin: 15px 0 22px; padding: 18px 52px; border: 0; border-radius: 16px;
+  color: #edcf99; background: var(--brief-cognac);
+  box-shadow: 0 5px 9px #14090499,inset 0 1px 1px #d9b68040;
+  font: 400 clamp(1.15rem,4.4vw,1.4rem)/1.2 Georgia,serif;
+}
+.moments-page .story-primary-action > span { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); margin: 0; font-size: 1.65rem; }
+
+/* Messenger: one surface per bubble, timestamp belongs to that bubble. */
+.conversation-list { gap: 7px; }
+.conversation-card, .conversation-card.active { border-radius: 11px; padding: 12px; background: var(--brief-dark-leather); }
+.conversation-card.active { border-color: #c09350; box-shadow: inset 3px 0 #c09350; }
+.chat-panel { padding: 17px 12px; border: 0; border-radius: 14px; background: var(--brief-dark-leather); }
+.chat-panel > header { padding-bottom: 13px; border-bottom: 1px solid #9673455e; }
+.chat-panel > header small { color: #c7b598; line-height: 1.4; }
+.chat-messages { gap: 13px; margin: 18px 0; }
+.chat-messages p, .chat-messages p.own {
+  display: block; min-width: 72px; max-width: 88%; margin: 0; padding: 10px 12px 7px;
+  border: 0; border-radius: 12px 12px 12px 3px;
+  color: var(--cream); background: var(--brief-dark-leather);
+  box-shadow: 0 2px 4px #0f070660,inset 0 0 0 1px #a7804940;
+  overflow-wrap: anywhere;
+}
+.chat-messages p.own { color: #3e291c; background: var(--br31-paper) center / cover,#ecdbb5; border-radius: 12px 12px 3px 12px; }
+.chat-messages p > span, .chat-messages p.own > span { padding: 0; border: 0; border-radius: 0; color: inherit; background: none; box-shadow: none; font: 1rem/1.4 Georgia,serif; }
+.chat-messages p > small { margin-top: 5px; color: #c2ae8c; text-align: right; font: .63rem/1.2 system-ui,sans-serif; }
+.chat-messages p.own > small { color: #796449; }
+.chat-compose { align-items: end; gap: 7px; padding: 6px; border: 1px solid #9b764b80; border-radius: 14px; background: var(--brief-dark-leather); }
+.chat-compose textarea { min-width: 0; height: 46px; min-height: 46px; max-height: 150px; padding: 10px 8px; border: 0; border-radius: 8px; background: transparent; font-size: 1rem; line-height: 1.4; }
+.chat-compose button { min-height: 44px; padding: 9px 11px; border: 1px solid #a98148; border-radius: 10px; color: #e7c58d; background: var(--brief-cognac); font: .84rem Georgia,serif; }
+
+/* Moment form: existing field controls on a paper page, no invented switches. */
+.entry-details-paper { display: grid; gap: 13px; }
+.entry-form.moment-roadbook-form { padding: 18px; border-radius: 19px; background: var(--app-leather); }
+.moment-roadbook-form > h2 { font: 400 1.65rem/1.2 Georgia,serif; }
+.moment-roadbook-form > p:not(.section-label) { font: .92rem/1.4 Georgia,serif; color: #d5c2a3; margin-bottom: 24px; }
+.moment-roadbook-form .entry-details-paper {
+  position: relative; gap: 15px; margin: 9px 0 23px; padding: 25px 17px 20px;
+  color: #382619; background: var(--br31-paper) center / cover,#ead8b7;
+  border: 1px solid #baa079; border-radius: 3px;
+  box-shadow: 2px 5px 9px #13080580; transform: rotate(-.3deg);
+}
+.moment-roadbook-form .entry-details-paper::before {
+  content: ""; position: absolute; left: 34%; top: -10px; width: 32%; height: 21px;
+  transform: rotate(-3deg); background: #c79f5d85; border: 1px solid #e4c89455;
+  box-shadow: 0 1px 1px #77613b33; pointer-events: none;
+}
+.moment-roadbook-form .entry-details-paper label { display: grid; gap: 5px; margin: 0; color: #49321f; font: 600 .92rem/1.25 Georgia,serif; }
+.entry-form.moment-roadbook-form .entry-details-paper input:not([type=checkbox]):not([type=radio]),
+.moment-roadbook-form .entry-details-paper textarea,
+.moment-roadbook-form .entry-details-paper select {
+  min-height: 44px; padding: 8px 1px; border: 0; border-bottom: 1px solid #92704973; border-radius: 0;
+  color: #372719; background: transparent; box-shadow: none; font: 400 1rem/1.4 Georgia,serif;
+}
+.moment-roadbook-form .entry-details-paper textarea { min-height: 118px; resize: vertical; }
+.moment-roadbook-form .entry-details-paper input::placeholder,
+.moment-roadbook-form .entry-details-paper textarea::placeholder { color: #796247; opacity: 1; }
+.moment-roadbook-form .entry-details-paper select option { color: #352418; background: #ecdec4; }
+.moment-roadbook-form .image-source-fieldset { margin: 0; padding: 0; border: 0; background: none; }
+.moment-roadbook-form .image-source-fieldset legend { margin-bottom: 10px; color: #e1c28d; font: 1.08rem Georgia,serif; }
+.moment-roadbook-form .image-source-actions { gap: 8px; }
+.moment-roadbook-form .image-source-actions button { min-height: 48px; padding: 11px 8px; font: .85rem/1.2 Georgia,serif; }
+.moment-roadbook-form .demo-image-select { margin-top: 15px; font: .87rem Georgia,serif; color: #d9c2a0; }
+.moment-roadbook-form .entry-photo-preview {
+  margin: 24px 3px 20px !important; padding: 10px 10px 27px;
+  border: 0 !important; border-radius: 2px !important;
+  background: var(--br31-paper) center / cover,#ead8b7 !important;
+  box-shadow: 0 6px 12px #110703a0; transform: rotate(-1deg);
+}
+.moment-roadbook-form .entry-photo-preview img { display: block; border-radius: 0; }
+.moment-roadbook-form > label { margin-top: 14px; color: #e7c99d; }
+.moment-roadbook-form .form-actions { gap: 9px; margin-block: 18px 12px; }
+.moment-roadbook-form .form-actions > button { min-height: 48px; font: 1rem Georgia,serif; }
+.moment-roadbook-form > small { color: #c2ae90; font-size: .72rem; line-height: 1.5; }
+.moment-roadbook-form input, .moment-roadbook-form select, .moment-roadbook-form textarea { font-size: 1rem; }
+.form-overlay { padding: max(10px,var(--br-safe-top)) max(10px,var(--br-safe-right)) max(10px,var(--br-safe-bottom)) max(10px,var(--br-safe-left)); }
+.entry-form { max-height: calc(100dvh - max(20px,var(--br-safe-top) + var(--br-safe-bottom))); scroll-padding-block: 20px; }
+
+@media (max-width: 840px) {
+  .site { padding: 0; }
+  .phone-shell { width: 100%; max-width: none; height: 100dvh; padding: 0; border: 0; border-radius: 0; }
+  .app-screen { height: 100dvh; border-radius: 0; }
+}
+@media (min-width: 600px) {
+  .brand-center { grid-template-columns: 60px minmax(0,1fr); }
+  .brand-line { min-height: 76px; }
+  .feed-hero, .roadbook-map-teaser, .feed-community-head, .feed-community-list { max-width: 600px; margin-inline: auto; }
+  .feed-hero .daily-polaroid { max-width: 470px; }
+  .silbersee-artwork figcaption { font-size: .72rem; }
+  .roadbook-quote { gap: 18px; padding: 25px; }
+  .roadbook-quote p { font-size: 1.3rem; }
+  .entry-form { max-width: 560px; }
+  .moments-collage { max-width: 620px; margin-inline: auto; }
+  .moments-page .story-primary-action { display: block; max-width: 620px; margin-inline: auto; }
+}
+@media (max-width: 350px) {
+  .app-header, .app-header.compact { padding-inline: 12px; }
+  .brand-line { grid-template-columns: minmax(0,1fr) 88px; gap: 3px; }
+  .header-utilities { gap: 0; }
+  .brand-center { grid-template-columns: 36px minmax(0,1fr); gap: 4px; }
+  .brand-mark { width: 36px; }
+  .brand-center h1 { font-size: .98rem; }
+  .brand-center p { font-size: .48rem; }
+  .road-control-row { padding-inline: 6px; gap: 2px; }
+  .road-control-button, .road-control-button.main-control { letter-spacing: .03em; }
+  .road-control-button .control-content { gap: 3px; }
+  .roadbook-quote { padding: 21px 14px; gap: 4px; }
+  .roadbook-quote p { font-size: .89rem; }
+  .silbersee-artwork figcaption { font-size: .6rem; }
+  .regional-coordinates { font-size: .6rem; }
+  .moment-roadbook-form .entry-details-paper { padding-inline: 13px; }
+}
+@media (orientation: landscape) and (max-height: 550px) {
+  .site { padding: 0; }
+  .phone-shell { width: 100%; max-width: none; height: 100dvh; padding: 0; border: 0; border-radius: 0; }
+  .app-screen { height: 100dvh; border-radius: 0; }
+  .app-header, .app-header.compact { padding-block: calc(13px + var(--br-safe-top)) 12px; }
+  .brand-line { min-height: 55px; }
+  .brand-mark { width: 45px; }
+  .bottom-nav { height: 68px; min-height: 68px; padding-block: 5px; }
+  .bottom-nav .nav-item { height: 54px; }
+  .entry-form { max-height: calc(100dvh - max(14px,var(--br-safe-top) + var(--br-safe-bottom))); }
+}

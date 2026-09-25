@@ -1,3 +1,4 @@
+import StitchedBorder from "../components/StitchedBorder";
 import AppHeader from "../components/AppHeader";
 import { IconBookmark, IconGarage, IconHeart, IconMapPin } from "../icons/Icons";
 
@@ -36,7 +37,7 @@ export default function NotificationsPage({
   const readCount = notifications.length - unreadCount;
 
   return (
-    <section className="screen-page">
+    <section className="screen-page notifications-page">
       <AppHeader
         compact
         userProfile={appState.user}
@@ -59,14 +60,7 @@ export default function NotificationsPage({
         </p>
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "9px",
-          marginBottom: "16px"
-        }}
-      >
+      <div className="notification-stats">
         <article className="stat-card">
           <strong>{notifications.length}</strong>
           <span>Gesamt</span>
@@ -98,46 +92,19 @@ export default function NotificationsPage({
         <span>{unreadCount} ungelesen</span>
       </div>
 
-      <div className="entry-list">
+      <div className="entry-list notification-list">
         {notifications.length > 0 ? (
           notifications.map((notification) => (
             <article
-              className="note-card"
+              className={notification.read ? "notification-card is-read" : "notification-card is-unread"}
               key={notification.id}
-              style={{
-                marginTop: 0,
-                borderColor: notification.read
-                  ? "rgba(216, 174, 103, 0.14)"
-                  : "rgba(216, 174, 103, 0.42)",
-                background: notification.read
-                  ? "linear-gradient(145deg, rgba(70, 31, 13, 0.7), rgba(22, 9, 4, 0.72))"
-                  : "radial-gradient(circle at top, rgba(255, 218, 154, 0.12), transparent 40%), linear-gradient(145deg, rgba(86, 38, 15, 0.92), rgba(22, 9, 4, 0.92))"
-              }}
             >
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "42px 1fr",
-                  gap: "12px",
-                  alignItems: "start"
-                }}
-              >
-                <span
-                  style={{
-                    width: "42px",
-                    height: "42px",
-                    display: "grid",
-                    placeItems: "center",
-                    border: "1px solid rgba(216, 174, 103, 0.22)",
-                    borderRadius: "15px",
-                    color: "var(--gold-light)",
-                    background: "rgba(216, 174, 103, 0.1)"
-                  }}
-                >
+              <div className="notification-body">
+                <span className="notification-icon" aria-hidden="true">
                   {getNotificationIcon(notification.type)}
                 </span>
 
-                <div>
+                <div className="notification-copy">
                   <p className="section-label">
                     {notification.read ? "Gelesen" : "Neu"} · {notification.time}
                   </p>
@@ -148,12 +115,9 @@ export default function NotificationsPage({
 
               {!notification.read && (
                 <button
-                  className="soft-action active"
+                  className="soft-action notification-read-action"
                   type="button"
                   onClick={() => onMarkRead(notification.id)}
-                  style={{
-                    marginTop: "14px"
-                  }}
                 >
                   Als gelesen markieren
                 </button>
@@ -161,7 +125,7 @@ export default function NotificationsPage({
             </article>
           ))
         ) : (
-          <article className="note-card">
+          <article className="note-card"><StitchedBorder />
             <p className="section-label">Alles ruhig</p>
             <h2>Keine Aktivitäten vorhanden.</h2>
             <p>
@@ -183,7 +147,7 @@ export default function NotificationsPage({
         )}
       </div>
 
-      <article className="note-card">
+      <article className="note-card"><StitchedBorder />
         <p className="section-label">Später</p>
         <h2>Das kann später deine echte Community Inbox werden.</h2>
         <p>

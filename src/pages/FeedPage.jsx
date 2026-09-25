@@ -5,6 +5,9 @@ import RoadbookCard from "../components/RoadbookCard";
 import WeeklyCarCard from "../components/WeeklyCarCard";
 import { carImages, defaultVehicles } from "../data/demoData";
 import { isEntryVisible, isOwnAuthor } from "../data/appSchema";
+import { CompassRose } from "../components/RoadbookArtwork";
+import { RegionalRoadbookPaper, SilberseeArtwork } from "../components/RegionalRoadbookArtwork";
+import StitchedBorder from "../components/StitchedBorder";
 
 export default function FeedPage({
   appState,
@@ -21,6 +24,8 @@ export default function FeedPage({
   onOpenFeed,
   onOpenMap,
   onOpenMenu,
+  onOpenCommunity,
+  onOpenRoadbookMap,
   onOpenMessages,
   onOpenNotifications,
   unreadMessages = 0,
@@ -32,6 +37,8 @@ export default function FeedPage({
   onRepostEntry
 }) {
   const { user, entries, polaroids, vehicles } = appState;
+  const hour = new Date().getHours();
+  const greeting = hour < 11 ? "Guten Morgen" : hour < 18 ? "Guten Tag" : "Guten Abend";
 
   const visibleEntries = entries.filter((entry) => isEntryVisible(entry, user, blockedProfiles));
   const weeklyVehicle = vehicles[0] || defaultVehicles[0];
@@ -39,7 +46,7 @@ export default function FeedPage({
   const ownEntries = visibleEntries.filter(
     (entry) => isOwnAuthor(entry.author, user)
   );
-  const featuredEntry = ownEntries[0] || visibleEntries[0];
+  const featuredEntry = ownEntries[0];
 
   const communityEntries = visibleEntries.filter(
     (entry) => !isOwnAuthor(entry.author, user) && entry.id !== featuredEntry?.id
@@ -79,13 +86,65 @@ export default function FeedPage({
         notificationCount={unreadNotifications}
       />
 
-      <div className="welcome-block">
-        <p className="section-label">Roadbook</p>
-        <h2>Guten Abend, {user.name}.</h2>
-        <p>Deine nächste Geschichte beginnt auf der Straße.</p>
+      <div className="feed-hero">
+        <div className="welcome-block feed-welcome">
+          <div className="roadbook-kicker"><p className="section-label">Roadbook</p><CompassRose /></div>
+          <h2>{greeting}, {user.name}.</h2>
+          <p>Deine nächste Geschichte beginnt auf der Straße.</p>
+        </div>
+        <div className="roadbook-photo-scene">
+          <RegionalRoadbookPaper />
+          <DailyHighlight moment={dailyMoment} />
+        </div>
+        <blockquote className="roadbook-quote">
+          <StitchedBorder />
+          <span className="quote-mark" aria-hidden="true">“</span>
+          <p>Manche Straßen führen<br />nicht nur zu Orten,<br />sondern zu sich selbst.</p>
+          <SilberseeArtwork />
+        </blockquote>
       </div>
 
-      <DailyHighlight moment={dailyMoment} />
+      <button className="roadbook-map-teaser" type="button" onClick={onOpenRoadbookMap}>
+        <StitchedBorder />
+        <span className="section-label">Deine Wege</span>
+        <strong>Dein Roadbook auf einen Blick</strong>
+        <small>{ownEntries.filter((entry) => entry.location).length} gespeicherte Erinnerungen · Übersicht öffnen →</small>
+      </button>
+
+      <div className="section-head feed-community-head">
+        <h2>Aus der Community</h2>
+        <button type="button" onClick={onOpenCommunity}>Alle ansehen <span aria-hidden="true">→</span></button>
+      </div>
+
+      <div className="entry-list feed-community-list">
+        {communityEntries.length > 0 ? (
+          communityEntries.map((entry) => (
+            <RoadbookCard
+              entry={entry}
+              key={entry.id}
+              currentUser={currentUser}
+              savedEntryIds={savedEntryIds}
+              likedEntryIds={likedEntryIds}
+              followingHandles={followingHandles}
+              onToggleSavedEntry={onToggleSavedEntry}
+              onToggleLikedEntry={onToggleLikedEntry}
+              onToggleFollow={onToggleFollow}
+              onUpdateEntry={onUpdateEntry}
+              onDeleteEntry={onDeleteEntry}
+              onOpenCommunityProfile={onOpenCommunityProfile}
+              onReportEntry={onReportEntry}
+              onShareEntry={onShareEntry}
+              onRepostEntry={onRepostEntry}
+            />
+          ))
+        ) : (
+          <article className="note-card"><StitchedBorder />
+            <p className="section-label">Community</p>
+            <h2>Hier landen später Beiträge anderer Fahrer.</h2>
+            <p>Die Beta läuft noch lokal auf deinem Gerät. Echte gemeinsame Beiträge kommen mit dem Server.</p>
+          </article>
+        )}
+      </div>
 
       <div className="section-head">
         <h2>Deine Momente</h2>
@@ -131,7 +190,7 @@ export default function FeedPage({
           onRepostEntry={onRepostEntry}
         />
       ) : (
-        <article className="note-card"><h2>Dein Roadbook ist noch leer.</h2><p>Über das Plus kannst du deine erste Tour festhalten.</p></article>
+        <article className="note-card"><StitchedBorder /><h2>Dein Roadbook ist noch leer.</h2><p>Über das Plus kannst du deine erste Tour festhalten.</p></article>
       )}
 
       {ownEntries.filter((entry) => entry.id !== featuredEntry?.id).slice(0, 2).map((entry) => (
@@ -154,43 +213,6 @@ export default function FeedPage({
         />
       ))}
 
-      <div className="section-head">
-        <h2>Community</h2>
-        <span>Fundstücke anderer Fahrer</span>
-      </div>
-
-      <div className="entry-list">
-        {communityEntries.length > 0 ? (
-          communityEntries.map((entry) => (
-            <RoadbookCard
-              entry={entry}
-              key={entry.id}
-              currentUser={currentUser}
-              savedEntryIds={savedEntryIds}
-              likedEntryIds={likedEntryIds}
-              followingHandles={followingHandles}
-              onToggleSavedEntry={onToggleSavedEntry}
-              onToggleLikedEntry={onToggleLikedEntry}
-              onToggleFollow={onToggleFollow}
-              onUpdateEntry={onUpdateEntry}
-              onDeleteEntry={onDeleteEntry}
-              onOpenCommunityProfile={onOpenCommunityProfile}
-              onReportEntry={onReportEntry}
-              onShareEntry={onShareEntry}
-              onRepostEntry={onRepostEntry}
-            />
-          ))
-        ) : (
-          <article className="note-card">
-            <p className="section-label">Community</p>
-            <h2>Hier landen später Beiträge anderer Fahrer.</h2>
-            <p>
-              Aktuell läuft Blechroute noch lokal auf deinem Gerät. Mit dem
-              Backend kommen echte Nutzer, Kommentare und gemeinsame Roadbooks.
-            </p>
-          </article>
-        )}
-      </div>
     </section>
   );
 }

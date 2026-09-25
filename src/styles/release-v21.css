@@ -45,7 +45,7 @@ html[data-platform="android"] .profile-polaroid::before,
 html[data-platform="android"] .garage-polaroid::before,
 html[data-platform="android"] .profile-gallery .polaroid::before,
 html[data-platform="android"] .garage-polaroids .polaroid::before {
-  background-image: url("/overlays/brass-pin-flat-top-v19.png") !important;
+  background-image: var(--br30-pin) !important;
 }
 
 .auth-page,
